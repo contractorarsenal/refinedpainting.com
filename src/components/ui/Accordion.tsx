@@ -27,7 +27,9 @@ export function Accordion({ items }: { items: AccordionItemData[] }) {
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 className="flex w-full items-center justify-between gap-4 py-5 text-left"
               >
-                <span className="text-base font-semibold text-ink sm:text-lg">{item.question}</span>
+                <span className="font-display text-lg font-bold uppercase tracking-wide text-ink sm:text-xl">
+                  {item.question}
+                </span>
                 <ChevronDown
                   className={`size-5 shrink-0 text-teal-dark transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
                   aria-hidden

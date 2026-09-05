@@ -5,10 +5,10 @@ import { SectionHeading } from "../ui/SectionHeading";
 
 export function FAQ() {
   return (
-    <section className="bg-warm-white py-20 sm:py-24">
+    <section className="bg-off-white py-16 sm:py-20">
       <Container className="mx-auto max-w-3xl">
         <SectionHeading align="center" eyebrow="Common Questions" title="Questions Before You Hire a Painter?" />
-        <div className="mt-12">
+        <div className="mt-10">
           <Accordion items={faqs} />
         </div>
       </Container>

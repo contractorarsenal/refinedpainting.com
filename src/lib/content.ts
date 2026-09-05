@@ -28,55 +28,54 @@ export type ServiceId =
   | "deck-fence"
   | "carpentry";
 
+export type PlaceholderTone = "navy" | "slate" | "teal" | "warm";
+
 export interface Service {
   id: ServiceId;
   title: string;
   description: string;
-  swatch: [string, string];
+  tone: PlaceholderTone;
 }
 
 export const services: Service[] = [
   {
     id: "interior",
     title: "Interior Painting",
-    description:
-      "Clean lines, careful masking, and finishes that hold up in the rooms you actually live in.",
-    swatch: ["#e6e0d3", "#c9beaa"],
+    description: "Clean lines, careful masking, and finishes that hold up in the rooms you actually live in.",
+    tone: "slate",
   },
   {
     id: "exterior",
     title: "Exterior Painting",
     description:
       "Prep-driven exterior painting built for Seattle's moisture, changing temperatures, and demanding seasons.",
-    swatch: ["#4fb0bb", "#2f7f89"],
+    tone: "teal",
   },
   {
     id: "cabinets",
     title: "Cabinet Refinishing",
-    description:
-      "A durable, sprayed finish that gives kitchens and baths a new look without a full remodel.",
-    swatch: ["#f5eedc", "#cfc7b3"],
+    description: "A durable, sprayed finish that gives kitchens and baths a new look without a full remodel.",
+    tone: "warm",
   },
   {
     id: "commercial",
     title: "Commercial Painting",
     description:
       "Scheduled around your business hours, with clear timelines for offices, retail, and multi-family properties.",
-    swatch: ["#152029", "#1f2e3a"],
+    tone: "navy",
   },
   {
     id: "deck-fence",
     title: "Deck & Fence Staining",
     description:
       "Stains and sealants matched to Pacific Northwest wood and weather, applied after proper surface prep.",
-    swatch: ["#c9a071", "#8a6a45"],
+    tone: "warm",
   },
   {
     id: "carpentry",
     title: "Carpentry Services",
-    description:
-      "Wood repair and replacement handled before paint, so the finish goes on a sound surface.",
-    swatch: ["#e3a13a", "#a9722a"],
+    description: "Wood repair and replacement handled before paint, so the finish goes on a sound surface.",
+    tone: "slate",
   },
 ];
 
@@ -223,3 +222,31 @@ export const trustBullets = [
   "Google Verified",
   "5-Year Workmanship Warranty",
 ];
+
+export const localPartnerBullets = [
+  "Clear communication from estimate to walkthrough",
+  "Careful surface prep, not shortcuts",
+  "Clean, protected job sites every day",
+  "EPA Lead-Safe practices on older homes",
+  "Complimentary color guidance",
+  "5-year workmanship warranty",
+];
+
+// Configurable — swap this copy any time the actual offer changes.
+export const promoBanner = {
+  eyebrow: "Included With Every Project",
+  headline: "Complimentary Color Consultation",
+  sub: "With qualifying painting projects, we bring Benjamin Moore and Sherwin-Williams samples directly to your home.",
+  cta: "Get My Free Estimate",
+  viewOffers: "View Current Offers",
+};
+
+// Configurable — swap this copy any time the actual offer changes.
+export const promoPopup = {
+  headline: "Planning a Painting Project?",
+  sub: "Get a free color consultation and see current availability for your project.",
+  cta: "Send Me the Offer",
+  dismiss: "No, Thanks",
+  successHeadline: "You're On the List.",
+  successSub: "We'll follow up with your color consultation details shortly.",
+};

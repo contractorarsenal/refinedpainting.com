@@ -1,9 +1,10 @@
 /**
  * PLACEHOLDER — Refined Painting did not supply project photography for this slot.
- * Swap the <img> usage for real before/after or in-progress photos when available;
- * every usage of this component is a spot that needs a real photo.
+ * Rendered as a desaturated duotone with a house silhouette so it reads as a
+ * missing photo, not a design element. Replace every usage with a real project
+ * photo (before/after, in-progress, or finished) when available.
  */
-type Tone = "stone" | "teal" | "ink" | "gold";
+type Tone = "navy" | "slate" | "teal" | "warm";
 
 interface PlaceholderPhotoProps {
   label: string;
@@ -12,57 +13,41 @@ interface PlaceholderPhotoProps {
 }
 
 const toneStops: Record<Tone, [string, string]> = {
-  stone: ["#efe9db", "#cfc7b3"],
-  teal: ["#dcedef", "#4fb0bb"],
-  ink: ["#2a3a47", "#152029"],
-  gold: ["#f2ddb6", "#e3a13a"],
+  navy: ["#3a4a58", "#14212c"],
+  slate: ["#8a9096", "#4d5257"],
+  teal: ["#4a8891", "#1f3c41"],
+  warm: ["#8f7a5f", "#4a3d2c"],
 };
 
-const toneText: Record<Tone, string> = {
-  stone: "text-ink/50",
-  teal: "text-ink-2/70",
-  ink: "text-warm-white/60",
-  gold: "text-ink/55",
-};
-
-export function PlaceholderPhoto({ label, tone = "stone", className = "" }: PlaceholderPhotoProps) {
+export function PlaceholderPhoto({ label, tone = "slate", className = "" }: PlaceholderPhotoProps) {
   const [from, to] = toneStops[tone];
-  const gradientId = `ph-grad-${tone}`;
 
   return (
     <div
       className={`relative isolate flex h-full w-full items-end overflow-hidden ${className}`}
-      style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}
+      style={{ background: `linear-gradient(160deg, ${from}, ${to})` }}
     >
       <svg
-        className="absolute inset-0 h-full w-full opacity-40"
+        className="absolute inset-0 h-full w-full opacity-25"
         viewBox="0 0 400 300"
-        preserveAspectRatio="xMidYMid slice"
+        preserveAspectRatio="xMidYMax slice"
         aria-hidden
       >
-        <defs>
-          <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="white" stopOpacity="0.35" />
-            <stop offset="1" stopColor="white" stopOpacity="0" />
-          </linearGradient>
-        </defs>
         <path
-          d="M-20 220 C 80 180, 140 260, 220 190 S 380 140, 440 200 L 440 320 L -20 320 Z"
-          fill={`url(#${gradientId})`}
+          d="M0 220 L70 220 L70 160 L120 120 L170 160 L170 220 L235 220 L235 140 L300 90 L365 140 L365 220 L400 220 L400 300 L0 300 Z"
+          fill="white"
+          fillOpacity="0.14"
         />
         <path
-          d="M-20 60 C 60 20, 120 90, 210 50 S 360 -10, 430 60"
+          d="M0 220 L70 220 L70 160 L120 120 L170 160 L170 220 L235 220 L235 140 L300 90 L365 140 L365 220 L400 220"
           stroke="white"
-          strokeOpacity="0.3"
-          strokeWidth="18"
-          strokeLinecap="round"
+          strokeOpacity="0.35"
+          strokeWidth="2"
           fill="none"
         />
       </svg>
-      <span
-        className={`relative z-10 m-3 rounded-full bg-warm-white/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest backdrop-blur-sm ${toneText[tone]}`}
-      >
-        {label} · sample
+      <span className="relative z-10 m-3 bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-warm-white/90">
+        {label} — sample
       </span>
     </div>
   );

@@ -1,7 +1,7 @@
 import { ArrowRight, Phone } from "lucide-react";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghost" | "outline-light";
+type Variant = "primary" | "secondary" | "ghost" | "outline-light" | "outline-dark";
 type Size = "md" | "lg";
 
 interface BaseProps {
@@ -13,14 +13,11 @@ interface BaseProps {
 }
 
 const variantClasses: Record<Variant, string> = {
-  primary:
-    "bg-teal text-ink hover:bg-teal-dark hover:text-warm-white shadow-card",
-  secondary:
-    "bg-ink text-warm-white hover:bg-ink-2",
-  ghost:
-    "bg-transparent text-ink border border-ink/15 hover:border-ink/40",
-  "outline-light":
-    "bg-transparent text-warm-white border border-warm-white/40 hover:bg-warm-white/10",
+  primary: "bg-teal text-ink hover:bg-teal-dark hover:text-warm-white",
+  secondary: "bg-ink text-warm-white hover:bg-ink-2",
+  ghost: "bg-warm-white text-ink border-2 border-ink hover:bg-ink hover:text-warm-white",
+  "outline-light": "bg-transparent text-warm-white border-2 border-warm-white/50 hover:bg-warm-white/10",
+  "outline-dark": "bg-transparent text-ink border-2 border-ink/25 hover:border-ink",
 };
 
 const sizeClasses: Record<Size, string> = {
@@ -29,13 +26,13 @@ const sizeClasses: Record<Size, string> = {
 };
 
 const baseClasses =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight transition-colors duration-200 cursor-pointer whitespace-nowrap";
+  "inline-flex items-center justify-center gap-2 rounded font-display font-extrabold uppercase tracking-wide transition-colors duration-150 cursor-pointer whitespace-nowrap";
 
 function IconFor({ icon }: { icon: BaseProps["icon"] }) {
   if (icon === "phone") return <Phone className="size-4 shrink-0" aria-hidden />;
   if (icon === "arrow")
     return (
-      <ArrowRight className="size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
+      <ArrowRight className="size-4 shrink-0 transition-transform duration-150 group-hover:translate-x-0.5" aria-hidden />
     );
   return null;
 }

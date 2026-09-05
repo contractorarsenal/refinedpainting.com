@@ -1,8 +1,9 @@
 import { ChevronLeft, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import wordmarkSrc from "../../assets/images/refined-painting-wordmark.webp";
+import { Mascot } from "../ui/Mascot";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { Button } from "../ui/Button";
+import { StepProgress } from "./StepProgress";
 import { StepContact } from "./steps/StepContact";
 import { StepDetails } from "./steps/StepDetails";
 import { StepService } from "./steps/StepService";
@@ -77,11 +78,9 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
     setStep((s) => Math.max(1, s - 1));
   };
 
-  const stepLabels = ["Location", "Project", "Timeline", "Details", "Contact"];
-
   return (
     <div
-      className="fixed inset-0 z-100 flex items-end justify-center bg-ink/60 backdrop-blur-sm sm:items-center sm:p-6"
+      className="fixed inset-0 z-100 flex items-end justify-center bg-ink/70 backdrop-blur-sm sm:items-center sm:p-6"
       role="presentation"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose();
@@ -91,16 +90,26 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-label="Get your free painting estimate"
-        className="animate-fade-up flex h-[92svh] w-full flex-col overflow-hidden rounded-t-3xl bg-warm-white shadow-lift sm:h-auto sm:max-h-[88vh] sm:max-w-[560px] sm:rounded-3xl"
+        aria-label="Book your free estimate"
+        className="animate-fade-up flex h-[94svh] w-full flex-col overflow-hidden rounded-t-lg bg-warm-white shadow-lift sm:h-auto sm:max-h-[88vh] sm:max-w-155 sm:rounded-lg"
       >
-        <div className="flex items-center justify-between border-b border-ink/10 px-5 py-4 sm:px-8 sm:py-5">
-          <img src={wordmarkSrc} alt="Refined Painting" className="h-8 w-auto sm:h-9" />
+        <div className="flex shrink-0 items-center justify-between bg-ink px-5 py-4 sm:px-7">
+          <div className="flex items-center gap-3">
+            <Mascot variant="full" className="h-10 w-10 shrink-0" />
+            <div className="leading-tight">
+              <p className="font-display text-lg font-extrabold uppercase tracking-wide text-warm-white">
+                Refined Painting
+              </p>
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-teal">
+                Book Your Free Estimate
+              </p>
+            </div>
+          </div>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close estimate form"
-            className="flex size-9 items-center justify-center rounded-full text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
+            className="flex size-9 shrink-0 items-center justify-center rounded text-warm-white/70 transition-colors hover:bg-warm-white/10 hover:text-warm-white"
           >
             <X className="size-5" aria-hidden />
           </button>
@@ -108,27 +117,12 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
 
         {!submitted ? (
           <>
-            <div className="px-5 pt-5 sm:px-8">
-              <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-[0.14em] text-ink/50">
-                <span>Get Your Free Painting Estimate</span>
-                <span>
-                  Step {step} of {TOTAL_STEPS}
-                </span>
-              </div>
-              <div className="mt-3 flex gap-1.5" aria-hidden>
-                {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
-                  <div
-                    key={stepLabels[i]}
-                    className={`h-1.5 flex-1 rounded-full transition-colors ${
-                      i < step ? "bg-teal-dark" : "bg-ink/10"
-                    }`}
-                  />
-                ))}
-              </div>
+            <div className="shrink-0 border-b border-ink/10 px-5 py-4 sm:px-7">
+              <StepProgress current={step} />
             </div>
 
             <form
-              className="flex flex-1 flex-col overflow-y-auto px-5 py-6 sm:px-8"
+              className="flex flex-1 flex-col overflow-y-auto px-5 py-6 sm:px-7"
               onSubmit={(e) => {
                 e.preventDefault();
                 goNext();
@@ -142,14 +136,20 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                 {step === 5 && <StepContact data={data} errors={errors} onUpdate={update} />}
               </div>
 
-              <div className="mt-8 flex items-center gap-3">
+              <div className="mt-8 flex items-center gap-3 border-t border-ink/10 pt-5">
                 {step > 1 ? (
-                  <Button type="button" variant="ghost" icon="none" onClick={goBack} className="shrink-0">
+                  <Button type="button" variant="outline-dark" icon="none" onClick={goBack} className="shrink-0">
                     <ChevronLeft className="size-4" aria-hidden />
                     Back
                   </Button>
                 ) : null}
-                <Button type="submit" variant="primary" icon={step === TOTAL_STEPS ? "none" : "arrow"} className="flex-1 justify-center">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="lg"
+                  icon={step === TOTAL_STEPS ? "none" : "arrow"}
+                  className="ml-auto justify-center"
+                >
                   {step === TOTAL_STEPS ? "Request My Free Estimate" : "Continue"}
                 </Button>
               </div>

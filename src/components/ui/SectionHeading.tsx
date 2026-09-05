@@ -23,17 +23,13 @@ export function SectionHeading({
   const descColor = tone === "dark" ? "text-ink/70" : "text-warm-white/75";
 
   return (
-    <div className={`flex max-w-2xl flex-col gap-4 ${alignClasses} ${className}`}>
-      <span className={`text-xs font-bold uppercase tracking-[0.18em] ${eyebrowColor}`}>
-        {eyebrow}
-      </span>
-      <h2 className={`text-balance text-3xl font-semibold leading-[1.08] sm:text-4xl lg:text-[2.75rem] ${titleColor}`}>
+    <div className={`flex max-w-2xl flex-col gap-3 ${alignClasses} ${className}`}>
+      <span className={`text-xs font-bold uppercase tracking-[0.14em] ${eyebrowColor}`}>{eyebrow}</span>
+      <h2 className={`text-balance font-display text-4xl font-extrabold uppercase leading-[0.98] sm:text-5xl ${titleColor}`}>
         {title}
       </h2>
       {description ? (
-        <p className={`text-balance font-body text-base leading-relaxed sm:text-lg ${descColor}`}>
-          {description}
-        </p>
+        <p className={`text-balance font-body text-base leading-relaxed sm:text-lg ${descColor}`}>{description}</p>
       ) : null}
     </div>
   );

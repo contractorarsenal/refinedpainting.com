@@ -13,11 +13,11 @@ const navLinks = [
   { label: "Our Work", href: "#gallery" },
   { label: "Process", href: "#process" },
   { label: "Service Areas", href: "#service-areas" },
-  { label: "About", href: "#why-refined" },
+  { label: "About", href: "#local-partner" },
 ];
 
 export function Header() {
-  const scrolled = useScrolled(12);
+  const scrolled = useScrolled(8);
   const [menuOpen, setMenuOpen] = useState(false);
   const { openQuoteModal } = useQuoteModal();
 
@@ -26,27 +26,19 @@ export function Header() {
       <div className="sticky top-0 z-50">
         <UtilityBar />
         <header
-          className={`border-b transition-[background-color,border-color,box-shadow] duration-300 ${
-            scrolled
-              ? "border-ink/10 bg-warm-white/95 shadow-card backdrop-blur"
-              : "border-transparent bg-warm-white"
-          }`}
+          className={`border-b border-ink/10 bg-warm-white transition-shadow duration-200 ${scrolled ? "shadow-card" : ""}`}
         >
-          <div className="mx-auto flex w-full max-w-[1240px] items-center justify-between gap-4 px-5 sm:px-8 lg:px-10">
-            <a href="#top" className="shrink-0 py-3">
-              <img
-                src={wordmarkSrc}
-                alt="Refined Painting"
-                className={`w-auto transition-[height] duration-300 ${scrolled ? "h-9" : "h-11"}`}
-              />
+          <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-10">
+            <a href="#top" className="shrink-0">
+              <img src={wordmarkSrc} alt="Refined Painting" className="h-10 w-auto sm:h-11" />
             </a>
 
-            <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+            <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-[15px] font-semibold text-ink/80 transition-colors hover:text-ink"
+                  className="text-sm font-bold uppercase tracking-wide text-ink/75 transition-colors hover:text-ink"
                 >
                   {link.label}
                 </a>
@@ -56,7 +48,7 @@ export function Header() {
             <div className="flex items-center gap-3">
               <a
                 href={business.phoneHref}
-                className="hidden items-center gap-2 text-[15px] font-bold text-ink md:flex"
+                className="hidden items-center gap-2 rounded border-2 border-ink/15 px-3 py-2 text-sm font-bold text-ink md:flex"
               >
                 <Phone className="size-4 text-teal-dark" aria-hidden />
                 {business.phone}
@@ -68,7 +60,7 @@ export function Header() {
                 type="button"
                 onClick={() => setMenuOpen(true)}
                 aria-label="Open menu"
-                className="flex size-11 items-center justify-center rounded-full border border-ink/15 text-ink lg:hidden"
+                className="flex size-11 items-center justify-center rounded border-2 border-ink/15 text-ink lg:hidden"
               >
                 <Menu className="size-5" aria-hidden />
               </button>

@@ -15,22 +15,22 @@ const badges = [
 
 export function TrustStrip() {
   return (
-    <section className="border-y border-ink/8 bg-off-white py-8 sm:py-10" aria-label="Trust and certifications">
-      <Container className="flex flex-col items-center gap-8 lg:flex-row lg:justify-between lg:gap-10">
-        <div className="flex flex-col items-center gap-1.5 lg:items-start">
+    <section className="border-b border-ink/10 bg-warm-white py-6" aria-label="Trust and certifications">
+      <Container className="flex flex-col items-center gap-6 lg:flex-row lg:justify-between lg:gap-8">
+        <div className="flex items-center gap-2.5">
           <Stars />
           <p className="text-sm font-bold text-ink">
             {business.rating} Google Rating <span className="font-medium text-ink/50">• {business.reviewCount} Reviews</span>
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 sm:gap-x-10">
+        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
           {badges.map((badge) => (
-            <img key={badge.alt} src={badge.src} alt={badge.alt} className="h-12 w-12 object-contain sm:h-14 sm:w-14" loading="lazy" />
+            <img key={badge.alt} src={badge.src} alt={badge.alt} className="h-11 w-11 object-contain sm:h-12 sm:w-12" loading="lazy" />
           ))}
         </div>
 
-        <p className="rounded-full border border-ink/10 bg-warm-white px-4 py-2 text-xs font-bold uppercase tracking-[0.08em] text-ink/70">
+        <p className="border-2 border-ink/15 px-4 py-2 text-xs font-bold uppercase tracking-widest text-ink/70">
           5-Year Workmanship Warranty
         </p>
       </Container>

@@ -9,15 +9,15 @@ export function FinalCTA() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section className="relative overflow-hidden bg-ink py-20 text-warm-white sm:py-28">
+    <section className="relative overflow-hidden bg-ink py-16 text-warm-white sm:py-20">
       <Mascot
         variant="watermark"
-        className="pointer-events-none absolute -bottom-10 -right-6 h-80 w-80 opacity-[0.1] sm:h-[26rem] sm:w-[26rem]"
+        className="pointer-events-none absolute -bottom-10 -right-6 h-72 w-72 opacity-[0.08] sm:h-96 sm:w-96"
       />
       <Container className="relative flex flex-col items-center gap-6 text-center">
-        <span className="text-xs font-bold uppercase tracking-[0.18em] text-teal">Ready When You Are</span>
-        <h2 className="text-balance max-w-2xl text-4xl font-semibold leading-tight sm:text-5xl">
-          Let's Make Your Home Feel Refined.
+        <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">Ready When You Are</span>
+        <h2 className="text-balance max-w-2xl font-display text-4xl font-extrabold uppercase leading-[0.98] sm:text-5xl">
+          Let's Make Your Home Feel Refined
         </h2>
         <p className="max-w-md text-balance text-base text-warm-white/70 sm:text-lg">
           Tell us what you're planning and we'll help you figure out the best next step.

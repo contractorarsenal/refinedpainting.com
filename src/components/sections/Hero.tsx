@@ -10,57 +10,52 @@ export function Hero() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section id="top" className="relative overflow-hidden bg-warm-white">
-      <Container className="grid grid-cols-1 items-center gap-10 py-12 sm:py-16 lg:grid-cols-2 lg:gap-12 lg:py-20 xl:py-24">
-        <div className="reveal flex flex-col items-start gap-6">
-          <span className="text-xs font-bold uppercase tracking-[0.18em] text-teal-dark">
+    <section id="top" className="border-b border-ink/10 bg-off-white">
+      <Container className="grid grid-cols-1 items-center gap-10 py-12 sm:py-14 lg:grid-cols-2 lg:gap-12 lg:py-16">
+        <div className="flex flex-col items-start gap-5">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal-dark">
             Seattle &amp; Eastside Painting Company
           </span>
-          <h1 className="text-balance text-4xl font-semibold leading-[1.05] text-ink sm:text-5xl lg:text-[3.4rem]">
-            Painting Your Home Should Feel This Easy.
+          <h1 className="text-balance font-display text-5xl font-extrabold uppercase leading-[0.94] text-ink sm:text-6xl lg:text-[4rem]">
+            Seattle Painting Done Right From Day One
           </h1>
-          <p className="max-w-xl text-balance text-base leading-relaxed text-ink/70 sm:text-lg">
-            High-end interior and exterior painting with clear communication, meticulous prep, clean job
-            sites, and a 5-year workmanship warranty. Serving homeowners across Seattle and the Eastside.
+          <p className="max-w-xl text-balance text-base leading-relaxed text-ink/75 sm:text-lg">
+            Professional interior, exterior, cabinet and commercial painting backed by clear
+            communication, careful prep and a 5-year workmanship warranty.
           </p>
 
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
             <Button onClick={openQuoteModal} size="lg" className="w-full sm:w-auto">
-              Get My Free Estimate
+              Get a Free Estimate
             </Button>
             <LinkButton href={business.phoneHref} variant="ghost" size="lg" icon="phone" className="w-full sm:w-auto">
-              Call {business.phone}
+              {business.phone}
             </LinkButton>
           </div>
 
-          <div className="flex flex-col gap-2 pt-2">
-            <div className="flex items-center gap-2.5">
-              <Stars />
-              <span className="text-sm font-bold text-ink">5.0 on Google</span>
-              <span className="text-sm text-ink/50">• {business.reviewCount} Reviews</span>
-            </div>
-            <p className="text-sm text-ink/55">
-              Licensed &amp; insured • EPA Lead-Safe • Complimentary color consultation
-            </p>
+          <div className="flex items-center gap-2.5 pt-1">
+            <Stars />
+            <span className="text-sm font-bold text-ink">5.0 Google Rating</span>
+            <span className="text-sm font-medium text-ink/50">• 227 Reviews</span>
           </div>
         </div>
 
-        <div className="relative flex justify-center lg:justify-end">
-          <div className="relative aspect-4/5 w-full max-w-110 overflow-hidden rounded-4xl shadow-lift sm:aspect-5/6">
-            <PlaceholderPhoto label="Exterior repaint, Seattle" tone="teal" />
+        <div className="relative">
+          <div className="relative aspect-4/3 w-full overflow-hidden rounded shadow-lift">
+            <PlaceholderPhoto label="Exterior repaint, Seattle" tone="navy" />
           </div>
 
           <Mascot
             variant="full"
-            className="absolute -bottom-6 -left-6 h-40 w-40 drop-shadow-[0_16px_24px_rgba(21,32,41,0.25)] sm:h-48 sm:w-48"
+            className="absolute -bottom-8 -left-4 h-32 w-32 drop-shadow-[0_12px_20px_rgba(20,33,44,0.35)] sm:h-40 sm:w-40"
           />
 
-          <div className="absolute -right-2 top-6 hidden max-w-55 rounded-2xl bg-warm-white p-4 shadow-lift sm:block lg:-right-8">
-            <Stars className="mb-2" />
-            <p className="text-sm font-medium leading-snug text-ink">
-              "Some of the best communication of any contractor we've worked with."
-            </p>
-            <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-ink/45">Google Review</p>
+          <div className="absolute -right-3 -top-4 flex items-center gap-2 rounded border-2 border-ink bg-warm-white px-3.5 py-2.5 shadow-lift sm:-right-5 sm:-top-5">
+            <Stars />
+            <div className="leading-tight">
+              <p className="text-sm font-extrabold text-ink">5.0 Google</p>
+              <p className="text-[11px] font-semibold text-ink/50">227 Reviews</p>
+            </div>
           </div>
         </div>
       </Container>

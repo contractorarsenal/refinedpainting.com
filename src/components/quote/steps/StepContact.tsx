@@ -1,3 +1,4 @@
+import { User } from "lucide-react";
 import type { ReactNode } from "react";
 import type { QuoteFormData } from "../quoteState";
 
@@ -18,7 +19,7 @@ function Field({
 }) {
   return (
     <label className="flex flex-col gap-2">
-      <span className="text-sm font-medium text-ink/80">{label}</span>
+      <span className="text-sm font-bold uppercase tracking-wide text-ink/70">{label}</span>
       {children}
       {error ? <span className="text-sm font-medium text-crest">{error}</span> : null}
     </label>
@@ -26,17 +27,24 @@ function Field({
 }
 
 const inputClasses =
-  "w-full rounded-2xl border border-ink/15 bg-warm-white px-4 py-3.5 text-[15px] text-ink outline-none transition-colors focus:border-teal-dark";
+  "w-full rounded border-2 border-ink/15 bg-warm-white px-4 py-3.5 text-[15px] text-ink outline-none transition-colors focus:border-teal-dark";
 
 export function StepContact({ data, errors, onUpdate }: StepContactProps) {
   return (
     <div className="flex flex-col gap-5">
-      <div>
-        <h3 className="text-2xl font-semibold text-ink">Where should we send your estimate information?</h3>
-        <p className="mt-1 text-sm text-ink/60">No pressure. No spam. Just a clear next step.</p>
+      <div className="flex items-center gap-4">
+        <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-teal/15 text-teal-dark">
+          <User className="size-7" aria-hidden />
+        </div>
+        <div>
+          <h3 className="font-display text-2xl font-extrabold uppercase tracking-wide text-ink">
+            How Should We Reach You?
+          </h3>
+          <p className="mt-0.5 text-sm text-ink/60">No pressure. No spam. Just a clear next step.</p>
+        </div>
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Field label="First name" error={errors.firstName}>
+        <Field label="First Name" error={errors.firstName}>
           <input
             autoFocus
             type="text"
@@ -46,7 +54,7 @@ export function StepContact({ data, errors, onUpdate }: StepContactProps) {
             className={inputClasses}
           />
         </Field>
-        <Field label="Last name" error={errors.lastName}>
+        <Field label="Last Name" error={errors.lastName}>
           <input
             type="text"
             autoComplete="family-name"
