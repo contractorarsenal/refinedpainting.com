@@ -61,6 +61,7 @@ export function Button({
 interface LinkButtonProps extends BaseProps {
   href: string;
   ariaLabel?: string;
+  external?: boolean;
 }
 
 export function LinkButton({
@@ -70,12 +71,15 @@ export function LinkButton({
   className = "",
   href,
   ariaLabel,
+  external = false,
   children,
 }: LinkButtonProps) {
   return (
     <a
       href={href}
       aria-label={ariaLabel}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       className={`group ${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
     >
       {children}

@@ -4,7 +4,7 @@ import badgeEpa from "../../assets/images/badge-epa-lead-safe.webp";
 import badgeGoogle from "../../assets/images/badge-google-verified.webp";
 import badgeLicensed from "../../assets/images/badge-licensed-insured.webp";
 import badgeNextdoor from "../../assets/images/badge-nextdoor.webp";
-import { business, testimonials } from "../../lib/content";
+import { business, googleReviewsUrl, testimonials } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
@@ -28,7 +28,7 @@ export function Reviews() {
   };
 
   return (
-    <section className="bg-light-blue py-20 sm:py-24">
+    <section className="bg-light-blue py-16 sm:py-20 lg:py-28">
       <Container>
         <SectionHeading eyebrow="What Your Neighbors Are Saying" title="Refined Painting Reviews" />
 
@@ -101,10 +101,10 @@ export function Reviews() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <Button onClick={openQuoteModal} icon="none" className="justify-center">
+              <Button onClick={() => openQuoteModal()} icon="none" className="justify-center">
                 Get a Free Estimate
               </Button>
-              <LinkButton href="#top" variant="outline-light" icon="arrow" className="justify-center">
+              <LinkButton href={googleReviewsUrl} external variant="outline-light" icon="arrow" className="justify-center">
                 Read More Reviews
               </LinkButton>
             </div>

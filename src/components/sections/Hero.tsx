@@ -14,7 +14,7 @@ export function Hero() {
 
   return (
     <section id="top" className="border-b border-ink/10 bg-off-white">
-      <Container className="grid grid-cols-1 items-center gap-10 py-12 sm:py-14 lg:grid-cols-2 lg:gap-12 lg:py-16">
+      <Container className="grid grid-cols-1 items-center gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:gap-12 lg:py-28">
         <div className="flex flex-col items-start gap-5">
           <span className="animate-fade-up text-xs font-bold uppercase tracking-[0.16em] text-teal-dark">
             Seattle &amp; Eastside Painting Company
@@ -30,7 +30,7 @@ export function Hero() {
           </p>
 
           <div className="animate-fade-up flex w-full flex-col gap-3 [animation-delay:460ms] sm:w-auto sm:flex-row">
-            <Button onClick={openQuoteModal} size="lg" className="w-full sm:w-auto">
+            <Button onClick={() => openQuoteModal()} size="lg" className="w-full sm:w-auto">
               Get a Free Estimate
             </Button>
             <LinkButton href={business.phoneHref} variant="ghost" size="lg" icon="phone" className="w-full sm:w-auto">

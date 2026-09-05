@@ -36,7 +36,6 @@ function App() {
           <ServiceAreaStrip />
           <DontKnowWhereToStart />
           <PNWDifference />
-          <div className="h-1.5 bg-teal-dark" aria-hidden />
           <Process />
           <BeforeAfter />
           <Gallery />

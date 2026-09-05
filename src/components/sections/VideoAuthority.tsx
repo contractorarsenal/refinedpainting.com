@@ -1,5 +1,3 @@
-import { Play } from "lucide-react";
-import { useState } from "react";
 import { cabinetEducationPoints, homesPainted, videoAuthority } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";
@@ -8,35 +6,17 @@ import { Mascot } from "../ui/Mascot";
 import { Reveal } from "../ui/Reveal";
 
 function VideoFrame() {
-  const [playing, setPlaying] = useState(false);
-
   return (
     <div className="relative mx-auto w-full max-w-80">
       <div className="relative aspect-9/16 w-full overflow-hidden rounded border-2 border-teal bg-ink shadow-lift">
-        {playing ? (
-          <iframe
-            className="h-full w-full"
-            src={`https://www.youtube-nocookie.com/embed/${videoAuthority.youtubeId}?autoplay=1&rel=0`}
-            title="Refined Painting — the cabinet prep mistake homeowners make"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        ) : (
-          <button
-            type="button"
-            onClick={() => setPlaying(true)}
-            className="group flex h-full w-full flex-col items-center justify-center gap-4 bg-linear-to-b from-ink-2 to-ink"
-            aria-label="Play video: the cabinet prep mistake homeowners make"
-          >
-            <span className="flex size-16 items-center justify-center rounded-full bg-teal text-ink shadow-lift transition-transform duration-200 group-hover:scale-105">
-              <Play className="ml-1 size-7 fill-current" aria-hidden />
-            </span>
-            <span className="px-6 text-center text-xs font-bold uppercase tracking-widest text-warm-white/70">
-              Watch: Cabinet Prep Mistakes
-            </span>
-          </button>
-        )}
+        <iframe
+          className="h-full w-full"
+          src={`https://www.youtube.com/embed/${videoAuthority.youtubeId}?autoplay=0&playsinline=1&rel=0`}
+          title="Refined Painting — the cabinet prep mistake homeowners make"
+          loading="eager"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
       </div>
       <div className="absolute -top-2 left-6 h-1 w-16 bg-crest" aria-hidden />
       <Mascot
@@ -51,7 +31,7 @@ export function VideoAuthority() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section className="bg-ink py-20 text-warm-white sm:py-28">
+    <section className="bg-ink py-16 text-warm-white sm:py-20 lg:py-28">
       <Container>
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[auto_1fr] lg:gap-16">
           <Reveal className="mx-auto lg:mx-0">
@@ -59,11 +39,12 @@ export function VideoAuthority() {
           </Reveal>
 
           <Reveal delay={120} className="flex flex-col items-start gap-5">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-5">
               <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">{videoAuthority.label}</span>
               <span className="h-px w-10 bg-warm-white/20" aria-hidden />
               <span className="font-display text-lg font-extrabold text-warm-white">
-                {homesPainted} <span className="text-xs font-bold uppercase tracking-wide text-warm-white/50">Homes Painted</span>
+                {homesPainted}{" "}
+                <span className="text-xs font-bold uppercase tracking-wide text-warm-white/50">Homes Painted</span>
               </span>
             </div>
             <h2 className="text-balance font-display text-3xl font-extrabold uppercase leading-[1.02] text-warm-white sm:text-4xl lg:text-5xl">
@@ -85,7 +66,7 @@ export function VideoAuthority() {
             </div>
 
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <Button onClick={openQuoteModal} size="lg" className="w-full sm:w-auto">
+              <Button onClick={() => openQuoteModal("cabinets")} size="lg" className="w-full sm:w-auto">
                 {videoAuthority.cta}
               </Button>
               <LinkButton href="#services" variant="outline-light" size="lg" className="w-full sm:w-auto">

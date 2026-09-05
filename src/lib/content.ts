@@ -13,6 +13,12 @@ export const business = {
   reviewCount: 227,
 } as const;
 
+// Google's public Maps Search URL API — a real, functional deep link built from
+// the business's own name/address (no fabricated place ID or review page).
+export const googleReviewsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  `${business.name} ${business.address.street} ${business.address.city} ${business.address.state} ${business.address.zip}`,
+)}`;
+
 export const CTA = {
   primary: "Get a Free Estimate",
   primaryAlt: "Get My Free Estimate",
@@ -238,7 +244,6 @@ export const promoBanner = {
   headline: "Complimentary Color Consultation",
   sub: "With qualifying painting projects, we bring Benjamin Moore and Sherwin-Williams samples directly to your home.",
   cta: "Get My Free Estimate",
-  viewOffers: "View Current Offers",
 };
 
 // Configurable — swap this copy any time the actual offer changes.

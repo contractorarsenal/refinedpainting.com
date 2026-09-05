@@ -13,16 +13,15 @@ const bullets = [
 
 export function PNWDifference() {
   return (
-    <section className="relative overflow-hidden bg-cream py-20 sm:py-24">
+    <section className="relative overflow-hidden bg-light-blue py-16 sm:py-20 lg:py-28">
       <DotGrid className="text-ink" />
-      <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+      <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
         <div className="aspect-4/5 w-full overflow-hidden rounded shadow-card">
           <PlaceholderPhoto label="Exterior surface prep detail" tone="teal" />
         </div>
 
         <div className="flex flex-col items-start gap-5">
           <SectionHeading
-            eyebrow="Built for the Pacific Northwest"
             title="Built for Pacific Northwest Homes"
             description="Rain, moisture, older wood siding, and temperature swings make exterior prep critical here. We plan around it instead of painting over it."
           />

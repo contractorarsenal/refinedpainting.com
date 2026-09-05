@@ -28,7 +28,7 @@ export function Gallery() {
   const [index, setIndex] = useState(0);
 
   return (
-    <section id="gallery" className="bg-light-blue py-20 sm:py-24">
+    <section id="gallery" className="bg-light-blue py-16 sm:py-20 lg:py-28">
       <Container>
         <SectionHeading
           align="center"
@@ -61,7 +61,7 @@ export function Gallery() {
           </button>
         </div>
 
-        <div className="mt-6 flex items-center justify-center gap-4">
+        <div className="mt-9 flex items-center justify-center gap-4">
           <button
             type="button"
             onClick={() => setIndex((i) => i - 1)}

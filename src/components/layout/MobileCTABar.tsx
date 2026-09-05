@@ -19,7 +19,7 @@ export function MobileCTABar() {
       </a>
       <button
         type="button"
-        onClick={openQuoteModal}
+        onClick={() => openQuoteModal()}
         className="flex flex-[1.4] items-center justify-center rounded bg-teal py-3 font-display text-sm font-extrabold uppercase tracking-wide text-ink"
       >
         {CTA.primaryAlt}

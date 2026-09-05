@@ -25,7 +25,7 @@ export function Accordion({ items }: { items: AccordionItemData[] }) {
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="flex w-full items-center justify-between gap-4 py-5 text-left"
+                className="flex min-h-17 w-full items-center justify-between gap-4 px-1 py-5 text-left"
               >
                 <span className="font-display text-lg font-bold uppercase tracking-wide text-ink sm:text-xl">
                   {item.question}
@@ -44,7 +44,7 @@ export function Accordion({ items }: { items: AccordionItemData[] }) {
               style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
             >
               <div className="overflow-hidden">
-                <p className="pb-5 pr-8 text-[15px] leading-relaxed text-ink/70">{item.answer}</p>
+                <p className="px-1 pb-6 pr-9 text-[15px] leading-relaxed text-ink/70">{item.answer}</p>
               </div>
             </div>
           </div>

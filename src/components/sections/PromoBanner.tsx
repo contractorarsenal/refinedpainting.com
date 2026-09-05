@@ -10,18 +10,21 @@ export function PromoBanner() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section className="bg-ink py-24 text-warm-white sm:py-28">
+    <section className="bg-ink py-16 text-warm-white sm:py-20 lg:py-28">
       <Container>
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <div className="flex flex-col items-start gap-5">
-            <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">{promoBanner.eyebrow}</span>
+            <span className="border border-teal/40 bg-teal/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-teal">
+              {promoBanner.eyebrow}
+            </span>
             <h2 className="text-balance font-display text-4xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-5xl">
               {promoBanner.headline}
             </h2>
+            <span className="h-1 w-16 bg-crest" aria-hidden />
             <p className="max-w-md text-balance text-base leading-relaxed text-warm-white/70 sm:text-lg">
               {promoBanner.sub}
             </p>
-            <Button onClick={openQuoteModal} size="lg">
+            <Button onClick={() => openQuoteModal()} size="lg">
               {promoBanner.cta}
             </Button>
           </div>
@@ -34,12 +37,6 @@ export function PromoBanner() {
             </div>
             <Mascot variant="full" className="absolute -bottom-8 -right-4 h-28 w-28 drop-shadow-[0_12px_20px_rgba(0,0,0,0.4)] sm:h-32 sm:w-32" />
           </div>
-        </div>
-
-        <div className="mt-10 flex justify-center border-t border-warm-white/10 pt-8">
-          <a href="#top" className="text-sm font-bold uppercase tracking-wide text-teal hover:text-teal/80">
-            {promoBanner.viewOffers}
-          </a>
         </div>
       </Container>
     </section>

@@ -10,14 +10,15 @@ import { StepService } from "./steps/StepService";
 import { StepSuccess } from "./steps/StepSuccess";
 import { StepTimeline } from "./steps/StepTimeline";
 import { StepZip } from "./steps/StepZip";
-import { initialQuoteData, TOTAL_STEPS, validateStep, type QuoteFormData } from "./quoteState";
+import { initialQuoteData, TOTAL_STEPS, validateStep, type QuoteFormData, type ServiceSelection } from "./quoteState";
 
 interface QuoteModalProps {
   isOpen: boolean;
+  presetService?: ServiceSelection | null;
   onClose: () => void;
 }
 
-export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
+export function QuoteModal({ isOpen, presetService, onClose }: QuoteModalProps) {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<QuoteFormData>(initialQuoteData);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -25,6 +26,14 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useLockBodyScroll(isOpen);
+
+  // A service card's "Learn More" can preselect its service so the visitor
+  // doesn't have to pick it again on step 2.
+  useEffect(() => {
+    if (isOpen && presetService) {
+      setData((prev) => ({ ...prev, service: presetService }));
+    }
+  }, [isOpen, presetService]);
 
   useEffect(() => {
     if (!isOpen) return;

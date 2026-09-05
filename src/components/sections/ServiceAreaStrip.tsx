@@ -5,7 +5,7 @@ import { SectionHeading } from "../ui/SectionHeading";
 
 export function ServiceAreaStrip() {
   return (
-    <section id="service-areas" className="relative overflow-hidden bg-light-blue py-20 sm:py-24">
+    <section id="service-areas" className="relative overflow-hidden bg-cream py-16 sm:py-20 lg:py-28">
       <svg
         className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.35]"
         viewBox="0 0 800 400"
@@ -30,14 +30,14 @@ export function ServiceAreaStrip() {
       </Container>
 
       <a
-        href="#top"
-        className="group relative mt-10 flex w-full items-center justify-center gap-3 bg-teal-dark px-6 py-6 text-center font-display text-xl font-extrabold uppercase tracking-wide text-warm-white transition-colors hover:bg-ink sm:text-2xl"
+        href="#service-areas-list"
+        className="group relative mt-11 flex w-full items-center justify-center gap-3 bg-teal-dark px-6 py-6 text-center font-display text-xl font-extrabold uppercase tracking-wide text-warm-white transition-colors hover:bg-ink sm:text-2xl"
       >
         View All Service Areas
         <ArrowRight className="size-6 transition-transform duration-150 group-hover:translate-x-1" aria-hidden />
       </a>
 
-      <Container className="relative mt-10">
+      <Container id="service-areas-list" className="relative mt-10 scroll-mt-24 pb-4">
         <div className="flex flex-wrap justify-center gap-2.5">
           {serviceAreas.map((area) => (
             <span

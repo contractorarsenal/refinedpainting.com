@@ -9,7 +9,7 @@ export function BeforeAfter() {
   const { ref: sliderRef, inView } = useInView<HTMLDivElement>(0.6);
 
   return (
-    <section className="bg-warm-white py-20 sm:py-24">
+    <section className="bg-warm-white pb-20 pt-16 sm:pb-24 sm:pt-20 lg:pb-30 lg:pt-25">
       <Container>
         <SectionHeading
           align="center"
@@ -18,7 +18,7 @@ export function BeforeAfter() {
           description="Drag the slider to compare — real project photos replace this sample as they become available."
         />
 
-        <div ref={sliderRef} className="relative mx-auto mt-10 aspect-16/10 w-full max-w-3xl overflow-hidden rounded shadow-lift sm:aspect-video">
+        <div ref={sliderRef} className="relative mx-auto mt-14 aspect-16/10 w-full max-w-3xl overflow-hidden rounded shadow-lift sm:mt-15 sm:aspect-video">
           <input
             type="range"
             min={0}

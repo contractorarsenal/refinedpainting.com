@@ -53,7 +53,7 @@ export function Header() {
                 <Phone className="size-4 text-teal-dark" aria-hidden />
                 {business.phone}
               </a>
-              <Button onClick={openQuoteModal} size="md" icon="none" className="hidden sm:inline-flex">
+              <Button onClick={() => openQuoteModal()} size="md" icon="none" className="hidden sm:inline-flex">
                 {CTA.primary}
               </Button>
               <button
