@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useInView } from "../../hooks/useInView";
 import { Container } from "../ui/Container";
 import { PlaceholderPhoto } from "../ui/PlaceholderPhoto";
 import { SectionHeading } from "../ui/SectionHeading";
 
 export function BeforeAfter() {
   const [value, setValue] = useState(50);
+  const { ref: sliderRef, inView } = useInView<HTMLDivElement>(0.6);
 
   return (
-    <section className="bg-warm-white py-16 sm:py-20">
+    <section className="bg-warm-white py-20 sm:py-24">
       <Container>
         <SectionHeading
           align="center"
@@ -16,7 +18,7 @@ export function BeforeAfter() {
           description="Drag the slider to compare — real project photos replace this sample as they become available."
         />
 
-        <div className="relative mx-auto mt-10 aspect-16/10 w-full max-w-3xl overflow-hidden rounded shadow-lift sm:aspect-16/9">
+        <div ref={sliderRef} className="relative mx-auto mt-10 aspect-16/10 w-full max-w-3xl overflow-hidden rounded shadow-lift sm:aspect-video">
           <input
             type="range"
             min={0}
@@ -39,7 +41,9 @@ export function BeforeAfter() {
             style={{ left: `${value}%`, transform: "translateX(-50%)" }}
           />
           <div
-            className="pointer-events-none absolute top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink bg-warm-white text-ink shadow-lift peer-focus-visible:ring-4 peer-focus-visible:ring-teal-dark/50"
+            className={`pointer-events-none absolute top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink bg-warm-white text-ink shadow-lift peer-focus-visible:ring-4 peer-focus-visible:ring-teal-dark/50 ${
+              inView ? "animate-pulse-once" : ""
+            }`}
             style={{ left: `${value}%`, transform: "translate(-50%, -50%)" }}
             aria-hidden
           >

@@ -2,13 +2,15 @@ import { Check } from "lucide-react";
 import { localPartnerBullets } from "../../lib/content";
 import { LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
+import { DotGrid } from "../ui/DotGrid";
 import { PlaceholderPhoto } from "../ui/PlaceholderPhoto";
 import { SectionHeading } from "../ui/SectionHeading";
 
 export function LocalTrustedPartner() {
   return (
-    <section id="local-partner" className="bg-off-white py-16 sm:py-20">
-      <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+    <section id="local-partner" className="relative overflow-hidden bg-light-blue py-20 sm:py-24">
+      <DotGrid className="text-ink" />
+      <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
         <div className="aspect-4/5 w-full overflow-hidden rounded shadow-card lg:order-1">
           <PlaceholderPhoto label="Refined Painting crew on site" tone="slate" />
         </div>

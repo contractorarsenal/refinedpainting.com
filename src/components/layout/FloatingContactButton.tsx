@@ -25,9 +25,9 @@ export function FloatingContactButton() {
   }, [open]);
 
   return (
-    <div ref={rootRef} className="fixed bottom-6 right-6 z-30 hidden sm:block">
+    <div ref={rootRef} className="fixed bottom-5 right-5 z-30 hidden sm:block">
       {open ? (
-        <div className="absolute bottom-16 right-0 flex w-56 flex-col overflow-hidden rounded border-2 border-ink/10 bg-warm-white shadow-lift">
+        <div className="absolute bottom-14 right-0 flex w-52 flex-col overflow-hidden rounded border-2 border-ink/10 bg-warm-white shadow-lift">
           <a
             href={business.phoneHref}
             className="flex items-center gap-3 border-b border-ink/8 px-4 py-3.5 text-sm font-bold text-ink hover:bg-off-white"
@@ -54,9 +54,9 @@ export function FloatingContactButton() {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-label={open ? "Close contact menu" : "Open contact menu"}
-        className="flex size-14 items-center justify-center rounded-full bg-teal-dark text-warm-white shadow-lift transition-colors hover:bg-ink"
+        className="flex size-12 items-center justify-center rounded-full bg-teal-dark text-warm-white shadow-card transition-colors hover:bg-ink"
       >
-        {open ? <X className="size-6" aria-hidden /> : <MessageCircle className="size-6" aria-hidden />}
+        {open ? <X className="size-5" aria-hidden /> : <MessageCircle className="size-5" aria-hidden />}
       </button>
     </div>
   );

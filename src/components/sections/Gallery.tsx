@@ -28,7 +28,7 @@ export function Gallery() {
   const [index, setIndex] = useState(0);
 
   return (
-    <section id="gallery" className="bg-warm-white py-16 sm:py-20">
+    <section id="gallery" className="bg-light-blue py-20 sm:py-24">
       <Container>
         <SectionHeading
           align="center"
@@ -47,7 +47,7 @@ export function Gallery() {
             <PlaceholderPhoto label={at(index - 1).label} tone={at(index - 1).tone} />
           </button>
 
-          <div className="aspect-4/3 w-full max-w-2xl shrink-0 overflow-hidden rounded shadow-lift">
+          <div key={index} className="animate-fade-in aspect-4/3 w-full max-w-2xl shrink-0 overflow-hidden rounded shadow-lift">
             <PlaceholderPhoto label={at(index).label} tone={at(index).tone} />
           </div>
 

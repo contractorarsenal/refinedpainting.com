@@ -244,9 +244,44 @@ export const promoBanner = {
 // Configurable — swap this copy any time the actual offer changes.
 export const promoPopup = {
   headline: "Planning a Painting Project?",
-  sub: "Get a free color consultation and see current availability for your project.",
-  cta: "Send Me the Offer",
+  sub: "Get current offers, seasonal availability and helpful painting advice from Refined Painting.",
+  cta: "Send Me the Offers",
   dismiss: "No, Thanks",
   successHeadline: "You're On the List.",
   successSub: "We'll follow up with your color consultation details shortly.",
 };
+
+export const homesPainted = "200+";
+
+export const videoAuthority = {
+  youtubeId: "_spxMZthwxs",
+  label: "From the Field",
+  headline: "We've Painted 200+ Homes. Here's the Cabinet Mistake We See Over and Over.",
+  paragraphs: [
+    "Homeowners often focus on the paint color first.",
+    "But cabinet finishes usually fail because of what happens before the paint ever goes on — cleaning, degreasing, sanding, bonding primer, product choice and application method determine whether cabinets still look good years later.",
+  ],
+  callout: "The finish is only as good as the prep.",
+  cta: "Get a Cabinet Painting Estimate",
+  secondaryCta: "Learn About Cabinet Refinishing",
+};
+
+export interface CabinetEducationPoint {
+  title: string;
+  description: string;
+}
+
+export const cabinetEducationPoints: CabinetEducationPoint[] = [
+  {
+    title: "Clean + Degrease",
+    description: "Cabinet surfaces collect oils that wall paint never has to deal with.",
+  },
+  {
+    title: "Proper Bonding",
+    description: "Skipping proper sanding and primer is one of the fastest ways to get peeling or chipping.",
+  },
+  {
+    title: "The Right Coating",
+    description: "Cabinets require a harder, more durable finish than ordinary wall paint.",
+  },
+];

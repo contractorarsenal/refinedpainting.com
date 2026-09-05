@@ -25,8 +25,15 @@ export function TrustStrip() {
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-          {badges.map((badge) => (
-            <img key={badge.alt} src={badge.src} alt={badge.alt} className="h-11 w-11 object-contain sm:h-12 sm:w-12" loading="lazy" />
+          {badges.map((badge, index) => (
+            <img
+              key={badge.alt}
+              src={badge.src}
+              alt={badge.alt}
+              loading="lazy"
+              style={{ animationDelay: `${index * 90}ms` }}
+              className="animate-fade-in h-11 w-11 object-contain sm:h-12 sm:w-12"
+            />
           ))}
         </div>
 

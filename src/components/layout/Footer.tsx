@@ -17,8 +17,12 @@ export function Footer() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <footer className="bg-ink text-warm-white">
-      <Container className="grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:gap-8 lg:py-16">
+    <footer className="relative overflow-hidden border-t-4 border-teal-dark bg-ink-2 text-warm-white">
+      <Mascot
+        variant="watermark"
+        className="pointer-events-none absolute -bottom-12 right-[8%] hidden h-72 w-72 opacity-[0.05] lg:block"
+      />
+      <Container className="relative grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:gap-8 lg:py-16">
         <div className="flex flex-col gap-5">
           <img src={wordmarkSrc} alt="Refined Painting" className="h-11 w-auto" />
           <h3 className="text-xs font-bold uppercase tracking-widest text-warm-white/50">Contact Refined</h3>
@@ -80,11 +84,10 @@ export function Footer() {
               </span>
             </div>
           </div>
-          <Mascot variant="full" className="h-24 w-24 self-end opacity-90" />
         </div>
       </Container>
 
-      <div className="border-t border-warm-white/10">
+      <div className="relative border-t border-warm-white/10">
         <Container className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 py-8">
           <img src={badgeGoogle} alt="Google Verified" className="h-12 w-12 object-contain" loading="lazy" />
           <img src={badgeEpa} alt="EPA Lead-Safe Certified Firm" className="h-12 w-12 object-contain" loading="lazy" />

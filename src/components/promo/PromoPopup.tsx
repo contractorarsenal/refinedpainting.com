@@ -56,7 +56,7 @@ export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="animate-fade-up relative flex w-full max-w-220 flex-col overflow-hidden rounded border-2 border-teal-dark bg-warm-white shadow-lift sm:flex-row">
+      <div className="animate-fade-up relative flex w-full max-w-220 flex-col overflow-hidden rounded border-2 border-teal-dark bg-cream shadow-lift sm:flex-row">
         <button
           type="button"
           onClick={onClose}
@@ -66,13 +66,14 @@ export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
           <X className="size-5" aria-hidden />
         </button>
 
-        <div className="flex shrink-0 items-center justify-center bg-off-white px-8 py-8 sm:w-[42%] sm:py-10">
+        <div className="flex shrink-0 items-center justify-center bg-cream-dark/40 px-8 py-8 sm:w-[42%] sm:py-10">
           <Mascot variant="full" className="h-32 w-32 sm:h-44 sm:w-44" />
         </div>
 
         <div className="flex flex-1 flex-col justify-center gap-4 px-7 py-8 sm:px-9 sm:py-10">
           {!submitted ? (
             <>
+              <div className="h-1 w-14 bg-crest" aria-hidden />
               <h3 className="text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
                 {promoPopup.headline}
               </h3>

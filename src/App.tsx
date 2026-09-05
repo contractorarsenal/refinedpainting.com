@@ -18,6 +18,7 @@ import { Reviews } from "./components/sections/Reviews";
 import { ServiceAreaStrip } from "./components/sections/ServiceAreaStrip";
 import { Services } from "./components/sections/Services";
 import { TrustStrip } from "./components/sections/TrustStrip";
+import { VideoAuthority } from "./components/sections/VideoAuthority";
 
 function App() {
   return (
@@ -29,11 +30,13 @@ function App() {
           <TrustStrip />
           <Reviews />
           <Services />
+          <VideoAuthority />
           <LocalTrustedPartner />
           <PromoBanner />
           <ServiceAreaStrip />
           <DontKnowWhereToStart />
           <PNWDifference />
+          <div className="h-1.5 bg-teal-dark" aria-hidden />
           <Process />
           <BeforeAfter />
           <Gallery />

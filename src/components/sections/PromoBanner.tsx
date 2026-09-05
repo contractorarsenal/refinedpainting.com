@@ -10,7 +10,7 @@ export function PromoBanner() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section className="bg-ink py-16 text-warm-white sm:py-20">
+    <section className="bg-ink py-24 text-warm-white sm:py-28">
       <Container>
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <div className="flex flex-col items-start gap-5">

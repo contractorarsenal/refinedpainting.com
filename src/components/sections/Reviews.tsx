@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import badgeEpa from "../../assets/images/badge-epa-lead-safe.webp";
 import badgeGoogle from "../../assets/images/badge-google-verified.webp";
@@ -28,14 +28,23 @@ export function Reviews() {
   };
 
   return (
-    <section className="bg-off-white py-16 sm:py-20">
+    <section className="bg-light-blue py-20 sm:py-24">
       <Container>
         <SectionHeading eyebrow="What Your Neighbors Are Saying" title="Refined Painting Reviews" />
 
         <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[1.5fr_1fr] lg:gap-8">
-          <div className="flex flex-col justify-between border-2 border-ink/10 bg-warm-white p-8 sm:p-10">
-            <div>
-              <Quote className="size-10 text-teal-dark/40" aria-hidden />
+          <div className="relative flex flex-col justify-between overflow-hidden border-2 border-ink/10 bg-warm-white p-8 sm:p-10">
+            <span
+              className="pointer-events-none absolute -left-2 -top-6 select-none font-display text-[9rem] font-black leading-none text-teal-dark/10 sm:text-[11rem]"
+              aria-hidden
+            >
+              "
+            </span>
+            <div key={active} className="animate-fade-in relative">
+              <div className="flex items-center gap-2">
+                <img src={badgeGoogle} alt="" className="h-6 w-6 object-contain" aria-hidden />
+                <span className="text-xs font-bold uppercase tracking-widest text-ink/45">Verified Google Review</span>
+              </div>
               <Stars className="mt-4" />
               <blockquote className="mt-4 text-balance font-display text-2xl font-semibold leading-snug text-ink sm:text-3xl">
                 "{current.quote}"
@@ -43,12 +52,12 @@ export function Reviews() {
               <p className="mt-4 text-sm font-bold uppercase tracking-wide text-ink/50">{current.source}</p>
             </div>
 
-            <div className="mt-8 flex items-center gap-3">
+            <div className="relative mt-8 flex items-center gap-3">
               <button
                 type="button"
                 onClick={() => go(-1)}
                 aria-label="Previous review"
-                className="flex size-10 items-center justify-center rounded border-2 border-ink/15 text-ink transition-colors hover:border-ink"
+                className="flex size-10 items-center justify-center rounded border-2 border-ink/15 text-ink transition-colors hover:border-teal-dark"
               >
                 <ChevronLeft className="size-5" aria-hidden />
               </button>
@@ -56,7 +65,7 @@ export function Reviews() {
                 type="button"
                 onClick={() => go(1)}
                 aria-label="Next review"
-                className="flex size-10 items-center justify-center rounded border-2 border-ink/15 text-ink transition-colors hover:border-ink"
+                className="flex size-10 items-center justify-center rounded border-2 border-ink/15 text-ink transition-colors hover:border-teal-dark"
               >
                 <ChevronRight className="size-5" aria-hidden />
               </button>
@@ -79,7 +88,7 @@ export function Reviews() {
           <div className="flex flex-col gap-6 border-2 border-ink/10 bg-ink p-8 text-warm-white sm:p-10">
             <div>
               <Stars />
-              <p className="mt-2 font-display text-3xl font-extrabold text-warm-white">
+              <p className="mt-2 font-display text-4xl font-extrabold text-warm-white">
                 {business.rating} <span className="text-lg font-bold text-warm-white/60">/ 5.0</span>
               </p>
               <p className="text-sm font-semibold text-warm-white/70">{business.reviewCount} Google Reviews</p>

@@ -1,5 +1,6 @@
 import { Square } from "lucide-react";
 import { Container } from "../ui/Container";
+import { DotGrid } from "../ui/DotGrid";
 import { PlaceholderPhoto } from "../ui/PlaceholderPhoto";
 import { SectionHeading } from "../ui/SectionHeading";
 
@@ -12,8 +13,9 @@ const bullets = [
 
 export function PNWDifference() {
   return (
-    <section className="bg-warm-white py-16 sm:py-20">
-      <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+    <section className="relative overflow-hidden bg-cream py-20 sm:py-24">
+      <DotGrid className="text-ink" />
+      <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
         <div className="aspect-4/5 w-full overflow-hidden rounded shadow-card">
           <PlaceholderPhoto label="Exterior surface prep detail" tone="teal" />
         </div>

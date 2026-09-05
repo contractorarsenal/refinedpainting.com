@@ -7,15 +7,18 @@
   --color-teal: #4fb0bb;
   --color-teal-dark: #2c8994;
 
-  /* Neutrals — cool, high-contrast, not cream */
+  /* Neutrals */
   --color-warm-white: #ffffff;
   --color-off-white: #f1f3f4;
+  --color-cream: #f6efdf;
+  --color-cream-dark: #ead9b8;
+  --color-light-blue: #e9f1f3;
   --color-stone: #e2e6e8;
   --color-stone-dark: #c6ccd0;
   --color-charcoal: #262a2d;
   --color-near-black: #0e1418;
 
-  /* Mascot accents — used sparingly */
+  /* Birdy's crest — a restrained red accent, never the dominant color */
   --color-crest: #c23b30;
   --color-gold: #e3a13a;
 
@@ -25,13 +28,15 @@
   --shadow-card: 0 1px 2px rgba(20, 33, 44, 0.06), 0 6px 16px -8px rgba(20, 33, 44, 0.16);
   --shadow-lift: 0 4px 8px rgba(20, 33, 44, 0.1), 0 20px 36px -16px rgba(20, 33, 44, 0.3);
 
-  --animate-fade-up: fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-fade-in: fade-in 0.4s ease both;
+  --animate-draw-line: draw-line 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-pulse-once: pulse-once 1.4s ease-out 1;
 
   @keyframes fade-up {
     from {
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(14px);
     }
     to {
       opacity: 1;
@@ -44,6 +49,23 @@
     }
     to {
       opacity: 1;
+    }
+  }
+  @keyframes draw-line {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes pulse-once {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(44, 137, 148, 0.45);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(44, 137, 148, 0);
     }
   }
 }
@@ -111,5 +133,16 @@
   .no-scrollbar {
     scrollbar-width: none;
     -ms-overflow-style: none;
+  }
+
+  /* Scroll-triggered reveal: starts hidden, JS flips data-inview once visible. */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  [data-reveal][data-inview="true"] {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -91,7 +91,7 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
         role="dialog"
         aria-modal="true"
         aria-label="Book your free estimate"
-        className="animate-fade-up flex h-[94svh] w-full flex-col overflow-hidden rounded-t-lg bg-warm-white shadow-lift sm:h-auto sm:max-h-[88vh] sm:max-w-155 sm:rounded-lg"
+        className="animate-fade-up flex h-[94svh] w-full flex-col overflow-hidden rounded-t-lg bg-cream shadow-lift sm:h-auto sm:max-h-[88vh] sm:max-w-155 sm:rounded-lg"
       >
         <div className="flex shrink-0 items-center justify-between bg-ink px-5 py-4 sm:px-7">
           <div className="flex items-center gap-3">

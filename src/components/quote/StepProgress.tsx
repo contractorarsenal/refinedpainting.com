@@ -20,7 +20,7 @@ export function StepProgress({ current }: { current: number }) {
           <div key={step.label} className="flex flex-1 flex-col items-center last:flex-none">
             <div className="flex w-full items-center">
               <div
-                className={`flex size-8 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold transition-colors sm:size-9 ${
+                className={`flex size-9 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold transition-colors sm:size-10 ${
                   isDone
                     ? "border-teal-dark bg-teal-dark text-warm-white"
                     : isActive
@@ -28,7 +28,7 @@ export function StepProgress({ current }: { current: number }) {
                       : "border-ink/15 bg-warm-white text-ink/30"
                 }`}
               >
-                {isDone ? <Check className="size-4" /> : <Icon className="size-4" />}
+                {isDone ? <Check className="size-4.5" /> : <Icon className="size-4.5" />}
               </div>
               {stepNumber < steps.length ? (
                 <div className={`h-0.5 flex-1 ${isDone ? "bg-teal-dark" : "bg-ink/10"}`} />
@@ -41,6 +41,7 @@ export function StepProgress({ current }: { current: number }) {
             >
               {step.label}
             </span>
+            {isActive ? <span className="mt-1 hidden h-0.5 w-5 bg-crest sm:block" /> : null}
           </div>
         );
       })}
