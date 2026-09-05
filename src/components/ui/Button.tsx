@@ -1,0 +1,88 @@
+import { ArrowRight, Phone } from "lucide-react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
+
+type Variant = "primary" | "secondary" | "ghost" | "outline-light";
+type Size = "md" | "lg";
+
+interface BaseProps {
+  variant?: Variant;
+  size?: Size;
+  icon?: "arrow" | "phone" | "none";
+  className?: string;
+  children?: ReactNode;
+}
+
+const variantClasses: Record<Variant, string> = {
+  primary:
+    "bg-teal text-ink hover:bg-teal-dark hover:text-warm-white shadow-card",
+  secondary:
+    "bg-ink text-warm-white hover:bg-ink-2",
+  ghost:
+    "bg-transparent text-ink border border-ink/15 hover:border-ink/40",
+  "outline-light":
+    "bg-transparent text-warm-white border border-warm-white/40 hover:bg-warm-white/10",
+};
+
+const sizeClasses: Record<Size, string> = {
+  md: "px-5 py-3 text-sm",
+  lg: "px-7 py-4 text-base",
+};
+
+const baseClasses =
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight transition-colors duration-200 cursor-pointer whitespace-nowrap";
+
+function IconFor({ icon }: { icon: BaseProps["icon"] }) {
+  if (icon === "phone") return <Phone className="size-4 shrink-0" aria-hidden />;
+  if (icon === "arrow")
+    return (
+      <ArrowRight className="size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
+    );
+  return null;
+}
+
+interface ButtonProps extends BaseProps, ButtonHTMLAttributes<HTMLButtonElement> {}
+
+export function Button({
+  variant = "primary",
+  size = "md",
+  icon = "arrow",
+  className = "",
+  children,
+  ...rest
+}: ButtonProps) {
+  return (
+    <button
+      className={`group ${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+      {...rest}
+    >
+      {children}
+      <IconFor icon={icon} />
+    </button>
+  );
+}
+
+interface LinkButtonProps extends BaseProps {
+  href: string;
+  ariaLabel?: string;
+}
+
+export function LinkButton({
+  variant = "primary",
+  size = "md",
+  icon = "none",
+  className = "",
+  href,
+  ariaLabel,
+  children,
+}: LinkButtonProps) {
+  return (
+    <a
+      href={href}
+      aria-label={ariaLabel}
+      className={`group ${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+    >
+      {children}
+      <IconFor icon={icon} />
+    </a>
+  );
+}
