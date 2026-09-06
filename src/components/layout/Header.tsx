@@ -1,6 +1,6 @@
 import { Menu, Phone } from "lucide-react";
 import { useState } from "react";
-import wordmarkSrc from "../../assets/images/refined-painting-wordmark.webp";
+import logoSrc from "../../assets/images/refined-painting-logo.webp";
 import { useScrolled } from "../../hooks/useScrolled";
 import { business, CTA } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
@@ -31,13 +31,12 @@ export function Header() {
           }`}
         >
           <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-10">
-            <a
-              href="#top"
-              className={`shrink-0 rounded transition-[background-color,padding] duration-300 ${
-                scrolled ? "bg-warm-white px-2 py-1" : "bg-transparent px-0 py-0"
-              }`}
-            >
-              <img src={wordmarkSrc} alt="Refined Painting" className="h-9 w-auto sm:h-10" />
+            <a href="#top" className="shrink-0">
+              <img
+                src={logoSrc}
+                alt="Refined Painting"
+                className="h-11 w-auto object-contain sm:h-12"
+              />
             </a>
 
             <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
