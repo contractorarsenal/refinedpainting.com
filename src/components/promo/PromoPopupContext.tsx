@@ -16,7 +16,7 @@ function writeDismissed() {
   try {
     sessionStorage.setItem(DISMISSED_KEY, "1");
   } catch {
-    // sessionStorage unavailable (private mode etc.) — popup just won't persist dismissal.
+    // sessionStorage unavailable (private mode etc). Popup just won't persist dismissal.
   }
 }
 
@@ -55,7 +55,7 @@ export function PromoPopupProvider({ children }: { children: ReactNode }) {
     };
   }, [dismissed]);
 
-  // If the user opens the booking flow, they're already converting — retire the promo for this session.
+  // If the user opens the booking flow, they're already converting. Retire the promo for this session.
   useEffect(() => {
     if (quoteOpen) {
       setDismissed(true);

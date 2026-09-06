@@ -75,7 +75,7 @@ export function QuoteModal({ isOpen, presetService, onClose }: QuoteModalProps) 
 
     if (step === TOTAL_STEPS) {
       // Demo submission: persisted locally only. Wire to a real API/CRM here later.
-      console.info("Refined Painting — quote request captured locally:", data);
+      console.info("Refined Painting: quote request captured locally", data);
       setSubmitted(true);
       return;
     }

@@ -1,7 +1,7 @@
 import { ArrowRight, Phone } from "lucide-react";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghost" | "outline-light" | "outline-dark";
+type Variant = "primary" | "secondary" | "ghost" | "outline-light" | "outline-dark" | "invert";
 type Size = "md" | "lg";
 
 interface BaseProps {
@@ -18,6 +18,8 @@ const variantClasses: Record<Variant, string> = {
   ghost: "bg-warm-white text-ink border-2 border-ink hover:bg-ink hover:text-warm-white",
   "outline-light": "bg-transparent text-warm-white border-2 border-warm-white/50 hover:bg-warm-white/10",
   "outline-dark": "bg-transparent text-ink border-2 border-ink/25 hover:border-ink",
+  // For use on saturated (e.g. red) backgrounds where the other variants lack contrast.
+  invert: "bg-warm-white text-crest hover:bg-cream",
 };
 
 const sizeClasses: Record<Size, string> = {

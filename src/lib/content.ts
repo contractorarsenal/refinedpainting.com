@@ -13,7 +13,7 @@ export const business = {
   reviewCount: 227,
 } as const;
 
-// Google's public Maps Search URL API — a real, functional deep link built from
+// Google's public Maps Search URL API. A real, functional deep link built from
 // the business's own name/address (no fabricated place ID or review page).
 export const googleReviewsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   `${business.name} ${business.address.street} ${business.address.city} ${business.address.state} ${business.address.zip}`,
@@ -238,7 +238,7 @@ export const localPartnerBullets = [
   "5-year workmanship warranty",
 ];
 
-// Configurable — swap this copy any time the actual offer changes.
+// Configurable. Swap this copy any time the actual offer changes.
 export const promoBanner = {
   eyebrow: "Included With Every Project",
   headline: "Complimentary Color Consultation",
@@ -246,7 +246,7 @@ export const promoBanner = {
   cta: "Get My Free Estimate",
 };
 
-// Configurable — swap this copy any time the actual offer changes.
+// Configurable. Swap this copy any time the actual offer changes.
 export const promoPopup = {
   headline: "Planning a Painting Project?",
   sub: "Get current offers, seasonal availability and helpful painting advice from Refined Painting.",
@@ -264,7 +264,7 @@ export const videoAuthority = {
   headline: "We've Painted 200+ Homes. Here's the Cabinet Mistake We See Over and Over.",
   paragraphs: [
     "Homeowners often focus on the paint color first.",
-    "But cabinet finishes usually fail because of what happens before the paint ever goes on — cleaning, degreasing, sanding, bonding primer, product choice and application method determine whether cabinets still look good years later.",
+    "But cabinet finishes usually fail because of what happens before the paint ever goes on. Cleaning, degreasing, sanding, bonding primer, product choice and application method determine whether cabinets still look good years later.",
   ],
   callout: "The finish is only as good as the prep.",
   cta: "Get a Cabinet Painting Estimate",

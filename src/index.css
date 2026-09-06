@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand — pulled from the Refined Painting wordmark */
+  /* Brand, pulled from the Refined Painting wordmark */
   --color-ink: #14212c;
   --color-ink-2: #1e3040;
   --color-teal: #4fb0bb;
@@ -18,7 +18,7 @@
   --color-charcoal: #262a2d;
   --color-near-black: #0e1418;
 
-  /* Birdy's crest — a restrained red accent, never the dominant color */
+  /* Birdy's crest: a restrained red accent, never the dominant color */
   --color-crest: #c23b30;
   --color-gold: #e3a13a;
 

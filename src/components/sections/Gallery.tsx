@@ -1,22 +1,34 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import type { PlaceholderTone } from "../../lib/content";
+import cabinetsPhoto from "../../assets/images/projects/cabinets-sage-green.webp";
+import afterPink from "../../assets/images/projects/exterior-after-pink.jpg";
+import afterWhite from "../../assets/images/projects/exterior-after-white.jpg";
+import cottagePhoto from "../../assets/images/projects/exterior-cottage.webp";
+import exteriorNavy from "../../assets/images/projects/exterior-finished-navy.webp";
+import inProgressPhoto from "../../assets/images/projects/exterior-in-progress.webp";
+import interiorBright from "../../assets/images/projects/interior-bright-finished.webp";
+import interiorEmpty from "../../assets/images/projects/interior-empty-room.webp";
+import kitchenPhoto from "../../assets/images/projects/kitchen-blue-accent.webp";
+import porchPhoto from "../../assets/images/projects/porch-yellow-door.webp";
 import { Container } from "../ui/Container";
-import { PlaceholderPhoto } from "../ui/PlaceholderPhoto";
 import { SectionHeading } from "../ui/SectionHeading";
 
 interface GalleryItem {
-  label: string;
-  tone: PlaceholderTone;
+  src: string;
+  alt: string;
 }
 
 const galleryItems: GalleryItem[] = [
-  { label: "Craftsman exterior repaint", tone: "teal" },
-  { label: "Living room refresh", tone: "slate" },
-  { label: "Kitchen cabinet refinish", tone: "warm" },
-  { label: "Full exterior, two-story", tone: "navy" },
-  { label: "Primary bedroom", tone: "slate" },
-  { label: "Bathroom vanity", tone: "warm" },
+  { src: exteriorNavy, alt: "Finished two-story exterior repaint in deep navy" },
+  { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
+  { src: cabinetsPhoto, alt: "Kitchen cabinets refinished in sage green" },
+  { src: afterWhite, alt: "Home exterior finished in crisp white" },
+  { src: kitchenPhoto, alt: "Kitchen with a painted blue accent wall" },
+  { src: porchPhoto, alt: "Covered porch with a bold yellow front door" },
+  { src: afterPink, alt: "Home exterior finished in a soft blush tone" },
+  { src: inProgressPhoto, alt: "Exterior siding mid-repaint with protective covering" },
+  { src: cottagePhoto, alt: "Painted cottage exterior with porch and railings" },
+  { src: interiorEmpty, alt: "Freshly painted bedroom ready for move-in" },
 ];
 
 function at(index: number) {
@@ -42,22 +54,22 @@ export function Gallery() {
             type="button"
             onClick={() => setIndex((i) => i - 1)}
             aria-label="Previous project"
-            className="hidden aspect-4/3 w-1/6 shrink-0 overflow-hidden rounded opacity-50 grayscale transition-opacity hover:opacity-80 lg:block"
+            className="hidden aspect-4/3 w-1/6 shrink-0 overflow-hidden rounded opacity-60 grayscale transition-opacity hover:opacity-90 lg:block"
           >
-            <PlaceholderPhoto label={at(index - 1).label} tone={at(index - 1).tone} />
+            <img src={at(index - 1).src} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />
           </button>
 
           <div key={index} className="animate-fade-in aspect-4/3 w-full max-w-2xl shrink-0 overflow-hidden rounded shadow-lift">
-            <PlaceholderPhoto label={at(index).label} tone={at(index).tone} />
+            <img src={at(index).src} alt={at(index).alt} className="h-full w-full object-cover" loading="lazy" decoding="async" />
           </div>
 
           <button
             type="button"
             onClick={() => setIndex((i) => i + 1)}
             aria-label="Next project"
-            className="hidden aspect-4/3 w-1/6 shrink-0 overflow-hidden rounded opacity-50 grayscale transition-opacity hover:opacity-80 lg:block"
+            className="hidden aspect-4/3 w-1/6 shrink-0 overflow-hidden rounded opacity-60 grayscale transition-opacity hover:opacity-90 lg:block"
           >
-            <PlaceholderPhoto label={at(index + 1).label} tone={at(index + 1).tone} />
+            <img src={at(index + 1).src} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />
           </button>
         </div>
 

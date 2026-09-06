@@ -1,13 +1,12 @@
 import { MapPin } from "lucide-react";
+import heroPhoto from "../../assets/images/projects/exterior-finished-navy.webp";
 import { business } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { Mascot } from "../ui/Mascot";
-import { PlaceholderPhoto } from "../ui/PlaceholderPhoto";
+import { ProjectImage } from "../ui/ProjectImage";
 import { Stars } from "../ui/Stars";
-
-const swatchEdge = ["#4fb0bb", "#c23b30", "#e3a13a", "#14212c", "#e2e6e8"];
 
 export function Hero() {
   const { openQuoteModal } = useQuoteModal();
@@ -46,19 +45,13 @@ export function Hero() {
         </div>
 
         <div className="animate-fade-up relative [animation-delay:200ms]">
-          <div className="relative aspect-4/3 w-full overflow-hidden rounded shadow-lift">
-            <PlaceholderPhoto label="Exterior repaint, Seattle" tone="navy" />
+          <div className="relative aspect-3/4 w-full overflow-hidden rounded shadow-lift sm:aspect-4/5">
+            <ProjectImage src={heroPhoto} alt="Recently completed exterior repaint on a two-story Seattle home" eager />
 
             <span className="absolute left-4 top-4 flex items-center gap-1.5 bg-ink/85 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-warm-white backdrop-blur-sm">
               <MapPin className="size-3 text-teal" aria-hidden />
               Seattle, WA
             </span>
-
-            <div className="absolute bottom-0 left-0 flex h-2.5 w-full" aria-hidden>
-              {swatchEdge.map((color) => (
-                <span key={color} className="h-full flex-1" style={{ backgroundColor: color }} />
-              ))}
-            </div>
           </div>
 
           <Mascot

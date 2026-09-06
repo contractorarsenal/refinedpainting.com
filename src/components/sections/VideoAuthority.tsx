@@ -12,7 +12,7 @@ function VideoFrame() {
         <iframe
           className="h-full w-full"
           src={`https://www.youtube.com/embed/${videoAuthority.youtubeId}?autoplay=0&playsinline=1&rel=0`}
-          title="Refined Painting — the cabinet prep mistake homeowners make"
+          title="Refined Painting: the cabinet prep mistake homeowners make"
           loading="eager"
           allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen

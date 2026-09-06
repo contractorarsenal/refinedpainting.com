@@ -1,5 +1,5 @@
 /**
- * PLACEHOLDER — Refined Painting did not supply project photography for this slot.
+ * PLACEHOLDER. Refined Painting did not supply project photography for this slot.
  * Rendered as a desaturated duotone with a house silhouette so it reads as a
  * missing photo, not a design element. Replace every usage with a real project
  * photo (before/after, in-progress, or finished) when available.
@@ -47,7 +47,7 @@ export function PlaceholderPhoto({ label, tone = "slate", className = "" }: Plac
         />
       </svg>
       <span className="relative z-10 m-3 bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-warm-white/90">
-        {label} — sample
+        {label} · sample
       </span>
     </div>
   );

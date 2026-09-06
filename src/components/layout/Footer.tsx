@@ -8,6 +8,7 @@ import { business, CTA, serviceAreas } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
+import { DotGrid } from "../ui/DotGrid";
 import { Mascot } from "../ui/Mascot";
 
 const companyLinks = [
@@ -28,12 +29,13 @@ export function Footer() {
         <span className="absolute left-0 top-0 h-full w-22.5 bg-crest" />
       </div>
 
+      <DotGrid className="text-warm-white" />
       <Mascot
         variant="watermark"
         className="pointer-events-none absolute -bottom-8 right-[6%] hidden h-56 w-56 opacity-[0.15] lg:block"
       />
 
-      <Container className="relative grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr] lg:gap-8 lg:py-16">
+      <Container className="relative grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr] lg:gap-10 lg:py-20">
         <div className="flex flex-col gap-5">
           <img src={wordmarkSrc} alt="Refined Painting" className="h-11 w-auto" />
           <p className="max-w-56 text-sm text-warm-white/65">
@@ -119,11 +121,16 @@ export function Footer() {
       </Container>
 
       <div className="relative border-t border-warm-white/10 bg-warm-white/4">
-        <Container className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 py-8">
-          <img src={badgeGoogle} alt="Google Verified" className="h-12 w-12 object-contain" loading="lazy" />
-          <img src={badgeEpa} alt="EPA Lead-Safe Certified Firm" className="h-12 w-12 object-contain" loading="lazy" />
-          <img src={badgeLicensed} alt="Licensed and Insured" className="h-12 w-12 object-contain" loading="lazy" />
-          <img src={badgeNextdoor} alt="Nextdoor Neighborhood Favorite" className="h-12 w-12 object-contain" loading="lazy" />
+        <Container className="flex flex-col items-center gap-5 py-8">
+          <span className="text-xs font-bold uppercase tracking-widest text-warm-white/45">
+            Trusted &amp; Certified
+          </span>
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+            <img src={badgeGoogle} alt="Google Verified" className="h-14 w-14 object-contain" loading="lazy" />
+            <img src={badgeEpa} alt="EPA Lead-Safe Certified Firm" className="h-14 w-14 object-contain" loading="lazy" />
+            <img src={badgeLicensed} alt="Licensed and Insured" className="h-14 w-14 object-contain" loading="lazy" />
+            <img src={badgeNextdoor} alt="Nextdoor Neighborhood Favorite" className="h-14 w-14 object-contain" loading="lazy" />
+          </div>
         </Container>
       </div>
 

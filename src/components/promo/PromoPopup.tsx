@@ -40,8 +40,8 @@ export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
       setError("Enter a valid email address.");
       return;
     }
-    // Demo capture only — wire to a real list/CRM here later.
-    console.info("Refined Painting — promo signup captured locally:", email);
+    // Demo capture only. Wire to a real list/CRM here later.
+    console.info("Refined Painting: promo signup captured locally", email);
     setError("");
     setSubmitted(true);
   };

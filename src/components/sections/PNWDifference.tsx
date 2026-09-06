@@ -1,7 +1,8 @@
 import { Square } from "lucide-react";
+import prepPhoto from "../../assets/images/projects/exterior-before-tan.jpg";
 import { Container } from "../ui/Container";
 import { DotGrid } from "../ui/DotGrid";
-import { PlaceholderPhoto } from "../ui/PlaceholderPhoto";
+import { ProjectImage } from "../ui/ProjectImage";
 import { SectionHeading } from "../ui/SectionHeading";
 
 const bullets = [
@@ -17,7 +18,10 @@ export function PNWDifference() {
       <DotGrid className="text-ink" />
       <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
         <div className="aspect-4/5 w-full overflow-hidden rounded shadow-card">
-          <PlaceholderPhoto label="Exterior surface prep detail" tone="teal" />
+          <ProjectImage
+            src={prepPhoto}
+            alt="Weathered exterior siding with peeling paint before surface preparation"
+          />
         </div>
 
         <div className="flex flex-col items-start gap-5">
