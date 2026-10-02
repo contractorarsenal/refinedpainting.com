@@ -3,12 +3,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import logoSrc from "../../assets/images/refined-painting-logo.webp";
 import { useScrolled } from "../../hooks/useScrolled";
+import { useQuoteModal } from "../quote/QuoteModalContext";
 import { MobileMenu } from "./MobileMenu";
 import { UtilityBar } from "./UtilityBar";
 
 const navLeft = [
   { label: "Services", href: "/services" },
-  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const navRight = [{ label: "Projects", href: "/projects" }];
@@ -16,6 +17,7 @@ const navRight = [{ label: "Projects", href: "/projects" }];
 export function Header() {
   const scrolled = useScrolled(40);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { openQuoteModal } = useQuoteModal();
 
   return (
     <>
@@ -78,12 +80,13 @@ export function Header() {
                     {link.label}
                   </Link>
                 ))}
-                <Link
-                  to="/contact"
+                <button
+                  type="button"
+                  onClick={() => openQuoteModal()}
                   className="text-sm font-bold uppercase tracking-wide text-teal transition-colors duration-300 hover:text-warm-white"
                 >
                   Free Estimate
-                </Link>
+                </button>
               </nav>
             </div>
           </div>

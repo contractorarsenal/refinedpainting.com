@@ -1,5 +1,5 @@
 import { User } from "lucide-react";
-import type { ReactNode } from "react";
+import { FormField as Field, formInputClasses as inputClasses } from "../../ui/FormField";
 import type { QuoteFormData } from "../quoteState";
 
 interface StepContactProps {
@@ -7,27 +7,6 @@ interface StepContactProps {
   errors: Record<string, string>;
   onUpdate: (patch: Partial<QuoteFormData>) => void;
 }
-
-function Field({
-  label,
-  error,
-  children,
-}: {
-  label: string;
-  error?: string;
-  children: ReactNode;
-}) {
-  return (
-    <label className="flex flex-col gap-2">
-      <span className="text-sm font-bold uppercase tracking-wide text-ink/70">{label}</span>
-      {children}
-      {error ? <span className="text-sm font-medium text-crest">{error}</span> : null}
-    </label>
-  );
-}
-
-const inputClasses =
-  "w-full rounded border-2 border-ink/15 bg-warm-white px-4 py-3.5 text-[15px] text-ink outline-none transition-colors focus:border-teal-dark";
 
 export function StepContact({ data, errors, onUpdate }: StepContactProps) {
   return (

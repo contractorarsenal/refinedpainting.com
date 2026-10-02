@@ -1,4 +1,4 @@
-import { Camera, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 import type { QuoteFormData } from "../quoteState";
 
 interface StepDetailsProps {
@@ -30,14 +30,6 @@ export function StepDetails({ data, onUpdate }: StepDetailsProps) {
           className="w-full resize-none rounded border-2 border-ink/15 bg-warm-white p-4 text-[15px] text-ink outline-none transition-colors focus:border-teal-dark"
         />
       </label>
-
-      <div className="flex items-start gap-3 rounded border-2 border-dashed border-ink/20 bg-off-white px-4 py-4">
-        <Camera className="mt-0.5 size-5 shrink-0 text-ink/40" aria-hidden />
-        <p className="text-sm leading-relaxed text-ink/60">
-          Have photos of the space? This form doesn't accept attachments yet — mention it in the
-          details above, or bring them up when we call to schedule your estimate.
-        </p>
-      </div>
     </div>
   );
 }

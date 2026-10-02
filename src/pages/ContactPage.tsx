@@ -1,7 +1,7 @@
 import { Clock, MapPin, Phone } from "lucide-react";
 import heroImage from "../assets/images/projects/interior-bright-finished.webp";
 import { PageHero } from "../components/hero/PageHero";
-import { DontKnowWhereToStart } from "../components/sections/DontKnowWhereToStart";
+import { ContactForm } from "../components/sections/ContactForm";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
 import { Container } from "../components/ui/Container";
@@ -29,14 +29,14 @@ export function ContactPage() {
       <PageHero
         eyebrow="Get In Touch"
         title="Start Your Project"
-        description="Request a free estimate online, or call us directly to talk through your project."
+        description="Send us a message below, or call us directly to talk through your project."
         image={heroImage}
         imageAlt="Freshly painted bedroom ready for move-in"
         height="compact"
       />
-      <DontKnowWhereToStart />
+      <ContactForm />
 
-      <section className="bg-warm-white py-16 sm:py-20 lg:py-24">
+      <section className="bg-light-blue py-16 sm:py-20 lg:py-24">
         <Container className="grid grid-cols-1 gap-8 sm:grid-cols-3">
           {contactDetails.map((detail) => (
             <div key={detail.label} className="flex flex-col items-start gap-3 border-t border-ink/15 pt-6">

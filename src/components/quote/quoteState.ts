@@ -1,4 +1,5 @@
 import type { ServiceId } from "../../lib/content";
+import { isValidEmail, isValidName, isValidPhone, isValidZip } from "../../lib/formValidation";
 
 export type ServiceSelection = ServiceId | "not-sure";
 export type TimelineSelection = "asap" | "30-days" | "1-3-months" | "planning";
@@ -31,7 +32,7 @@ export function validateStep(step: number, data: QuoteFormData): Record<string, 
   const errors: Record<string, string> = {};
 
   if (step === 1) {
-    if (!/^\d{5}$/.test(data.zip.trim())) {
+    if (!isValidZip(data.zip)) {
       errors.zip = "Enter a valid 5-digit ZIP code.";
     }
   }
@@ -49,15 +50,10 @@ export function validateStep(step: number, data: QuoteFormData): Record<string, 
   }
 
   if (step === 5) {
-    if (!/\p{L}/u.test(data.firstName.trim())) errors.firstName = "First name is required.";
-    if (!/\p{L}/u.test(data.lastName.trim())) errors.lastName = "Last name is required.";
-
-    const phoneDigits = data.phone.replace(/\D/g, "");
-    if (phoneDigits.length < 10 || phoneDigits.length > 15 || /^(\d)\1+$/.test(phoneDigits)) {
-      errors.phone = "Enter a valid phone number.";
-    }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) errors.email = "Enter a valid email address.";
+    if (!isValidName(data.firstName)) errors.firstName = "First name is required.";
+    if (!isValidName(data.lastName)) errors.lastName = "Last name is required.";
+    if (!isValidPhone(data.phone)) errors.phone = "Enter a valid phone number.";
+    if (!isValidEmail(data.email)) errors.email = "Enter a valid email address.";
   }
 
   return errors;
