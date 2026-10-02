@@ -1,4 +1,5 @@
-import heroImage from "../../assets/images/projects/exterior-finished-navy.webp";
+import heroPoster from "../../assets/images/home-hero-poster.webp";
+import heroVideo from "../../assets/videos/home-hero.mp4";
 import { business } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";
@@ -7,9 +8,10 @@ import { Stars } from "../ui/Stars";
 import type { HeroMedia } from "./heroMedia";
 
 const homeHeroMedia: HeroMedia = {
-  type: "image",
-  src: heroImage,
-  alt: "Recently completed exterior repaint on a two-story Seattle home",
+  type: "video",
+  src: heroVideo,
+  poster: heroPoster,
+  alt: "Aerial view of a Refined Painting truck driving through a Seattle neighborhood overlooking the water",
 };
 
 export function HomeHero() {
