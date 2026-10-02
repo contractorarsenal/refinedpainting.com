@@ -4,7 +4,6 @@ import { services } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
-import { SectionHeading } from "../ui/SectionHeading";
 
 const serviceIcons: Record<ServiceId, typeof Home> = {
   interior: Home,
@@ -21,13 +20,7 @@ export function Services() {
   return (
     <section id="services" className="bg-cream py-16 sm:py-20 lg:py-28">
       <Container>
-        <SectionHeading
-          eyebrow="Painting Services"
-          title="Painting Services for Homes & Businesses"
-          description="Professional painting, refinishing and repair services for homes and businesses across Seattle and the Eastside."
-        />
-
-        <div className="mt-15 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => {
             const Icon = serviceIcons[service.id];
             return (

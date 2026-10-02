@@ -1,5 +1,6 @@
 import { ArrowRight, Phone } from "lucide-react";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 type Variant = "primary" | "secondary" | "ghost" | "outline-light" | "outline-dark" | "invert";
 type Size = "md" | "lg";
@@ -76,13 +77,25 @@ export function LinkButton({
   external = false,
   children,
 }: LinkButtonProps) {
+  const classes = `group ${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+
+  // Internal routes navigate client-side via react-router; tel:/mailto:/http(s) links stay plain <a> tags.
+  if (!external && href.startsWith("/")) {
+    return (
+      <Link to={href} aria-label={ariaLabel} className={classes}>
+        {children}
+        <IconFor icon={icon} />
+      </Link>
+    );
+  }
+
   return (
     <a
       href={href}
       aria-label={ariaLabel}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      className={`group ${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+      className={classes}
     >
       {children}
       <IconFor icon={icon} />

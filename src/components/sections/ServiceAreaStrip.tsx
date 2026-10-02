@@ -5,7 +5,7 @@ import { SectionHeading } from "../ui/SectionHeading";
 
 export function ServiceAreaStrip() {
   return (
-    <section id="service-areas" className="relative overflow-hidden bg-cream py-16 sm:py-20 lg:py-28">
+    <section id="service-areas" className="relative scroll-mt-24 overflow-hidden bg-cream py-16 sm:py-20 lg:py-28">
       <svg
         className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.35]"
         viewBox="0 0 800 400"

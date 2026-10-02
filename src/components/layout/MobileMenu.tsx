@@ -1,16 +1,17 @@
 import { Phone, X } from "lucide-react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { business, CTA } from "../../lib/content";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button } from "../ui/Button";
 
 const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Our Work", href: "#gallery" },
-  { label: "Process", href: "#process" },
-  { label: "Service Areas", href: "#service-areas" },
-  { label: "About", href: "#local-partner" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Projects", href: "/projects" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 interface MobileMenuProps {
@@ -53,14 +54,14 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         <nav className="flex flex-1 flex-col overflow-y-auto px-3 py-2">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
+              to={link.href}
               onClick={onClose}
               className="border-b border-ink/8 px-3 py-4 font-display text-xl font-extrabold uppercase tracking-wide text-ink"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 

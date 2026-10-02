@@ -1,7 +1,6 @@
 import cabinetsPhoto from "../../assets/images/projects/cabinets-sage-green.webp";
 import afterPink from "../../assets/images/projects/exterior-after-pink.jpg";
 import afterWhite from "../../assets/images/projects/exterior-after-white.jpg";
-import cottagePhoto from "../../assets/images/projects/exterior-cottage.webp";
 import inProgressPhoto from "../../assets/images/projects/exterior-in-progress.webp";
 import interiorBright from "../../assets/images/projects/interior-bright-finished.webp";
 import interiorEmpty from "../../assets/images/projects/interior-empty-room.webp";
@@ -9,7 +8,6 @@ import kitchenPhoto from "../../assets/images/projects/kitchen-blue-accent.webp"
 import porchPhoto from "../../assets/images/projects/porch-yellow-door.webp";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
-import { SectionHeading } from "../ui/SectionHeading";
 
 /**
  * Structured so a future project detail route can key off `id` without
@@ -27,11 +25,11 @@ export interface ProjectEntry {
 
 const projects: ProjectEntry[] = [
   {
-    id: "exterior-cottage",
-    title: "Exterior Repaint",
+    id: "exterior-pink",
+    title: "Exterior Color Change",
     category: "Exterior Painting",
-    image: cottagePhoto,
-    alt: "Painted cottage exterior with porch and railings",
+    image: afterPink,
+    alt: "Home exterior finished in a soft blush tone",
     feature: true,
   },
   {
@@ -68,13 +66,6 @@ const projects: ProjectEntry[] = [
     category: "Exterior Painting",
     image: porchPhoto,
     alt: "Covered porch with a bold yellow front door",
-  },
-  {
-    id: "exterior-pink",
-    title: "Exterior Color Change",
-    category: "Exterior Painting",
-    image: afterPink,
-    alt: "Home exterior finished in a soft blush tone",
   },
   {
     id: "exterior-in-progress",
@@ -121,28 +112,18 @@ function ProjectFigure({ project, aspect = "aspect-4/3" }: { project: ProjectEnt
 
 export function Gallery() {
   return (
-    <section id="gallery" className="bg-off-white pb-10 pt-16 sm:pb-12 sm:pt-20 lg:pb-16 lg:pt-32">
+    <section className="bg-off-white pb-10 pt-16 sm:pb-12 sm:pt-20 lg:pb-16 lg:pt-24">
       <Container>
-        <SectionHeading
-          align="center"
-          eyebrow="Our Work"
-          title="Recent Projects"
-          description="A selection of recent interior, exterior and cabinet work across Seattle and the Eastside."
-          className="mx-auto"
-        />
+        <Reveal>
+          <ProjectFigure project={feature} aspect="aspect-4/3 sm:aspect-16/9 lg:aspect-21/9" />
+        </Reveal>
 
-        <div className="mt-14 sm:mt-16">
-          <Reveal>
-            <ProjectFigure project={feature} aspect="aspect-4/3 sm:aspect-16/9 lg:aspect-21/9" />
-          </Reveal>
-
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
-            {rest.map((project, index) => (
-              <Reveal key={project.id} delay={Math.min(index, 4) * 60}>
-                <ProjectFigure project={project} />
-              </Reveal>
-            ))}
-          </div>
+        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
+          {rest.map((project, index) => (
+            <Reveal key={project.id} delay={Math.min(index, 4) * 60}>
+              <ProjectFigure project={project} />
+            </Reveal>
+          ))}
         </div>
       </Container>
     </section>

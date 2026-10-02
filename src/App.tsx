@@ -1,46 +1,33 @@
+import { Route, Routes } from "react-router-dom";
 import { FloatingContactButton } from "./components/layout/FloatingContactButton";
 import { Footer } from "./components/layout/Footer";
 import { Header } from "./components/layout/Header";
 import { MobileCTABar } from "./components/layout/MobileCTABar";
+import { ScrollToTop } from "./components/layout/ScrollToTop";
 import { PromoPopupProvider } from "./components/promo/PromoPopupContext";
 import { QuoteModalProvider } from "./components/quote/QuoteModalContext";
-import { BeforeAfter } from "./components/sections/BeforeAfter";
-import { DontKnowWhereToStart } from "./components/sections/DontKnowWhereToStart";
-import { FAQ } from "./components/sections/FAQ";
-import { FinalCTA } from "./components/sections/FinalCTA";
-import { Gallery } from "./components/sections/Gallery";
-import { Hero } from "./components/sections/Hero";
-import { LocalTrustedPartner } from "./components/sections/LocalTrustedPartner";
-import { PNWDifference } from "./components/sections/PNWDifference";
-import { Process } from "./components/sections/Process";
-import { PromoBanner } from "./components/sections/PromoBanner";
-import { Reviews } from "./components/sections/Reviews";
-import { ServiceAreaStrip } from "./components/sections/ServiceAreaStrip";
-import { Services } from "./components/sections/Services";
-import { TrustStrip } from "./components/sections/TrustStrip";
-import { VideoAuthority } from "./components/sections/VideoAuthority";
+import { AboutPage } from "./pages/AboutPage";
+import { ContactPage } from "./pages/ContactPage";
+import { HomePage } from "./pages/HomePage";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import { ProjectsPage } from "./pages/ProjectsPage";
+import { ServicesPage } from "./pages/ServicesPage";
 
 function App() {
   return (
     <QuoteModalProvider>
       <PromoPopupProvider>
+        <ScrollToTop />
         <Header />
         <main className="pb-20 sm:pb-0">
-          <Hero />
-          <TrustStrip />
-          <Services />
-          <Gallery />
-          <BeforeAfter />
-          <VideoAuthority />
-          <LocalTrustedPartner />
-          <PNWDifference />
-          <Process />
-          <PromoBanner />
-          <Reviews />
-          <ServiceAreaStrip />
-          <FAQ />
-          <DontKnowWhereToStart />
-          <FinalCTA />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         </main>
         <Footer />
         <MobileCTABar />

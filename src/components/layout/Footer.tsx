@@ -1,4 +1,5 @@
 import { Clock, MapPin, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 import badgeEpa from "../../assets/images/badge-epa-lead-safe.webp";
 import badgeGoogle from "../../assets/images/badge-google-verified.webp";
 import badgeLicensed from "../../assets/images/badge-licensed-insured.webp";
@@ -12,11 +13,11 @@ import { DotGrid } from "../ui/DotGrid";
 import { Mascot } from "../ui/Mascot";
 
 const companyLinks = [
-  { label: "About", href: "#local-partner" },
-  { label: "Our Work", href: "#gallery" },
-  { label: "Process", href: "#process" },
-  { label: "Warranty", href: "#faq" },
-  { label: "Contact", href: "#quote-cta" },
+  { label: "About", href: "/about" },
+  { label: "Our Work", href: "/projects" },
+  { label: "Process", href: "/about#process" },
+  { label: "Warranty", href: "/services#faq" },
+  { label: "Contact", href: "/contact" },
 ];
 const featuredAreas = serviceAreas.slice(0, 8);
 
@@ -37,7 +38,9 @@ export function Footer() {
 
       <Container className="relative grid grid-cols-1 gap-10 pb-12 pt-16 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr] lg:gap-10 lg:pt-20">
         <div className="flex flex-col gap-5">
-          <img src={logoSrc} alt="Refined Painting" className="h-14 w-auto self-start object-contain" />
+          <Link to="/" className="self-start">
+            <img src={logoSrc} alt="Refined Painting" className="h-14 w-auto object-contain" />
+          </Link>
           <p className="max-w-56 text-sm text-warm-white/65">
             Professional painting for Seattle and the Eastside.
           </p>
@@ -61,9 +64,9 @@ export function Footer() {
             {["Interior Painting", "Exterior Painting", "Cabinet Refinishing", "Commercial Painting", "Deck & Fence Staining", "Carpentry"].map(
               (label) => (
                 <li key={label}>
-                  <a href="#services" className="text-sm font-medium text-warm-white/80 hover:text-warm-white">
+                  <Link to="/services" className="text-sm font-medium text-warm-white/80 hover:text-warm-white">
                     {label}
-                  </a>
+                  </Link>
                 </li>
               ),
             )}
@@ -75,15 +78,15 @@ export function Footer() {
           <ul className="mt-4 flex flex-col gap-3">
             {featuredAreas.map((area) => (
               <li key={area}>
-                <a href="#service-areas" className="text-sm font-medium text-warm-white/80 hover:text-warm-white">
+                <Link to="/contact#service-areas" className="text-sm font-medium text-warm-white/80 hover:text-warm-white">
                   {area}
-                </a>
+                </Link>
               </li>
             ))}
             <li>
-              <a href="#service-areas" className="text-sm font-bold text-teal hover:text-teal/80">
+              <Link to="/contact#service-areas" className="text-sm font-bold text-teal hover:text-teal/80">
                 View All
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
@@ -94,9 +97,9 @@ export function Footer() {
             <ul className="mt-4 flex flex-col gap-3">
               {companyLinks.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm font-medium text-warm-white/80 hover:text-warm-white">
+                  <Link to={link.href} className="text-sm font-medium text-warm-white/80 hover:text-warm-white">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
