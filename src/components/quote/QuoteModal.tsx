@@ -1,6 +1,6 @@
 import { ChevronLeft, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { business } from "../../lib/content";
+import { business, serviceOptions, timelineOptions } from "../../lib/content";
 import { Mascot } from "../ui/Mascot";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { Button } from "../ui/Button";
@@ -22,6 +22,14 @@ interface QuoteModalProps {
 type SubmitState = "idle" | "submitting" | "error";
 
 const REQUEST_TIMEOUT_MS = 15_000;
+const MIN_FORM_SECONDS = 3;
+
+// Web3Forms access keys are explicitly public/safe for client-side use by
+// design (unlike a real API secret) — see https://docs.web3forms.com.
+// This is Refined Painting's existing, already-configured form; do not swap
+// it for a different key or create a second form.
+const WEB3FORMS_ACCESS_KEY = "5325d12a-69cf-4914-9eed-810c0410edf5";
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 export function QuoteModal({ isOpen, presetService, onClose }: QuoteModalProps) {
   const [step, setStep] = useState(1);
@@ -109,41 +117,59 @@ export function QuoteModal({ isOpen, presetService, onClose }: QuoteModalProps) 
     setSubmitState("submitting");
     setSubmitError(null);
 
+    // Lightweight client-only bot signals: a filled honeypot field, or a
+    // form completed suspiciously fast. Both are handled by pretending
+    // success without ever actually calling Web3Forms, so we don't tip off
+    // automated submitters. There's no server here to enforce this against
+    // a determined attacker — it's a cheap deterrent, not a security
+    // boundary, which is also true of Web3Forms' own public access key.
+    const honeypotFilled = (honeypotRef.current?.value ?? "").trim().length > 0;
+    const elapsedSeconds = (Date.now() - openedAtRef.current) / 1000;
+    if (honeypotFilled || elapsedSeconds < MIN_FORM_SECONDS) {
+      setSubmitState("idle");
+      setSubmitted(true);
+      isSubmittingRef.current = false;
+      return;
+    }
+
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
     try {
-      const res = await fetch("/api/estimate", {
+      const fullName = `${data.firstName} ${data.lastName}`.trim();
+      const serviceLabel = serviceOptions.find((o) => o.id === data.service)?.label ?? "";
+      const timelineLabel = timelineOptions.find((o) => o.id === data.timeline)?.label ?? "";
+
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         signal: controller.signal,
         body: JSON.stringify({
-          ...data,
-          formOpenedAt: openedAtRef.current,
-          website: honeypotRef.current?.value ?? "",
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "Refined Painting — New Estimate Request",
+          name: fullName,
+          first_name: data.firstName,
+          last_name: data.lastName,
+          email: data.email,
+          phone: data.phone,
+          zip: data.zip,
+          service: serviceLabel,
+          timeline: timelineLabel,
+          details: data.details || "(none provided)",
         }),
       });
 
       const resBody = await res.json().catch(() => null);
+      const success = res.ok && resBody !== null && (resBody as { success?: unknown }).success === true;
 
-      if (res.ok && resBody && (resBody as { ok?: boolean }).ok) {
+      if (success) {
         setSubmitState("idle");
         setSubmitted(true);
         return;
       }
 
-      if (res.status === 400 && resBody && (resBody as { error?: string }).error === "validation") {
-        const fieldErrors = (resBody as { fieldErrors?: Record<string, string> }).fieldErrors ?? {};
-        setErrors(fieldErrors);
-        setStep(TOTAL_STEPS);
-        setSubmitState("error");
-        setSubmitError("Please check the highlighted fields and try again.");
-        return;
-      }
-
-      const message = (resBody as { message?: string } | null)?.message;
       setSubmitState("error");
-      setSubmitError(message || "Something went wrong while sending your request. Please try again.");
+      setSubmitError("Something went wrong while sending your request. Please try again.");
     } catch (err) {
       setSubmitState("error");
       if (err instanceof DOMException && err.name === "AbortError") {

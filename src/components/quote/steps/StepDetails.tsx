@@ -34,8 +34,8 @@ export function StepDetails({ data, onUpdate }: StepDetailsProps) {
       <div className="flex items-start gap-3 rounded border-2 border-dashed border-ink/20 bg-off-white px-4 py-4">
         <Camera className="mt-0.5 size-5 shrink-0 text-ink/40" aria-hidden />
         <p className="text-sm leading-relaxed text-ink/60">
-          Have photos of the space? This form doesn't accept attachments yet — reply to our
-          confirmation email, or bring them up when we call to schedule your estimate.
+          Have photos of the space? This form doesn't accept attachments yet — mention it in the
+          details above, or bring them up when we call to schedule your estimate.
         </p>
       </div>
     </div>

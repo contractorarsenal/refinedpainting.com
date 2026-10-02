@@ -29,8 +29,9 @@ npm run lint     # oxlint
 - `src/components/sections/`: one file per homepage section, composed in `src/App.tsx`.
 - `src/components/quote/`: the multi-step "Get a Free Estimate" modal (context, reducer-style
   state, and one component per step). It can be opened pre-filled with a specific service via
-  `openQuoteModal("cabinets")`. Submission is simulated locally (`console.info` plus a success
-  screen); see the comment in `QuoteModal.tsx` for where to wire up a real API or CRM.
+  `openQuoteModal("cabinets")`. Submission posts directly from the browser to Web3Forms
+  (`api.web3forms.com/submit`) using the public form access key in `QuoteModal.tsx`; the success
+  screen only shows once Web3Forms' response confirms the submission actually succeeded.
 - `src/components/promo/`: the scroll/time-triggered promo popup and its coordination with the
   quote modal (only one of the two is ever shown at once).
 - `src/components/ui/`: shared primitives (Button, Container, SectionHeading, Accordion, Stars,
