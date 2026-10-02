@@ -247,13 +247,13 @@ export const promoBanner = {
 };
 
 // Configurable. Swap this copy any time the actual offer changes.
+// Submitting this popup opens the real estimate form (see PromoPopup.tsx) —
+// there is no separate mailing list, so the copy here should never imply one.
 export const promoPopup = {
   headline: "Planning a Painting Project?",
-  sub: "Get current offers, seasonal availability and helpful painting advice from Refined Painting.",
-  cta: "Send Me the Offers",
+  sub: "Get a free, no-pressure estimate from Refined Painting.",
+  cta: "Get My Free Estimate",
   dismiss: "No, Thanks",
-  successHeadline: "You're On the List.",
-  successSub: "We'll follow up with your color consultation details shortly.",
 };
 
 export const homesPainted = "200+";

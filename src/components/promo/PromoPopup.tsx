@@ -1,7 +1,8 @@
 import { X } from "lucide-react";
-import { useEffect, useState, type FormEvent } from "react";
-import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
+import { useEffect } from "react";
 import { promoPopup } from "../../lib/content";
+import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
+import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button } from "../ui/Button";
 import { Mascot } from "../ui/Mascot";
 
@@ -11,9 +12,7 @@ interface PromoPopupProps {
 }
 
 export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const { openQuoteModal } = useQuoteModal();
 
   useLockBodyScroll(isOpen);
 
@@ -26,25 +25,7 @@ export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isOpen, onClose]);
 
-  useEffect(() => {
-    if (!submitted) return;
-    const timer = window.setTimeout(onClose, 2200);
-    return () => window.clearTimeout(timer);
-  }, [submitted, onClose]);
-
   if (!isOpen) return null;
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setError("Enter a valid email address.");
-      return;
-    }
-    // Demo capture only. Wire to a real list/CRM here later.
-    console.info("Refined Painting: promo signup captured locally", email);
-    setError("");
-    setSubmitted(true);
-  };
 
   return (
     <div
@@ -71,49 +52,31 @@ export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
         </div>
 
         <div className="flex flex-1 flex-col justify-center gap-4 px-7 py-8 sm:px-9 sm:py-10">
-          {!submitted ? (
-            <>
-              <div className="h-1 w-14 bg-crest" aria-hidden />
-              <h3 className="text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
-                {promoPopup.headline}
-              </h3>
-              <p className="text-sm leading-relaxed text-ink/65 sm:text-base">{promoPopup.sub}</p>
+          <div className="h-1 w-14 bg-crest" aria-hidden />
+          <h3 className="text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+            {promoPopup.headline}
+          </h3>
+          <p className="text-sm leading-relaxed text-ink/65 sm:text-base">{promoPopup.sub}</p>
 
-              <form onSubmit={handleSubmit} className="mt-2 flex flex-col gap-3">
-                <label className="flex flex-col gap-2">
-                  <span className="sr-only">Email address</span>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      if (error) setError("");
-                    }}
-                    placeholder="you@email.com"
-                    aria-invalid={Boolean(error)}
-                    className="w-full rounded border-2 border-ink/15 bg-warm-white px-4 py-3.5 text-[15px] text-ink outline-none transition-colors focus:border-teal-dark"
-                  />
-                  {error ? <span className="text-sm font-medium text-crest">{error}</span> : null}
-                </label>
-                <Button type="submit" size="lg" icon="none" className="justify-center">
-                  {promoPopup.cta}
-                </Button>
-              </form>
+          <Button
+            onClick={() => {
+              onClose();
+              openQuoteModal();
+            }}
+            size="lg"
+            icon="none"
+            className="mt-2 justify-center"
+          >
+            {promoPopup.cta}
+          </Button>
 
-              <button
-                type="button"
-                onClick={onClose}
-                className="mt-1 self-start text-sm font-bold uppercase tracking-wide text-ink/45 hover:text-ink/70"
-              >
-                {promoPopup.dismiss}
-              </button>
-            </>
-          ) : (
-            <div className="flex flex-col items-start gap-2 py-4">
-              <h3 className="font-display text-3xl font-extrabold uppercase text-ink">{promoPopup.successHeadline}</h3>
-              <p className="text-sm leading-relaxed text-ink/65">{promoPopup.successSub}</p>
-            </div>
-          )}
+          <button
+            type="button"
+            onClick={onClose}
+            className="mt-1 self-start text-sm font-bold uppercase tracking-wide text-ink/45 hover:text-ink/70"
+          >
+            {promoPopup.dismiss}
+          </button>
         </div>
       </div>
     </div>

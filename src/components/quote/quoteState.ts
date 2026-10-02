@@ -8,7 +8,6 @@ export interface QuoteFormData {
   service: ServiceSelection | null;
   timeline: TimelineSelection | null;
   details: string;
-  photoName: string | null;
   firstName: string;
   lastName: string;
   phone: string;
@@ -20,7 +19,6 @@ export const initialQuoteData: QuoteFormData = {
   service: null,
   timeline: null,
   details: "",
-  photoName: null,
   firstName: "",
   lastName: "",
   phone: "",
@@ -51,9 +49,14 @@ export function validateStep(step: number, data: QuoteFormData): Record<string, 
   }
 
   if (step === 5) {
-    if (!data.firstName.trim()) errors.firstName = "First name is required.";
-    if (!data.lastName.trim()) errors.lastName = "Last name is required.";
-    if (!/^[\d\s()+-]{7,}$/.test(data.phone.trim())) errors.phone = "Enter a valid phone number.";
+    if (!/\p{L}/u.test(data.firstName.trim())) errors.firstName = "First name is required.";
+    if (!/\p{L}/u.test(data.lastName.trim())) errors.lastName = "Last name is required.";
+
+    const phoneDigits = data.phone.replace(/\D/g, "");
+    if (phoneDigits.length < 10 || phoneDigits.length > 15 || /^(\d)\1+$/.test(phoneDigits)) {
+      errors.phone = "Enter a valid phone number.";
+    }
+
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) errors.email = "Enter a valid email address.";
   }
 

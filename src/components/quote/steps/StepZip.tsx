@@ -18,7 +18,7 @@ export function StepZip({ data, errors, onUpdate }: StepZipProps) {
           <h3 className="font-display text-2xl font-extrabold uppercase tracking-wide text-ink">
             Where Is the Project?
           </h3>
-          <p className="mt-0.5 text-sm text-ink/60">Enter your ZIP code so we can confirm your service area.</p>
+          <p className="mt-0.5 text-sm text-ink/60">Enter your ZIP code so we know where the project is.</p>
         </div>
       </div>
       <label className="flex flex-col gap-2">

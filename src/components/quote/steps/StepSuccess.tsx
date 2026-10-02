@@ -1,3 +1,4 @@
+import type { RefObject } from "react";
 import { Mascot } from "../../ui/Mascot";
 import { Button, LinkButton } from "../../ui/Button";
 import { business } from "../../../lib/content";
@@ -5,14 +6,19 @@ import { business } from "../../../lib/content";
 interface StepSuccessProps {
   firstName: string;
   onClose: () => void;
+  headingRef?: RefObject<HTMLHeadingElement | null>;
 }
 
-export function StepSuccess({ firstName, onClose }: StepSuccessProps) {
+export function StepSuccess({ firstName, onClose, headingRef }: StepSuccessProps) {
   return (
     <div className="flex flex-col items-center gap-5 py-4 text-center">
       <Mascot variant="full" className="h-32 w-32" />
       <div>
-        <h3 className="font-display text-3xl font-extrabold uppercase tracking-wide text-ink">
+        <h3
+          ref={headingRef}
+          tabIndex={-1}
+          className="font-display text-3xl font-extrabold uppercase tracking-wide text-ink outline-none"
+        >
           You're All Set{firstName ? `, ${firstName}` : ""}.
         </h3>
         <p className="mx-auto mt-3 max-w-sm text-[15px] leading-relaxed text-ink/70">

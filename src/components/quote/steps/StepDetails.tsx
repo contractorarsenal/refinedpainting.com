@@ -1,5 +1,4 @@
-import { FileText, Paperclip, X } from "lucide-react";
-import { useId } from "react";
+import { Camera, FileText } from "lucide-react";
 import type { QuoteFormData } from "../quoteState";
 
 interface StepDetailsProps {
@@ -8,8 +7,6 @@ interface StepDetailsProps {
 }
 
 export function StepDetails({ data, onUpdate }: StepDetailsProps) {
-  const fileInputId = useId();
-
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center gap-4">
@@ -34,42 +31,12 @@ export function StepDetails({ data, onUpdate }: StepDetailsProps) {
         />
       </label>
 
-      <div className="flex flex-col gap-2">
-        <span className="text-sm font-bold uppercase tracking-wide text-ink/70">Photo (Optional)</span>
-        {data.photoName ? (
-          <div className="flex items-center justify-between rounded border-2 border-ink/15 bg-warm-white px-4 py-3">
-            <span className="flex items-center gap-2 text-sm text-ink/80">
-              <Paperclip className="size-4 text-teal-dark" aria-hidden />
-              {data.photoName}
-            </span>
-            <button
-              type="button"
-              onClick={() => onUpdate({ photoName: null })}
-              aria-label="Remove attached photo"
-              className="text-ink/50 hover:text-ink"
-            >
-              <X className="size-4" aria-hidden />
-            </button>
-          </div>
-        ) : (
-          <label
-            htmlFor={fileInputId}
-            className="flex cursor-pointer items-center justify-center gap-2 rounded border-2 border-dashed border-ink/25 bg-off-white px-4 py-6 text-sm font-bold text-ink/60 transition-colors hover:border-teal-dark hover:text-ink"
-          >
-            <Paperclip className="size-4" aria-hidden />
-            Attach a Photo of the Space
-            <input
-              id={fileInputId}
-              type="file"
-              accept="image/*"
-              className="sr-only"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) onUpdate({ photoName: file.name });
-              }}
-            />
-          </label>
-        )}
+      <div className="flex items-start gap-3 rounded border-2 border-dashed border-ink/20 bg-off-white px-4 py-4">
+        <Camera className="mt-0.5 size-5 shrink-0 text-ink/40" aria-hidden />
+        <p className="text-sm leading-relaxed text-ink/60">
+          Have photos of the space? This form doesn't accept attachments yet — reply to our
+          confirmation email, or bring them up when we call to schedule your estimate.
+        </p>
       </div>
     </div>
   );
