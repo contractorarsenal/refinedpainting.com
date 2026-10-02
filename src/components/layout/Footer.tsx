@@ -16,7 +16,7 @@ const companyLinks = [
   { label: "About", href: "/about" },
   { label: "Our Work", href: "/projects" },
   { label: "Process", href: "/about#process" },
-  { label: "Warranty", href: "/services#faq" },
+  { label: "Warranty", href: "/services#warranty" },
   { label: "Contact", href: "/contact" },
 ];
 const featuredAreas = serviceAreas.slice(0, 8);

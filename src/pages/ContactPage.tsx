@@ -6,7 +6,7 @@ import { FinalCTA } from "../components/sections/FinalCTA";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
 import { Container } from "../components/ui/Container";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
-import { business } from "../lib/content";
+import { business, contactReassurance } from "../lib/content";
 
 const contactDetails = [
   { icon: Phone, label: "Phone", value: business.phone, href: business.phoneHref },
@@ -55,6 +55,17 @@ export function ContactPage() {
       </section>
 
       <ServiceAreaStrip />
+
+      <section className="bg-warm-white py-14 sm:py-16 lg:py-20">
+        <Container className="mx-auto max-w-xl text-center">
+          <span className="h-1 w-12 bg-crest mx-auto block" aria-hidden />
+          <h2 className="mt-5 font-display text-2xl font-extrabold uppercase tracking-wide text-ink sm:text-3xl">
+            {contactReassurance.heading}
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-ink/70">{contactReassurance.body}</p>
+        </Container>
+      </section>
+
       <FinalCTA />
     </>
   );

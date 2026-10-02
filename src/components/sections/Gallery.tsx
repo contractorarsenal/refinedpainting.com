@@ -6,6 +6,8 @@ import interiorBright from "../../assets/images/projects/interior-bright-finishe
 import interiorEmpty from "../../assets/images/projects/interior-empty-room.webp";
 import kitchenPhoto from "../../assets/images/projects/kitchen-blue-accent.webp";
 import porchPhoto from "../../assets/images/projects/porch-yellow-door.webp";
+import { useState } from "react";
+import { ProjectLightbox } from "../projects/ProjectLightbox";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
 
@@ -85,47 +87,74 @@ const projects: ProjectEntry[] = [
 
 const feature = projects.find((p) => p.feature) ?? projects[0];
 const rest = projects.filter((p) => p.id !== feature.id);
+const orderedProjects = [feature, ...rest];
 
-function ProjectFigure({ project, aspect = "aspect-4/3" }: { project: ProjectEntry; aspect?: string }) {
+function ProjectFigure({
+  project,
+  aspect = "aspect-4/3",
+  onClick,
+}: {
+  project: ProjectEntry;
+  aspect?: string;
+  onClick: () => void;
+}) {
   return (
-    <figure className="group">
-      <div className={`relative ${aspect} w-full overflow-hidden bg-ink/5`}>
-        <img
-          src={project.image}
-          alt={project.alt}
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-        />
-      </div>
-      <figcaption className="mt-3 flex items-baseline justify-between gap-3">
-        <span className="font-display text-base font-bold uppercase tracking-wide text-ink">
-          {project.title}
-        </span>
-        <span className="text-xs font-semibold uppercase tracking-widest text-ink/45">
-          {project.category}
-        </span>
-      </figcaption>
-    </figure>
+    <button type="button" onClick={onClick} className="group block w-full text-left">
+      <figure>
+        <div className={`relative ${aspect} w-full overflow-hidden bg-ink/5`}>
+          <img
+            src={project.image}
+            alt={project.alt}
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-ink/0 transition-colors duration-300 group-hover:bg-ink/10" aria-hidden />
+        </div>
+        <figcaption className="mt-3 flex items-baseline justify-between gap-3">
+          <span className="font-display text-base font-bold uppercase tracking-wide text-ink transition-colors group-hover:text-crest">
+            {project.title}
+          </span>
+          <span className="text-xs font-semibold uppercase tracking-widest text-ink/45 transition-colors group-hover:text-crest">
+            {project.category}
+          </span>
+        </figcaption>
+      </figure>
+    </button>
   );
 }
 
 export function Gallery() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
   return (
     <section className="bg-off-white pb-10 pt-16 sm:pb-12 sm:pt-20 lg:pb-16 lg:pt-24">
       <Container>
         <Reveal>
-          <ProjectFigure project={feature} aspect="aspect-4/3 sm:aspect-16/9 lg:aspect-21/9" />
+          <ProjectFigure
+            project={feature}
+            aspect="aspect-4/3 sm:aspect-16/9 lg:aspect-21/9"
+            onClick={() => setActiveIndex(0)}
+          />
         </Reveal>
 
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
           {rest.map((project, index) => (
             <Reveal key={project.id} delay={Math.min(index, 4) * 60}>
-              <ProjectFigure project={project} />
+              <ProjectFigure project={project} onClick={() => setActiveIndex(index + 1)} />
             </Reveal>
           ))}
         </div>
       </Container>
+
+      {activeIndex !== null ? (
+        <ProjectLightbox
+          projects={orderedProjects}
+          index={activeIndex}
+          onClose={() => setActiveIndex(null)}
+          onNavigate={setActiveIndex}
+        />
+      ) : null}
     </section>
   );
 }

@@ -9,10 +9,13 @@ import { UtilityBar } from "./UtilityBar";
 
 const navLeft = [
   { label: "Services", href: "/services" },
-  { label: "Contact", href: "/contact" },
+  { label: "About", href: "/about" },
 ];
 
-const navRight = [{ label: "Projects", href: "/projects" }];
+const navRight = [
+  { label: "Projects", href: "/projects" },
+  { label: "Contact", href: "/contact" },
+];
 
 export function Header() {
   const scrolled = useScrolled(40);
@@ -83,7 +86,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={() => openQuoteModal()}
-                  className="text-sm font-bold uppercase tracking-wide text-teal transition-colors duration-300 hover:text-warm-white"
+                  className="rounded border-2 border-crest px-4 py-2 text-sm font-bold uppercase tracking-wide text-crest transition-colors duration-300 hover:bg-crest hover:text-warm-white"
                 >
                   Free Estimate
                 </button>
