@@ -52,7 +52,7 @@ export function BeforeAfter() {
   const active = pairs.find((p) => p.id === activeId) ?? pairs[0];
 
   return (
-    <section className="bg-warm-white pb-20 pt-16 sm:pb-24 sm:pt-20 lg:pb-30 lg:pt-25">
+    <section className="bg-off-white pb-20 pt-4 sm:pb-24 sm:pt-6 lg:pb-32">
       <Container>
         <SectionHeading
           align="center"
@@ -61,7 +61,7 @@ export function BeforeAfter() {
           description="Drag the slider to compare real Refined Painting projects, before and after."
         />
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
           {pairs.map((pair) => (
             <button
               key={pair.id}
@@ -71,10 +71,10 @@ export function BeforeAfter() {
                 setValue(50);
               }}
               aria-pressed={activeId === pair.id}
-              className={`border-2 px-4 py-2 text-xs font-bold uppercase tracking-wide transition-colors ${
+              className={`border-b-2 pb-1 text-xs font-bold uppercase tracking-wide transition-colors ${
                 activeId === pair.id
-                  ? "border-teal-dark bg-teal-dark text-warm-white"
-                  : "border-ink/15 bg-warm-white text-ink/70 hover:border-ink/30"
+                  ? "border-teal-dark text-ink"
+                  : "border-transparent text-ink/50 hover:text-ink/80"
               }`}
             >
               {pair.label}
@@ -85,7 +85,7 @@ export function BeforeAfter() {
         <div
           ref={sliderRef}
           key={active.id}
-          className="relative mx-auto mt-14 aspect-16/10 w-full max-w-3xl overflow-hidden rounded shadow-lift sm:mt-15 sm:aspect-video"
+          className="relative mx-auto mt-14 aspect-16/10 w-full max-w-3xl overflow-hidden sm:mt-15 sm:aspect-video"
         >
           <input
             type="range"

@@ -27,27 +27,24 @@ export function Services() {
           description="Professional painting, refinishing and repair services for homes and businesses across Seattle and the Eastside."
         />
 
-        <div className="mt-15 grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-15 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => {
             const Icon = serviceIcons[service.id];
             return (
               <Reveal key={service.id} delay={index * 70} className="h-full">
-                <div className="group relative flex h-full flex-col items-center border border-ink/10 border-t-4 border-t-teal-dark bg-warm-white pb-7 pt-11 text-center transition-colors duration-200 hover:border-t-crest">
-                  <div className="absolute -top-8 flex size-16 items-center justify-center rounded-full border-4 border-cream bg-teal-dark text-warm-white shadow-card transition-transform duration-200 group-hover:-translate-y-1.5">
-                    <Icon className="size-7" aria-hidden />
-                  </div>
+                <div className="group flex h-full flex-col items-start gap-3 border-t border-ink/15 pt-6">
+                  <Icon className="size-6 text-teal-dark" aria-hidden />
                   <h3 className="font-display text-xl font-bold uppercase tracking-wide text-ink">
                     {service.title}
                   </h3>
-                  <span className="mt-1.5 h-0.5 w-6 bg-crest" aria-hidden />
-                  <p className="mt-3 max-w-[26ch] text-sm leading-relaxed text-ink/65">{service.description}</p>
+                  <p className="max-w-[32ch] text-sm leading-relaxed text-ink/65">{service.description}</p>
                   <button
                     type="button"
                     onClick={() => openQuoteModal(service.id)}
-                    className="group/btn mt-auto flex items-center gap-1.5 border-2 border-ink px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink transition-colors duration-200 hover:bg-ink hover:text-warm-white"
+                    className="mt-auto flex items-center gap-1.5 pt-3 text-xs font-bold uppercase tracking-wide text-ink transition-colors duration-200 group-hover:text-teal-dark"
                   >
                     Learn More
-                    <ArrowRight className="size-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" aria-hidden />
+                    <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden />
                   </button>
                 </div>
               </Reveal>

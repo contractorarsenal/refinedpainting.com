@@ -14,7 +14,7 @@ const bullets = [
 
 export function PNWDifference() {
   return (
-    <section className="relative overflow-hidden bg-light-blue py-16 sm:py-20 lg:py-28">
+    <section className="relative overflow-hidden bg-warm-white py-16 sm:py-20 lg:py-28">
       <DotGrid className="text-ink" />
       <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
         <div className="aspect-4/5 w-full overflow-hidden rounded shadow-card">

@@ -24,7 +24,7 @@ export function Footer() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <footer className="relative overflow-hidden bg-ink-2 text-warm-white">
+    <footer className="relative overflow-hidden bg-ink-2 pb-20 text-warm-white sm:pb-0">
       <div className="relative h-1 w-full bg-teal-dark" aria-hidden>
         <span className="absolute left-0 top-0 h-full w-22.5 bg-crest" />
       </div>

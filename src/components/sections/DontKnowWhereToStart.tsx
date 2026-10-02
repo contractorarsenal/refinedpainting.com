@@ -8,7 +8,7 @@ export function DontKnowWhereToStart() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section id="quote-cta" className="border-y border-ink/10 bg-warm-white py-16 sm:py-20 lg:py-28">
+    <section id="quote-cta" className="border-y border-ink/10 bg-light-blue py-16 sm:py-20 lg:py-28">
       <Container className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
         <Mascot variant="full" className="h-40 w-40 sm:h-48 sm:w-48" />
 

@@ -28,18 +28,18 @@ function App() {
         <main className="pb-20 sm:pb-0">
           <Hero />
           <TrustStrip />
-          <Reviews />
           <Services />
+          <Gallery />
+          <BeforeAfter />
           <VideoAuthority />
           <LocalTrustedPartner />
-          <PromoBanner />
-          <ServiceAreaStrip />
-          <DontKnowWhereToStart />
           <PNWDifference />
           <Process />
-          <BeforeAfter />
-          <Gallery />
+          <PromoBanner />
+          <Reviews />
+          <ServiceAreaStrip />
           <FAQ />
+          <DontKnowWhereToStart />
           <FinalCTA />
         </main>
         <Footer />
