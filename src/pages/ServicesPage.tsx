@@ -1,5 +1,4 @@
 import afterWhite from "../assets/images/projects/exterior-after-white.jpg";
-import { FAQ } from "../components/sections/FAQ";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { Process } from "../components/sections/Process";
 import { PromoBanner } from "../components/sections/PromoBanner";
@@ -8,11 +7,12 @@ import { ServiceSections } from "../components/sections/ServiceSections";
 import { VideoAuthority } from "../components/sections/VideoAuthority";
 import { WhyChooseRefined } from "../components/sections/WhyChooseRefined";
 import { Button, LinkButton } from "../components/ui/Button";
+import { Accordion } from "../components/ui/Accordion";
 import { Container } from "../components/ui/Container";
 import { ProjectImage } from "../components/ui/ProjectImage";
 import { useQuoteModal } from "../components/quote/QuoteModalContext";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
-import { business, cabinetProofStat, warranty } from "../lib/content";
+import { business, cabinetProofStat, faqs, warranty } from "../lib/content";
 
 const proofRow = [
   { value: cabinetProofStat.value, label: cabinetProofStat.label },
@@ -20,6 +20,9 @@ const proofRow = [
   { value: "EPA", label: "Lead-Safe Certified" },
   { value: "Licensed", label: "& Insured" },
 ];
+
+const primaryFaqs = faqs.slice(0, 5);
+const moreFaqs = faqs.slice(5);
 
 export function ServicesPage() {
   const { openQuoteModal } = useQuoteModal();
@@ -31,41 +34,42 @@ export function ServicesPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-ink pt-28 sm:pt-32 lg:pt-20">
-        <Container className="relative grid grid-cols-1 items-center gap-10 pb-16 sm:pb-20 lg:grid-cols-2 lg:gap-16 lg:pb-24">
-          <div className="flex flex-col items-start gap-5">
-            <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">Painting Services</span>
-            <h1 className="text-balance font-display text-4xl font-black uppercase leading-[0.96] text-warm-white sm:text-5xl lg:text-6xl">
-              Built Around Quality, Care &amp; Communication
+      <section className="bg-cream pt-28 sm:pt-32 lg:pt-24">
+        <Container className="grid grid-cols-1 items-center gap-10 pb-10 sm:pb-12 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:pb-14">
+          <div className="flex flex-col items-start gap-4">
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Painting Services</span>
+            <h1 className="text-balance font-display text-3xl font-black uppercase leading-[0.98] text-ink sm:text-4xl lg:text-5xl">
+              Built Around <span className="text-teal-dark">Quality</span>, Care &amp; Communication.
             </h1>
-            <p className="max-w-md text-balance text-base leading-relaxed text-warm-white/75 sm:text-lg">
+            <p className="max-w-md text-balance text-sm leading-relaxed text-ink/65 sm:text-base">
               Refined Painting provides interior, exterior, cabinet and specialty painting services for
               homeowners and businesses throughout Seattle and the Eastside.
             </p>
-            <div className="mt-2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <Button onClick={() => openQuoteModal()} size="lg" className="w-full sm:w-auto">
-                Get a Free Estimate
+            <div className="mt-1 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+              <Button onClick={() => openQuoteModal()} size="md" className="w-full sm:w-auto">
+                Request Free Estimate
               </Button>
-              <LinkButton href={business.phoneHref} variant="outline-light" size="lg" icon="phone" className="w-full sm:w-auto">
+              <LinkButton href={business.phoneHref} variant="outline-dark" size="md" icon="phone" className="w-full sm:w-auto">
                 Call Now
               </LinkButton>
             </div>
+            <span className="mt-1 text-[11px] font-bold uppercase tracking-widest text-ink/40">
+              Benjamin Moore &amp; Sherwin-Williams Certified
+            </span>
           </div>
 
-          <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-lift lg:aspect-4/5">
+          <div className="aspect-4/3 w-full max-w-md overflow-hidden rounded-xl shadow-card lg:justify-self-end">
             <ProjectImage src={afterWhite} alt="Home exterior finished in crisp white" />
           </div>
         </Container>
       </section>
 
-      <section className="border-t border-ink/10 bg-warm-white py-10 sm:py-12">
+      <section className="border-t border-ink/10 bg-warm-white py-6">
         <Container className="grid grid-cols-2 gap-6 sm:grid-cols-4">
           {proofRow.map((item) => (
-            <div key={item.label} className="flex flex-col items-center text-center">
-              <span className="font-display text-3xl font-black leading-none text-crest sm:text-4xl">
-                {item.value}
-              </span>
-              <span className="mt-2 text-[11px] font-bold uppercase tracking-[0.14em] text-ink/50 sm:text-xs">
+            <div key={item.label} className="flex flex-col items-center text-center sm:flex-row sm:gap-2.5">
+              <span className="font-display text-2xl font-black leading-none text-crest">{item.value}</span>
+              <span className="mt-1 text-[10px] font-bold uppercase tracking-widest text-ink/50 sm:mt-0 sm:text-[11px]">
                 {item.label}
               </span>
             </div>
@@ -80,19 +84,37 @@ export function ServicesPage() {
       <Process />
       <WhyChooseRefined />
 
-      <section id="warranty" className="scroll-mt-24 border-t border-ink/10 bg-ink pb-12 pt-16 text-warm-white sm:pb-14 sm:pt-20 lg:pt-24">
-        <Container className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Backed By</span>
-          <h2 className="mt-3 font-display text-3xl font-extrabold uppercase leading-[0.98] sm:text-4xl">
-            {warranty.headline}
-          </h2>
-          <span className="mx-auto mt-4 block h-1 w-16 bg-crest" aria-hidden />
-          <p className="mt-5 text-balance text-base leading-relaxed text-warm-white/75">{warranty.covered}</p>
-          <p className="mt-4 text-sm text-warm-white/50">{warranty.note}</p>
+      <section id="warranty" className="scroll-mt-24 border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
+        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <div className="border-2 border-ink/10 p-6 sm:p-8 lg:sticky lg:top-28 lg:self-start">
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Structural Integrity</span>
+            <h2 className="mt-2 font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink sm:text-3xl">
+              {warranty.headline}
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-ink/65">{warranty.covered}</p>
+            <p className="mt-3 text-xs text-ink/45">{warranty.note}</p>
+          </div>
+
+          <div>
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Clarifications</span>
+            <h2 className="mt-2 font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink sm:text-3xl">
+              Frequently Asked Service Questions
+            </h2>
+            <div className="mt-6">
+              <Accordion items={primaryFaqs} />
+            </div>
+            {moreFaqs.length ? (
+              <details className="mt-2 group/more">
+                <summary className="cursor-pointer list-none py-3 text-xs font-bold uppercase tracking-wide text-crest">
+                  Show More Questions
+                </summary>
+                <Accordion items={moreFaqs} />
+              </details>
+            ) : null}
+          </div>
         </Container>
       </section>
 
-      <FAQ />
       <FinalCTA />
     </>
   );

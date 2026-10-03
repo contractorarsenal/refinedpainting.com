@@ -1,19 +1,20 @@
-import { Clock, MapPin, Phone } from "lucide-react";
+import { Clock, MapPin, ShieldCheck } from "lucide-react";
+import interiorPhoto from "../assets/images/projects/interior-bright-finished.webp";
 import { ContactForm } from "../components/sections/ContactForm";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
+import { LinkButton } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
+import { ProjectImage } from "../components/ui/ProjectImage";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
-import { business, contactReassurance } from "../lib/content";
+import { business, contactReassurance, promoBanner, warranty } from "../lib/content";
 
-const contactDetails = [
-  { icon: Phone, label: "Phone", value: "Call Now", href: business.phoneHref },
-  {
-    icon: MapPin,
-    label: "Address",
-    value: `${business.address.street}, ${business.address.city}, ${business.address.state} ${business.address.zip}`,
-  },
-  { icon: Clock, label: "Hours", value: business.hours },
+const verifiedProof = ["Licensed & Insured", "EPA Lead-Safe Certified", "5-Year Workmanship Warranty"];
+
+const lowerInfo = [
+  { title: "Color Consultation", body: promoBanner.sub },
+  { title: warranty.headline, body: warranty.note },
+  { title: "Licensed & Insured", body: "Fully licensed and insured, EPA Lead-Safe and Google Verified." },
 ];
 
 export function ContactPage() {
@@ -24,53 +25,75 @@ export function ContactPage() {
 
   return (
     <>
-      <section className="bg-cream pb-14 pt-32 sm:pb-16 sm:pt-40">
-        <Container className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Get In Touch</span>
-          <h1 className="mt-3 text-balance font-display text-4xl font-black uppercase leading-[0.96] text-ink sm:text-5xl">
-            Let&rsquo;s Talk Through Your Project
-          </h1>
-          <p className="mx-auto mt-4 max-w-md text-balance text-base leading-relaxed text-ink/70 sm:text-lg">
-            Send us a message below, or call us directly to talk through your project.
-          </p>
+      <section className="bg-cream pb-10 pt-28 sm:pb-12 sm:pt-32 lg:pt-24">
+        <Container className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-12">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Start Your Project</span>
+            <h1 className="mt-3 text-balance font-display text-4xl font-black uppercase leading-[0.96] text-ink sm:text-5xl">
+              Let&rsquo;s Talk Through <span className="text-teal-dark">Your Project</span>
+            </h1>
+            <p className="mt-4 max-w-md text-balance text-base leading-relaxed text-ink/70 sm:text-lg">
+              Send us a message below, or call us directly to talk through your project.
+            </p>
+          </div>
+
+          <div className="border-2 border-ink/10 bg-warm-white p-5 sm:p-6">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ink/50">
+              <ShieldCheck className="size-4 text-crest" aria-hidden />
+              Verified &amp; Approved
+            </div>
+            <ul className="mt-3 flex flex-col gap-2">
+              {verifiedProof.map((item) => (
+                <li key={item} className="text-sm font-bold text-ink">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </Container>
       </section>
 
-      <section className="bg-light-blue py-16 sm:py-20 lg:py-28">
-        <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          <div className="flex flex-col gap-10">
+      <section className="bg-light-blue py-14 sm:py-16 lg:py-20">
+        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          <div className="flex flex-col gap-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Let&rsquo;s Talk</span>
-              <h2 className="mt-3 font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
-                Have a Question or Ready to Start?
-              </h2>
-              <p className="mt-4 max-w-sm text-base leading-relaxed text-ink/70">
-                Reach out to our team to get clear answers and a detailed painting quote you can feel
-                confident about.
-              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink/45">Direct Line</span>
+                <span className="flex items-center gap-1.5 text-[11px] font-bold uppercase text-teal-dark">
+                  <span className="size-1.5 rounded-full bg-teal-dark" aria-hidden />
+                  Available Now
+                </span>
+              </div>
+              <LinkButton
+                href={business.phoneHref}
+                variant="secondary"
+                size="lg"
+                icon="phone"
+                className="mt-3 w-full justify-center"
+              >
+                Call Now
+              </LinkButton>
             </div>
 
-            <div className="flex flex-col gap-6">
-              {contactDetails.map((detail) => (
-                <div key={detail.label} className="flex items-start gap-4 border-t border-ink/12 pt-5">
-                  <detail.icon className="mt-0.5 size-5 shrink-0 text-crest" aria-hidden />
-                  <div>
-                    <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">
-                      {detail.label}
-                    </span>
-                    {detail.href ? (
-                      <a href={detail.href} className="font-display text-xl font-bold text-ink hover:text-teal-dark">
-                        {detail.value}
-                      </a>
-                    ) : (
-                      <span className="font-display text-xl font-bold text-ink">{detail.value}</span>
-                    )}
-                  </div>
-                </div>
-              ))}
+            <div className="flex items-start gap-3 border-t border-ink/10 pt-5">
+              <MapPin className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
+              <div>
+                <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">Office</span>
+                <span className="text-sm font-bold text-ink">
+                  {business.address.street}, {business.address.city}, {business.address.state}{" "}
+                  {business.address.zip}
+                </span>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 border-t border-ink/10 pt-5">
+              <Clock className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
+              <div>
+                <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">Hours</span>
+                <span className="text-sm font-bold text-ink">{business.hours}</span>
+              </div>
             </div>
 
-            <div className="border-t-2 border-crest pt-5">
+            <div className="border-t-2 border-crest bg-warm-white p-5">
               <h3 className="font-display text-sm font-extrabold uppercase tracking-wide text-ink">
                 {contactReassurance.heading}
               </h3>
@@ -89,6 +112,10 @@ export function ContactPage() {
                 ))}
               </ol>
             </div>
+
+            <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-card">
+              <ProjectImage src={interiorPhoto} alt="Freshly painted interior room ready for a walkthrough" />
+            </div>
           </div>
 
           <ContactForm />
@@ -96,6 +123,21 @@ export function ContactPage() {
       </section>
 
       <ServiceAreaStrip />
+
+      <section className="border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
+        <Container className="grid grid-cols-1 gap-10 sm:grid-cols-3">
+          {lowerInfo.map((item, index) => (
+            <div key={item.title} className="border-t-2 border-crest pt-4">
+              <span className="font-display text-sm font-black text-crest">{String(index + 1).padStart(2, "0")}</span>
+              <h3 className="mt-2 font-display text-base font-extrabold uppercase tracking-wide text-ink">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink/65">{item.body}</p>
+            </div>
+          ))}
+        </Container>
+      </section>
+
       <FinalCTA />
     </>
   );

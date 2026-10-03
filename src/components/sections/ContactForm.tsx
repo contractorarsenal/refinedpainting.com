@@ -63,12 +63,12 @@ export function ContactForm() {
   return (
     <div className="relative border-2 border-ink/10 bg-warm-white p-6 shadow-card sm:p-8 lg:p-10">
       <span className="absolute inset-x-0 top-0 h-1 bg-crest" aria-hidden />
-      <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Get In Touch</span>
+      <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Project Inquiry</span>
       <h2 className="mt-2 font-display text-2xl font-extrabold uppercase leading-tight text-ink sm:text-3xl">
-        Send Us a Message
+        Request Your Consultation
       </h2>
       <p className="mt-2 text-sm text-ink/60">
-        Questions about your project? Send us a message and we&rsquo;ll get back to you.
+        Complete the form below and our team will review your project and follow up.
       </p>
 
       <form

@@ -89,8 +89,14 @@ const feature = projects.find((p) => p.feature) ?? projects[0];
 const rest = projects.filter((p) => p.id !== feature.id);
 const orderedProjects = [feature, ...rest];
 
-// Only categories that real project photos actually exist for.
+// Only categories that real project photos actually exist for, with real counts.
 const filters = ["All", "Interior Painting", "Exterior Painting", "Cabinet Refinishing"] as const;
+const filterCounts: Record<(typeof filters)[number], number> = {
+  All: projects.length,
+  "Interior Painting": projects.filter((p) => p.category === "Interior Painting").length,
+  "Exterior Painting": projects.filter((p) => p.category === "Exterior Painting").length,
+  "Cabinet Refinishing": projects.filter((p) => p.category === "Cabinet Refinishing").length,
+};
 
 function ProjectFigure({
   project,
@@ -137,18 +143,18 @@ export function Gallery() {
   return (
     <section className="bg-off-white pb-10 pt-10 sm:pb-12 lg:pb-16">
       <Container>
-        <div className="mb-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-b border-ink/10 pb-6">
+        <div className="mb-8 flex flex-wrap items-center gap-2 border-b border-ink/10 pb-6">
           {filters.map((f) => (
             <button
               key={f}
               type="button"
               onClick={() => setFilter(f)}
               aria-pressed={filter === f}
-              className={`text-xs font-bold uppercase tracking-wide transition-colors ${
-                filter === f ? "text-crest" : "text-ink/50 hover:text-ink"
+              className={`rounded-full px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wide transition-colors ${
+                filter === f ? "bg-ink text-warm-white" : "text-ink/55 hover:bg-ink/5 hover:text-ink"
               }`}
             >
-              {f}
+              {f} ({filterCounts[f]})
             </button>
           ))}
         </div>

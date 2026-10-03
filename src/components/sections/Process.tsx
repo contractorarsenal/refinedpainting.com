@@ -5,28 +5,25 @@ import { SectionHeading } from "../ui/SectionHeading";
 
 export function Process() {
   return (
-    <section id="process" className="relative scroll-mt-24 border-t border-warm-white/10 bg-ink py-16 sm:py-20 lg:py-28">
+    <section id="process" className="relative scroll-mt-24 border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
       <Container className="relative">
         <SectionHeading
           align="center"
-          tone="light"
-          eyebrow="How It Works"
-          title="What to Expect"
+          eyebrow="Systematic Craft"
+          title="The 4-Phase Refined Protocol"
           description="A clear, consistent process from your first estimate to the final walkthrough."
           className="mx-auto"
         />
 
-        <ol className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-10 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-8">
+        <ol className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {processSteps.map((step, index) => (
             <Reveal key={step.number} delay={index * 100}>
-              <li className="flex flex-col items-start gap-2 border-t-2 border-crest pt-5">
-                <span className="font-display text-4xl font-black leading-none text-crest sm:text-5xl">
-                  {step.number}
-                </span>
-                <h3 className="mt-1 font-display text-lg font-extrabold uppercase tracking-wide text-warm-white sm:text-xl">
+              <li className="flex flex-col items-start gap-1.5 border-t-2 border-crest pt-4">
+                <span className="font-display text-3xl font-black leading-none text-crest">{step.number}</span>
+                <h3 className="mt-1 font-display text-base font-extrabold uppercase tracking-wide text-ink">
                   {step.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-warm-white/70">{step.description}</p>
+                <p className="text-sm leading-relaxed text-ink/60">{step.description.split(".")[0]}.</p>
               </li>
             </Reveal>
           ))}

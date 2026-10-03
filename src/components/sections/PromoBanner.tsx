@@ -5,26 +5,29 @@ import { Container } from "../ui/Container";
 import { Mascot } from "../ui/Mascot";
 
 const swatches = ["#e2e6e8", "#4fb0bb", "#c9a071", "#0e1418", "#e3a13a", "#ffffff"];
+const swatchLabels = ["Matte", "Eggshell", "Satin", "Semi-Gloss"];
 
 export function PromoBanner() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section className="border-t border-warm-white/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-28">
+    <section className="border-t border-ink/10 bg-cream py-14 sm:py-16 lg:py-20">
       <Container>
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          <div className="flex flex-col items-start gap-5">
-            <span className="border border-teal/40 bg-teal/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-teal">
-              {promoBanner.eyebrow}
-            </span>
-            <h2 className="text-balance font-display text-4xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-5xl">
+        <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">
+          Complimentary Architectural Service
+        </span>
+        <div className="mt-5 grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <div className="flex flex-col items-start gap-4">
+            <h2 className="text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
               {promoBanner.headline}
             </h2>
-            <span className="h-1 w-16 bg-crest" aria-hidden />
-            <p className="max-w-md text-balance text-base leading-relaxed text-warm-white/70 sm:text-lg">
-              {promoBanner.sub}
-            </p>
-            <Button onClick={() => openQuoteModal()} size="lg">
+            <p className="max-w-md text-balance text-base leading-relaxed text-ink/70">{promoBanner.sub}</p>
+            <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs font-bold uppercase tracking-wide text-ink/45">
+              {swatchLabels.map((label) => (
+                <span key={label}>{label}</span>
+              ))}
+            </div>
+            <Button onClick={() => openQuoteModal()} size="lg" className="mt-1">
               {promoBanner.cta}
             </Button>
           </div>
@@ -32,10 +35,10 @@ export function PromoBanner() {
           <div className="relative flex items-center justify-center">
             <div className="grid w-full max-w-sm grid-cols-3 gap-3">
               {swatches.map((color) => (
-                <span key={color} className="aspect-square border-2 border-warm-white/10" style={{ backgroundColor: color }} />
+                <span key={color} className="aspect-square rounded-lg border-2 border-ink/10 shadow-sm" style={{ backgroundColor: color }} />
               ))}
             </div>
-            <Mascot variant="full" className="absolute -bottom-8 -right-4 h-28 w-28 drop-shadow-[0_12px_20px_rgba(0,0,0,0.4)] sm:h-32 sm:w-32" />
+            <Mascot variant="full" className="absolute -bottom-8 -right-4 h-28 w-28 drop-shadow-[0_12px_20px_rgba(0,0,0,0.25)] sm:h-32 sm:w-32" />
           </div>
         </div>
       </Container>
