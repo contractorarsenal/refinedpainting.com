@@ -19,7 +19,7 @@ export function Process() {
           className="mx-auto"
         />
 
-        <div ref={lineRef} className="relative mt-16 lg:mt-20">
+        <div ref={lineRef} className="relative mx-auto mt-16 max-w-3xl lg:mt-20">
           <span
             className={`absolute left-6 top-0 hidden h-full w-px bg-warm-white/15 lg:block`}
             aria-hidden

@@ -9,7 +9,7 @@ import { useDocumentMeta } from "../hooks/useDocumentMeta";
 import { business, contactReassurance } from "../lib/content";
 
 const contactDetails = [
-  { icon: Phone, label: "Phone", value: business.phone, href: business.phoneHref },
+  { icon: Phone, label: "Phone", value: "Call Now", href: business.phoneHref },
   {
     icon: MapPin,
     label: "Address",
@@ -21,7 +21,7 @@ const contactDetails = [
 export function ContactPage() {
   useDocumentMeta(
     "Contact Refined Painting | Free Estimate",
-    "Get a free painting estimate from Refined Painting. Call (206) 258-7994 or request an estimate online — serving Seattle and the Eastside.",
+    "Get a free painting estimate from Refined Painting. Call now or request an estimate online, serving Seattle and the Eastside.",
   );
 
   return (

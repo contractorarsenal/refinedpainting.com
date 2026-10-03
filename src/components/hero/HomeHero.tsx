@@ -6,7 +6,6 @@ import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { Stars } from "../ui/Stars";
 import type { HeroMedia } from "./heroMedia";
-import { LogoReveal } from "./LogoReveal";
 
 const homeHeroMedia: HeroMedia = {
   type: "video",
@@ -45,19 +44,18 @@ export function HomeHero() {
       </div>
 
       <Container className="relative flex w-full flex-col items-start gap-5 pb-14 pt-36 sm:pb-20 sm:pt-40 lg:pt-[25vh]">
-        <LogoReveal className="mb-3 hidden lg:block" />
-        <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">
+        <span className="relative text-xs font-bold uppercase tracking-[0.16em] text-teal">
           Seattle &amp; Eastside Painting Company
         </span>
-        <h1 className="text-balance max-w-2xl font-display text-5xl font-black uppercase leading-[0.95] text-warm-white sm:text-6xl lg:text-7xl">
+        <h1 className="relative text-balance max-w-2xl font-display text-5xl font-black uppercase leading-[0.95] text-warm-white sm:text-6xl lg:text-7xl">
           Seattle Painting Done Right From Day One
         </h1>
-        <p className="max-w-xl text-balance text-base leading-relaxed text-warm-white/80 sm:text-lg">
+        <p className="relative max-w-xl text-balance text-base leading-relaxed text-warm-white/80 sm:text-lg">
           Professional interior, exterior, cabinet and commercial painting backed by clear
           communication, careful prep and a 5-year workmanship warranty.
         </p>
 
-        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+        <div className="relative flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <Button onClick={() => openQuoteModal()} size="lg" className="w-full sm:w-auto">
             Get a Free Estimate
           </Button>
@@ -68,11 +66,11 @@ export function HomeHero() {
             icon="phone"
             className="w-full sm:w-auto"
           >
-            {business.phone}
+            Call Now
           </LinkButton>
         </div>
 
-        <div className="flex items-center gap-2.5 pt-1">
+        <div className="relative flex items-center gap-2.5 pt-1">
           <Stars />
           <span className="text-sm font-bold text-warm-white">5.0 Google Rating</span>
           <span className="text-sm font-medium text-warm-white/60">• 227 Reviews</span>

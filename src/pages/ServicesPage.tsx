@@ -10,7 +10,7 @@ import { VideoAuthority } from "../components/sections/VideoAuthority";
 import { WhyChooseRefined } from "../components/sections/WhyChooseRefined";
 import { Container } from "../components/ui/Container";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
-import { warranty } from "../lib/content";
+import { cabinetProofStat, warranty } from "../lib/content";
 
 export function ServicesPage() {
   useDocumentMeta(
@@ -21,26 +21,28 @@ export function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="What We Do"
-        title="Painting Services"
-        description="Professional painting, refinishing and repair services for homes and businesses across Seattle and the Eastside."
+        eyebrow="Painting Services"
+        title="Built Around Quality, Care & Communication"
+        description="Refined Painting provides interior, exterior, cabinet and specialty painting services for homeowners and businesses throughout Seattle and the Eastside."
         image={heroImage}
         imageAlt="Exterior siding mid-repaint with protective covering"
       />
 
-      <section className="bg-warm-white py-14 sm:py-16 lg:py-20">
-        <Container className="mx-auto max-w-3xl text-center">
-          <p className="text-balance font-display text-xl font-semibold leading-snug text-ink/80 sm:text-2xl">
-            Our house painters in Seattle, WA help homeowners and businesses protect and refresh their
-            properties with professional workmanship, clear communication, and finishes built to handle the
-            Pacific Northwest climate.
-          </p>
+      <section className="bg-warm-white py-10 sm:py-12">
+        <Container className="flex flex-col items-center text-center">
+          <span className="font-display text-5xl font-black leading-none text-crest sm:text-6xl">
+            {cabinetProofStat.value}
+          </span>
+          <span className="mt-2 text-xs font-bold uppercase tracking-[0.2em] text-ink/50">
+            {cabinetProofStat.label}
+          </span>
         </Container>
       </section>
 
       <Services />
       <ServiceSections />
       <VideoAuthority />
+      <PromoBanner />
       <Process />
       <WhyChooseRefined />
 
@@ -57,7 +59,6 @@ export function ServicesPage() {
       </section>
 
       <FAQ />
-      <PromoBanner />
       <FinalCTA />
     </>
   );

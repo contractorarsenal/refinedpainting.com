@@ -17,7 +17,7 @@ export function PNWDifference() {
     <section className="relative overflow-hidden border-t border-ink/10 bg-cream py-16 sm:py-20 lg:py-28">
       <DotGrid className="text-ink" />
       <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
-        <div className="aspect-4/5 w-full overflow-hidden rounded shadow-card">
+        <div className="aspect-4/5 w-full overflow-hidden rounded-xl shadow-card">
           <ProjectImage
             src={prepPhoto}
             alt="Weathered exterior siding with peeling paint before surface preparation"

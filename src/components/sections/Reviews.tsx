@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import badgeEpa from "../../assets/images/badge-epa-lead-safe.webp";
 import badgeGoogle from "../../assets/images/badge-google-verified.webp";
 import badgeLicensed from "../../assets/images/badge-licensed-insured.webp";
@@ -18,8 +18,11 @@ const badges = [
   { src: badgeNextdoor, alt: "Nextdoor Neighborhood Favorite" },
 ];
 
+const AUTO_ADVANCE_MS = 7000;
+
 export function Reviews() {
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
   const { openQuoteModal } = useQuoteModal();
   const current = testimonials[active];
 
@@ -27,13 +30,30 @@ export function Reviews() {
     setActive((i) => (i + delta + testimonials.length) % testimonials.length);
   };
 
+  useEffect(() => {
+    if (testimonials.length <= 1) return;
+    if (paused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const id = setInterval(() => {
+      setActive((i) => (i + 1) % testimonials.length);
+    }, AUTO_ADVANCE_MS);
+    return () => clearInterval(id);
+  }, [paused]);
+
   return (
     <section className="bg-light-blue py-16 sm:py-20 lg:py-28">
       <Container>
         <SectionHeading eyebrow="What Your Neighbors Are Saying" title="Refined Painting Reviews" />
 
         <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
-          <div className="flex flex-col justify-center">
+          <div
+            className="flex flex-col justify-center"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onFocus={() => setPaused(true)}
+            onBlur={() => setPaused(false)}
+          >
             <span className="h-1 w-12 bg-crest" aria-hidden />
             <div key={active} className="animate-fade-in mt-6">
               <Stars />

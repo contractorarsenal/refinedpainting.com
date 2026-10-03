@@ -13,7 +13,7 @@ export function ServicesPreview() {
           <SectionHeading
             eyebrow="Painting Services"
             title="Painting Services for Homes & Businesses"
-            description="Six services, one standard of care — clear communication and careful prep on every job."
+            description="Six services, one standard of care: clear communication and careful prep on every job."
           />
           <Link
             to="/services"

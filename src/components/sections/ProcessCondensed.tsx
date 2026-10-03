@@ -35,7 +35,7 @@ export function ProcessCondensed() {
 
         <div className="mt-12 text-center">
           <Link
-            to="/about#process"
+            to="/services#process"
             className="inline-flex items-center gap-1.5 border-b-2 border-crest pb-1 text-sm font-bold uppercase tracking-wide text-warm-white transition-colors hover:text-crest"
           >
             See Our Process

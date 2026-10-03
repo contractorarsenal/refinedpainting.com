@@ -52,7 +52,7 @@ export function ProjectLightbox({ projects, index, onClose, onNavigate }: Projec
       className="fixed inset-0 z-100 flex flex-col bg-ink/97 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
-      aria-label={`${project.title} — ${project.category}`}
+      aria-label={`${project.title}: ${project.category}`}
       onClick={onClose}
       onTouchStart={(e) => {
         touchStartX.current = e.touches[0].clientX;

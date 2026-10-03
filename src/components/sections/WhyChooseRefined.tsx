@@ -11,16 +11,16 @@ export function WhyChooseRefined() {
       <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
         <div className="flex flex-col gap-6 lg:sticky lg:top-28 lg:self-start">
           <SectionHeading
-            eyebrow="Why Homeowners Choose Refined"
+            eyebrow="Why Choose Refined"
             title="Built Around the Details That Actually Matter"
-            description="These aren't marketing bullet points — they're the standards every project is run against, from the first estimate to the final sign-off."
+            description="These aren't marketing bullet points. They're the standards every project is run against, from the first estimate to the final sign-off."
           />
-          <div className="hidden aspect-4/5 w-full overflow-hidden rounded shadow-card lg:block">
+          <div className="hidden aspect-4/5 w-full overflow-hidden rounded-xl shadow-card lg:block">
             <ProjectImage src={interiorPhoto} alt="Freshly painted bedroom ready for move-in" />
           </div>
         </div>
 
-        <ol className="flex flex-col">
+        <ol className="flex flex-col lg:mt-56">
           {whyChooseUs.map((point, index) => (
             <Reveal key={point.title} delay={index * 70}>
               <li className="flex gap-5 border-b border-ink/10 py-6 first:pt-0 last:border-b-0 sm:gap-7">

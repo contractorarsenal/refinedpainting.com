@@ -184,7 +184,7 @@ export const faqs: FaqItem[] = [
   {
     question: "How do I choose the right painting company in Seattle?",
     answer:
-      "Look for clear, detailed proposals, proof of licensing and insurance, and a process that includes real surface preparation — not just a coat of paint. Refined Painting is fully licensed and insured, Google Verified, and follows EPA Lead-Safe work practices on every project.",
+      "Look for clear, detailed proposals, proof of licensing and insurance, and a process that includes real surface preparation, not just a coat of paint. Refined Painting is fully licensed and insured, Google Verified, and follows EPA Lead-Safe work practices on every project.",
   },
   {
     question: "What should a painting estimate include?",
@@ -204,7 +204,7 @@ export const faqs: FaqItem[] = [
   {
     question: "How durable is refinished cabinetry?",
     answer:
-      "When done correctly — with proper cleaning, degreasing, sanding, and bonding primer before a premium cabinet-grade coating — refinished cabinets are extremely durable and hold up well to daily kitchen use.",
+      "When done correctly, with proper cleaning, degreasing, sanding, and bonding primer before a premium cabinet-grade coating, refinished cabinets are extremely durable and hold up well to daily kitchen use.",
   },
   {
     question: "Is your team EPA Lead-Safe Certified?",
@@ -214,7 +214,7 @@ export const faqs: FaqItem[] = [
   {
     question: "What do you do to protect my home during a project?",
     answer:
-      "We treat every home as if it were our own — protecting floors, furniture, and landscaping with drop cloths and plastic sheeting, and keeping the job site clean and organized throughout the project.",
+      "We treat every home as if it were our own: protecting floors, furniture, and landscaping with drop cloths and plastic sheeting, and keeping the job site clean and organized throughout the project.",
   },
   {
     question: "How much does painting cost?",
@@ -224,7 +224,7 @@ export const faqs: FaqItem[] = [
   {
     question: "When should I book my project?",
     answer:
-      "As soon as you have a scope you're comfortable with — many interior projects can be scheduled within 2 to 4 weeks of estimate approval, and exterior scheduling fills up fastest during the May–September window.",
+      "As soon as you have a scope you're comfortable with. Many interior projects can be scheduled within 2 to 4 weeks of estimate approval, and exterior scheduling fills up fastest during the May through September window.",
   },
   {
     question: "Do you offer a warranty?",
@@ -268,6 +268,7 @@ export const promoPopup = {
 };
 
 export const homesPainted = "200+";
+export const cabinetsRefinished = "200+";
 
 export const videoAuthority = {
   youtubeId: "_spxMZthwxs",
@@ -307,13 +308,13 @@ export const cabinetEducationPoints: CabinetEducationPoint[] = [
 // Contact) — the homepage intentionally keeps using the short arrays above.
 
 export const aboutIntro =
-  "At Refined Painting, we help Seattle homeowners feel confident about their painting project — from the first conversation to the final walkthrough — by delivering high-end results with a clear, professional process.";
+  "At Refined Painting, we help Seattle homeowners feel confident about their painting project, from the first conversation to the final walkthrough, by delivering high-end results with a clear, professional process.";
 
 export const companyStory = {
   heading: "The Story Behind Our Seattle Painting Company",
   paragraphs: [
     "Refined Painting was founded with a clear goal: to raise the standard for professional painting services in Seattle.",
-    "From the beginning, Refined Painting focused on doing fewer things — but doing them exceptionally well.",
+    "From the beginning, Refined Painting focused on doing fewer things, but doing them exceptionally well.",
     "What started as a small, locally owned painting company in Seattle quickly grew through word of mouth.",
   ],
 };
@@ -343,7 +344,7 @@ export const coreValues: CoreValue[] = [
   {
     title: "Respect for Your Home",
     description:
-      "We treat every home as if it were our own — protecting surfaces, maintaining clean work areas, and minimizing disruption.",
+      "We treat every home as if it were our own: protecting surfaces, maintaining clean work areas, and minimizing disruption.",
   },
   {
     title: "Accountability",
@@ -361,7 +362,7 @@ export const whyChooseUs: WhyChoosePoint[] = [
   {
     title: "Communication-First, On-Time Service",
     description:
-      "Clear expectations, regular updates, and fast responses — proactive communication matters just as much as paint quality.",
+      "Clear expectations, regular updates, and fast responses: proactive communication matters just as much as paint quality.",
   },
   {
     title: "Detailed Scope + Transparent Options",
@@ -371,7 +372,7 @@ export const whyChooseUs: WhyChoosePoint[] = [
   {
     title: "Clean, Protected Job Sites + Daily Cleanup",
     description:
-      "We treat every home as if it were our own — protecting surfaces, maintaining clean work areas, and minimizing disruption.",
+      "We treat every home as if it were our own: protecting surfaces, maintaining clean work areas, and minimizing disruption.",
   },
   {
     title: "Premium Prep + High-End Finishes",
@@ -421,7 +422,7 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     overview:
       "When a room feels tired, outdated, or simply needs a refresh, professional interior painting offers one of the most impactful transformations available for your home.",
     commonProblem:
-      "Many homeowners delay interior painting assuming it will be disruptive, messy, or difficult to coordinate — or worry about choosing the wrong colors, hiring unreliable contractors, or ending up with results that look uneven or amateur.",
+      "Many homeowners delay interior painting assuming it will be disruptive, messy, or difficult to coordinate, or worry about choosing the wrong colors, hiring unreliable contractors, or ending up with results that look uneven or amateur.",
     approach:
       "We combine meticulous surface preparation, premium Benjamin Moore and Sherwin-Williams paints, and a structured process that keeps your project on schedule from estimate to final walkthrough.",
     whatsIncluded: [
@@ -460,7 +461,7 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     overview:
       "When a home's exterior looks faded, weathered, or no longer reflects the care put into the property, professional exterior painting delivers one of the most dramatic transformations possible.",
     commonProblem:
-      "Exterior surfaces face constant exposure to rain, humidity, UV rays, and temperature fluctuations. Paint fades, cracks, and peels, exposing wood to moisture damage and reducing curb appeal — and crews that skip proper preparation set the work up to fail within months.",
+      "Exterior surfaces face constant exposure to rain, humidity, UV rays, and temperature fluctuations. Paint fades, cracks, and peels, exposing wood to moisture damage and reducing curb appeal, and crews that skip proper preparation set the work up to fail within months.",
     approach:
       "Our process includes comprehensive power washing calibrated to your siding material, wood repair and rot remediation before any paint goes on, careful scraping of loose paint, weather-resistant priming, premium exterior coatings engineered for Pacific Northwest conditions, and detailed attention to trim and accents.",
     whatsIncluded: [
@@ -499,7 +500,7 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     overview:
       "When cabinets feel dated, worn, or out of place in an otherwise beautiful kitchen, cabinet refinishing is one of the smartest ways to upgrade the space without a full remodel.",
     commonProblem:
-      "Your kitchen is one of the most used spaces in your home, which means cabinets show wear faster than almost any other surface — scratches, grease buildup, fading finishes, and outdated colors can make even a well-designed kitchen feel tired.",
+      "Your kitchen is one of the most used spaces in your home, which means cabinets show wear faster than almost any other surface: scratches, grease buildup, fading finishes, and outdated colors can make even a well-designed kitchen feel tired.",
     approach:
       "Rather than the weeks of disruption and cost of full replacement, we rely on meticulous preparation, premium coatings, and a controlled application process to give cabinets a durable, factory-quality finish.",
     whatsIncluded: [
@@ -535,7 +536,7 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     overview:
       "When a business space no longer projects the professionalism a brand deserves, commercial painting delivers an immediate transformation that impacts customer perception, employee morale, and property value.",
     commonProblem:
-      "A commercial space is more than walls and ceilings — it's where you serve customers, conduct business, and represent your brand. Outdated paint, scuffed surfaces, and worn finishes send the wrong message to clients and don't support productivity or pride.",
+      "A commercial space is more than walls and ceilings. It's where you serve customers, conduct business, and represent your brand. Outdated paint, scuffed surfaces, and worn finishes send the wrong message to clients and don't support productivity or pride.",
     approach:
       "We schedule a site visit to assess the space and any operational constraints, build a project schedule that minimizes disruption, manage surface preparation and premium coating application with a licensed team, then walk every surface with you to confirm it meets commercial standards.",
     whatsIncluded: [
@@ -572,9 +573,9 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     overview:
       "When outdoor wood looks gray, weathered, or no longer enhances a property's appearance, professional deck and fence staining provides the protection and visual transformation your exterior spaces deserve.",
     commonProblem:
-      "Pacific Northwest weather is relentless — constant moisture exposure, UV damage, mildew growth, and seasonal temperature swings cause untreated or improperly maintained wood to deteriorate rapidly.",
+      "Pacific Northwest weather is relentless: constant moisture exposure, UV damage, mildew growth, and seasonal temperature swings cause untreated or improperly maintained wood to deteriorate rapidly.",
     approach:
-      "We don't just apply stain — we create a protective barrier using moisture meters, proper surface preparation, premium penetrating stains, and application techniques proven to perform in Seattle's challenging climate.",
+      "We don't just apply stain. We create a protective barrier using moisture meters, proper surface preparation, premium penetrating stains, and application techniques proven to perform in Seattle's challenging climate.",
     whatsIncluded: [
       "Moisture-level testing before staining",
       "Removal of failing or peeling stain",
@@ -608,7 +609,7 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     overview:
       "When woodwork shows signs of damage, decay, or wear that paint alone can't fix, professional carpentry provides the structural repairs and custom improvements that protect your investment.",
     commonProblem:
-      "Exterior and interior woodwork faces constant challenges — moisture intrusion, insect damage, structural settling, and simple wear from decades of use. Rotted trim boards, damaged siding, failing window casings, deteriorating fascia, and worn door frames compromise both appearance and protection.",
+      "Exterior and interior woodwork faces constant challenges: moisture intrusion, insect damage, structural settling, and simple wear from decades of use. Rotted trim boards, damaged siding, failing window casings, deteriorating fascia, and worn door frames compromise both appearance and protection.",
     approach:
       "We inspect wood damage and structural concerns, source materials that match your existing construction and architectural style, handle careful removal and custom-fit replacement with weather-resistant installation, then walk the finished work with you.",
     whatsIncluded: [
@@ -632,7 +633,7 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
       {
         question: "What causes wood rot in Seattle homes?",
         answer:
-          "Wood rot results from prolonged moisture exposure combined with moderate temperatures — conditions Seattle provides abundantly. Poor drainage, failed caulking, inadequate paint maintenance, roof leaks, and areas where water can collect all contribute to rot development.",
+          "Wood rot results from prolonged moisture exposure combined with moderate temperatures, conditions Seattle provides abundantly. Poor drainage, failed caulking, inadequate paint maintenance, roof leaks, and areas where water can collect all contribute to rot development.",
       },
       {
         question: "Can carpentry repairs be done along with painting?",
@@ -646,7 +647,7 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
 export const warranty = {
   headline: "5-Year Workmanship Warranty",
   covered:
-    "Peeling of paint caused by inadequate surface preparation or improper application on areas painted by our team — including labor and materials for covered repairs. Covered repairs are completed by our team and scheduled within 12 months of notification.",
+    "Peeling of paint caused by inadequate surface preparation or improper application on areas painted by our team, including labor and materials for covered repairs. Covered repairs are completed by our team and scheduled within 12 months of notification.",
   excluded: [
     "Failure of old or underlying paint layers",
     "Stained surfaces",
@@ -664,5 +665,34 @@ export const warranty = {
 export const contactReassurance = {
   heading: "What Happens Next",
   body:
-    "Once you submit the form, our team typically reaches out within one business day. You're not committing to anything — you're starting a conversation.",
+    "Once you submit the form, our team typically reaches out within one business day. You're not committing to anything. You're starting a conversation.",
+};
+
+export interface HowWeWorkPrinciple {
+  title: string;
+  description: string;
+}
+
+// Short About-page summary, distinct from the full 4-step Process on
+// /services so the two pages don't repeat the same timeline.
+export const howWeWork: HowWeWorkPrinciple[] = [
+  {
+    title: "Clear, Respectful Communication",
+    description: "Proactive updates and fast responses from the first estimate through the final coat.",
+  },
+  {
+    title: "Clean, Protected Job Sites",
+    description: "Floors, furniture, and landscaping protected daily, with a tidy site at the end of every visit.",
+  },
+  {
+    title: "Final Walkthrough & 5-Year Warranty",
+    description: "A detailed walkthrough to confirm every detail, backed by our workmanship warranty.",
+  },
+];
+
+export const teamMembers = [{ name: "Jose" }, { name: "Luis" }];
+
+export const cabinetProofStat = {
+  value: cabinetsRefinished,
+  label: "Cabinets Refinished",
 };

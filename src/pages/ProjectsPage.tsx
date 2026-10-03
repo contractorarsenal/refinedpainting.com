@@ -32,8 +32,8 @@ export function ProjectsPage() {
       <section className="bg-off-white pt-14 sm:pt-16 lg:pt-20">
         <Container className="mx-auto max-w-2xl text-center">
           <p className="text-balance text-base leading-relaxed text-ink/65 sm:text-lg">
-            Every project below reflects the same process — detailed prep, premium materials, and clear
-            communication from estimate to final walkthrough.
+            Explore recent interior, exterior, cabinet and specialty painting projects completed by Refined
+            Painting. Click any photo for a closer look.
           </p>
         </Container>
       </section>

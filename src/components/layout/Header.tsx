@@ -56,7 +56,7 @@ export function Header() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="text-sm font-bold uppercase tracking-wide text-warm-white/75 transition-colors duration-300 hover:text-warm-white"
+                    className="text-sm font-bold uppercase tracking-wide text-warm-white transition-colors duration-300 [text-shadow:0_1px_4px_rgba(0,0,0,0.55)] hover:text-teal"
                   >
                     {link.label}
                   </Link>
@@ -78,7 +78,7 @@ export function Header() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="text-sm font-bold uppercase tracking-wide text-warm-white/75 transition-colors duration-300 hover:text-warm-white"
+                    className="text-sm font-bold uppercase tracking-wide text-warm-white transition-colors duration-300 [text-shadow:0_1px_4px_rgba(0,0,0,0.55)] hover:text-teal"
                   >
                     {link.label}
                   </Link>
@@ -86,7 +86,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={() => openQuoteModal()}
-                  className="rounded border-2 border-crest px-4 py-2 text-sm font-bold uppercase tracking-wide text-crest transition-colors duration-300 hover:bg-crest hover:text-warm-white"
+                  className="rounded bg-crest px-4 py-2 text-sm font-bold uppercase tracking-wide text-warm-white shadow-sm transition-colors duration-300 hover:bg-ink"
                 >
                   Free Estimate
                 </button>

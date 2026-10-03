@@ -1,11 +1,11 @@
-import { Clock, MapPin, Phone } from "lucide-react";
+import { Clock, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import badgeEpa from "../../assets/images/badge-epa-lead-safe.webp";
 import badgeGoogle from "../../assets/images/badge-google-verified.webp";
 import badgeLicensed from "../../assets/images/badge-licensed-insured.webp";
 import badgeNextdoor from "../../assets/images/badge-nextdoor.webp";
 import logoSrc from "../../assets/images/refined-painting-logo.webp";
-import { business, CTA, serviceAreas } from "../../lib/content";
+import { business, CTA, serviceSlugs, services } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
@@ -15,11 +15,10 @@ import { Mascot } from "../ui/Mascot";
 const companyLinks = [
   { label: "About", href: "/about" },
   { label: "Our Work", href: "/projects" },
-  { label: "Process", href: "/about#process" },
-  { label: "Warranty", href: "/services#warranty" },
   { label: "Contact", href: "/contact" },
+  { label: "Warranty", href: "/services#warranty" },
+  { label: "Service Areas", href: "/about#service-areas" },
 ];
-const featuredAreas = serviceAreas.slice(0, 8);
 
 export function Footer() {
   const { openQuoteModal } = useQuoteModal();
@@ -44,67 +43,6 @@ export function Footer() {
           <p className="max-w-56 text-sm text-warm-white/65">
             Professional painting for Seattle and the Eastside.
           </p>
-          <LinkButton
-            href={business.phoneHref}
-            variant="secondary"
-            size="lg"
-            icon="phone"
-            className="justify-center bg-warm-white/10 hover:bg-warm-white/20"
-          >
-            {business.phone}
-          </LinkButton>
-          <Button onClick={() => openQuoteModal()} size="md" className="justify-center">
-            {CTA.primary}
-          </Button>
-        </div>
-
-        <nav aria-label="Services">
-          <h3 className="text-xs font-bold uppercase tracking-widest text-warm-white/50">Services</h3>
-          <ul className="mt-4 flex flex-col gap-3">
-            {["Interior Painting", "Exterior Painting", "Cabinet Refinishing", "Commercial Painting", "Deck & Fence Staining", "Carpentry"].map(
-              (label) => (
-                <li key={label}>
-                  <Link to="/services" className="text-sm font-medium text-warm-white/80 hover:text-warm-white">
-                    {label}
-                  </Link>
-                </li>
-              ),
-            )}
-          </ul>
-        </nav>
-
-        <nav aria-label="Service areas">
-          <h3 className="text-xs font-bold uppercase tracking-widest text-warm-white/50">Service Areas</h3>
-          <ul className="mt-4 flex flex-col gap-3">
-            {featuredAreas.map((area) => (
-              <li key={area}>
-                <Link to="/contact#service-areas" className="text-sm font-medium text-warm-white/80 hover:text-warm-white">
-                  {area}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link to="/contact#service-areas" className="text-sm font-bold text-teal hover:text-teal/80">
-                View All
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
-        <div className="flex flex-col gap-8">
-          <nav aria-label="Company">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-warm-white/50">Company</h3>
-            <ul className="mt-4 flex flex-col gap-3">
-              {companyLinks.map((link) => (
-                <li key={link.label}>
-                  <Link to={link.href} className="text-sm font-medium text-warm-white/80 hover:text-warm-white">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
           <div className="flex flex-col gap-2.5 text-sm text-warm-white/80">
             <span className="flex items-start gap-2.5">
               <MapPin className="mt-0.5 size-4 shrink-0 text-teal" aria-hidden />
@@ -115,11 +53,61 @@ export function Footer() {
               <Clock className="size-4 shrink-0 text-teal" aria-hidden />
               {business.hours}
             </span>
-            <span className="flex items-center gap-2.5">
-              <Phone className="size-4 shrink-0 text-teal" aria-hidden />
-              {business.phone}
-            </span>
           </div>
+          <LinkButton
+            href={business.phoneHref}
+            variant="secondary"
+            size="lg"
+            icon="phone"
+            className="justify-center bg-warm-white/10 hover:bg-warm-white/20"
+          >
+            Call Now
+          </LinkButton>
+        </div>
+
+        <nav aria-label="Services">
+          <h3 className="text-xs font-bold uppercase tracking-widest text-warm-white/50">Services</h3>
+          <ul className="mt-4 flex flex-col gap-3">
+            {services.map((service) => (
+              <li key={service.id}>
+                <Link
+                  to={`/services/${serviceSlugs[service.id]}`}
+                  className="text-sm font-medium text-warm-white/80 hover:text-warm-white"
+                >
+                  {service.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <nav aria-label="Company">
+          <h3 className="text-xs font-bold uppercase tracking-widest text-warm-white/50">Company</h3>
+          <ul className="mt-4 flex flex-col gap-3">
+            {companyLinks.map((link) => (
+              <li key={link.label}>
+                <Link to={link.href} className="text-sm font-medium text-warm-white/80 hover:text-warm-white">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="flex flex-col gap-5">
+          <h3 className="text-xs font-bold uppercase tracking-widest text-warm-white/50">Get Started</h3>
+          <Button onClick={() => openQuoteModal()} size="md" className="justify-center">
+            {CTA.primary}
+          </Button>
+          <LinkButton
+            href={business.phoneHref}
+            variant="outline-light"
+            size="md"
+            icon="phone"
+            className="justify-center"
+          >
+            Call Now
+          </LinkButton>
         </div>
       </Container>
 
@@ -137,9 +125,10 @@ export function Footer() {
 
       <Container className="relative flex flex-col items-center justify-between gap-3 border-t border-warm-white/10 py-6 text-xs text-warm-white/50 sm:flex-row">
         <p>&copy; 2026 Refined Painting. All rights reserved.</p>
-        <div className="flex gap-6">
+        <div className="flex items-center gap-6">
           <span>Privacy Policy</span>
           <span>Terms</span>
+          <span className="text-warm-white/35">Made by Contractor Arsenal</span>
         </div>
       </Container>
     </footer>

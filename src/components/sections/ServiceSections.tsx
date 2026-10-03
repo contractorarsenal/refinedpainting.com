@@ -11,6 +11,7 @@ import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { ProjectImage } from "../ui/ProjectImage";
+import { Reveal } from "../ui/Reveal";
 
 const serviceImages: Record<ServiceId, { src: string; alt: string }> = {
   interior: { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
@@ -41,11 +42,11 @@ export function ServiceSections() {
                 reversed ? "lg:[&>*:first-child]:order-2" : ""
               }`}
             >
-              <div className="aspect-4/5 w-full overflow-hidden rounded shadow-card lg:aspect-4/3">
+              <Reveal className="aspect-4/5 w-full overflow-hidden rounded-xl shadow-card lg:aspect-4/3">
                 <ProjectImage src={image.src} alt={image.alt} />
-              </div>
+              </Reveal>
 
-              <div className="flex flex-col items-start gap-5">
+              <Reveal delay={120} className="flex flex-col items-start gap-5">
                 <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">
                   {detail.eyebrow}
                 </span>
@@ -72,7 +73,7 @@ export function ServiceSections() {
                     Get a Free Estimate
                   </Button>
                 </div>
-              </div>
+              </Reveal>
             </Container>
           </section>
         );

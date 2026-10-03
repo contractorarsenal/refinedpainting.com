@@ -2,14 +2,14 @@ import heroImage from "../assets/images/projects/porch-yellow-door.webp";
 import { PageHero } from "../components/hero/PageHero";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { PNWDifference } from "../components/sections/PNWDifference";
-import { Process } from "../components/sections/Process";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
 import { TrustStrip } from "../components/sections/TrustStrip";
 import { WhyChooseRefined } from "../components/sections/WhyChooseRefined";
 import { Container } from "../components/ui/Container";
+import { Reveal } from "../components/ui/Reveal";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
-import { aboutIntro, companyStory, coreValues, mission, vision } from "../lib/content";
+import { aboutIntro, companyStory, coreValues, howWeWork, mission, teamMembers, vision } from "../lib/content";
 
 export function AboutPage() {
   useDocumentMeta(
@@ -84,7 +84,53 @@ export function AboutPage() {
 
       <WhyChooseRefined />
       <PNWDifference />
-      <Process />
+
+      <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+        <Container>
+          <SectionHeading align="center" tone="light" eyebrow="How We Work" title="Our Standard" className="mx-auto" />
+          <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-8 sm:grid-cols-3">
+            {howWeWork.map((item, index) => (
+              <Reveal key={item.title} delay={index * 100}>
+                <div className="border-t-2 border-crest pt-4 text-center sm:text-left">
+                  <span className="font-display text-sm font-black text-crest">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-2 font-display text-base font-extrabold uppercase tracking-wide text-warm-white">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-warm-white/60">{item.description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-warm-white py-16 sm:py-20 lg:py-24">
+        <Container className="text-center">
+          <SectionHeading
+            align="center"
+            eyebrow="The People Behind the Work"
+            title="Meet the Team"
+            className="mx-auto"
+          />
+          <div className="mx-auto mt-12 grid max-w-2xl grid-cols-2 gap-10 sm:grid-cols-3">
+            {teamMembers.map((member, index) => (
+              <Reveal key={member.name} delay={index * 100}>
+                <div className="flex flex-col items-center gap-3">
+                  <div className="flex aspect-square w-full items-center justify-center rounded-xl bg-light-blue text-4xl font-black text-teal-dark">
+                    {member.name.charAt(0)}
+                  </div>
+                  <span className="font-display text-base font-extrabold uppercase tracking-wide text-ink">
+                    {member.name}
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
+
       <TrustStrip />
       <ServiceAreaStrip />
       <FinalCTA />

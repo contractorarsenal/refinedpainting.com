@@ -29,7 +29,7 @@ export function FinalCTA() {
             {CTA.primaryAlt}
           </Button>
           <LinkButton href={business.phoneHref} variant="outline-light" size="lg" icon="phone" className="w-full sm:w-auto">
-            {business.phone}
+            Call Now
           </LinkButton>
         </div>
 

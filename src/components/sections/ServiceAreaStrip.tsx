@@ -15,14 +15,14 @@ export function ServiceAreaStrip() {
           className="mx-auto"
         />
 
-        <div className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3 sm:gap-x-10">
+        <div className="mx-auto mt-12 max-w-md columns-2 gap-x-10 sm:max-w-xl sm:columns-3">
           {serviceAreas.map((area) => (
-            <span key={area} className="group flex items-center gap-2 text-sm font-bold text-ink/80">
+            <div key={area} className="group mb-4 flex items-center gap-2 text-sm font-bold text-ink/80">
               <MapPin className="size-3.5 shrink-0 text-crest" aria-hidden />
               <span className="border-b border-transparent pb-0.5 transition-colors group-hover:border-crest group-hover:text-crest">
                 {area}
               </span>
-            </span>
+            </div>
           ))}
         </div>
       </Container>

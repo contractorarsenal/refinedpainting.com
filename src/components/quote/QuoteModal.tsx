@@ -216,9 +216,9 @@ export function QuoteModal({ isOpen, presetService, onClose }: QuoteModalProps) 
           </div>
           {step === TOTAL_STEPS ? (
             <p className="mt-4 text-center text-xs text-ink/50">
-              No pressure. No spam. Just a clear next step for your project. Can't submit? Call us at{" "}
+              No pressure. No spam. Just a clear next step for your project. Can't submit?{" "}
               <a href={business.phoneHref} className="font-bold text-ink underline">
-                {business.phone}
+                Call Now
               </a>
               .
             </p>

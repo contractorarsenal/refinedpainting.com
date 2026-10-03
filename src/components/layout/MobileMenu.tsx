@@ -71,7 +71,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             className="flex items-center justify-center gap-2 rounded border-2 border-ink/15 px-5 py-3.5 text-base font-bold text-ink"
           >
             <Phone className="size-4" aria-hidden />
-            {business.phone}
+            Call Now
           </a>
           <Button
             onClick={() => {
