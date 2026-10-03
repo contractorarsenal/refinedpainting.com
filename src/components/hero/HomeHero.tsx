@@ -45,7 +45,7 @@ export function HomeHero() {
       </div>
 
       <Container className="relative flex w-full flex-col items-start gap-5 pb-14 pt-36 sm:pb-20 sm:pt-40 lg:pt-[25vh]">
-        <LogoReveal className="mb-1 hidden lg:block" />
+        <LogoReveal className="mb-3 hidden lg:block" />
         <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">
           Seattle &amp; Eastside Painting Company
         </span>

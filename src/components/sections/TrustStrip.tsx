@@ -11,26 +11,35 @@ const badges = [
   { src: badgeNextdoor, alt: "Nextdoor Neighborhood Favorite" },
 ];
 
-export function TrustStrip() {
+export function TrustStrip({ eyebrow }: { eyebrow?: string }) {
   return (
     <section className="border-b border-ink/10 bg-warm-white py-8 sm:py-10" aria-label="Trust and certifications">
-      <Container className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-12">
-        <div className="flex flex-wrap items-center justify-center gap-x-9 gap-y-4">
-          {badges.map((badge, index) => (
-            <img
-              key={badge.alt}
-              src={badge.src}
-              alt={badge.alt}
-              loading="lazy"
-              style={{ animationDelay: `${index * 90}ms` }}
-              className="animate-fade-in h-11 w-11 object-contain sm:h-12 sm:w-12"
-            />
-          ))}
-        </div>
+      <Container className="flex flex-col items-center gap-6">
+        {eyebrow ? (
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-crest" aria-hidden />
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-ink/50">{eyebrow}</span>
+            <span className="h-px w-8 bg-crest" aria-hidden />
+          </div>
+        ) : null}
+        <div className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-12">
+          <div className="flex flex-wrap items-center justify-center gap-x-9 gap-y-4">
+            {badges.map((badge, index) => (
+              <img
+                key={badge.alt}
+                src={badge.src}
+                alt={badge.alt}
+                loading="lazy"
+                style={{ animationDelay: `${index * 90}ms` }}
+                className="animate-fade-in h-11 w-11 object-contain sm:h-12 sm:w-12"
+              />
+            ))}
+          </div>
 
-        <p className="border-2 border-ink/15 px-4 py-2 text-xs font-bold uppercase tracking-widest text-ink/70">
-          5-Year Workmanship Warranty
-        </p>
+          <p className="border-2 border-ink/15 px-4 py-2 text-xs font-bold uppercase tracking-widest text-ink/70">
+            5-Year Workmanship Warranty
+          </p>
+        </div>
       </Container>
     </section>
   );

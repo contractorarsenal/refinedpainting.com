@@ -32,32 +32,25 @@ export function Reviews() {
       <Container>
         <SectionHeading eyebrow="What Your Neighbors Are Saying" title="Refined Painting Reviews" />
 
-        <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[1.5fr_1fr] lg:gap-8">
-          <div className="relative flex flex-col justify-between overflow-hidden border-2 border-ink/10 bg-warm-white p-8 sm:p-10">
-            <span
-              className="pointer-events-none absolute -left-2 -top-6 select-none font-display text-[9rem] font-black leading-none text-teal-dark/10 sm:text-[11rem]"
-              aria-hidden
-            >
-              "
-            </span>
-            <div key={active} className="animate-fade-in relative">
-              <div className="flex items-center gap-2">
-                <img src={badgeGoogle} alt="" className="h-6 w-6 object-contain" aria-hidden />
-                <span className="text-xs font-bold uppercase tracking-widest text-ink/45">Verified Google Review</span>
-              </div>
-              <Stars className="mt-4" />
-              <blockquote className="mt-4 text-balance font-display text-2xl font-semibold leading-snug text-ink sm:text-3xl">
-                "{current.quote}"
+        <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
+          <div className="flex flex-col justify-center">
+            <span className="h-1 w-12 bg-crest" aria-hidden />
+            <div key={active} className="animate-fade-in mt-6">
+              <Stars />
+              <blockquote className="mt-5 text-balance font-display text-3xl font-semibold leading-snug text-ink sm:text-4xl">
+                &ldquo;{current.quote}&rdquo;
               </blockquote>
-              <p className="mt-4 text-sm font-bold uppercase tracking-wide text-ink/50">{current.source}</p>
+              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-ink/50">
+                {current.source} &middot; Verified Google Review
+              </p>
             </div>
 
-            <div className="relative mt-8 flex items-center gap-3">
+            <div className="mt-10 flex items-center gap-3 border-t border-ink/10 pt-6">
               <button
                 type="button"
                 onClick={() => go(-1)}
                 aria-label="Previous review"
-                className="flex size-10 items-center justify-center rounded border-2 border-ink/15 text-ink transition-colors hover:border-teal-dark"
+                className="flex size-10 items-center justify-center rounded-full border-2 border-ink/15 text-ink transition-colors hover:border-crest hover:text-crest"
               >
                 <ChevronLeft className="size-5" aria-hidden />
               </button>
@@ -65,7 +58,7 @@ export function Reviews() {
                 type="button"
                 onClick={() => go(1)}
                 aria-label="Next review"
-                className="flex size-10 items-center justify-center rounded border-2 border-ink/15 text-ink transition-colors hover:border-teal-dark"
+                className="flex size-10 items-center justify-center rounded-full border-2 border-ink/15 text-ink transition-colors hover:border-crest hover:text-crest"
               >
                 <ChevronRight className="size-5" aria-hidden />
               </button>
@@ -78,7 +71,7 @@ export function Reviews() {
                     aria-selected={i === active}
                     aria-label={`Review ${i + 1}`}
                     onClick={() => setActive(i)}
-                    className={`h-2 w-6 transition-colors ${i === active ? "bg-teal-dark" : "bg-ink/15"}`}
+                    className={`h-2 w-6 transition-colors ${i === active ? "bg-crest" : "bg-ink/15"}`}
                   />
                 ))}
               </div>

@@ -8,7 +8,7 @@ export function Process() {
   const { ref: lineRef, inView: lineInView } = useInView<HTMLDivElement>(0.3);
 
   return (
-    <section id="process" className="relative scroll-mt-24 bg-ink py-16 sm:py-20 lg:py-28">
+    <section id="process" className="relative scroll-mt-24 border-t border-warm-white/10 bg-ink py-16 sm:py-20 lg:py-28">
       <Container className="relative">
         <SectionHeading
           align="center"

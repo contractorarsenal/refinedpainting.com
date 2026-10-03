@@ -1,10 +1,13 @@
 import { HomeHero } from "../components/hero/HomeHero";
 import { AboutPreview } from "../components/sections/AboutPreview";
 import { FinalCTA } from "../components/sections/FinalCTA";
+import { ProcessCondensed } from "../components/sections/ProcessCondensed";
 import { ProjectsPreview } from "../components/sections/ProjectsPreview";
 import { Reviews } from "../components/sections/Reviews";
+import { ServiceAreaSummary } from "../components/sections/ServiceAreaSummary";
 import { ServicesPreview } from "../components/sections/ServicesPreview";
 import { TrustStrip } from "../components/sections/TrustStrip";
+import { WhyChooseRefined } from "../components/sections/WhyChooseRefined";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 export function HomePage() {
@@ -16,11 +19,14 @@ export function HomePage() {
   return (
     <>
       <HomeHero />
-      <TrustStrip />
-      <ServicesPreview />
+      <TrustStrip eyebrow="Proven. Local. Professional." />
       <AboutPreview />
+      <ServicesPreview />
+      <WhyChooseRefined />
       <ProjectsPreview />
+      <ProcessCondensed />
       <Reviews />
+      <ServiceAreaSummary />
       <FinalCTA />
     </>
   );

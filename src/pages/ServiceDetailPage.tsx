@@ -85,11 +85,15 @@ export function ServiceDetailPage() {
         </Container>
       </section>
 
-      <section id="faq" className="scroll-mt-20 bg-warm-white py-16 sm:py-20 lg:py-24">
+      <section id="faq" className="scroll-mt-20 border-t border-ink/10 bg-warm-white py-16 sm:py-20 lg:py-24">
         <Container className="mx-auto max-w-3xl">
-          <h2 className="text-balance text-center font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
-            {service.title} FAQ
-          </h2>
+          <div className="flex flex-col items-center text-center">
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Common Questions</span>
+            <span className="mt-3 h-1 w-12 bg-crest" aria-hidden />
+            <h2 className="mt-5 text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+              {service.title} FAQ
+            </h2>
+          </div>
           <div className="mt-10">
             <Accordion items={detail.faqs} />
           </div>

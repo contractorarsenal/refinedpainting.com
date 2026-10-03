@@ -1,23 +1,13 @@
-import { Building2, Hammer, Home, Layers, PaintRoller, TreeDeciduous } from "lucide-react";
-import type { ServiceId } from "../../lib/content";
-import { services } from "../../lib/content";
-import { LinkButton } from "../ui/Button";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { serviceDetails, serviceSlugs, services } from "../../lib/content";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
 
-const serviceIcons: Record<ServiceId, typeof Home> = {
-  interior: Home,
-  exterior: PaintRoller,
-  cabinets: Layers,
-  commercial: Building2,
-  "deck-fence": TreeDeciduous,
-  carpentry: Hammer,
-};
-
 export function ServicesPreview() {
   return (
-    <section className="bg-cream py-16 sm:py-20 lg:py-24">
+    <section id="services-preview" className="bg-cream py-16 sm:py-20 lg:py-24">
       <Container>
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <SectionHeading
@@ -25,28 +15,45 @@ export function ServicesPreview() {
             title="Painting Services for Homes & Businesses"
             description="Six services, one standard of care — clear communication and careful prep on every job."
           />
-          <LinkButton href="/services" variant="ghost" className="hidden shrink-0 sm:inline-flex">
+          <Link
+            to="/services"
+            className="hidden shrink-0 items-center gap-1.5 border-b-2 border-crest pb-1 text-sm font-bold uppercase tracking-wide text-ink transition-colors hover:text-crest sm:flex"
+          >
             View All Services
-          </LinkButton>
+            <ArrowRight className="size-4" aria-hidden />
+          </Link>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
-          {services.map((service, index) => {
-            const Icon = serviceIcons[service.id];
-            return (
-              <Reveal key={service.id} delay={index * 60} className="flex flex-col items-start gap-2">
-                <Icon className="size-6 text-teal-dark" aria-hidden />
-                <span className="font-display text-sm font-bold uppercase tracking-wide text-ink">
-                  {service.title}
+        <div className="mt-12 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2">
+          {services.map((service, index) => (
+            <Reveal key={service.id} delay={index * 60}>
+              <Link
+                to={`/services/${serviceSlugs[service.id]}`}
+                className="group flex items-baseline gap-4 border-t-2 border-ink/10 pt-5 transition-colors hover:border-crest"
+              >
+                <span className="font-display text-sm font-black text-crest/50">
+                  {String(index + 1).padStart(2, "0")}
                 </span>
-              </Reveal>
-            );
-          })}
+                <div>
+                  <h3 className="font-display text-xl font-extrabold uppercase tracking-wide text-ink transition-colors group-hover:text-crest sm:text-2xl">
+                    {service.title}
+                  </h3>
+                  <p className="mt-1.5 max-w-sm text-sm leading-relaxed text-ink/60">
+                    {serviceDetails[service.id].overview}
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
         </div>
 
-        <LinkButton href="/services" variant="ghost" className="mt-10 w-full justify-center sm:hidden">
+        <Link
+          to="/services"
+          className="mt-10 flex w-full items-center justify-center gap-1.5 border-2 border-ink/15 py-3.5 text-sm font-bold uppercase tracking-wide text-ink sm:hidden"
+        >
           View All Services
-        </LinkButton>
+          <ArrowRight className="size-4" aria-hidden />
+        </Link>
       </Container>
     </section>
   );

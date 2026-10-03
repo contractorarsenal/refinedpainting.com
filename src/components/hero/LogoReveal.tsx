@@ -9,8 +9,10 @@ import logoRevealVideo from "../../assets/videos/logo-reveal.webm";
  * VP9 alpha correctly — canPlayType() can't tell us that, and guessing wrong
  * would show an opaque box instead of transparency. Safari/WebKit has no
  * alpha-WebM support in <video>, so it (and reduced-motion, and anything that
- * errors) just keeps the static logo. Plays once, then settles back on the
- * static logo in the same spot.
+ * errors) just keeps the static logo. Plays once, holds briefly, then the
+ * whole mark fades out — the navbar already carries the logo permanently, so
+ * this is a one-time reveal moment rather than a second permanent logo
+ * competing with the headline.
  */
 // Below `lg` the overlay is hidden anyway (it would duplicate the top-left
 // mobile nav logo), and reduced-motion users don't want it either — in both
@@ -21,17 +23,25 @@ function canAttemptVideo() {
   return window.matchMedia("(min-width: 1024px)").matches;
 }
 
+const HOLD_MS = 1100;
+const STATIC_ONLY_HOLD_MS = 1800;
+
 export function LogoReveal({ className = "" }: { className?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoVisible, setVideoVisible] = useState(false);
+  const [faded, setFaded] = useState(false);
   const [attemptVideo] = useState(canAttemptVideo);
 
   useEffect(() => {
-    if (!attemptVideo) return;
+    if (!attemptVideo) {
+      const t = setTimeout(() => setFaded(true), STATIC_ONLY_HOLD_MS);
+      return () => clearTimeout(t);
+    }
 
     const video = videoRef.current;
     if (!video) return;
     let cancelled = false;
+    let fadeTimer: ReturnType<typeof setTimeout> | undefined;
 
     const onLoadedData = () => {
       try {
@@ -54,7 +64,10 @@ export function LogoReveal({ className = "" }: { className?: string }) {
     };
 
     const onError = () => setVideoVisible(false);
-    const onEnded = () => setVideoVisible(false);
+    const onEnded = () => {
+      setVideoVisible(false);
+      fadeTimer = setTimeout(() => setFaded(true), HOLD_MS);
+    };
 
     video.addEventListener("loadeddata", onLoadedData);
     video.addEventListener("error", onError);
@@ -63,6 +76,7 @@ export function LogoReveal({ className = "" }: { className?: string }) {
 
     return () => {
       cancelled = true;
+      clearTimeout(fadeTimer);
       video.removeEventListener("loadeddata", onLoadedData);
       video.removeEventListener("error", onError);
       video.removeEventListener("ended", onEnded);
@@ -70,7 +84,12 @@ export function LogoReveal({ className = "" }: { className?: string }) {
   }, [attemptVideo]);
 
   return (
-    <div className={`relative aspect-[2.6/1] w-[140px] sm:w-[180px] lg:w-[200px] ${className}`}>
+    <div
+      className={`relative aspect-[2.6/1] w-37.5 lg:w-45 transition-opacity duration-700 ease-out ${
+        faded ? "opacity-0" : "opacity-100"
+      } ${className}`}
+      aria-hidden={faded}
+    >
       <img
         src={logoStatic}
         alt="Refined Painting"

@@ -2,9 +2,7 @@ import { useState, type FormEvent } from "react";
 import { services } from "../../lib/content";
 import { isValidEmail, isValidName, isValidPhone } from "../../lib/formValidation";
 import { Button } from "../ui/Button";
-import { Container } from "../ui/Container";
 import { FormField as Field, formInputClasses as inputClasses } from "../ui/FormField";
-import { SectionHeading } from "../ui/SectionHeading";
 
 // Same existing Refined Painting Web3Forms form used by the estimate
 // wizard — do not swap this key or create a second form.
@@ -63,23 +61,23 @@ export function ContactForm() {
   const redirectUrl = typeof window !== "undefined" ? `${window.location.origin}/thank-you` : "/thank-you";
 
   return (
-    <section className="bg-warm-white py-16 sm:py-20 lg:py-24">
-      <Container className="mx-auto max-w-2xl">
-        <SectionHeading
-          align="center"
-          eyebrow="Get In Touch"
-          title="Send Us a Message"
-          description="Questions about your project? Send us a message and we'll get back to you."
-          className="mx-auto"
-        />
+    <div className="relative border-2 border-ink/10 bg-warm-white p-6 shadow-card sm:p-8 lg:p-10">
+      <span className="absolute inset-x-0 top-0 h-1 bg-crest" aria-hidden />
+      <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Get In Touch</span>
+      <h2 className="mt-2 font-display text-2xl font-extrabold uppercase leading-tight text-ink sm:text-3xl">
+        Send Us a Message
+      </h2>
+      <p className="mt-2 text-sm text-ink/60">
+        Questions about your project? Send us a message and we&rsquo;ll get back to you.
+      </p>
 
-        <form
-          action={WEB3FORMS_ENDPOINT}
-          method="POST"
-          noValidate
-          onSubmit={handleSubmit}
-          className="mt-10 flex flex-col gap-5"
-        >
+      <form
+        action={WEB3FORMS_ENDPOINT}
+        method="POST"
+        noValidate
+        onSubmit={handleSubmit}
+        className="mt-7 flex flex-col gap-5"
+      >
           {/* Web3Forms delivery configuration — not shown to the visitor. */}
           <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
           <input type="hidden" name="subject" value="Refined Painting — Contact Form" />
@@ -172,7 +170,6 @@ export function ContactForm() {
             {isSubmitting ? "Sending…" : "Send Message"}
           </Button>
         </form>
-      </Container>
-    </section>
+    </div>
   );
 }
