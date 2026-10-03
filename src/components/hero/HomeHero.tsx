@@ -6,6 +6,7 @@ import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { Stars } from "../ui/Stars";
 import type { HeroMedia } from "./heroMedia";
+import { LogoReveal } from "./LogoReveal";
 
 const homeHeroMedia: HeroMedia = {
   type: "video",
@@ -43,7 +44,8 @@ export function HomeHero() {
         <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/25 to-transparent" />
       </div>
 
-      <Container className="relative flex w-full flex-col items-start gap-5 pb-14 pt-36 sm:pb-20 sm:pt-40 lg:pb-24">
+      <Container className="relative flex w-full flex-col items-start gap-5 pb-14 pt-36 sm:pb-20 sm:pt-40 lg:pt-28">
+        <LogoReveal className="mb-1 hidden lg:block" />
         <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">
           Seattle &amp; Eastside Painting Company
         </span>
