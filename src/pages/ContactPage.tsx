@@ -21,7 +21,7 @@ const contactDetails = [
 export function ContactPage() {
   useDocumentMeta(
     "Contact Refined Painting | Free Estimate",
-    "Get a free painting estimate from Refined Painting. Call (206) 672-2571 or request an estimate online — serving Seattle and the Eastside.",
+    "Get a free painting estimate from Refined Painting. Call (206) 258-7994 or request an estimate online — serving Seattle and the Eastside.",
   );
 
   return (

@@ -1,7 +1,7 @@
 export const business = {
   name: "Refined Painting",
-  phone: "(206) 672-2571",
-  phoneHref: "tel:+12066722571",
+  phone: "(206) 258-7994",
+  phoneHref: "tel:+12062587994",
   address: {
     street: "7212 Linden Ave N",
     city: "Seattle",

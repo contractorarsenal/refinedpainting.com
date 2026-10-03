@@ -19,7 +19,7 @@ export function HomeHero() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section className="relative flex min-h-[640px] items-end overflow-hidden bg-ink sm:min-h-[720px] lg:min-h-[88vh]">
+    <section className="relative flex min-h-[640px] items-start overflow-hidden bg-ink sm:min-h-[720px] lg:min-h-[88vh]">
       <div className="absolute inset-0">
         {homeHeroMedia.type === "video" ? (
           <video
@@ -44,7 +44,7 @@ export function HomeHero() {
         <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/25 to-transparent" />
       </div>
 
-      <Container className="relative flex w-full flex-col items-start gap-5 pb-14 pt-36 sm:pb-20 sm:pt-40 lg:pt-28">
+      <Container className="relative flex w-full flex-col items-start gap-5 pb-14 pt-36 sm:pb-20 sm:pt-40 lg:pt-[25vh]">
         <LogoReveal className="mb-1 hidden lg:block" />
         <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">
           Seattle &amp; Eastside Painting Company
