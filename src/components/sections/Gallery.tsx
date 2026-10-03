@@ -89,6 +89,9 @@ const feature = projects.find((p) => p.feature) ?? projects[0];
 const rest = projects.filter((p) => p.id !== feature.id);
 const orderedProjects = [feature, ...rest];
 
+// Only categories that real project photos actually exist for.
+const filters = ["All", "Interior Painting", "Exterior Painting", "Cabinet Refinishing"] as const;
+
 function ProjectFigure({
   project,
   aspect = "aspect-4/3",
@@ -101,7 +104,7 @@ function ProjectFigure({
   return (
     <button type="button" onClick={onClick} className="group block w-full text-left">
       <figure>
-        <div className={`relative ${aspect} w-full overflow-hidden bg-ink/5`}>
+        <div className={`relative ${aspect} w-full overflow-hidden rounded-xl bg-ink/5`}>
           <img
             src={project.image}
             alt={project.alt}
@@ -126,22 +129,44 @@ function ProjectFigure({
 
 export function Gallery() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [filter, setFilter] = useState<(typeof filters)[number]>("All");
+
+  const filtered = filter === "All" ? orderedProjects : orderedProjects.filter((p) => p.category === filter);
+  const showFeature = filter === "All";
 
   return (
-    <section className="bg-off-white pb-10 pt-16 sm:pb-12 sm:pt-20 lg:pb-16 lg:pt-24">
+    <section className="bg-off-white pb-10 pt-10 sm:pb-12 lg:pb-16">
       <Container>
-        <Reveal>
-          <ProjectFigure
-            project={feature}
-            aspect="aspect-4/3 sm:aspect-16/9 lg:aspect-21/9"
-            onClick={() => setActiveIndex(0)}
-          />
-        </Reveal>
+        <div className="mb-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-b border-ink/10 pb-6">
+          {filters.map((f) => (
+            <button
+              key={f}
+              type="button"
+              onClick={() => setFilter(f)}
+              aria-pressed={filter === f}
+              className={`text-xs font-bold uppercase tracking-wide transition-colors ${
+                filter === f ? "text-crest" : "text-ink/50 hover:text-ink"
+              }`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
-          {rest.map((project, index) => (
+        {showFeature ? (
+          <Reveal>
+            <ProjectFigure
+              project={feature}
+              aspect="aspect-4/3 sm:aspect-16/9 lg:aspect-21/9"
+              onClick={() => setActiveIndex(orderedProjects.indexOf(feature))}
+            />
+          </Reveal>
+        ) : null}
+
+        <div className={`grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 ${showFeature ? "mt-10 sm:mt-12" : ""}`}>
+          {(showFeature ? filtered.filter((p) => p.id !== feature.id) : filtered).map((project, index) => (
             <Reveal key={project.id} delay={Math.min(index, 4) * 60}>
-              <ProjectFigure project={project} onClick={() => setActiveIndex(index + 1)} />
+              <ProjectFigure project={project} onClick={() => setActiveIndex(orderedProjects.indexOf(project))} />
             </Reveal>
           ))}
         </div>

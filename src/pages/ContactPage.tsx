@@ -1,6 +1,4 @@
 import { Clock, MapPin, Phone } from "lucide-react";
-import heroImage from "../assets/images/projects/interior-bright-finished.webp";
-import { PageHero } from "../components/hero/PageHero";
 import { ContactForm } from "../components/sections/ContactForm";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
@@ -26,14 +24,17 @@ export function ContactPage() {
 
   return (
     <>
-      <PageHero
-        eyebrow="Get In Touch"
-        title="Start Your Project"
-        description="Send us a message below, or call us directly to talk through your project."
-        image={heroImage}
-        imageAlt="Freshly painted bedroom ready for move-in"
-        height="compact"
-      />
+      <section className="bg-cream pb-14 pt-32 sm:pb-16 sm:pt-40">
+        <Container className="mx-auto max-w-2xl text-center">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Get In Touch</span>
+          <h1 className="mt-3 text-balance font-display text-4xl font-black uppercase leading-[0.96] text-ink sm:text-5xl">
+            Let&rsquo;s Talk Through Your Project
+          </h1>
+          <p className="mx-auto mt-4 max-w-md text-balance text-base leading-relaxed text-ink/70 sm:text-lg">
+            Send us a message below, or call us directly to talk through your project.
+          </p>
+        </Container>
+      </section>
 
       <section className="bg-light-blue py-16 sm:py-20 lg:py-28">
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
@@ -73,7 +74,20 @@ export function ContactPage() {
               <h3 className="font-display text-sm font-extrabold uppercase tracking-wide text-ink">
                 {contactReassurance.heading}
               </h3>
-              <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink/65">{contactReassurance.body}</p>
+              <ol className="mt-4 flex flex-col gap-3">
+                {[
+                  "Submit the form with a few details about your project.",
+                  "Our team typically reaches out within one business day.",
+                  "You're not committing to anything. You're starting a conversation.",
+                ].map((step, index) => (
+                  <li key={step} className="flex items-start gap-3">
+                    <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-crest text-[11px] font-bold text-warm-white">
+                      {index + 1}
+                    </span>
+                    <span className="text-sm leading-relaxed text-ink/65">{step}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
 

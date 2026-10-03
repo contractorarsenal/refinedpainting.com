@@ -1,5 +1,4 @@
 import heroImage from "../assets/images/projects/porch-yellow-door.webp";
-import { PageHero } from "../components/hero/PageHero";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { PNWDifference } from "../components/sections/PNWDifference";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
@@ -19,89 +18,65 @@ export function AboutPage() {
 
   return (
     <>
-      <PageHero
-        eyebrow="About Us"
-        title="About Refined Painting"
-        description="Licensed, insured and EPA Lead-Safe, serving Seattle and the Eastside with clear communication and careful prep on every project."
-        image={heroImage}
-        imageAlt="Covered porch with a bold yellow front door"
-      />
+      <section className="relative overflow-hidden bg-ink">
+        <div className="relative min-h-120 sm:min-h-140 lg:min-h-160">
+          <img
+            src={heroImage}
+            alt="Covered porch with a bold yellow front door"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-transparent to-transparent" />
+        </div>
+
+        <Container className="relative">
+          <div className="relative -mt-24 max-w-md rounded-xl bg-warm-white p-7 shadow-lift sm:-mt-28 sm:p-9 lg:-mt-32">
+            <span className="h-1 w-10 bg-crest" aria-hidden />
+            <span className="mt-4 block text-xs font-bold uppercase tracking-[0.16em] text-crest">
+              About Refined Painting
+            </span>
+            <h1 className="mt-3 text-balance font-display text-3xl font-black uppercase leading-[0.96] text-ink sm:text-4xl">
+              Clear Communication. Careful Preparation. High-End Results.
+            </h1>
+            <p className="mt-4 text-sm leading-relaxed text-ink/70">{aboutIntro}</p>
+          </div>
+          <div className="h-12 sm:h-16 lg:h-10" aria-hidden />
+        </Container>
+      </section>
 
       <section className="bg-warm-white py-16 sm:py-20 lg:py-24">
         <Container className="mx-auto max-w-3xl">
-          <p className="text-balance text-center font-display text-xl font-semibold leading-snug text-ink/80 sm:text-2xl">
-            {aboutIntro}
-          </p>
-
-          <div className="mt-12 border-t border-ink/10 pt-10">
-            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{companyStory.heading}</span>
-            <div className="mt-4 flex flex-col gap-4">
-              {companyStory.paragraphs.map((p) => (
-                <p key={p} className="text-base leading-relaxed text-ink/70">
-                  {p}
-                </p>
-              ))}
-            </div>
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{companyStory.heading}</span>
+          <div className="mt-4 flex flex-col gap-4">
+            {companyStory.paragraphs.map((p) => (
+              <p key={p} className="text-base leading-relaxed text-ink/70">
+                {p}
+              </p>
+            ))}
           </div>
         </Container>
       </section>
 
-      <section className="bg-cream py-16 sm:py-20 lg:py-24">
-        <Container>
-          <div className="grid grid-cols-1 gap-10 border-b border-ink/10 pb-12 sm:grid-cols-2">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Our Mission</span>
-              <p className="mt-3 font-display text-2xl font-extrabold leading-tight text-ink sm:text-3xl">
-                {mission}
-              </p>
-            </div>
-            <div>
-              <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Our Vision</span>
-              <p className="mt-3 font-display text-2xl font-extrabold leading-tight text-ink sm:text-3xl">
-                {vision}
-              </p>
-            </div>
+      <section className="border-t border-ink/10 bg-ink text-warm-white">
+        <Container className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="flex flex-col justify-center gap-5 py-16 pr-0 sm:py-20 lg:py-24 lg:pr-12">
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">Our Philosophy</span>
+            <p className="text-balance font-display text-3xl font-extrabold leading-tight text-warm-white sm:text-4xl">
+              {mission}
+            </p>
+            <p className="max-w-sm text-sm leading-relaxed text-warm-white/60">{vision}</p>
           </div>
-
-          <div className="mt-12">
-            <SectionHeading align="center" eyebrow="What We Stand On" title="Core Values" className="mx-auto" />
-            <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="flex flex-col gap-8 border-t border-warm-white/10 py-16 lg:border-l lg:border-t-0 lg:py-24 lg:pl-12">
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Our Approach</span>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               {coreValues.map((value, index) => (
-                <div key={value.title} className="border-t-2 border-crest pt-4">
-                  <span className="font-display text-sm font-black text-crest">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-2 font-display text-base font-extrabold uppercase tracking-wide text-ink">
+                <Reveal key={value.title} delay={index * 80} className="border-t-2 border-crest pt-4">
+                  <h3 className="font-display text-base font-extrabold uppercase tracking-wide text-warm-white">
                     {value.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink/65">{value.description}</p>
-                </div>
+                  <p className="mt-2 text-sm leading-relaxed text-warm-white/60">{value.description}</p>
+                </Reveal>
               ))}
             </div>
-          </div>
-        </Container>
-      </section>
-
-      <WhyChooseRefined />
-      <PNWDifference />
-
-      <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
-        <Container>
-          <SectionHeading align="center" tone="light" eyebrow="How We Work" title="Our Standard" className="mx-auto" />
-          <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-8 sm:grid-cols-3">
-            {howWeWork.map((item, index) => (
-              <Reveal key={item.title} delay={index * 100}>
-                <div className="border-t-2 border-crest pt-4 text-center sm:text-left">
-                  <span className="font-display text-sm font-black text-crest">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-2 font-display text-base font-extrabold uppercase tracking-wide text-warm-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-warm-white/60">{item.description}</p>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </Container>
       </section>
@@ -124,6 +99,30 @@ export function AboutPage() {
                   <span className="font-display text-base font-extrabold uppercase tracking-wide text-ink">
                     {member.name}
                   </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <WhyChooseRefined />
+      <PNWDifference />
+
+      <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+        <Container>
+          <SectionHeading align="center" tone="light" eyebrow="How We Work" title="Our Standard" className="mx-auto" />
+          <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-8 sm:grid-cols-3">
+            {howWeWork.map((item, index) => (
+              <Reveal key={item.title} delay={index * 100}>
+                <div className="border-t-2 border-crest pt-4 text-center sm:text-left">
+                  <span className="font-display text-sm font-black text-crest">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-2 font-display text-base font-extrabold uppercase tracking-wide text-warm-white">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-warm-white/60">{item.description}</p>
                 </div>
               </Reveal>
             ))}

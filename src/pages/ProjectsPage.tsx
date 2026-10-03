@@ -1,5 +1,3 @@
-import heroImage from "../assets/images/projects/exterior-after-pink.jpg";
-import { PageHero } from "../components/hero/PageHero";
 import { BeforeAfter } from "../components/sections/BeforeAfter";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { Gallery } from "../components/sections/Gallery";
@@ -20,18 +18,13 @@ export function ProjectsPage() {
 
   return (
     <>
-      <PageHero
-        eyebrow="Real Homes, Real Work"
-        title="Our Work"
-        description="A selection of recent interior, exterior and cabinet projects across Seattle and the Eastside. Click any photo for a closer look."
-        image={heroImage}
-        imageAlt="Home exterior finished in a soft blush tone"
-        height="tall"
-      />
-
-      <section className="bg-off-white pt-14 sm:pt-16 lg:pt-20">
+      <section className="bg-warm-white pb-10 pt-32 sm:pb-12 sm:pt-40">
         <Container className="mx-auto max-w-2xl text-center">
-          <p className="text-balance text-base leading-relaxed text-ink/65 sm:text-lg">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Our Work</span>
+          <h1 className="mt-3 text-balance font-display text-4xl font-black uppercase leading-[0.96] text-ink sm:text-5xl">
+            Real Homes, Real Work
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl text-balance text-base leading-relaxed text-ink/65 sm:text-lg">
             Explore recent interior, exterior, cabinet and specialty painting projects completed by Refined
             Painting. Click any photo for a closer look.
           </p>

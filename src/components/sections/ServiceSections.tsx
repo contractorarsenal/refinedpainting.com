@@ -14,70 +14,154 @@ import { ProjectImage } from "../ui/ProjectImage";
 import { Reveal } from "../ui/Reveal";
 
 const serviceImages: Record<ServiceId, { src: string; alt: string }> = {
+  cabinets: { src: cabinetsPhoto, alt: "Kitchen cabinets refinished in sage green" },
   interior: { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
   exterior: { src: afterWhite, alt: "Home exterior finished in crisp white" },
-  cabinets: { src: cabinetsPhoto, alt: "Kitchen cabinets refinished in sage green" },
-  commercial: { src: navyPhoto, alt: "Professionally finished exterior in a deep navy tone" },
   "deck-fence": { src: porchPhoto, alt: "Covered porch with stained and painted wood trim" },
+  commercial: { src: navyPhoto, alt: "Professionally finished exterior in a deep navy tone" },
   carpentry: { src: inProgressPhoto, alt: "Exterior trim and siding mid-repair with protective covering" },
 };
 
-export function ServiceSections() {
-  const { openQuoteModal } = useQuoteModal();
+const byId = (id: ServiceId) => services.find((s) => s.id === id)!;
+
+// Featured: Cabinet Refinishing and Interior Painting, each a large alternating image+content section.
+const featured: ServiceId[] = ["cabinets", "interior"];
+// Paired: Exterior and Deck & Fence, side by side, still substantial.
+const paired: ServiceId[] = ["exterior", "deck-fence"];
+// Compact: Commercial and Carpentry, condensed side by side.
+const compact: ServiceId[] = ["commercial", "carpentry"];
+
+function FeaturedSection({ id, index, bg }: { id: ServiceId; index: number; bg: string }) {
+  const service = byId(id);
+  const detail = serviceDetails[id];
+  const image = serviceImages[id];
+  const reversed = index % 2 === 1;
 
   return (
+    <section id={serviceSlugs[id]} className={`scroll-mt-24 py-16 sm:py-20 lg:py-24 ${bg}`}>
+      <Container
+        className={`grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16 ${
+          reversed ? "lg:[&>*:first-child]:order-2" : ""
+        }`}
+      >
+        <Reveal className="aspect-4/5 w-full overflow-hidden rounded-xl shadow-card lg:aspect-4/3">
+          <ProjectImage src={image.src} alt={image.alt} />
+        </Reveal>
+
+        <Reveal delay={120} className="flex flex-col items-start gap-5">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
+          <h3 className="font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+            {service.title}
+          </h3>
+          <p className="text-base leading-relaxed text-ink/70">{detail.overview}</p>
+          <p className="text-sm leading-relaxed text-ink/65">{detail.approach}</p>
+
+          <ul className="mt-1 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+            {detail.whatsIncluded.slice(0, 4).map((item) => (
+              <li key={item} className="flex items-start gap-2 text-sm font-semibold text-ink/80">
+                <Check className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-2 flex flex-wrap gap-3">
+            <LinkButton href={`/services/${serviceSlugs[id]}`} variant="ghost">
+              Full Details
+            </LinkButton>
+            <QuoteButton id={id} />
+          </div>
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+function QuoteButton({ id }: { id: ServiceId }) {
+  const { openQuoteModal } = useQuoteModal();
+  return (
+    <Button onClick={() => openQuoteModal(id)} variant="primary">
+      Get a Free Estimate
+    </Button>
+  );
+}
+
+function PairedCard({ id }: { id: ServiceId }) {
+  const service = byId(id);
+  const detail = serviceDetails[id];
+  const image = serviceImages[id];
+
+  return (
+    <Reveal id={serviceSlugs[id]} className="scroll-mt-24 flex flex-col gap-5">
+      <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-card">
+        <ProjectImage src={image.src} alt={image.alt} />
+      </div>
+      <div className="flex flex-col items-start gap-3">
+        <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
+        <h3 className="font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink">{service.title}</h3>
+        <p className="text-sm leading-relaxed text-ink/65">{detail.overview}</p>
+        <ul className="flex flex-col gap-2">
+          {detail.whatsIncluded.slice(0, 3).map((item) => (
+            <li key={item} className="flex items-start gap-2 text-sm font-semibold text-ink/80">
+              <Check className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
+              {item}
+            </li>
+          ))}
+        </ul>
+        <LinkButton href={`/services/${serviceSlugs[id]}`} variant="ghost" className="mt-1">
+          Full Details
+        </LinkButton>
+      </div>
+    </Reveal>
+  );
+}
+
+function CompactCard({ id }: { id: ServiceId }) {
+  const service = byId(id);
+  const detail = serviceDetails[id];
+  const image = serviceImages[id];
+
+  return (
+    <Reveal id={serviceSlugs[id]} className="scroll-mt-24 flex items-start gap-5 border-t-2 border-ink/10 pt-6">
+      <div className="aspect-square w-20 shrink-0 overflow-hidden rounded-xl shadow-card sm:w-24">
+        <ProjectImage src={image.src} alt={image.alt} />
+      </div>
+      <div className="flex flex-col items-start gap-2">
+        <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
+        <h3 className="font-display text-lg font-extrabold uppercase leading-[0.98] text-ink sm:text-xl">
+          {service.title}
+        </h3>
+        <p className="text-sm leading-relaxed text-ink/65">{detail.overview}</p>
+        <LinkButton href={`/services/${serviceSlugs[id]}`} variant="ghost" size="md" className="mt-1">
+          Full Details
+        </LinkButton>
+      </div>
+    </Reveal>
+  );
+}
+
+export function ServiceSections() {
+  return (
     <div className="flex flex-col">
-      {services.map((service, index) => {
-        const detail = serviceDetails[service.id];
-        const image = serviceImages[service.id];
-        const reversed = index % 2 === 1;
-        return (
-          <section
-            key={service.id}
-            id={serviceSlugs[service.id]}
-            className={`scroll-mt-24 py-16 sm:py-20 lg:py-24 ${index % 2 === 0 ? "bg-warm-white" : "bg-cream"}`}
-          >
-            <Container
-              className={`grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16 ${
-                reversed ? "lg:[&>*:first-child]:order-2" : ""
-              }`}
-            >
-              <Reveal className="aspect-4/5 w-full overflow-hidden rounded-xl shadow-card lg:aspect-4/3">
-                <ProjectImage src={image.src} alt={image.alt} />
-              </Reveal>
+      {featured.map((id, index) => (
+        <FeaturedSection key={id} id={id} index={index} bg={index % 2 === 0 ? "bg-warm-white" : "bg-cream"} />
+      ))}
 
-              <Reveal delay={120} className="flex flex-col items-start gap-5">
-                <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">
-                  {detail.eyebrow}
-                </span>
-                <h3 className="font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
-                  {service.title}
-                </h3>
-                <p className="text-base leading-relaxed text-ink/70">{detail.overview}</p>
-                <p className="text-sm leading-relaxed text-ink/65">{detail.approach}</p>
+      <section className="bg-warm-white py-16 sm:py-20 lg:py-24">
+        <Container className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-10">
+          {paired.map((id) => (
+            <PairedCard key={id} id={id} />
+          ))}
+        </Container>
+      </section>
 
-                <ul className="mt-1 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                  {detail.whatsIncluded.slice(0, 4).map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm font-semibold text-ink/80">
-                      <Check className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-2 flex flex-wrap gap-3">
-                  <LinkButton href={`/services/${serviceSlugs[service.id]}`} variant="ghost">
-                    Full Details
-                  </LinkButton>
-                  <Button onClick={() => openQuoteModal(service.id)} variant="primary">
-                    Get a Free Estimate
-                  </Button>
-                </div>
-              </Reveal>
-            </Container>
-          </section>
-        );
-      })}
+      <section className="bg-cream py-16 sm:py-20 lg:py-24">
+        <Container className="grid grid-cols-1 gap-10 sm:grid-cols-2">
+          {compact.map((id) => (
+            <CompactCard key={id} id={id} />
+          ))}
+        </Container>
+      </section>
     </div>
   );
 }
