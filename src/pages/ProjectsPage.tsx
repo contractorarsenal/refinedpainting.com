@@ -45,7 +45,7 @@ export function ProjectsPage() {
           </div>
 
           <div className="border-2 border-ink/10 bg-cream p-5 sm:p-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-ink/50">Backed By</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-ink/50">Every Project Is Backed By</span>
             <ul className="mt-3 flex flex-col gap-2">
               <li className="text-sm font-bold text-ink">5-Year Workmanship Warranty</li>
               <li className="text-sm font-bold text-ink">Licensed &amp; Insured</li>

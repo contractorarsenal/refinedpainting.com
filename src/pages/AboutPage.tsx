@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { PNWDifference } from "../components/sections/PNWDifference";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
@@ -6,9 +7,16 @@ import { WhyChooseRefined } from "../components/sections/WhyChooseRefined";
 import { Container } from "../components/ui/Container";
 import { ImagePlaceholder } from "../components/ui/ImagePlaceholder";
 import { Reveal } from "../components/ui/Reveal";
-import { SectionHeading } from "../components/ui/SectionHeading";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
-import { aboutIntro, companyStory, howWeWork, mission, teamMembers, trustBullets, vision } from "../lib/content";
+import { aboutIntro, companyStory, mission, teamMembers, trustBullets, vision } from "../lib/content";
+
+const expectList = [
+  "Clear project communication",
+  "Protected work areas",
+  "Careful preparation",
+  "Final walkthrough",
+  "5-Year Workmanship Warranty",
+];
 
 export function AboutPage() {
   useDocumentMeta(
@@ -30,6 +38,9 @@ export function AboutPage() {
               Clear Communication. Careful Preparation. High-End Results.
             </h1>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/70 sm:text-base">{aboutIntro}</p>
+            <p className="mt-6 border-t border-ink/10 pt-5 text-xs font-bold uppercase tracking-wide text-ink/45">
+              {trustBullets.slice(0, 3).join(" · ")}
+            </p>
           </div>
 
           <ImagePlaceholder label="Team Photo Coming Soon" aspectClassName="aspect-4/3" className="max-w-md lg:justify-self-end" />
@@ -37,28 +48,28 @@ export function AboutPage() {
       </section>
 
       {/* F2 — Why Refined exists / approved story */}
-      <section className="bg-ink pt-10 text-warm-white sm:pt-12">
+      <section className="bg-ink pt-12 text-warm-white sm:pt-14 lg:pt-16">
         <Container className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="flex flex-col justify-center gap-5 py-10 pr-0 lg:py-14 lg:pr-12">
+          <div className="flex flex-col gap-6 py-10 pr-0 lg:py-16 lg:pr-12">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">The Refined Pledge</span>
             <p className="text-balance font-display text-2xl font-extrabold leading-tight text-warm-white sm:text-3xl">
               &ldquo;{mission}&rdquo;
             </p>
             <p className="max-w-sm text-sm leading-relaxed text-warm-white/55">{vision}</p>
-            <div className="mt-2 border-t border-warm-white/10 pt-4 text-xs font-bold uppercase tracking-widest text-warm-white/40">
+            <div className="mt-auto border-t border-warm-white/10 pt-5 text-xs font-bold uppercase tracking-widest text-warm-white/40">
               Locally Owned &middot; King &amp; Snohomish Counties
             </div>
           </div>
-          <div className="flex flex-col gap-5 border-t border-warm-white/10 py-10 lg:border-l lg:border-t-0 lg:py-14 lg:pl-12">
+          <div className="flex flex-col gap-6 border-t border-warm-white/10 py-10 lg:border-l lg:border-t-0 lg:py-16 lg:pl-12">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{companyStory.heading}</span>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               {companyStory.paragraphs.map((p) => (
                 <p key={p} className="text-sm leading-relaxed text-warm-white/65">
                   {p}
                 </p>
               ))}
             </div>
-            <div className="mt-2 grid grid-cols-3 gap-4 border-t border-warm-white/10 pt-4">
+            <div className="mt-auto grid grid-cols-3 gap-4 border-t border-warm-white/10 pt-5">
               {trustBullets.slice(0, 3).map((bullet) => (
                 <span key={bullet} className="text-[11px] font-bold uppercase leading-snug tracking-wide text-teal">
                   {bullet}
@@ -74,7 +85,7 @@ export function AboutPage() {
       <PNWDifference />
 
       {/* F4 — Team */}
-      <section className="border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
+      <section className="border-t border-ink/10 bg-warm-white py-16 sm:py-20 lg:py-24">
         <Container>
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
@@ -84,13 +95,16 @@ export function AboutPage() {
               <h2 className="mt-2 font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
                 Craftsmen at the Helm
               </h2>
+              <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink/60">
+                The people behind the work and communication on your project.
+              </p>
             </div>
             <p className="max-w-xs text-sm leading-relaxed text-ink/60">
               Direct field leadership on every residential project.
             </p>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
             {teamMembers.map((member, index) => (
               <Reveal key={member.name} delay={index * 100}>
                 <div className="flex items-center gap-5 border-2 border-ink/10 p-5">
@@ -112,31 +126,26 @@ export function AboutPage() {
         </Container>
       </section>
 
-      {/* F5 — What homeowners can expect from the team */}
-      <section className="border-t border-ink/10 bg-ink py-14 text-warm-white sm:py-16 lg:py-20">
-        <Container>
-          <SectionHeading
-            align="center"
-            tone="light"
-            eyebrow="With Our Team in Your Home"
-            title="What to Expect"
-            className="mx-auto"
-          />
-          <div className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-8 sm:grid-cols-3">
-            {howWeWork.map((item, index) => (
-              <Reveal key={item.title} delay={index * 100}>
-                <div className="border-t-2 border-crest pt-4 text-center sm:text-left">
-                  <span className="font-display text-sm font-black text-crest">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-2 font-display text-base font-extrabold uppercase tracking-wide text-warm-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-warm-white/60">{item.description}</p>
-                </div>
+      {/* F5 — What homeowners can expect (About's trust frame) */}
+      <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+        <Container className="mx-auto max-w-2xl text-center">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">With Our Team in Your Home</span>
+          <h2 className="mt-3 font-display text-3xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-4xl">
+            What Homeowners Can Expect
+          </h2>
+          <ul className="mx-auto mt-8 flex max-w-sm flex-col gap-3 text-left sm:max-w-md">
+            {expectList.map((item, index) => (
+              <Reveal
+                key={item}
+                as="li"
+                delay={index * 60}
+                className="flex items-center gap-3 border-t border-warm-white/10 pt-3 first:border-t-0 first:pt-0"
+              >
+                <Check className="size-4 shrink-0 text-crest" aria-hidden />
+                <span className="text-sm font-semibold text-warm-white/85 sm:text-base">{item}</span>
               </Reveal>
             ))}
-          </div>
+          </ul>
         </Container>
       </section>
 

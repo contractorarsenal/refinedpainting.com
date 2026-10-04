@@ -58,18 +58,18 @@ export function ServicesPage() {
 
           <ImagePlaceholder label="Service Image" aspectClassName="aspect-4/3" className="max-w-md lg:justify-self-end" />
         </Container>
-      </section>
 
-      <section className="border-t border-ink/10 bg-warm-white py-6">
-        <Container className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-          {proofRow.map((item) => (
-            <div key={item.label} className="flex flex-col items-center text-center sm:flex-row sm:gap-2.5">
-              <span className="font-display text-2xl font-black leading-none text-crest">{item.value}</span>
-              <span className="mt-1 text-[10px] font-bold uppercase tracking-widest text-ink/50 sm:mt-0 sm:text-[11px]">
-                {item.label}
-              </span>
-            </div>
-          ))}
+        <Container>
+          <div className="mt-10 grid grid-cols-2 gap-6 border-t border-ink/10 pt-6 sm:mt-12 sm:grid-cols-4 lg:mt-14">
+            {proofRow.map((item) => (
+              <div key={item.label} className="flex flex-col items-center text-center sm:flex-row sm:gap-2.5">
+                <span className="font-display text-2xl font-black leading-none text-crest">{item.value}</span>
+                <span className="mt-1 text-[10px] font-bold uppercase tracking-widest text-ink/50 sm:mt-0 sm:text-[11px]">
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
 

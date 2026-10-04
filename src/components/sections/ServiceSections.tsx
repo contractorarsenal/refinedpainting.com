@@ -36,6 +36,17 @@ const quickFacts: Partial<Record<ServiceId, { label: string; value: string }[]>>
   ],
 };
 
+// Short framing sentence shown above each service's title, so visitors know
+// at a glance who the tier is for before reading the full overview.
+const sectionIntros: Record<ServiceId, string> = {
+  cabinets: "For kitchens that need a major visual update without a full remodel.",
+  interior: "For walls, ceilings, trim, and spaces that need a cleaner, more finished look.",
+  exterior: "For homes that need durable prep and finish work built for Seattle weather.",
+  commercial: "For offices, retail, and multi-family properties that need work scheduled around business hours.",
+  "deck-fence": "For decks and fences that need stain and sealant built for Pacific Northwest weather.",
+  carpentry: "For wood surfaces that need repair before paint goes on.",
+};
+
 const byId = (id: ServiceId) => services.find((s) => s.id === id)!;
 
 // Featured: Cabinet Refinishing and Interior Painting, each a large alternating image+content section.
@@ -68,6 +79,7 @@ function FeaturedSection({ id, index, bg }: { id: ServiceId; index: number; bg: 
           <h3 className="font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
             {service.title}
           </h3>
+          <p className="text-sm font-semibold text-ink/55">{sectionIntros[id]}</p>
           <p className="text-base leading-relaxed text-ink/70">{detail.overview}</p>
 
           {facts ? (
@@ -126,6 +138,7 @@ function PairedCard({ id }: { id: ServiceId }) {
       <div className="flex flex-col items-start gap-2.5">
         <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
         <h3 className="font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink">{service.title}</h3>
+        <p className="text-xs font-semibold text-ink/50">{sectionIntros[id]}</p>
         <p className="text-sm leading-relaxed text-ink/65">{detail.overview}</p>
         <ul className="flex flex-col gap-1.5">
           {detail.whatsIncluded.slice(0, 3).map((item) => (
@@ -153,6 +166,7 @@ function CompactCard({ id }: { id: ServiceId }) {
       <h3 className="mt-1.5 font-display text-lg font-extrabold uppercase leading-[0.98] text-ink sm:text-xl">
         {service.title}
       </h3>
+      <p className="mt-1 text-xs font-semibold text-ink/50">{sectionIntros[id]}</p>
       <p className="mt-2 text-sm leading-relaxed text-ink/65">{detail.overview}</p>
       <LinkButton href={`/services/${serviceSlugs[id]}`} variant="ghost" size="md" className="mt-3">
         Full Details

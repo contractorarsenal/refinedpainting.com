@@ -19,7 +19,7 @@ export function ContactPage() {
 
   return (
     <>
-      <section className="bg-cream pb-16 pt-32 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-28">
+      <section className="bg-cream pb-12 pt-32 sm:pb-14 sm:pt-36 lg:pb-16 lg:pt-28">
         <Container className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-12">
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Start Your Project</span>
@@ -47,9 +47,9 @@ export function ContactPage() {
         </Container>
       </section>
 
-      <section className="bg-light-blue py-14 sm:py-16 lg:py-20">
-        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          <div className="flex flex-col gap-6">
+      <section className="bg-light-blue py-12 sm:py-14 lg:py-16">
+        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+          <div className="flex flex-col gap-5">
             <div>
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink/45">Direct Line</span>

@@ -15,7 +15,7 @@ import { Container } from "../components/ui/Container";
 import { ProjectImage } from "../components/ui/ProjectImage";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
 import type { ServiceId } from "../lib/content";
-import { getServiceIdFromSlug, processSteps, serviceDetails, services, warranty } from "../lib/content";
+import { getServiceIdFromSlug, howWeWork, processSteps, serviceDetails, services, warranty } from "../lib/content";
 
 const heroImages: Record<ServiceId, { src: string; alt: string }> = {
   interior: { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
@@ -147,13 +147,30 @@ export function ServiceDetailPage() {
         </Container>
       </section>
 
-      <section className="border-t border-ink/10 bg-ink py-14 text-warm-white sm:py-16">
-        <Container className="mx-auto flex max-w-2xl flex-col items-center gap-2 text-center">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Backed By</span>
-          <h2 className="font-display text-2xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-3xl">
-            {warranty.headline}
-          </h2>
-          <p className="mt-2 text-sm leading-relaxed text-warm-white/65">{warranty.note}</p>
+      <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="flex flex-col gap-3">
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Backed By</span>
+            <h2 className="font-display text-2xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-3xl">
+              {warranty.headline}
+            </h2>
+            <p className="text-sm leading-relaxed text-warm-white/65">{warranty.covered}</p>
+            <p className="text-xs text-warm-white/40">{warranty.note}</p>
+          </div>
+
+          <div className="flex flex-col gap-5 border-t border-warm-white/10 pt-8 lg:border-l lg:border-t-0 lg:pl-16 lg:pt-0">
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">What to Expect</span>
+            <ul className="flex flex-col gap-4">
+              {howWeWork.map((principle) => (
+                <li key={principle.title} className="flex flex-col gap-1">
+                  <span className="text-sm font-extrabold uppercase tracking-wide text-warm-white/90">
+                    {principle.title}
+                  </span>
+                  <span className="text-sm leading-relaxed text-warm-white/55">{principle.description}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Container>
       </section>
 

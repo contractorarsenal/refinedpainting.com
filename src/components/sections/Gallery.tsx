@@ -120,12 +120,10 @@ function ProjectFigure({
           />
           <div className="absolute inset-0 bg-ink/0 transition-colors duration-300 group-hover:bg-ink/10" aria-hidden />
         </div>
-        <figcaption className="mt-3 flex items-baseline justify-between gap-3">
+        <figcaption className="mt-3 flex flex-col gap-1">
+          <span className="text-[11px] font-bold uppercase tracking-widest text-crest">{project.category}</span>
           <span className="font-display text-base font-bold uppercase tracking-wide text-ink transition-colors group-hover:text-crest">
             {project.title}
-          </span>
-          <span className="text-xs font-semibold uppercase tracking-widest text-ink/45 transition-colors group-hover:text-crest">
-            {project.category}
           </span>
         </figcaption>
       </figure>
@@ -143,6 +141,9 @@ export function Gallery() {
   return (
     <section className="bg-off-white pb-10 pt-10 sm:pb-12 lg:pb-16">
       <Container>
+        <p className="mb-6 max-w-lg text-sm leading-relaxed text-ink/55">
+          Filter by project type below, or browse everything we&rsquo;ve completed.
+        </p>
         <div className="mb-8 flex flex-wrap items-center gap-2 border-b border-ink/10 pb-6">
           {filters.map((f) => (
             <button
