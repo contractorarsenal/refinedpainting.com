@@ -1,21 +1,15 @@
 import { Clock, MapPin, ShieldCheck } from "lucide-react";
 import interiorPhoto from "../assets/images/projects/interior-bright-finished.webp";
 import { ContactForm } from "../components/sections/ContactForm";
-import { FinalCTA } from "../components/sections/FinalCTA";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
+import { TrustStrip } from "../components/sections/TrustStrip";
 import { LinkButton } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { ProjectImage } from "../components/ui/ProjectImage";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
-import { business, contactReassurance, promoBanner, warranty } from "../lib/content";
+import { business, contactReassurance } from "../lib/content";
 
 const verifiedProof = ["Licensed & Insured", "EPA Lead-Safe Certified", "5-Year Workmanship Warranty"];
-
-const lowerInfo = [
-  { title: "Color Consultation", body: promoBanner.sub },
-  { title: warranty.headline, body: warranty.note },
-  { title: "Licensed & Insured", body: "Fully licensed and insured, EPA Lead-Safe and Google Verified." },
-];
 
 export function ContactPage() {
   useDocumentMeta(
@@ -122,23 +116,8 @@ export function ContactPage() {
         </Container>
       </section>
 
+      <TrustStrip />
       <ServiceAreaStrip />
-
-      <section className="border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
-        <Container className="grid grid-cols-1 gap-10 sm:grid-cols-3">
-          {lowerInfo.map((item, index) => (
-            <div key={item.title} className="border-t-2 border-crest pt-4">
-              <span className="font-display text-sm font-black text-crest">{String(index + 1).padStart(2, "0")}</span>
-              <h3 className="mt-2 font-display text-base font-extrabold uppercase tracking-wide text-ink">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink/65">{item.body}</p>
-            </div>
-          ))}
-        </Container>
-      </section>
-
-      <FinalCTA />
     </>
   );
 }

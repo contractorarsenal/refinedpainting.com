@@ -1,6 +1,6 @@
 import { HomeHero } from "../components/hero/HomeHero";
-import { AboutPreview } from "../components/sections/AboutPreview";
 import { FinalCTA } from "../components/sections/FinalCTA";
+import { HomeownerProblem } from "../components/sections/HomeownerProblem";
 import { ProcessCondensed } from "../components/sections/ProcessCondensed";
 import { ProjectsPreview } from "../components/sections/ProjectsPreview";
 import { Reviews } from "../components/sections/Reviews";
@@ -18,14 +18,23 @@ export function HomePage() {
 
   return (
     <>
+      {/* F1 — What does Refined Painting do? */}
       <HomeHero />
+      {/* F2 — Are these people legitimate? */}
       <TrustStrip eyebrow="Proven. Local. Professional." />
-      <AboutPreview />
+      {/* F3 — Why would I need a better contractor? */}
+      <HomeownerProblem />
+      {/* F4 — Can they do what I need? */}
       <ServicesPreview />
-      <WhyChooseRefined />
+      {/* F5 — Can they actually deliver? */}
       <ProjectsPreview />
+      {/* F6 — What happens if I contact them? */}
       <ProcessCondensed />
+      {/* F7 — Why them instead of another painter? */}
+      <WhyChooseRefined />
+      {/* F8 — Do other homeowners agree? */}
       <Reviews />
+      {/* F9 — Do they serve me, and what do I do next? */}
       <ServiceAreaSummary />
       <FinalCTA />
     </>

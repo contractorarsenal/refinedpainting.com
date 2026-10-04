@@ -1,59 +1,64 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Building2, Hammer, Home, Layers, PaintRoller, TreeDeciduous } from "lucide-react";
 import { Link } from "react-router-dom";
-import { serviceDetails, serviceSlugs, services } from "../../lib/content";
+import type { ServiceId } from "../../lib/content";
+import { serviceSlugs, services } from "../../lib/content";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
 
+const serviceIcons: Record<ServiceId, typeof Home> = {
+  interior: Home,
+  exterior: PaintRoller,
+  cabinets: Layers,
+  commercial: Building2,
+  "deck-fence": TreeDeciduous,
+  carpentry: Hammer,
+};
+
 export function ServicesPreview() {
   return (
-    <section id="services-preview" className="bg-cream py-16 sm:py-20 lg:py-24">
+    <section id="services-preview" className="bg-warm-white py-14 sm:py-16 lg:py-20">
       <Container>
-        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-          <SectionHeading
-            eyebrow="Painting Services"
-            title="Painting Services for Homes & Businesses"
-            description="Six services, one standard of care: clear communication and careful prep on every job."
-          />
+        <SectionHeading
+          align="center"
+          eyebrow="Choose Your Project"
+          title="What Do You Need Done?"
+          description="Six services, one standard of care: clear communication and careful prep on every job."
+          className="mx-auto"
+        />
+
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5">
+          {services.map((service, index) => {
+            const Icon = serviceIcons[service.id];
+            return (
+              <Reveal key={service.id} delay={index * 60}>
+                <Link
+                  to={`/services/${serviceSlugs[service.id]}`}
+                  className="group flex h-full flex-col items-start gap-3 border-2 border-ink/10 p-5 transition-colors hover:border-crest"
+                >
+                  <Icon className="size-6 text-teal-dark" aria-hidden />
+                  <span className="font-display text-sm font-extrabold uppercase leading-tight tracking-wide text-ink sm:text-base">
+                    {service.title}
+                  </span>
+                  <span className="mt-auto flex items-center gap-1 text-[11px] font-bold uppercase tracking-wide text-ink/40 transition-colors group-hover:text-crest">
+                    View
+                    <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                  </span>
+                </Link>
+              </Reveal>
+            );
+          })}
+        </div>
+
+        <div className="mt-8 text-center">
           <Link
             to="/services"
-            className="hidden shrink-0 items-center gap-1.5 border-b-2 border-crest pb-1 text-sm font-bold uppercase tracking-wide text-ink transition-colors hover:text-crest sm:flex"
+            className="inline-flex items-center gap-1.5 border-b-2 border-crest pb-1 text-sm font-bold uppercase tracking-wide text-ink transition-colors hover:text-crest"
           >
-            View All Services
+            Not Sure Which One You Need? See All Services
             <ArrowRight className="size-4" aria-hidden />
           </Link>
         </div>
-
-        <div className="mt-12 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2">
-          {services.map((service, index) => (
-            <Reveal key={service.id} delay={index * 60}>
-              <Link
-                to={`/services/${serviceSlugs[service.id]}`}
-                className="group flex items-baseline gap-4 border-t-2 border-ink/10 pt-5 transition-colors hover:border-crest"
-              >
-                <span className="font-display text-sm font-black text-crest/50">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="font-display text-xl font-extrabold uppercase tracking-wide text-ink transition-colors group-hover:text-crest sm:text-2xl">
-                    {service.title}
-                  </h3>
-                  <p className="mt-1.5 max-w-sm text-sm leading-relaxed text-ink/60">
-                    {serviceDetails[service.id].overview}
-                  </p>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-
-        <Link
-          to="/services"
-          className="mt-10 flex w-full items-center justify-center gap-1.5 border-2 border-ink/15 py-3.5 text-sm font-bold uppercase tracking-wide text-ink sm:hidden"
-        >
-          View All Services
-          <ArrowRight className="size-4" aria-hidden />
-        </Link>
       </Container>
     </section>
   );

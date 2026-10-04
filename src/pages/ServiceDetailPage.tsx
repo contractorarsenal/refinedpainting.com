@@ -10,11 +10,12 @@ import { PageHero } from "../components/hero/PageHero";
 import { Accordion } from "../components/ui/Accordion";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { useQuoteModal } from "../components/quote/QuoteModalContext";
-import { Button } from "../components/ui/Button";
+import { Button, LinkButton } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
+import { ProjectImage } from "../components/ui/ProjectImage";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
 import type { ServiceId } from "../lib/content";
-import { getServiceIdFromSlug, serviceDetails, services } from "../lib/content";
+import { getServiceIdFromSlug, processSteps, serviceDetails, services, warranty } from "../lib/content";
 
 const heroImages: Record<ServiceId, { src: string; alt: string }> = {
   interior: { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
@@ -23,6 +24,14 @@ const heroImages: Record<ServiceId, { src: string; alt: string }> = {
   commercial: { src: navyPhoto, alt: "Professionally finished exterior in a deep navy tone" },
   "deck-fence": { src: porchPhoto, alt: "Covered porch with stained and painted wood trim" },
   carpentry: { src: inProgressPhoto, alt: "Exterior trim and siding mid-repair with protective covering" },
+};
+
+// Only the services with real project photos on /projects get a proof frame —
+// no project photos exist yet for commercial, deck-fence, or carpentry.
+const hasProjectProof: Partial<Record<ServiceId, boolean>> = {
+  interior: true,
+  exterior: true,
+  cabinets: true,
 };
 
 export function ServiceDetailPage() {
@@ -65,7 +74,7 @@ export function ServiceDetailPage() {
         </Container>
       </section>
 
-      <section className="bg-cream py-16 sm:py-20 lg:py-24">
+      <section className="border-t border-ink/10 bg-cream py-16 sm:py-20 lg:py-24">
         <Container className="mx-auto max-w-3xl">
           <h2 className="font-display text-2xl font-extrabold uppercase tracking-wide text-ink sm:text-3xl">
             What&rsquo;s Included
@@ -85,6 +94,45 @@ export function ServiceDetailPage() {
         </Container>
       </section>
 
+      {hasProjectProof[serviceId] ? (
+        <section className="border-t border-ink/10 bg-warm-white py-16 sm:py-20 lg:py-24">
+          <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-card">
+              <ProjectImage src={hero.src} alt={hero.alt} />
+            </div>
+            <div className="flex flex-col items-start gap-4">
+              <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">See the Work</span>
+              <h2 className="font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink sm:text-3xl">
+                Real {service.title} Projects
+              </h2>
+              <p className="text-sm leading-relaxed text-ink/65">
+                Browse recent {service.title.toLowerCase()} work completed by Refined Painting across Seattle
+                and the Eastside.
+              </p>
+              <LinkButton href="/projects" variant="ghost">
+                View All Projects
+              </LinkButton>
+            </div>
+          </Container>
+        </section>
+      ) : null}
+
+      <section className="border-t border-ink/10 bg-cream py-16 sm:py-20 lg:py-24">
+        <Container>
+          <SectionProcessHeading />
+          <ol className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {processSteps.map((step) => (
+              <li key={step.number} className="flex flex-col items-start gap-1.5 border-t-2 border-crest pt-4">
+                <span className="font-display text-3xl font-black leading-none text-crest">{step.number}</span>
+                <h3 className="mt-1 font-display text-sm font-extrabold uppercase tracking-wide text-ink">
+                  {step.title}
+                </h3>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </section>
+
       <section id="faq" className="scroll-mt-20 border-t border-ink/10 bg-warm-white py-16 sm:py-20 lg:py-24">
         <Container className="mx-auto max-w-3xl">
           <div className="flex flex-col items-center text-center">
@@ -100,7 +148,28 @@ export function ServiceDetailPage() {
         </Container>
       </section>
 
+      <section className="border-t border-ink/10 bg-ink py-14 text-warm-white sm:py-16">
+        <Container className="mx-auto flex max-w-2xl flex-col items-center gap-2 text-center">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Backed By</span>
+          <h2 className="font-display text-2xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-3xl">
+            {warranty.headline}
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-warm-white/65">{warranty.note}</p>
+        </Container>
+      </section>
+
       <FinalCTA />
     </>
+  );
+}
+
+function SectionProcessHeading() {
+  return (
+    <div className="mx-auto max-w-2xl text-center">
+      <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">How It Works</span>
+      <h2 className="mt-2 font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink sm:text-3xl">
+        A Clear Process, Start to Finish
+      </h2>
+    </div>
   );
 }

@@ -18,6 +18,7 @@ export function AboutPage() {
 
   return (
     <>
+      {/* F1 — Strong company positioning */}
       <section className="relative overflow-hidden bg-ink">
         <div className="relative min-h-100 sm:min-h-120 lg:min-h-140">
           <img
@@ -42,6 +43,7 @@ export function AboutPage() {
         </Container>
       </section>
 
+      {/* F2 — Why Refined exists / approved story */}
       <section className="bg-ink pt-10 text-warm-white sm:pt-12">
         <Container className="grid grid-cols-1 lg:grid-cols-2">
           <div className="flex flex-col justify-center gap-5 py-10 pr-0 lg:py-14 lg:pr-12">
@@ -74,7 +76,12 @@ export function AboutPage() {
         </Container>
       </section>
 
-      <section className="bg-warm-white py-14 sm:py-16 lg:py-20">
+      {/* F3 — Operating philosophy / standards */}
+      <WhyChooseRefined />
+      <PNWDifference />
+
+      {/* F4 — Team */}
+      <section className="border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
         <Container>
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
@@ -112,12 +119,16 @@ export function AboutPage() {
         </Container>
       </section>
 
-      <WhyChooseRefined />
-      <PNWDifference />
-
+      {/* F5 — What homeowners can expect from the team */}
       <section className="border-t border-ink/10 bg-ink py-14 text-warm-white sm:py-16 lg:py-20">
         <Container>
-          <SectionHeading align="center" tone="light" eyebrow="How We Work" title="Our Standard" className="mx-auto" />
+          <SectionHeading
+            align="center"
+            tone="light"
+            eyebrow="With Our Team in Your Home"
+            title="What to Expect"
+            className="mx-auto"
+          />
           <div className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-8 sm:grid-cols-3">
             {howWeWork.map((item, index) => (
               <Reveal key={item.title} delay={index * 100}>
@@ -136,8 +147,11 @@ export function AboutPage() {
         </Container>
       </section>
 
+      {/* F6 — Local / certifications / service areas */}
       <TrustStrip />
       <ServiceAreaStrip />
+
+      {/* F7 — CTA */}
       <FinalCTA />
     </>
   );

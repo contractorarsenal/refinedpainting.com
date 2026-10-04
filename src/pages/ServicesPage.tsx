@@ -5,7 +5,6 @@ import { PromoBanner } from "../components/sections/PromoBanner";
 import { ServiceJumpNav } from "../components/sections/ServiceJumpNav";
 import { ServiceSections } from "../components/sections/ServiceSections";
 import { VideoAuthority } from "../components/sections/VideoAuthority";
-import { WhyChooseRefined } from "../components/sections/WhyChooseRefined";
 import { Button, LinkButton } from "../components/ui/Button";
 import { Accordion } from "../components/ui/Accordion";
 import { Container } from "../components/ui/Container";
@@ -78,11 +77,9 @@ export function ServicesPage() {
       </section>
 
       <ServiceJumpNav />
-      <ServiceSections />
-      <VideoAuthority />
+      <ServiceSections afterFeatured={<VideoAuthority />} />
       <PromoBanner />
       <Process />
-      <WhyChooseRefined />
 
       <section id="warranty" className="scroll-mt-24 border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
         <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
