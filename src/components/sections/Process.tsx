@@ -5,10 +5,11 @@ import { SectionHeading } from "../ui/SectionHeading";
 
 export function Process() {
   return (
-    <section id="process" className="relative scroll-mt-24 border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
+    <section id="process" className="relative scroll-mt-24 border-t border-warm-white/10 bg-ink py-16 sm:py-20 lg:py-24">
       <Container className="relative">
         <SectionHeading
           align="center"
+          tone="light"
           eyebrow="Systematic Craft"
           title="The 4-Phase Refined Protocol"
           description="A clear, consistent process from your first estimate to the final walkthrough."
@@ -20,10 +21,10 @@ export function Process() {
             <Reveal key={step.number} delay={index * 100}>
               <li className="flex flex-col items-start gap-1.5 border-t-2 border-crest pt-4">
                 <span className="font-display text-3xl font-black leading-none text-crest">{step.number}</span>
-                <h3 className="mt-1 font-display text-base font-extrabold uppercase tracking-wide text-ink">
+                <h3 className="mt-1 font-display text-base font-extrabold uppercase tracking-wide text-warm-white">
                   {step.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-ink/60">{step.description.split(".")[0]}.</p>
+                <p className="text-sm leading-relaxed text-warm-white/60">{step.description.split(".")[0]}.</p>
               </li>
             </Reveal>
           ))}

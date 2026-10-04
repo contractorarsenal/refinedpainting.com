@@ -31,7 +31,7 @@ export function ProjectsPage() {
 
   return (
     <>
-      <section className="bg-warm-white pb-8 pt-28 sm:pb-10 sm:pt-32 lg:pt-24">
+      <section className="bg-warm-white pb-16 pt-32 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-28">
         <Container className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-12">
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Our Work</span>

@@ -1,4 +1,3 @@
-import afterWhite from "../assets/images/projects/exterior-after-white.jpg";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { Process } from "../components/sections/Process";
 import { PromoBanner } from "../components/sections/PromoBanner";
@@ -8,7 +7,7 @@ import { VideoAuthority } from "../components/sections/VideoAuthority";
 import { Button, LinkButton } from "../components/ui/Button";
 import { Accordion } from "../components/ui/Accordion";
 import { Container } from "../components/ui/Container";
-import { ProjectImage } from "../components/ui/ProjectImage";
+import { ImagePlaceholder } from "../components/ui/ImagePlaceholder";
 import { useQuoteModal } from "../components/quote/QuoteModalContext";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
 import { business, cabinetProofStat, faqs, warranty } from "../lib/content";
@@ -33,8 +32,8 @@ export function ServicesPage() {
 
   return (
     <>
-      <section className="bg-cream pt-28 sm:pt-32 lg:pt-24">
-        <Container className="grid grid-cols-1 items-center gap-10 pb-10 sm:pb-12 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:pb-14">
+      <section className="bg-cream pb-16 pt-32 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-28">
+        <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
           <div className="flex flex-col items-start gap-4">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Painting Services</span>
             <h1 className="text-balance font-display text-3xl font-black uppercase leading-[0.98] text-ink sm:text-4xl lg:text-5xl">
@@ -57,9 +56,7 @@ export function ServicesPage() {
             </span>
           </div>
 
-          <div className="aspect-4/3 w-full max-w-md overflow-hidden rounded-xl shadow-card lg:justify-self-end">
-            <ProjectImage src={afterWhite} alt="Home exterior finished in crisp white" />
-          </div>
+          <ImagePlaceholder label="Service Image" aspectClassName="aspect-4/3" className="max-w-md lg:justify-self-end" />
         </Container>
       </section>
 

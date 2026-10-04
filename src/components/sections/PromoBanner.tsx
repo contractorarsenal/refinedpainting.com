@@ -11,7 +11,7 @@ export function PromoBanner() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section className="border-t border-ink/10 bg-cream py-14 sm:py-16 lg:py-20">
+    <section className="border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
       <Container>
         <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">
           Complimentary Architectural Service

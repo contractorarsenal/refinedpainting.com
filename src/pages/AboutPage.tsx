@@ -1,10 +1,10 @@
-import heroImage from "../assets/images/projects/porch-yellow-door.webp";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { PNWDifference } from "../components/sections/PNWDifference";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
 import { TrustStrip } from "../components/sections/TrustStrip";
 import { WhyChooseRefined } from "../components/sections/WhyChooseRefined";
 import { Container } from "../components/ui/Container";
+import { ImagePlaceholder } from "../components/ui/ImagePlaceholder";
 import { Reveal } from "../components/ui/Reveal";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
@@ -19,27 +19,20 @@ export function AboutPage() {
   return (
     <>
       {/* F1 — Strong company positioning */}
-      <section className="relative overflow-hidden bg-ink">
-        <div className="relative min-h-100 sm:min-h-120 lg:min-h-140">
-          <img
-            src={heroImage}
-            alt="Covered porch with a bold yellow front door"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-transparent to-transparent" />
-        </div>
-
-        <Container className="relative">
-          <div className="relative -mt-20 max-w-lg rounded-xl bg-warm-white p-7 shadow-lift sm:-mt-24 sm:p-9">
+      <section className="bg-cream pb-16 pt-32 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-28">
+        <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+          <div>
             <span className="h-1 w-10 bg-crest" aria-hidden />
             <span className="mt-4 block text-xs font-bold uppercase tracking-[0.16em] text-crest">
               About Refined Painting
             </span>
-            <h1 className="mt-3 text-balance font-display text-3xl font-black uppercase leading-[0.96] text-ink sm:text-4xl">
+            <h1 className="mt-3 text-balance font-display text-3xl font-black uppercase leading-[0.96] text-ink sm:text-4xl lg:text-5xl">
               Clear Communication. Careful Preparation. High-End Results.
             </h1>
-            <p className="mt-4 text-sm leading-relaxed text-ink/70">{aboutIntro}</p>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/70 sm:text-base">{aboutIntro}</p>
           </div>
+
+          <ImagePlaceholder label="Team Photo Coming Soon" aspectClassName="aspect-4/3" className="max-w-md lg:justify-self-end" />
         </Container>
       </section>
 

@@ -55,9 +55,8 @@ export function ServiceDetailPage() {
         eyebrow={detail.eyebrow}
         title={service.title}
         description={detail.overview}
-        image={hero.src}
-        imageAlt={hero.alt}
-        height="compact"
+        placeholderLabel={`${service.title} Image`}
+        onEstimateClick={() => openQuoteModal(serviceId)}
       />
 
       <section className="bg-warm-white py-16 sm:py-20 lg:py-24">
