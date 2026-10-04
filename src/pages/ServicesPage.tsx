@@ -74,7 +74,7 @@ export function ServicesPage() {
       </section>
 
       <ServiceJumpNav />
-      <ServiceSections afterFeatured={<VideoAuthority />} />
+      <ServiceSections afterCabinets={<VideoAuthority />} />
       <PromoBanner />
       <Process />
 

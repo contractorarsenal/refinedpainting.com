@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import cabinetsPhoto from "../../assets/images/projects/cabinets-sage-green.webp";
 import navyPhoto from "../../assets/images/projects/exterior-finished-navy.webp";
 import inProgressPhoto from "../../assets/images/projects/exterior-in-progress.webp";
@@ -175,14 +175,15 @@ function CompactCard({ id }: { id: ServiceId }) {
   );
 }
 
-export function ServiceSections({ afterFeatured }: { afterFeatured?: ReactNode } = {}) {
+export function ServiceSections({ afterCabinets }: { afterCabinets?: ReactNode } = {}) {
   return (
     <div className="flex flex-col">
       {featured.map((id, index) => (
-        <FeaturedSection key={id} id={id} index={index} bg={index % 2 === 0 ? "bg-warm-white" : "bg-cream"} />
+        <Fragment key={id}>
+          <FeaturedSection id={id} index={index} bg={index % 2 === 0 ? "bg-warm-white" : "bg-cream"} />
+          {id === "cabinets" ? afterCabinets : null}
+        </Fragment>
       ))}
-
-      {afterFeatured}
 
       <section className="border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
         <Container className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-10">

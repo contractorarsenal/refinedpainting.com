@@ -98,10 +98,10 @@ export function BeforeAfter() {
           />
 
           <div className="absolute inset-0">
-            <img src={active.after} alt={active.afterAlt} className="h-full w-full object-cover" loading="lazy" decoding="async" />
+            <img src={active.after} alt={active.afterAlt} className="h-full w-full object-cover" loading="eager" decoding="async" />
           </div>
           <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - value}% 0 0)` }}>
-            <img src={active.before} alt={active.beforeAlt} className="h-full w-full object-cover" loading="lazy" decoding="async" />
+            <img src={active.before} alt={active.beforeAlt} className="h-full w-full object-cover" loading="eager" decoding="async" />
           </div>
 
           <div

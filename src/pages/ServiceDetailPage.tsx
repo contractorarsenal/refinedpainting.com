@@ -60,16 +60,20 @@ export function ServiceDetailPage() {
       />
 
       <section className="bg-warm-white py-16 sm:py-20 lg:py-24">
-        <Container className="mx-auto max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">The Problem</span>
-          <p className="mt-3 text-balance font-display text-2xl font-extrabold leading-tight text-ink sm:text-3xl">
-            {detail.commonProblem}
-          </p>
+        <Container className="mx-auto max-w-5xl">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">The Problem</span>
+              <p className="mt-3 text-balance font-display text-2xl font-extrabold leading-tight text-ink sm:text-3xl">
+                {detail.commonProblem}
+              </p>
+            </div>
 
-          <span className="mt-10 block text-xs font-bold uppercase tracking-[0.16em] text-crest">
-            Our Approach
-          </span>
-          <p className="mt-3 text-base leading-relaxed text-ink/70">{detail.approach}</p>
+            <div className="flex flex-col gap-3 border-t border-ink/10 pt-8 lg:border-l lg:border-t-0 lg:pl-16 lg:pt-0">
+              <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Our Approach</span>
+              <p className="text-base leading-relaxed text-ink/70">{detail.approach}</p>
+            </div>
+          </div>
         </Container>
       </section>
 
