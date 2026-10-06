@@ -1,4 +1,5 @@
-import { CheckCircle2, Layers, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, Layers, ShieldCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 import { BeforeAfter } from "../components/sections/BeforeAfter";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { Gallery } from "../components/sections/Gallery";
@@ -31,7 +32,7 @@ export function ProjectsPage() {
 
   return (
     <>
-      <section className="bg-warm-white pb-16 pt-32 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-28">
+      <section className="bg-warm-white pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
         <Container className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-12">
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Our Work</span>
@@ -75,6 +76,19 @@ export function ProjectsPage() {
               </div>
             ))}
           </div>
+        </Container>
+      </section>
+
+      <section className="border-t border-ink/10 bg-warm-white py-10 sm:py-12">
+        <Container className="flex flex-col items-center gap-2 text-center">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink/50">Looking for Ideas?</span>
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-1.5 font-display text-lg font-extrabold uppercase tracking-wide text-ink transition-colors hover:text-crest sm:text-xl"
+          >
+            Explore Painting Tips &amp; Ideas
+            <ArrowRight className="size-4" aria-hidden />
+          </Link>
         </Container>
       </section>
 

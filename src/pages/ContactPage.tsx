@@ -6,6 +6,7 @@ import { TrustStrip } from "../components/sections/TrustStrip";
 import { LinkButton } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { ProjectImage } from "../components/ui/ProjectImage";
+import { Reveal } from "../components/ui/Reveal";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
 import { business, contactReassurance } from "../lib/content";
 
@@ -19,7 +20,7 @@ export function ContactPage() {
 
   return (
     <>
-      <section className="bg-cream pb-12 pt-32 sm:pb-14 sm:pt-36 lg:pb-16 lg:pt-28">
+      <section className="bg-cream pb-12 pt-36 sm:pb-14 sm:pt-60 lg:pb-16">
         <Container className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-12">
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Start Your Project</span>
@@ -47,69 +48,79 @@ export function ContactPage() {
         </Container>
       </section>
 
-      <section className="bg-light-blue py-12 sm:py-14 lg:py-16">
+      <section className="border-t-2 border-crest bg-light-blue py-12 sm:py-14 lg:py-16">
         <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
           <div className="flex flex-col gap-5">
-            <div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink/45">Direct Line</span>
-                <span className="flex items-center gap-1.5 text-[11px] font-bold uppercase text-teal-dark">
-                  <span className="size-1.5 rounded-full bg-teal-dark" aria-hidden />
-                  Available Now
-                </span>
-              </div>
-              <LinkButton
-                href={business.phoneHref}
-                variant="secondary"
-                size="lg"
-                icon="phone"
-                className="mt-3 w-full justify-center"
-              >
-                Call Now
-              </LinkButton>
-            </div>
-
-            <div className="flex items-start gap-3 border-t border-ink/10 pt-5">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
+            <Reveal>
               <div>
-                <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">Office</span>
-                <span className="text-sm font-bold text-ink">
-                  {business.address.street}, {business.address.city}, {business.address.state}{" "}
-                  {business.address.zip}
-                </span>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink/45">Direct Line</span>
+                  <span className="flex items-center gap-1.5 text-[11px] font-bold uppercase text-teal-dark">
+                    <span className="size-1.5 rounded-full bg-teal-dark" aria-hidden />
+                    Available Now
+                  </span>
+                </div>
+                <LinkButton
+                  href={business.phoneHref}
+                  variant="secondary"
+                  size="lg"
+                  icon="phone"
+                  className="mt-3 w-full justify-center"
+                >
+                  Call Now
+                </LinkButton>
               </div>
-            </div>
-            <div className="flex items-start gap-3 border-t border-ink/10 pt-5">
-              <Clock className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
-              <div>
-                <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">Hours</span>
-                <span className="text-sm font-bold text-ink">{business.hours}</span>
+            </Reveal>
+
+            <Reveal delay={70}>
+              <div className="flex items-start gap-3 border-t border-ink/10 pt-5">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
+                <div>
+                  <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">Office</span>
+                  <span className="text-sm font-bold text-ink">
+                    {business.address.street}, {business.address.city}, {business.address.state}{" "}
+                    {business.address.zip}
+                  </span>
+                </div>
               </div>
-            </div>
+            </Reveal>
+            <Reveal delay={140}>
+              <div className="flex items-start gap-3 border-t border-ink/10 pt-5">
+                <Clock className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
+                <div>
+                  <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">Hours</span>
+                  <span className="text-sm font-bold text-ink">{business.hours}</span>
+                </div>
+              </div>
+            </Reveal>
 
-            <div className="border-t-2 border-crest bg-warm-white p-5">
-              <h3 className="font-display text-sm font-extrabold uppercase tracking-wide text-ink">
-                {contactReassurance.heading}
-              </h3>
-              <ol className="mt-4 flex flex-col gap-3">
-                {[
-                  "Submit the form with a few details about your project.",
-                  "Our team typically reaches out within one business day.",
-                  "You're not committing to anything. You're starting a conversation.",
-                ].map((step, index) => (
-                  <li key={step} className="flex items-start gap-3">
-                    <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-crest text-[11px] font-bold text-warm-white">
-                      {index + 1}
-                    </span>
-                    <span className="text-sm leading-relaxed text-ink/65">{step}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
+            <Reveal delay={210}>
+              <div className="border-t-2 border-crest bg-warm-white p-5">
+                <h3 className="font-display text-sm font-extrabold uppercase tracking-wide text-ink">
+                  {contactReassurance.heading}
+                </h3>
+                <ol className="mt-4 flex flex-col gap-3">
+                  {[
+                    "Submit the form with a few details about your project.",
+                    "Our team typically reaches out within one business day.",
+                    "You're not committing to anything. You're starting a conversation.",
+                  ].map((step, index) => (
+                    <li key={step} className="flex items-start gap-3">
+                      <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-crest text-[11px] font-bold text-warm-white">
+                        {index + 1}
+                      </span>
+                      <span className="text-sm leading-relaxed text-ink/65">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </Reveal>
 
-            <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-card">
-              <ProjectImage src={interiorPhoto} alt="Freshly painted interior room ready for a walkthrough" />
-            </div>
+            <Reveal delay={280}>
+              <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-card">
+                <ProjectImage src={interiorPhoto} alt="Freshly painted interior room ready for a walkthrough" />
+              </div>
+            </Reveal>
           </div>
 
           <ContactForm />

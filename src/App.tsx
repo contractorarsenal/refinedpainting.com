@@ -7,6 +7,7 @@ import { ScrollToTop } from "./components/layout/ScrollToTop";
 import { PromoPopupProvider } from "./components/promo/PromoPopupContext";
 import { QuoteModalProvider } from "./components/quote/QuoteModalContext";
 import { AboutPage } from "./pages/AboutPage";
+import { BlogPage } from "./pages/BlogPage";
 import { ContactPage } from "./pages/ContactPage";
 import { HomePage } from "./pages/HomePage";
 import { NotFoundPage } from "./pages/NotFoundPage";
@@ -28,6 +29,7 @@ function App() {
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/blog" element={<BlogPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="*" element={<NotFoundPage />} />

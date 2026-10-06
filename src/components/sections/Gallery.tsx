@@ -132,11 +132,21 @@ function ProjectFigure({
 }
 
 export function Gallery() {
+  const [lightboxProjects, setLightboxProjects] = useState<ProjectEntry[] | null>(null);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
 
   const filtered = filter === "All" ? orderedProjects : orderedProjects.filter((p) => p.category === filter);
   const showFeature = filter === "All";
+
+  // Scope the lightbox to the clicked project's own category, regardless of
+  // which gallery filter tab is active, so Prev/Next inside the viewer only
+  // ever shows photos from that same category.
+  const openProject = (project: ProjectEntry) => {
+    const sameCategory = orderedProjects.filter((p) => p.category === project.category);
+    setLightboxProjects(sameCategory);
+    setActiveIndex(sameCategory.findIndex((p) => p.id === project.id));
+  };
 
   return (
     <section className="bg-off-white pb-10 pt-10 sm:pb-12 lg:pb-16">
@@ -165,7 +175,7 @@ export function Gallery() {
             <ProjectFigure
               project={feature}
               aspect="aspect-4/3 sm:aspect-16/9 lg:aspect-21/9"
-              onClick={() => setActiveIndex(orderedProjects.indexOf(feature))}
+              onClick={() => openProject(feature)}
             />
           </Reveal>
         ) : null}
@@ -173,17 +183,20 @@ export function Gallery() {
         <div className={`grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 ${showFeature ? "mt-10 sm:mt-12" : ""}`}>
           {(showFeature ? filtered.filter((p) => p.id !== feature.id) : filtered).map((project, index) => (
             <Reveal key={project.id} delay={Math.min(index, 4) * 60}>
-              <ProjectFigure project={project} onClick={() => setActiveIndex(orderedProjects.indexOf(project))} />
+              <ProjectFigure project={project} onClick={() => openProject(project)} />
             </Reveal>
           ))}
         </div>
       </Container>
 
-      {activeIndex !== null ? (
+      {lightboxProjects && activeIndex !== null ? (
         <ProjectLightbox
-          projects={orderedProjects}
+          projects={lightboxProjects}
           index={activeIndex}
-          onClose={() => setActiveIndex(null)}
+          onClose={() => {
+            setActiveIndex(null);
+            setLightboxProjects(null);
+          }}
           onNavigate={setActiveIndex}
         />
       ) : null}

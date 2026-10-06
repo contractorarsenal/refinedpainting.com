@@ -1,22 +1,21 @@
 import { Check } from "lucide-react";
 import { FinalCTA } from "../components/sections/FinalCTA";
-import { PNWDifference } from "../components/sections/PNWDifference";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
 import { TrustStrip } from "../components/sections/TrustStrip";
-import { WhyChooseRefined } from "../components/sections/WhyChooseRefined";
 import { Container } from "../components/ui/Container";
 import { ImagePlaceholder } from "../components/ui/ImagePlaceholder";
 import { Reveal } from "../components/ui/Reveal";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
-import { aboutIntro, companyStory, mission, teamMembers, trustBullets, vision } from "../lib/content";
-
-const expectList = [
-  "Clear project communication",
-  "Protected work areas",
-  "Careful preparation",
-  "Final walkthrough",
-  "5-Year Workmanship Warranty",
-];
+import {
+  aboutIntro,
+  companyStory,
+  coreValues,
+  localPartnerBullets,
+  mission,
+  teamMembers,
+  trustBullets,
+  vision,
+} from "../lib/content";
 
 export function AboutPage() {
   useDocumentMeta(
@@ -27,7 +26,7 @@ export function AboutPage() {
   return (
     <>
       {/* F1 — Strong company positioning */}
-      <section className="bg-cream pb-16 pt-32 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-28">
+      <section className="bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
         <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
           <div>
             <span className="h-1 w-10 bg-crest" aria-hidden />
@@ -80,12 +79,36 @@ export function AboutPage() {
         </Container>
       </section>
 
-      {/* F3 — Operating philosophy / standards */}
-      <WhyChooseRefined />
-      <PNWDifference />
+      {/* F3 — How we think about the work */}
+      <section className="border-t border-ink/10 bg-warm-white py-16 sm:py-20 lg:py-24">
+        <Container>
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Our Standards</span>
+            <h2 className="mt-3 text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+              How We Think About the Work
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-ink/60 sm:text-base">
+              Four principles every project is run against, from the first estimate to the final coat.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-12 grid max-w-3xl grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
+            {coreValues.map((value, index) => (
+              <Reveal key={value.title} delay={index * 80}>
+                <div className="border-t-2 border-crest pt-4">
+                  <h3 className="font-display text-base font-extrabold uppercase tracking-wide text-ink sm:text-lg">
+                    {value.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink/65">{value.description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
 
       {/* F4 — Team */}
-      <section className="border-t border-ink/10 bg-warm-white py-16 sm:py-20 lg:py-24">
+      <section className="border-t border-ink/10 bg-cream py-16 sm:py-20 lg:py-24">
         <Container>
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
@@ -126,15 +149,15 @@ export function AboutPage() {
         </Container>
       </section>
 
-      {/* F5 — What homeowners can expect (About's trust frame) */}
+      {/* F5 — What you can expect from us (practical, homeowner-facing standards) */}
       <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
         <Container className="mx-auto max-w-2xl text-center">
           <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">With Our Team in Your Home</span>
           <h2 className="mt-3 font-display text-3xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-4xl">
-            What Homeowners Can Expect
+            What You Can Expect From Us
           </h2>
           <ul className="mx-auto mt-8 flex max-w-sm flex-col gap-3 text-left sm:max-w-md">
-            {expectList.map((item, index) => (
+            {localPartnerBullets.map((item, index) => (
               <Reveal
                 key={item}
                 as="li"

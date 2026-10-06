@@ -21,7 +21,7 @@ export function PageHero({
   onEstimateClick,
 }: PageHeroProps) {
   return (
-    <section className="bg-cream pb-16 pt-32 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-28">
+    <section className="bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
       <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
         <div className="flex flex-col items-start gap-4">
           {eyebrow ? (
