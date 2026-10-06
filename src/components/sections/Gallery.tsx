@@ -151,10 +151,10 @@ export function Gallery() {
   return (
     <section className="bg-off-white pb-10 pt-10 sm:pb-12 lg:pb-16">
       <Container>
-        <p className="mb-6 max-w-lg text-sm leading-relaxed text-ink/55">
-          Filter by project type below, or browse everything we&rsquo;ve completed.
+        <p className="mb-5 max-w-lg text-sm leading-relaxed text-ink/55">
+          Browse recent interior, exterior and cabinet projects.
         </p>
-        <div className="mb-8 flex flex-wrap items-center gap-2 border-b border-ink/10 pb-6">
+        <div className="mb-8 flex flex-wrap items-center gap-2">
           {filters.map((f) => (
             <button
               key={f}

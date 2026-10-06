@@ -11,11 +11,9 @@ export function PromoBanner() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section className="border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
+    <section className="border-t-2 border-crest/30 bg-warm-white pb-14 pt-10 sm:pb-16 sm:pt-12 lg:pb-20 lg:pt-14">
       <Container>
-        <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">
-          Complimentary Architectural Service
-        </span>
+        <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink/45">Need Help Choosing Color?</span>
         <div className="mt-5 grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <div className="flex flex-col items-start gap-4">
             <h2 className="text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">

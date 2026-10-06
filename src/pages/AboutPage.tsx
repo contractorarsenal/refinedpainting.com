@@ -177,7 +177,7 @@ export function AboutPage() {
       <ServiceAreaStrip />
 
       {/* F7 — CTA */}
-      <FinalCTA />
+      <FinalCTA tone="navy" />
     </>
   );
 }

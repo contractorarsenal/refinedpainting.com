@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Building2, Check, Hammer } from "lucide-react";
 import { Fragment, type ReactNode } from "react";
 import cabinetsPhoto from "../../assets/images/projects/cabinets-sage-green.webp";
 import navyPhoto from "../../assets/images/projects/exterior-finished-navy.webp";
@@ -21,19 +21,6 @@ const serviceImages: Record<ServiceId, { src: string; alt: string }> = {
   "deck-fence": { src: porchPhoto, alt: "Covered porch with stained and painted wood trim" },
   commercial: { src: navyPhoto, alt: "Professionally finished exterior in a deep navy tone" },
   carpentry: { src: inProgressPhoto, alt: "Exterior trim and siding mid-repair with protective covering" },
-};
-
-// Short, honest quick-facts pulled directly from each service's own approved
-// FAQ answers in content.ts — not fabricated technical specs.
-const quickFacts: Partial<Record<ServiceId, { label: string; value: string }[]>> = {
-  cabinets: [
-    { label: "Timeline", value: "Several Days to a Week" },
-    { label: "Finish", value: "Sprayed, Factory-Smooth" },
-  ],
-  interior: [
-    { label: "Timeline", value: "3 to 7 Days" },
-    { label: "Materials", value: "Benjamin Moore & Sherwin-Williams" },
-  ],
 };
 
 // Short framing sentence shown above each service's title, so visitors know
@@ -60,43 +47,24 @@ function FeaturedSection({ id, index, bg }: { id: ServiceId; index: number; bg: 
   const service = byId(id);
   const detail = serviceDetails[id];
   const image = serviceImages[id];
-  const facts = quickFacts[id];
   const reversed = index % 2 === 1;
 
   return (
     <section id={serviceSlugs[id]} className={`scroll-mt-24 py-14 sm:py-16 lg:py-20 ${bg}`}>
-      <Container
-        className={`grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16 ${
-          reversed ? "lg:[&>*:first-child]:order-2" : ""
-        }`}
-      >
-        <Reveal className="aspect-4/5 w-full overflow-hidden rounded-xl shadow-card lg:aspect-4/3">
-          <ProjectImage src={image.src} alt={image.alt} />
-        </Reveal>
-
-        <Reveal delay={120} className="flex flex-col items-start gap-4">
+      <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        {/* Reading order: label, heading, value statement, key points, CTA, then visual. */}
+        <Reveal
+          delay={120}
+          className={`flex flex-col items-start gap-4 ${reversed ? "lg:order-1" : "lg:order-2"}`}
+        >
           <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
           <h3 className="font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
             {service.title}
           </h3>
-          <p className="text-sm font-semibold text-ink/55">{sectionIntros[id]}</p>
-          <p className="text-base leading-relaxed text-ink/70">{detail.overview}</p>
+          <p className="text-base font-semibold leading-relaxed text-ink/70">{sectionIntros[id]}</p>
 
-          {facts ? (
-            <div className="grid grid-cols-2 gap-x-8 gap-y-2 border-y border-ink/10 py-3">
-              {facts.map((fact) => (
-                <div key={fact.label}>
-                  <span className="block text-[10px] font-bold uppercase tracking-widest text-ink/40">
-                    {fact.label}
-                  </span>
-                  <span className="text-sm font-bold text-ink">{fact.value}</span>
-                </div>
-              ))}
-            </div>
-          ) : null}
-
-          <ul className="mt-1 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-            {detail.whatsIncluded.slice(0, 4).map((item) => (
+          <ul className="mt-1 flex flex-col gap-2.5">
+            {detail.whatsIncluded.slice(0, 3).map((item) => (
               <li key={item} className="flex items-start gap-2 text-sm font-semibold text-ink/80">
                 <Check className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
                 {item}
@@ -110,6 +78,14 @@ function FeaturedSection({ id, index, bg }: { id: ServiceId; index: number; bg: 
             </LinkButton>
             <QuoteButton id={id} />
           </div>
+        </Reveal>
+
+        <Reveal
+          className={`aspect-4/5 w-full overflow-hidden rounded-xl shadow-card lg:aspect-4/3 ${
+            reversed ? "lg:order-2" : "lg:order-1"
+          }`}
+        >
+          <ProjectImage src={image.src} alt={image.alt} />
         </Reveal>
       </Container>
     </section>
@@ -156,19 +132,28 @@ function PairedCard({ id }: { id: ServiceId }) {
   );
 }
 
-function CompactCard({ id }: { id: ServiceId }) {
+const compactIcons: Partial<Record<ServiceId, typeof Building2>> = {
+  commercial: Building2,
+  carpentry: Hammer,
+};
+
+function CompactCard({ id, divider }: { id: ServiceId; divider?: boolean }) {
   const service = byId(id);
   const detail = serviceDetails[id];
+  const Icon = compactIcons[id];
 
   return (
-    <Reveal id={serviceSlugs[id]} className="scroll-mt-24 border-t-2 border-ink/10 pt-5">
-      <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
+    <Reveal
+      id={serviceSlugs[id]}
+      className={`scroll-mt-24 border-t-2 border-ink/10 pt-5 ${divider ? "sm:border-t-2 sm:border-l sm:border-l-ink/10 sm:pl-10" : ""}`}
+    >
+      {Icon ? <Icon className="size-6 text-teal-dark" aria-hidden /> : null}
+      <span className="mt-2 block text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
       <h3 className="mt-1.5 font-display text-lg font-extrabold uppercase leading-[0.98] text-ink sm:text-xl">
         {service.title}
       </h3>
-      <p className="mt-1 text-xs font-semibold text-ink/50">{sectionIntros[id]}</p>
-      <p className="mt-2 text-sm leading-relaxed text-ink/65">{detail.overview}</p>
-      <LinkButton href={`/services/${serviceSlugs[id]}`} variant="ghost" size="md" className="mt-3">
+      <p className="mt-2 text-sm leading-relaxed text-ink/65">{sectionIntros[id]}</p>
+      <LinkButton href={`/services/${serviceSlugs[id]}`} variant="ghost" size="md" className="mt-4">
         Full Details
       </LinkButton>
     </Reveal>
@@ -186,10 +171,13 @@ export function ServiceSections({ afterCabinets }: { afterCabinets?: ReactNode }
       ))}
 
       <section className="border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
-        <Container className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-10">
-          {paired.map((id) => (
-            <PairedCard key={id} id={id} />
-          ))}
+        <Container>
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink/50">Weather &amp; Seasonal Work</span>
+          <div className="mt-6 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-10">
+            {paired.map((id) => (
+              <PairedCard key={id} id={id} />
+            ))}
+          </div>
         </Container>
       </section>
 
@@ -197,8 +185,8 @@ export function ServiceSections({ afterCabinets }: { afterCabinets?: ReactNode }
         <Container>
           <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink/50">Structural Disciplines</span>
           <div className="mt-6 grid grid-cols-1 gap-10 sm:grid-cols-2">
-            {compact.map((id) => (
-              <CompactCard key={id} id={id} />
+            {compact.map((id, index) => (
+              <CompactCard key={id} id={id} divider={index === 1} />
             ))}
           </div>
         </Container>

@@ -33,7 +33,7 @@ export function ProjectsPage() {
   return (
     <>
       <section className="bg-warm-white pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
-        <Container className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-12">
+        <Container className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Our Work</span>
             <h1 className="mt-3 text-balance font-display text-4xl font-black uppercase leading-[0.96] text-ink sm:text-5xl">
@@ -45,9 +45,9 @@ export function ProjectsPage() {
             </p>
           </div>
 
-          <div className="border-2 border-ink/10 bg-cream p-5 sm:p-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-ink/50">Every Project Is Backed By</span>
-            <ul className="mt-3 flex flex-col gap-2">
+          <div className="flex flex-col gap-3 border-t border-ink/10 pt-6 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Every Project Is Backed By</span>
+            <ul className="flex flex-col gap-2.5">
               <li className="text-sm font-bold text-ink">5-Year Workmanship Warranty</li>
               <li className="text-sm font-bold text-ink">Licensed &amp; Insured</li>
               <li className="text-sm font-bold text-ink">EPA Lead-Safe Certified</li>
@@ -92,7 +92,7 @@ export function ProjectsPage() {
         </Container>
       </section>
 
-      <FinalCTA />
+      <FinalCTA tone="navy" />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Building2, Hammer, Home, Layers, PaintRoller, TreeDeciduous } from "lucide-react";
+import { ArrowRight, Building2, Hammer, Home, Layers, PaintRoller, TreeDeciduous } from "lucide-react";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { Process } from "../components/sections/Process";
 import { PromoBanner } from "../components/sections/PromoBanner";
@@ -45,7 +45,7 @@ export function ServicesPage() {
   return (
     <>
       <section className="bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
-        <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+        <Container className="grid grid-cols-1 items-stretch gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
           <div className="flex flex-col items-start gap-4">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Painting Services</span>
             <h1 className="text-balance font-display text-3xl font-black uppercase leading-[0.98] text-ink sm:text-4xl lg:text-5xl">
@@ -68,19 +68,23 @@ export function ServicesPage() {
             </span>
           </div>
 
-          <ImagePlaceholder label="Service Image" aspectClassName="aspect-4/3" className="max-w-md lg:justify-self-end" />
-        </Container>
-
-        <Container>
-          <div className="mt-10 grid grid-cols-2 gap-6 border-t border-ink/10 pt-6 sm:mt-12 sm:grid-cols-4 lg:mt-14">
-            {proofRow.map((item) => (
-              <div key={item.label} className="flex flex-col items-center text-center sm:flex-row sm:gap-2.5">
-                <span className="font-display text-2xl font-black leading-none text-crest">{item.value}</span>
-                <span className="mt-1 text-[10px] font-bold uppercase tracking-widest text-ink/50 sm:mt-0 sm:text-[11px]">
-                  {item.label}
-                </span>
-              </div>
-            ))}
+          <div className="flex max-w-md flex-col gap-5 lg:justify-self-end">
+            <div className="flex flex-col gap-2">
+              <ImagePlaceholder label="Project Photo Coming Soon" aspectClassName="aspect-4/3" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+                Real project photography, added as work is completed
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-4 border-t-2 border-crest pt-4">
+              {proofRow.map((item) => (
+                <div key={item.label}>
+                  <span className="block font-display text-xl font-black leading-none text-crest">{item.value}</span>
+                  <span className="mt-1 block text-[10px] font-bold uppercase tracking-widest text-ink/50">
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </Container>
       </section>
@@ -95,20 +99,27 @@ export function ServicesPage() {
             </h2>
           </div>
 
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5">
+          <div className="mt-12 grid grid-cols-1 gap-x-10 gap-y-9 sm:grid-cols-3">
             {services.map((service, index) => {
               const Icon = serviceIcons[service.id];
               return (
                 <Reveal key={service.id} delay={index * 60}>
                   <a
                     href={`#${serviceSlugs[service.id]}`}
-                    className="group flex h-full flex-col items-start gap-2.5 border-2 border-ink/10 p-5 transition-colors hover:border-crest"
+                    className="group flex h-full flex-col items-start gap-3 border-t-2 border-ink/15 pt-5 transition-colors hover:border-crest"
                   >
-                    <Icon className="size-6 text-teal-dark" aria-hidden />
-                    <span className="font-display text-sm font-extrabold uppercase leading-tight tracking-wide text-ink sm:text-base">
+                    <Icon
+                      className="size-8 text-teal-dark transition-transform duration-300 group-hover:scale-110 group-hover:text-crest"
+                      aria-hidden
+                    />
+                    <span className="font-display text-lg font-extrabold uppercase leading-tight tracking-wide text-ink sm:text-xl">
                       {service.title}
                     </span>
                     <span className="text-xs leading-relaxed text-ink/55">{service.description}</span>
+                    <span className="mt-auto flex items-center gap-1 pt-1 text-[11px] font-bold uppercase tracking-wide text-ink/40 transition-colors group-hover:text-crest">
+                      View
+                      <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" aria-hidden />
+                    </span>
                   </a>
                 </Reveal>
               );

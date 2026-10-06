@@ -5,34 +5,45 @@ import { ProjectImage } from "../ui/ProjectImage";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
 
+// Short captions for the grid tiles — each is the lead clause of that point's
+// full description in content.ts, trimmed for a scannable 3x2 layout. The
+// full sentence still lives in content.ts; nothing here is invented.
+const shortCaptions: Record<string, string> = {
+  "Communication-First, On-Time Service": "Clear expectations, regular updates, and fast responses.",
+  "Detailed Scope + Transparent Options": "Every proposal lays out exactly what's included.",
+  "Clean, Protected Job Sites + Daily Cleanup": "We treat every home as if it were our own.",
+  "Premium Prep + High-End Finishes": "Great finishes start long before the first coat.",
+  "Color Guidance + Lead-Safe Practices": "Complimentary color consultation, backed by EPA Lead-Safe practices.",
+  "5-Year Warranty + Final Walkthrough Sign-Off": "A detailed walkthrough backed by our 5-year warranty.",
+};
+
 export function WhyChooseRefined() {
   return (
     <section id="why-choose-refined" className="relative scroll-mt-24 bg-warm-white py-16 sm:py-20 lg:py-28">
-      <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
+      <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.75fr_1.3fr] lg:gap-16">
         <div className="flex flex-col gap-6 lg:sticky lg:top-28 lg:self-start">
           <SectionHeading
             eyebrow="Why Choose Refined"
             title="Built Around the Details That Actually Matter"
-            description="These aren't marketing bullet points. They're the standards every project is run against, from the first estimate to the final sign-off."
           />
-          <div className="hidden aspect-4/5 w-full overflow-hidden rounded-xl shadow-card lg:block">
+          <div className="hidden aspect-4/3 w-full overflow-hidden rounded-xl shadow-card lg:block">
             <ProjectImage src={interiorPhoto} alt="Freshly painted bedroom ready for move-in" />
           </div>
         </div>
 
-        <ol className="flex flex-col lg:mt-56">
+        <ol className="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2">
           {whyChooseUs.map((point, index) => (
-            <Reveal key={point.title} delay={index * 70}>
-              <li className="flex gap-5 border-b border-ink/10 py-6 first:pt-0 last:border-b-0 sm:gap-7">
-                <span className="shrink-0 font-display text-3xl font-black leading-none text-crest/30 sm:text-4xl">
+            <Reveal key={point.title} delay={index * 60}>
+              <li className="border-t-2 border-crest pt-4">
+                <span className="font-display text-2xl font-black leading-none text-crest/40">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <div>
-                  <h3 className="font-display text-base font-extrabold uppercase tracking-wide text-ink sm:text-lg">
-                    {point.title}
-                  </h3>
-                  <p className="mt-2 max-w-md text-sm leading-relaxed text-ink/65">{point.description}</p>
-                </div>
+                <h3 className="mt-2 font-display text-base font-extrabold uppercase tracking-wide text-ink sm:text-lg">
+                  {point.title}
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-ink/60">
+                  {shortCaptions[point.title] ?? point.description}
+                </p>
               </li>
             </Reveal>
           ))}

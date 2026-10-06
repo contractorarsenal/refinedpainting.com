@@ -31,7 +31,7 @@ export function VideoAuthority() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section className="bg-ink py-16 text-warm-white sm:py-20 lg:py-28">
+    <section className="bg-ink py-14 text-warm-white sm:py-16 lg:py-20">
       <Container>
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[auto_1fr] lg:gap-16">
           <Reveal className="mx-auto lg:mx-0">
