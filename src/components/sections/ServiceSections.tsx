@@ -54,16 +54,13 @@ function FeaturedSection({ id, index, bg }: { id: ServiceId; index: number; bg: 
     <section id={serviceSlugs[id]} className={`scroll-mt-24 py-12 sm:py-14 lg:py-18 ${bg}`}>
       <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
         {/* Reading order: label, heading, value statement, key points, CTA, then visual. */}
-        <div className={`flex flex-col items-start gap-5 ${reversed ? "lg:order-1" : "lg:order-2"}`}>
-          <Reveal className="flex flex-col items-start gap-4">
-            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/40">
-              Service Spec {String(index + 1).padStart(2, "0")}
-            </span>
+        <div className={`flex flex-col items-start gap-7 ${reversed ? "lg:order-1" : "lg:order-2"}`}>
+          <Reveal className="flex flex-col items-start">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
-            <h3 className="font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+            <h3 className="mt-3 font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
               {service.title}
             </h3>
-            <p className="text-base font-semibold leading-relaxed text-ink/70">{sectionIntros[id]}</p>
+            <p className="mt-5 max-w-sm text-base font-semibold leading-relaxed text-ink/70">{sectionIntros[id]}</p>
           </Reveal>
 
           <Reveal delay={220}>
@@ -122,12 +119,15 @@ function PairedCard({ id }: { id: ServiceId }) {
       <div className="aspect-16/10 w-full overflow-hidden">
         <ProjectImage src={image.src} alt={image.alt} />
       </div>
-      <div className="flex flex-1 flex-col items-start gap-2.5 p-6 sm:p-7">
-        <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
-        <h3 className="font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink">{service.title}</h3>
-        <p className="text-xs font-semibold text-ink/50">{sectionIntros[id]}</p>
-        <p className="text-sm leading-relaxed text-ink/65">{detail.overview}</p>
-        <ul className="flex flex-col gap-1.5">
+      <div className="flex flex-1 flex-col items-start gap-5 p-6 sm:p-7">
+        <div>
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
+          <h3 className="mt-2 font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink">
+            {service.title}
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-ink/60">{sectionIntros[id]}</p>
+        </div>
+        <ul className="flex flex-col gap-2">
           {detail.whatsIncluded.slice(0, 3).map((item) => (
             <li key={item} className="flex items-start gap-2 text-sm font-semibold text-ink/80">
               <Check className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
@@ -165,10 +165,10 @@ function CompactCard({ id, divider }: { id: ServiceId; divider?: boolean }) {
       <h3 className="mt-3 font-display text-lg font-extrabold uppercase leading-[0.98] text-ink sm:text-xl">
         {service.title}
       </h3>
-      <p className="mt-2 text-sm leading-relaxed text-ink/65">{sectionIntros[id]}</p>
+      <p className="mt-4 text-sm leading-relaxed text-ink/65">{sectionIntros[id]}</p>
       <Link
         to={`/services/${serviceSlugs[id]}`}
-        className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-crest transition-colors hover:text-ink"
+        className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-crest transition-colors hover:text-ink"
       >
         Full Details
         <ArrowRight className="size-3" aria-hidden />

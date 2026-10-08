@@ -149,13 +149,10 @@ export function AboutPage() {
                     {member.name.charAt(0)}
                   </div>
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-crest">
-                      Craft Team {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span className="mt-1 block font-display text-xl font-extrabold uppercase tracking-wide text-ink">
+                    <span className="block font-display text-xl font-extrabold uppercase tracking-wide text-ink">
                       {member.name}
                     </span>
-                    <span className="mt-0.5 block text-xs font-bold uppercase tracking-widest text-ink/45">
+                    <span className="mt-1 block text-xs font-bold uppercase tracking-widest text-ink/45">
                       Refined Painting
                     </span>
                   </div>

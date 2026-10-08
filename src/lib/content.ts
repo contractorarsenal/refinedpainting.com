@@ -136,25 +136,25 @@ export const processSteps: ProcessStep[] = [
     number: "01",
     title: "Get Your Free Estimate",
     description:
-      "We'll visit your home to walk through the project, take measurements, and answer your questions. Within 24–48 hours, you'll receive a detailed, transparent proposal so you know exactly what's included, what to expect, and how your timeline will work.",
+      "We'll visit your home, take measurements, and answer your questions, then send a detailed proposal within 24–48 hours.",
   },
   {
     number: "02",
     title: "Complimentary Color Consultation",
     description:
-      "Not sure what colors will look best in your space? We'll help you choose a palette that fits your home and your style, bringing Benjamin Moore and Sherwin-Williams samples directly to you so you can see how colors look in your own lighting.",
+      "We'll help you choose a palette that fits your home, bringing Benjamin Moore and Sherwin-Williams samples directly to you.",
   },
   {
     number: "03",
     title: "Meticulous Prep & Detailed Finishes",
     description:
-      "Our licensed team handles everything from prep to final coats. We protect your home, keep the job site clean, stay on schedule, and provide proactive updates so you're never left guessing.",
+      "Our licensed team handles everything from prep to final coats, protecting your home and keeping you updated along the way.",
   },
   {
     number: "04",
     title: "Final Walkthrough & 5-Year Warranty",
     description:
-      "We'll do a detailed walkthrough together to confirm every detail meets your expectations. Once you're happy, we finalize the project, leave your space spotless, and back it with your 5-year workmanship warranty.",
+      "We'll walk through every detail together, leave your space spotless, and back it with your 5-year workmanship warranty.",
   },
 ];
 
@@ -240,10 +240,10 @@ export const trustBullets = [
   "5-Year Workmanship Warranty",
 ];
 
+// Trimmed to the items not already covered by "Our Standards" above it on
+// the About page (communication, prep, and cleanliness live there) — this
+// list only adds what's new: EPA practices, color guidance, and warranty.
 export const localPartnerBullets = [
-  "Clear communication from estimate to walkthrough",
-  "Careful surface prep, not shortcuts",
-  "Clean, protected job sites every day",
   "EPA Lead-Safe practices on older homes",
   "Complimentary color guidance",
   "5-year workmanship warranty",
@@ -276,7 +276,7 @@ export const videoAuthority = {
   headline: "We've Painted 200+ Homes. Here's the Cabinet Mistake We See Over and Over.",
   paragraphs: [
     "Homeowners often focus on the paint color first.",
-    "But cabinet finishes usually fail because of what happens before the paint ever goes on. Cleaning, degreasing, sanding, bonding primer, product choice and application method determine whether cabinets still look good years later.",
+    "But cabinet finishes usually fail because of what happens before the paint goes on: cleaning, sanding, and bonding primer.",
   ],
   callout: "The finish is only as good as the prep.",
   cta: "Get a Cabinet Painting Estimate",
@@ -422,9 +422,9 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     overview:
       "When a room feels tired, outdated, or simply needs a refresh, professional interior painting offers one of the most impactful transformations available for your home.",
     commonProblem:
-      "Many homeowners delay interior painting assuming it will be disruptive, messy, or difficult to coordinate, or worry about choosing the wrong colors, hiring unreliable contractors, or ending up with results that look uneven or amateur.",
+      "Homeowners often delay interior painting, worried it will be disruptive, messy, or end up looking uneven and amateur.",
     approach:
-      "We combine meticulous surface preparation, premium Benjamin Moore and Sherwin-Williams paints, and a structured process that keeps your project on schedule from estimate to final walkthrough.",
+      "Meticulous prep, premium paints, and a structured process keep your project on schedule from estimate to final walkthrough.",
     whatsIncluded: [
       "Thorough surface preparation and repair",
       "Professional masking and protection of floors and belongings",
@@ -461,9 +461,9 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     overview:
       "When a home's exterior looks faded, weathered, or no longer reflects the care put into the property, professional exterior painting delivers one of the most dramatic transformations possible.",
     commonProblem:
-      "Exterior surfaces face constant exposure to rain, humidity, UV rays, and temperature fluctuations. Paint fades, cracks, and peels, exposing wood to moisture damage and reducing curb appeal, and crews that skip proper preparation set the work up to fail within months.",
+      "Constant rain, UV, and temperature swings fade and crack paint fast. Crews that skip proper prep set the work up to fail within months.",
     approach:
-      "Our process includes comprehensive power washing calibrated to your siding material, wood repair and rot remediation before any paint goes on, careful scraping of loose paint, weather-resistant priming, premium exterior coatings engineered for Pacific Northwest conditions, and detailed attention to trim and accents.",
+      "We power wash, repair rot, and scrape loose paint before priming and coating — prep-first, built for Pacific Northwest conditions.",
     whatsIncluded: [
       "Siding-specific power washing",
       "Wood repair and rot remediation before painting",
@@ -500,9 +500,9 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     overview:
       "When cabinets feel dated, worn, or out of place in an otherwise beautiful kitchen, cabinet refinishing is one of the smartest ways to upgrade the space without a full remodel.",
     commonProblem:
-      "Your kitchen is one of the most used spaces in your home, which means cabinets show wear faster than almost any other surface: scratches, grease buildup, fading finishes, and outdated colors can make even a well-designed kitchen feel tired.",
+      "Cabinets take more daily wear than almost any other surface — scratches, grease buildup, and fading can make even a well-designed kitchen feel tired.",
     approach:
-      "Rather than the weeks of disruption and cost of full replacement, we rely on meticulous preparation, premium coatings, and a controlled application process to give cabinets a durable, factory-quality finish.",
+      "Rather than weeks of disruption and cost, we rely on meticulous prep and premium coatings for a durable, factory-quality finish.",
     whatsIncluded: [
       "Deep cleaning and degreasing",
       "Precision sanding and surface prep",
@@ -536,9 +536,9 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     overview:
       "When a business space no longer projects the professionalism a brand deserves, commercial painting delivers an immediate transformation that impacts customer perception, employee morale, and property value.",
     commonProblem:
-      "A commercial space is more than walls and ceilings. It's where you serve customers, conduct business, and represent your brand. Outdated paint, scuffed surfaces, and worn finishes send the wrong message to clients and don't support productivity or pride.",
+      "Outdated paint and worn finishes send the wrong message to clients and don't support employee pride or productivity.",
     approach:
-      "We schedule a site visit to assess the space and any operational constraints, build a project schedule that minimizes disruption, manage surface preparation and premium coating application with a licensed team, then walk every surface with you to confirm it meets commercial standards.",
+      "We assess your space, build a schedule around your operations, and complete the work with a licensed team — then walk every surface with you.",
     whatsIncluded: [
       "Flexible scheduling, including evenings and weekends",
       "High-traffic surface preparation",
@@ -573,9 +573,9 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     overview:
       "When outdoor wood looks gray, weathered, or no longer enhances a property's appearance, professional deck and fence staining provides the protection and visual transformation your exterior spaces deserve.",
     commonProblem:
-      "Pacific Northwest weather is relentless: constant moisture exposure, UV damage, mildew growth, and seasonal temperature swings cause untreated or improperly maintained wood to deteriorate rapidly.",
+      "Pacific Northwest moisture, UV, and mildew cause untreated or improperly maintained wood to deteriorate rapidly.",
     approach:
-      "We don't just apply stain. We create a protective barrier using moisture meters, proper surface preparation, premium penetrating stains, and application techniques proven to perform in Seattle's challenging climate.",
+      "We test moisture levels, prep the surface properly, then apply premium penetrating stains proven to perform in Seattle's climate.",
     whatsIncluded: [
       "Moisture-level testing before staining",
       "Removal of failing or peeling stain",
@@ -609,9 +609,9 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     overview:
       "When woodwork shows signs of damage, decay, or wear that paint alone can't fix, professional carpentry provides the structural repairs and custom improvements that protect your investment.",
     commonProblem:
-      "Exterior and interior woodwork faces constant challenges: moisture intrusion, insect damage, structural settling, and simple wear from decades of use. Rotted trim boards, damaged siding, failing window casings, deteriorating fascia, and worn door frames compromise both appearance and protection.",
+      "Moisture, insect damage, and years of wear leave rotted trim, siding, and window casings compromising both looks and protection.",
     approach:
-      "We inspect wood damage and structural concerns, source materials that match your existing construction and architectural style, handle careful removal and custom-fit replacement with weather-resistant installation, then walk the finished work with you.",
+      "We inspect the damage, source materials that match your existing construction, and handle removal and replacement — then walk the finished work with you.",
     whatsIncluded: [
       "Rot detection and structural assessment",
       "Precision wood removal and replacement",
@@ -647,7 +647,7 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
 export const warranty = {
   headline: "5-Year Workmanship Warranty",
   covered:
-    "Peeling of paint caused by inadequate surface preparation or improper application on areas painted by our team, including labor and materials for covered repairs. Covered repairs are completed by our team and scheduled within 12 months of notification.",
+    "Covers peeling caused by inadequate surface prep or improper application on areas we painted — labor and materials included, scheduled within 12 months of notification.",
   excluded: [
     "Failure of old or underlying paint layers",
     "Stained surfaces",
