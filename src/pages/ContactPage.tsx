@@ -104,7 +104,7 @@ export function ContactPage() {
             </Reveal>
 
             <Reveal delay={240}>
-              <div className="border-t-2 border-crest bg-warm-white p-5">
+              <div className="border-t-2 border-crest bg-cream-light p-5">
                 <h3 className="font-display text-sm font-extrabold uppercase tracking-wide text-ink">
                   {contactReassurance.heading}
                 </h3>

@@ -11,7 +11,11 @@
   --color-warm-white: #ffffff;
   --color-off-white: #f1f3f4;
   --color-cream: #f6efdf;
+  --color-cream-light: #f8f5ee;
   --color-cream-dark: #ead9b8;
+  /* Muted architectural frame tone — darker/cooler than cream-dark's golden
+     tan, used for the frame/inset layer in the background rhythm system. */
+  --color-sand: #ede8de;
   --color-light-blue: #e9f1f3;
   --color-stone: #e2e6e8;
   --color-stone-dark: #c6ccd0;

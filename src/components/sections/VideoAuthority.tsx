@@ -4,6 +4,7 @@ import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { Mascot } from "../ui/Mascot";
 import { Reveal } from "../ui/Reveal";
+import { LineTexture } from "../ui/Texture";
 
 function VideoFrame() {
   return (
@@ -31,8 +32,9 @@ export function VideoAuthority() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section className="bg-ink py-12 text-warm-white sm:py-14 lg:py-18">
-      <Container>
+    <section className="relative overflow-hidden bg-ink py-12 text-warm-white sm:py-14 lg:py-18">
+      <LineTexture tone="warm-white" className="opacity-50" />
+      <Container className="relative">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[auto_1fr] lg:gap-16">
           <Reveal className="mx-auto lg:mx-0">
             <VideoFrame />

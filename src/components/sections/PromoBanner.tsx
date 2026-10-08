@@ -14,7 +14,7 @@ export function PromoBanner() {
   const { ref: ruleRef, inView: ruleInView } = useInView<HTMLDivElement>(0.6);
 
   return (
-    <section className="relative bg-warm-white pb-14 pt-10 sm:pb-16 sm:pt-12 lg:pb-20 lg:pt-14">
+    <section className="relative bg-cream-light pb-14 pt-10 sm:pb-16 sm:pt-12 lg:pb-20 lg:pt-14">
       {/* Expands from Process's connecting line rather than a flat static border — ties this section to the one above it. */}
       <div
         ref={ruleRef}

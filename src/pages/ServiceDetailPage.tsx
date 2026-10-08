@@ -94,7 +94,7 @@ export function ServiceDetailPage() {
         onEstimateClick={() => openQuoteModal(serviceId)}
       />
 
-      <section className="bg-warm-white py-16 sm:py-20 lg:py-24">
+      <section className="bg-cream-light py-16 sm:py-20 lg:py-24">
         <Container className="mx-auto max-w-5xl">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
@@ -133,9 +133,9 @@ export function ServiceDetailPage() {
       </section>
 
       {hasProjectProof[serviceId] ? (
-        <section className="border-t border-ink/10 bg-warm-white py-16 sm:py-20 lg:py-24">
+        <section className="border-t border-ink/10 bg-cream-light py-16 sm:py-20 lg:py-24">
           <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-card">
+            <div className="aspect-4/3 w-full overflow-hidden rounded-lg border border-ink/10 shadow-card">
               <ProjectImage src={hero.src} alt={hero.alt} />
             </div>
             <div className="flex flex-col items-start gap-4">
@@ -171,7 +171,7 @@ export function ServiceDetailPage() {
         </Container>
       </section>
 
-      <section id="faq" className="scroll-mt-20 border-t border-ink/10 bg-warm-white py-16 sm:py-20 lg:py-24">
+      <section id="faq" className="scroll-mt-20 border-t border-ink/10 bg-cream-light py-16 sm:py-20 lg:py-24">
         <Container className="mx-auto max-w-3xl">
           <div className="flex flex-col items-center text-center">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Common Questions</span>

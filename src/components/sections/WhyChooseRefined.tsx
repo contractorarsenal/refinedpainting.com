@@ -19,7 +19,7 @@ const shortCaptions: Record<string, string> = {
 
 export function WhyChooseRefined() {
   return (
-    <section id="why-choose-refined" className="relative scroll-mt-24 bg-warm-white py-16 sm:py-20 lg:py-28">
+    <section id="why-choose-refined" className="relative scroll-mt-24 bg-cream-light py-16 sm:py-20 lg:py-28">
       <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.75fr_1.3fr] lg:gap-16">
         <div className="flex flex-col gap-6 lg:sticky lg:top-28 lg:self-start">
           <SectionHeading

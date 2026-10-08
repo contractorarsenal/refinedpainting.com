@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 import { processSteps } from "../../lib/content";
 import { Container } from "../ui/Container";
+import { LineTexture } from "../ui/Texture";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
 
 /** Short, homepage-only version of the full Process section on About/Services — one sentence per step instead of the full copy. */
 export function ProcessCondensed() {
   return (
-    <section className="bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
-      <Container>
+    <section className="relative overflow-hidden bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+      <LineTexture tone="warm-white" className="opacity-50" />
+      <Container className="relative">
         <SectionHeading
           align="center"
           tone="light"

@@ -5,6 +5,7 @@ import { TrustStrip } from "../components/sections/TrustStrip";
 import { Container } from "../components/ui/Container";
 import { ImagePlaceholder } from "../components/ui/ImagePlaceholder";
 import { Reveal } from "../components/ui/Reveal";
+import { GridTexture, LineTexture } from "../components/ui/Texture";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
 import {
   aboutIntro,
@@ -26,8 +27,9 @@ export function AboutPage() {
   return (
     <>
       {/* F1 — Strong company positioning */}
-      <section className="bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
-        <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+      <section className="relative overflow-hidden bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
+        <GridTexture />
+        <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
           <Reveal>
             <span className="h-1 w-10 bg-crest" aria-hidden />
             <span className="mt-4 block text-xs font-bold uppercase tracking-[0.16em] text-crest">
@@ -85,25 +87,28 @@ export function AboutPage() {
       </section>
 
       {/* F3 — How we think about the work */}
-      <section className="border-t border-ink/10 bg-warm-white py-16 sm:py-20 lg:py-24">
+      <section className="border-t border-ink/10 bg-cream-light py-16 sm:py-20 lg:py-24">
         <Container>
-          <Reveal>
-            <div className="mx-auto max-w-2xl text-center">
-              <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Our Standards</span>
-              <h2 className="mt-3 text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+          <Reveal className="flex flex-col items-start gap-3 border-b border-ink/10 pb-8 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Our Standards</span>
+              <h2 className="mt-2 text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
                 How We Think About the Work
               </h2>
-              <p className="mt-3 text-sm leading-relaxed text-ink/60 sm:text-base">
-                Four principles every project is run against, from the first estimate to the final coat.
-              </p>
             </div>
+            <p className="max-w-xs text-sm leading-relaxed text-ink/60">
+              Four principles every project is run against, from the first estimate to the final coat.
+            </p>
           </Reveal>
 
-          <div className="mx-auto mt-12 grid max-w-3xl grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
+          <div className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
             {coreValues.map((value, index) => (
               <Reveal key={value.title} delay={180 + index * 80}>
                 <div className="border-t-2 border-crest pt-4">
-                  <h3 className="font-display text-base font-extrabold uppercase tracking-wide text-ink sm:text-lg">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/40">
+                    Standard {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-1.5 font-display text-base font-extrabold uppercase tracking-wide text-ink sm:text-lg">
                     {value.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink/65">{value.description}</p>
@@ -120,7 +125,7 @@ export function AboutPage() {
           <Reveal>
             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
               <div>
-                <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">
+                <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">
                   Architectural Craft Team
                 </span>
                 <h2 className="mt-2 font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
@@ -139,15 +144,18 @@ export function AboutPage() {
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
             {teamMembers.map((member, index) => (
               <Reveal key={member.name} delay={180 + index * 100}>
-                <div className="flex items-center gap-5 border-2 border-ink/10 p-5">
-                  <div className="flex size-24 shrink-0 items-center justify-center rounded-xl bg-light-blue text-3xl font-black text-teal-dark sm:size-28">
+                <div className="flex items-center gap-5 border border-ink/10 bg-cream-light p-5">
+                  <div className="flex size-24 shrink-0 items-center justify-center bg-ink text-3xl font-black text-teal sm:size-28">
                     {member.name.charAt(0)}
                   </div>
                   <div>
-                    <span className="font-display text-xl font-extrabold uppercase tracking-wide text-ink">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-crest">
+                      Craft Team {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="mt-1 block font-display text-xl font-extrabold uppercase tracking-wide text-ink">
                       {member.name}
                     </span>
-                    <span className="mt-1 block text-xs font-bold uppercase tracking-widest text-ink/45">
+                    <span className="mt-0.5 block text-xs font-bold uppercase tracking-widest text-ink/45">
                       Refined Painting
                     </span>
                   </div>
@@ -159,8 +167,9 @@ export function AboutPage() {
       </section>
 
       {/* F5 — What you can expect from us (practical, homeowner-facing standards) */}
-      <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
-        <Container className="mx-auto max-w-2xl text-center">
+      <section className="relative overflow-hidden border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+        <LineTexture tone="warm-white" className="opacity-50" />
+        <Container className="relative mx-auto max-w-2xl text-center">
           <Reveal>
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">With Our Team in Your Home</span>
             <h2 className="mt-3 font-display text-3xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-4xl">

@@ -38,11 +38,11 @@ export function ProjectsPreview() {
           </LinkButton>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6">
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
           {previewItems.map((item, index) => (
             <Reveal key={item.id} delay={index * 80}>
-              <Link to="/projects" className="group block">
-                <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl bg-ink/5">
+              <Link to="/projects" className="group flex h-full flex-col border border-ink/10 bg-cream-light">
+                <div className="relative aspect-4/3 w-full overflow-hidden">
                   <img
                     src={item.src}
                     alt={item.alt}
@@ -51,7 +51,7 @@ export function ProjectsPreview() {
                     className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 </div>
-                <span className="mt-3 block text-xs font-semibold uppercase tracking-widest text-ink/45 transition-colors group-hover:text-crest">
+                <span className="border-t border-ink/10 px-4 py-3.5 text-xs font-bold uppercase tracking-widest text-ink/60 transition-colors group-hover:text-crest">
                   {item.label}
                 </span>
               </Link>

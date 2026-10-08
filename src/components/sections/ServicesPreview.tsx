@@ -17,7 +17,7 @@ const serviceIcons: Record<ServiceId, typeof Home> = {
 
 export function ServicesPreview() {
   return (
-    <section id="services-preview" className="bg-warm-white py-14 sm:py-16 lg:py-20">
+    <section id="services-preview" className="bg-cream-light py-14 sm:py-16 lg:py-20">
       <Container>
         <SectionHeading
           align="center"
@@ -34,8 +34,13 @@ export function ServicesPreview() {
               <Reveal key={service.id} delay={index * 60}>
                 <Link
                   to={`/services/${serviceSlugs[service.id]}`}
-                  className="group flex h-full flex-col items-start gap-3 border-2 border-ink/10 p-5 transition-colors hover:border-crest"
+                  className="group relative flex h-full flex-col items-start gap-3 border border-ink/10 bg-cream p-5 pt-6 transition-colors hover:border-crest/40"
                 >
+                  <span className="absolute inset-x-0 top-0 h-0.5 bg-ink/15" aria-hidden />
+                  <span
+                    className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-crest transition-transform duration-300 ease-out group-hover:scale-x-100"
+                    aria-hidden
+                  />
                   <Icon className="size-6 text-teal-dark" aria-hidden />
                   <span className="font-display text-sm font-extrabold uppercase leading-tight tracking-wide text-ink sm:text-base">
                     {service.title}

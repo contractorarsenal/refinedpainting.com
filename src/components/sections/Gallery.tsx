@@ -11,6 +11,18 @@ import { ProjectLightbox } from "../projects/ProjectLightbox";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
 
+// Same honest category blurbs ProjectLightbox uses — real, approved copy,
+// reused here for the featured card's description rather than inventing
+// per-project narrative text we don't have.
+const categoryBlurb: Record<string, string> = {
+  "Exterior Painting":
+    "This project showcases the type of exterior preparation and finish work Refined Painting provides for homeowners throughout the Seattle area.",
+  "Interior Painting":
+    "This project showcases the type of interior preparation and finish work Refined Painting provides for homeowners throughout the Seattle area.",
+  "Cabinet Refinishing":
+    "This project showcases the type of cabinet preparation and finish work Refined Painting provides for homeowners throughout the Seattle area.",
+};
+
 /**
  * Structured so a future project detail route can key off `id` without
  * reshaping this data. `category` lines up with ServiceId for when these
@@ -108,25 +120,62 @@ function ProjectFigure({
   onClick: () => void;
 }) {
   return (
-    <button type="button" onClick={onClick} className="group block w-full text-left">
-      <figure>
-        <div className={`relative ${aspect} w-full overflow-hidden rounded-xl bg-ink/5`}>
-          <img
-            src={project.image}
-            alt={project.alt}
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-ink/0 transition-colors duration-300 group-hover:bg-ink/10" aria-hidden />
-        </div>
-        <figcaption className="mt-3 flex flex-col gap-1">
-          <span className="text-[11px] font-bold uppercase tracking-widest text-crest">{project.category}</span>
-          <span className="font-display text-base font-bold uppercase tracking-wide text-ink transition-colors group-hover:text-crest">
-            {project.title}
-          </span>
-        </figcaption>
-      </figure>
+    <button
+      type="button"
+      onClick={onClick}
+      className="group flex h-full w-full flex-col border border-ink/10 bg-cream-light text-left"
+    >
+      <div className={`relative ${aspect} w-full overflow-hidden`}>
+        <img
+          src={project.image}
+          alt={project.alt}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-ink/0 transition-colors duration-300 group-hover:bg-ink/10" aria-hidden />
+      </div>
+      <figcaption className="flex flex-1 flex-col items-start gap-1 border-t border-ink/10 px-4 py-3.5">
+        <span className="text-[10px] font-bold uppercase tracking-widest text-crest">{project.category}</span>
+        <span className="font-display text-base font-bold uppercase tracking-wide text-ink transition-colors group-hover:text-crest">
+          {project.title}
+        </span>
+      </figcaption>
+    </button>
+  );
+}
+
+function FeaturedFigure({ project, onClick }: { project: ProjectEntry; onClick: () => void }) {
+  const blurb =
+    categoryBlurb[project.category] ??
+    "This project showcases the type of work Refined Painting provides for homeowners throughout the Seattle area.";
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="group flex h-full w-full flex-col border border-ink/10 bg-cream-light text-left"
+    >
+      <div className="relative aspect-4/3 w-full overflow-hidden sm:aspect-16/9">
+        <span className="absolute left-0 top-0 z-10 bg-crest px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-warm-white">
+          Featured Project
+        </span>
+        <img
+          src={project.image}
+          alt={project.alt}
+          loading="eager"
+          decoding="async"
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-ink/0 transition-colors duration-300 group-hover:bg-ink/10" aria-hidden />
+      </div>
+      <div className="flex flex-1 flex-col items-start gap-2 border-t border-ink/10 p-6">
+        <span className="text-[11px] font-bold uppercase tracking-widest text-crest">{project.category}</span>
+        <span className="font-display text-2xl font-extrabold uppercase tracking-wide text-ink transition-colors group-hover:text-crest sm:text-3xl">
+          {project.title}
+        </span>
+        <p className="text-sm leading-relaxed text-ink/60">{blurb}</p>
+      </div>
     </button>
   );
 }
@@ -148,9 +197,14 @@ export function Gallery() {
     setActiveIndex(sameCategory.findIndex((p) => p.id === project.id));
   };
 
+  // The second project (after the feature) gets the smaller vertical slot
+  // beside it in the editorial layout; everything else flows into the grid.
+  const secondary = showFeature ? rest[0] : null;
+  const gridProjects = showFeature ? filtered.filter((p) => p.id !== feature.id && p.id !== secondary?.id) : filtered;
+
   return (
-    <section className="bg-off-white pb-10 pt-10 sm:pb-12 lg:pb-16">
-      <Container>
+    <section className="relative overflow-hidden bg-off-white pb-10 pt-10 sm:pb-12 lg:pb-16">
+      <Container className="relative">
         <Reveal>
           <p className="mb-5 max-w-lg text-sm leading-relaxed text-ink/55">
             Browse recent interior, exterior and cabinet projects.
@@ -173,17 +227,20 @@ export function Gallery() {
         </Reveal>
 
         {showFeature ? (
-          <Reveal>
-            <ProjectFigure
-              project={feature}
-              aspect="aspect-4/3 sm:aspect-16/9 lg:aspect-21/9"
-              onClick={() => openProject(feature)}
-            />
-          </Reveal>
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+            <Reveal className="lg:col-span-2">
+              <FeaturedFigure project={feature} onClick={() => openProject(feature)} />
+            </Reveal>
+            {secondary ? (
+              <Reveal delay={100} className="h-full">
+                <ProjectFigure project={secondary} aspect="aspect-4/3 lg:aspect-3/4" onClick={() => openProject(secondary)} />
+              </Reveal>
+            ) : null}
+          </div>
         ) : null}
 
-        <div className={`grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 ${showFeature ? "mt-10 sm:mt-12" : ""}`}>
-          {(showFeature ? filtered.filter((p) => p.id !== feature.id) : filtered).map((project, index) => (
+        <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ${showFeature ? "mt-6" : ""}`}>
+          {gridProjects.map((project, index) => (
             <Reveal key={project.id} delay={Math.min(index, 4) * 60}>
               <ProjectFigure project={project} onClick={() => openProject(project)} />
             </Reveal>

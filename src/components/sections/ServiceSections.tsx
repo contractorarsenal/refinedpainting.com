@@ -1,5 +1,6 @@
-import { Building2, Check, Hammer } from "lucide-react";
+import { ArrowRight, Building2, Check, Hammer } from "lucide-react";
 import { Fragment, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 import cabinetsPhoto from "../../assets/images/projects/cabinets-sage-green.webp";
 import navyPhoto from "../../assets/images/projects/exterior-finished-navy.webp";
 import inProgressPhoto from "../../assets/images/projects/exterior-in-progress.webp";
@@ -55,6 +56,9 @@ function FeaturedSection({ id, index, bg }: { id: ServiceId; index: number; bg: 
         {/* Reading order: label, heading, value statement, key points, CTA, then visual. */}
         <div className={`flex flex-col items-start gap-5 ${reversed ? "lg:order-1" : "lg:order-2"}`}>
           <Reveal className="flex flex-col items-start gap-4">
+            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/40">
+              Service Spec {String(index + 1).padStart(2, "0")}
+            </span>
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
             <h3 className="font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
               {service.title}
@@ -85,10 +89,13 @@ function FeaturedSection({ id, index, bg }: { id: ServiceId; index: number; bg: 
 
         <Reveal
           delay={130}
-          className={`aspect-4/3 w-full overflow-hidden rounded-xl shadow-card ${
+          className={`relative aspect-4/3 w-full overflow-hidden rounded-lg border border-ink/10 shadow-card ${
             reversed ? "lg:order-2" : "lg:order-1"
           }`}
         >
+          <span className="absolute left-3 top-3 z-10 bg-ink/85 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-warm-white">
+            {service.title}
+          </span>
           <ProjectImage src={image.src} alt={image.alt} />
         </Reveal>
       </Container>
@@ -111,11 +118,11 @@ function PairedCard({ id }: { id: ServiceId }) {
   const image = serviceImages[id];
 
   return (
-    <Reveal id={serviceSlugs[id]} className="scroll-mt-24 flex flex-col gap-4">
-      <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-card">
+    <Reveal id={serviceSlugs[id]} className="scroll-mt-24 flex flex-col border border-ink/10 bg-cream-light">
+      <div className="aspect-16/10 w-full overflow-hidden">
         <ProjectImage src={image.src} alt={image.alt} />
       </div>
-      <div className="flex flex-col items-start gap-2.5">
+      <div className="flex flex-1 flex-col items-start gap-2.5 p-6 sm:p-7">
         <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
         <h3 className="font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink">{service.title}</h3>
         <p className="text-xs font-semibold text-ink/50">{sectionIntros[id]}</p>
@@ -128,10 +135,10 @@ function PairedCard({ id }: { id: ServiceId }) {
             </li>
           ))}
         </ul>
-        <LinkButton href={`/services/${serviceSlugs[id]}`} variant="ghost" className="mt-1">
-          Full Details
-        </LinkButton>
       </div>
+      <LinkButton href={`/services/${serviceSlugs[id]}`} variant="secondary" className="w-full justify-center">
+        Full Details
+      </LinkButton>
     </Reveal>
   );
 }
@@ -151,15 +158,21 @@ function CompactCard({ id, divider }: { id: ServiceId; divider?: boolean }) {
       id={serviceSlugs[id]}
       className={`scroll-mt-24 border-t-2 border-ink/10 pt-5 ${divider ? "sm:border-t-2 sm:border-l sm:border-l-ink/10 sm:pl-10" : ""}`}
     >
-      {Icon ? <Icon className="size-6 text-teal-dark" aria-hidden /> : null}
-      <span className="mt-2 block text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
-      <h3 className="mt-1.5 font-display text-lg font-extrabold uppercase leading-[0.98] text-ink sm:text-xl">
+      <div className="flex items-start justify-between gap-3">
+        {Icon ? <Icon className="size-6 text-teal-dark" aria-hidden /> : null}
+        <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">{detail.eyebrow}</span>
+      </div>
+      <h3 className="mt-3 font-display text-lg font-extrabold uppercase leading-[0.98] text-ink sm:text-xl">
         {service.title}
       </h3>
       <p className="mt-2 text-sm leading-relaxed text-ink/65">{sectionIntros[id]}</p>
-      <LinkButton href={`/services/${serviceSlugs[id]}`} variant="ghost" size="md" className="mt-4">
+      <Link
+        to={`/services/${serviceSlugs[id]}`}
+        className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-crest transition-colors hover:text-ink"
+      >
         Full Details
-      </LinkButton>
+        <ArrowRight className="size-3" aria-hidden />
+      </Link>
     </Reveal>
   );
 }
@@ -169,15 +182,24 @@ export function ServiceSections({ afterCabinets }: { afterCabinets?: ReactNode }
     <div className="flex flex-col">
       {featured.map((id, index) => (
         <Fragment key={id}>
-          <FeaturedSection id={id} index={index} bg={index % 2 === 0 ? "bg-warm-white" : "bg-cream"} />
+          <FeaturedSection id={id} index={index} bg={index % 2 === 0 ? "bg-cream-light" : "bg-cream"} />
           {id === "cabinets" ? afterCabinets : null}
         </Fragment>
       ))}
 
-      <section className="border-t border-ink/10 bg-warm-white py-12 sm:py-14 lg:py-18">
+      <section className="border-t border-ink/10 bg-cream-light py-12 sm:py-14 lg:py-18">
         <Container>
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink/50">Weather &amp; Seasonal Work</span>
-          <div className="mt-6 grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-10">
+          <div className="flex flex-col items-start gap-2 border-b border-ink/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">
+                Weather &amp; Seasonal Work
+              </span>
+              <h2 className="mt-2 font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink sm:text-3xl">
+                Built for Pacific Northwest Exposure
+              </h2>
+            </div>
+          </div>
+          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
             {paired.map((id) => (
               <PairedCard key={id} id={id} />
             ))}
@@ -187,8 +209,17 @@ export function ServiceSections({ afterCabinets }: { afterCabinets?: ReactNode }
 
       <section className="border-t border-ink/10 bg-cream py-12 sm:py-14 lg:py-18">
         <Container>
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink/50">Structural Disciplines</span>
-          <div className="mt-6 grid grid-cols-1 gap-10 sm:grid-cols-2">
+          <div className="flex items-start justify-between gap-4 border-b border-ink/10 pb-6">
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">
+                Structural Disciplines
+              </span>
+              <h2 className="mt-2 font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink sm:text-3xl">
+                Commercial &amp; Carpentry Services
+              </h2>
+            </div>
+          </div>
+          <div className="mt-8 grid grid-cols-1 gap-10 sm:grid-cols-2">
             {compact.map((id, index) => (
               <CompactCard key={id} id={id} divider={index === 1} />
             ))}

@@ -68,7 +68,10 @@ export function Footer() {
         </div>
 
         <nav aria-label="Services">
-          <h3 className="text-xs font-bold uppercase tracking-widest text-warm-white/50">Services</h3>
+          <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-warm-white/50">
+            <span className="size-1.5 bg-crest" aria-hidden />
+            Services
+          </h3>
           <ul className="mt-4 flex flex-col gap-3">
             {services.map((service) => (
               <li key={service.id}>
@@ -84,7 +87,10 @@ export function Footer() {
         </nav>
 
         <nav aria-label="Company">
-          <h3 className="text-xs font-bold uppercase tracking-widest text-warm-white/50">Company</h3>
+          <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-warm-white/50">
+            <span className="size-1.5 bg-teal" aria-hidden />
+            Company
+          </h3>
           <ul className="mt-4 flex flex-col gap-3">
             {companyLinks.map((link) => (
               <li key={link.label}>
@@ -97,7 +103,10 @@ export function Footer() {
         </nav>
 
         <div className="flex flex-col gap-5">
-          <h3 className="text-xs font-bold uppercase tracking-widest text-warm-white/50">Get Started</h3>
+          <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-warm-white/50">
+            <span className="size-1.5 bg-crest" aria-hidden />
+            Get Started
+          </h3>
           <Button onClick={() => openQuoteModal()} size="md" className="justify-center">
             {CTA.primary}
           </Button>

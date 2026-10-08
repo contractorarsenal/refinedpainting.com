@@ -17,9 +17,12 @@ export function ServiceAreaSummary() {
           className="mx-auto"
         />
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
           {featuredAreas.map((area) => (
-            <span key={area} className="flex items-center gap-1.5 text-sm font-bold text-ink/75">
+            <span
+              key={area}
+              className="flex items-center gap-1.5 border border-ink/15 bg-cream-light px-3 py-1.5 text-xs font-bold text-ink/75"
+            >
               <MapPin className="size-3.5 text-crest" aria-hidden />
               {area}
             </span>
