@@ -1,24 +1,34 @@
 import { processSteps } from "../../lib/content";
+import { useInView } from "../../hooks/useInView";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
 
 export function Process() {
-  return (
-    <section id="process" className="relative scroll-mt-24 border-t border-warm-white/10 bg-ink py-16 sm:py-20 lg:py-24">
-      <Container className="relative">
-        <SectionHeading
-          align="center"
-          tone="light"
-          eyebrow="Systematic Craft"
-          title="The 4-Phase Refined Protocol"
-          description="A clear, consistent process from your first estimate to the final walkthrough."
-          className="mx-auto"
-        />
+  const { ref: lineRef, inView: lineInView } = useInView<HTMLOListElement>(0.4);
 
-        <ol className="relative mx-auto mt-14 grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {/* Faint continuous line behind the four steps — shows through the gaps so 01–04 read as one progression, not four isolated blocks. */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 hidden h-px bg-warm-white/15 lg:block" aria-hidden />
+  return (
+    <section id="process" className="relative scroll-mt-24 border-t border-warm-white/10 bg-ink py-12 sm:py-16 lg:py-20">
+      <Container className="relative">
+        <Reveal>
+          <SectionHeading
+            align="center"
+            tone="light"
+            eyebrow="Systematic Craft"
+            title="The 4-Phase Refined Protocol"
+            description="A clear, consistent process from your first estimate to the final walkthrough."
+            className="mx-auto"
+          />
+        </Reveal>
+
+        <ol ref={lineRef} className="relative mx-auto mt-14 grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          {/* Connecting line draws left-to-right as the row enters, so 01–04 read as one progression instead of four isolated blocks. */}
+          <div
+            className={`pointer-events-none absolute inset-x-0 top-0 hidden h-px origin-left bg-warm-white/20 transition-transform duration-700 ease-out lg:block ${
+              lineInView ? "scale-x-100" : "scale-x-0"
+            }`}
+            aria-hidden
+          />
 
           {processSteps.map((step, index) => (
             <Reveal key={step.number} delay={index * 120}>

@@ -90,24 +90,31 @@ export function ServicesPage() {
       </section>
 
       {/* F2 — Choose Your Service: scannable overview before the detailed sections below */}
-      <section className="border-t border-ink/10 bg-cream py-14 sm:py-16 lg:py-20">
+      <section className="border-t border-ink/10 bg-cream py-12 sm:py-14 lg:py-18">
         <Container>
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Choose Your Service</span>
-            <h2 className="mt-3 text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
-              What Do You Need Done?
-            </h2>
-          </div>
+          <Reveal>
+            <div className="mx-auto max-w-2xl text-center">
+              <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Choose Your Service</span>
+              <h2 className="mt-3 text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+                What Do You Need Done?
+              </h2>
+            </div>
+          </Reveal>
 
           <div className="mt-12 grid grid-cols-1 gap-x-10 gap-y-9 sm:grid-cols-3">
             {services.map((service, index) => {
               const Icon = serviceIcons[service.id];
               return (
-                <Reveal key={service.id} delay={index * 60}>
+                <Reveal key={service.id} delay={120 + index * 70}>
                   <a
                     href={`#${serviceSlugs[service.id]}`}
-                    className="group flex h-full flex-col items-start gap-3 border-t-2 border-ink/15 pt-5 transition-colors hover:border-crest"
+                    className="group relative flex h-full flex-col items-start gap-3 pt-5"
                   >
+                    <span className="absolute inset-x-0 top-0 h-0.5 bg-ink/15" aria-hidden />
+                    <span
+                      className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-crest transition-transform duration-300 ease-out group-hover:scale-x-100"
+                      aria-hidden
+                    />
                     <Icon
                       className="size-8 text-teal-dark transition-transform duration-300 group-hover:scale-110 group-hover:text-crest"
                       aria-hidden
@@ -133,7 +140,7 @@ export function ServicesPage() {
       <Process />
       <PromoBanner />
 
-      <section id="warranty" className="scroll-mt-24 border-t border-ink/10 bg-cream py-14 sm:py-16 lg:py-20">
+      <section id="warranty" className="scroll-mt-24 border-t border-ink/10 bg-cream py-12 sm:py-14 lg:py-18">
         <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <div className="border-2 border-ink/10 p-6 sm:p-8 lg:sticky lg:top-28 lg:self-start">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Structural Integrity</span>

@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useRef } from "react";
 import type { ProjectEntry } from "../sections/Gallery";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button } from "../ui/Button";
@@ -23,8 +24,10 @@ interface ProjectLightboxProps {
 
 export function ProjectLightbox({ projects, index, onClose, onNavigate }: ProjectLightboxProps) {
   const touchStartX = useRef<number | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const { openQuoteModal } = useQuoteModal();
   useLockBodyScroll(true);
+  useFocusTrap(dialogRef, true);
 
   const project = projects[index];
   const goPrev = () => onNavigate((index - 1 + projects.length) % projects.length);
@@ -49,7 +52,9 @@ export function ProjectLightbox({ projects, index, onClose, onNavigate }: Projec
 
   return (
     <div
-      className="fixed inset-0 z-100 flex flex-col bg-ink/97 backdrop-blur-sm"
+      ref={dialogRef}
+      tabIndex={-1}
+      className="animate-fade-in fixed inset-0 z-100 flex flex-col overflow-y-auto bg-ink/97 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-label={`${project.title}: ${project.category}`}
@@ -69,7 +74,7 @@ export function ProjectLightbox({ projects, index, onClose, onNavigate }: Projec
         type="button"
         onClick={onClose}
         aria-label="Close"
-        className="absolute right-4 top-4 z-10 flex size-11 items-center justify-center rounded-full bg-warm-white/10 text-warm-white transition-colors hover:bg-warm-white/20 sm:right-6 sm:top-6"
+        className="fixed right-4 top-4 z-10 flex size-11 items-center justify-center rounded-full bg-warm-white/10 text-warm-white transition-colors hover:bg-warm-white/20 sm:right-6 sm:top-6"
       >
         <X className="size-5" aria-hidden />
       </button>
@@ -81,7 +86,7 @@ export function ProjectLightbox({ projects, index, onClose, onNavigate }: Projec
           goPrev();
         }}
         aria-label="Previous project"
-        className="absolute left-2 top-1/2 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-warm-white/10 text-warm-white transition-colors hover:bg-warm-white/20 sm:left-6"
+        className="fixed left-2 top-1/2 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-warm-white/10 text-warm-white transition-colors hover:bg-warm-white/20 sm:left-6"
       >
         <ChevronLeft className="size-6" aria-hidden />
       </button>
@@ -92,21 +97,24 @@ export function ProjectLightbox({ projects, index, onClose, onNavigate }: Projec
           goNext();
         }}
         aria-label="Next project"
-        className="absolute right-2 top-1/2 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-warm-white/10 text-warm-white transition-colors hover:bg-warm-white/20 sm:right-6"
+        className="fixed right-2 top-1/2 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-warm-white/10 text-warm-white transition-colors hover:bg-warm-white/20 sm:right-6"
       >
         <ChevronRight className="size-6" aria-hidden />
       </button>
 
-      <div className="flex flex-1 items-center justify-center px-14 pt-16 sm:px-20" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="flex min-h-0 shrink-0 items-center justify-center px-12 pt-16 sm:flex-1 sm:px-20"
+        onClick={(e) => e.stopPropagation()}
+      >
         <img
           src={project.image}
           alt={project.alt}
-          className="max-h-[62vh] w-auto max-w-full rounded object-contain shadow-lift sm:max-h-[68vh]"
+          className="max-h-[42vh] w-auto max-w-full rounded object-contain shadow-lift sm:max-h-[68vh]"
         />
       </div>
 
       <div
-        className="relative flex flex-col items-center gap-3 px-6 pb-8 pt-4 text-center sm:pb-10"
+        className="relative flex shrink-0 flex-col items-center gap-3 px-6 pb-8 pt-4 text-center sm:pb-10"
         onClick={(e) => e.stopPropagation()}
       >
         <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{project.category}</span>

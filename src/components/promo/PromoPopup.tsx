@@ -1,6 +1,7 @@
 import { X } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { promoPopup } from "../../lib/content";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button } from "../ui/Button";
@@ -13,8 +14,10 @@ interface PromoPopupProps {
 
 export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
   const { openQuoteModal } = useQuoteModal();
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useLockBodyScroll(isOpen);
+  useFocusTrap(dialogRef, isOpen);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -37,7 +40,11 @@ export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="animate-fade-up relative flex w-full max-w-220 flex-col overflow-hidden rounded border-2 border-teal-dark bg-cream shadow-lift sm:flex-row">
+      <div
+        ref={dialogRef}
+        tabIndex={-1}
+        className="animate-fade-up relative flex w-full max-w-220 flex-col overflow-hidden rounded border-2 border-teal-dark bg-cream shadow-lift sm:flex-row"
+      >
         <button
           type="button"
           onClick={onClose}

@@ -28,7 +28,7 @@ export function AboutPage() {
       {/* F1 — Strong company positioning */}
       <section className="bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
         <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
-          <div>
+          <Reveal>
             <span className="h-1 w-10 bg-crest" aria-hidden />
             <span className="mt-4 block text-xs font-bold uppercase tracking-[0.16em] text-crest">
               About Refined Painting
@@ -40,16 +40,18 @@ export function AboutPage() {
             <p className="mt-6 border-t border-ink/10 pt-5 text-xs font-bold uppercase tracking-wide text-ink/45">
               {trustBullets.slice(0, 3).join(" · ")}
             </p>
-          </div>
+          </Reveal>
 
-          <ImagePlaceholder label="Team Photo Coming Soon" aspectClassName="aspect-4/3" className="max-w-md lg:justify-self-end" />
+          <Reveal delay={130} className="max-w-md lg:justify-self-end">
+            <ImagePlaceholder label="Team Photo Coming Soon" aspectClassName="aspect-4/3" />
+          </Reveal>
         </Container>
       </section>
 
       {/* F2 — Why Refined exists / approved story */}
       <section className="bg-ink pt-12 text-warm-white sm:pt-14 lg:pt-16">
         <Container className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="flex flex-col gap-6 py-10 pr-0 lg:py-16 lg:pr-12">
+          <Reveal className="flex flex-col gap-6 py-10 pr-0 lg:py-16 lg:pr-12">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">The Refined Pledge</span>
             <p className="text-balance font-display text-2xl font-extrabold leading-tight text-warm-white sm:text-3xl">
               &ldquo;{mission}&rdquo;
@@ -58,8 +60,11 @@ export function AboutPage() {
             <div className="mt-auto border-t border-warm-white/10 pt-5 text-xs font-bold uppercase tracking-widest text-warm-white/40">
               Locally Owned &middot; King &amp; Snohomish Counties
             </div>
-          </div>
-          <div className="flex flex-col gap-6 border-t border-warm-white/10 py-10 lg:border-l lg:border-t-0 lg:py-16 lg:pl-12">
+          </Reveal>
+          <Reveal
+            delay={130}
+            className="flex flex-col gap-6 border-t border-warm-white/10 py-10 lg:border-l lg:border-t-0 lg:py-16 lg:pl-12"
+          >
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{companyStory.heading}</span>
             <div className="flex flex-col gap-4">
               {companyStory.paragraphs.map((p) => (
@@ -75,26 +80,28 @@ export function AboutPage() {
                 </span>
               ))}
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* F3 — How we think about the work */}
       <section className="border-t border-ink/10 bg-warm-white py-16 sm:py-20 lg:py-24">
         <Container>
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Our Standards</span>
-            <h2 className="mt-3 text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
-              How We Think About the Work
-            </h2>
-            <p className="mt-3 text-sm leading-relaxed text-ink/60 sm:text-base">
-              Four principles every project is run against, from the first estimate to the final coat.
-            </p>
-          </div>
+          <Reveal>
+            <div className="mx-auto max-w-2xl text-center">
+              <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Our Standards</span>
+              <h2 className="mt-3 text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+                How We Think About the Work
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-ink/60 sm:text-base">
+                Four principles every project is run against, from the first estimate to the final coat.
+              </p>
+            </div>
+          </Reveal>
 
           <div className="mx-auto mt-12 grid max-w-3xl grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
             {coreValues.map((value, index) => (
-              <Reveal key={value.title} delay={index * 80}>
+              <Reveal key={value.title} delay={180 + index * 80}>
                 <div className="border-t-2 border-crest pt-4">
                   <h3 className="font-display text-base font-extrabold uppercase tracking-wide text-ink sm:text-lg">
                     {value.title}
@@ -110,26 +117,28 @@ export function AboutPage() {
       {/* F4 — Team */}
       <section className="border-t border-ink/10 bg-cream py-16 sm:py-20 lg:py-24">
         <Container>
-          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">
-                Architectural Craft Team
-              </span>
-              <h2 className="mt-2 font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
-                Craftsmen at the Helm
-              </h2>
-              <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink/60">
-                The people behind the work and communication on your project.
+          <Reveal>
+            <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">
+                  Architectural Craft Team
+                </span>
+                <h2 className="mt-2 font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+                  Craftsmen at the Helm
+                </h2>
+                <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink/60">
+                  The people behind the work and communication on your project.
+                </p>
+              </div>
+              <p className="max-w-xs text-sm leading-relaxed text-ink/60">
+                Direct field leadership on every residential project.
               </p>
             </div>
-            <p className="max-w-xs text-sm leading-relaxed text-ink/60">
-              Direct field leadership on every residential project.
-            </p>
-          </div>
+          </Reveal>
 
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
             {teamMembers.map((member, index) => (
-              <Reveal key={member.name} delay={index * 100}>
+              <Reveal key={member.name} delay={180 + index * 100}>
                 <div className="flex items-center gap-5 border-2 border-ink/10 p-5">
                   <div className="flex size-24 shrink-0 items-center justify-center rounded-xl bg-light-blue text-3xl font-black text-teal-dark sm:size-28">
                     {member.name.charAt(0)}
@@ -152,16 +161,18 @@ export function AboutPage() {
       {/* F5 — What you can expect from us (practical, homeowner-facing standards) */}
       <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
         <Container className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">With Our Team in Your Home</span>
-          <h2 className="mt-3 font-display text-3xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-4xl">
-            What You Can Expect From Us
-          </h2>
+          <Reveal>
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">With Our Team in Your Home</span>
+            <h2 className="mt-3 font-display text-3xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-4xl">
+              What You Can Expect From Us
+            </h2>
+          </Reveal>
           <ul className="mx-auto mt-8 flex max-w-sm flex-col gap-3 text-left sm:max-w-md">
             {localPartnerBullets.map((item, index) => (
               <Reveal
                 key={item}
                 as="li"
-                delay={index * 60}
+                delay={180 + index * 60}
                 className="flex items-center gap-3 border-t border-warm-white/10 pt-3 first:border-t-0 first:pt-0"
               >
                 <Check className="size-4 shrink-0 text-crest" aria-hidden />

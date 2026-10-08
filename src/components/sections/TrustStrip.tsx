@@ -3,6 +3,7 @@ import badgeGoogle from "../../assets/images/badge-google-verified.webp";
 import badgeLicensed from "../../assets/images/badge-licensed-insured.webp";
 import badgeNextdoor from "../../assets/images/badge-nextdoor.webp";
 import { Container } from "../ui/Container";
+import { Reveal } from "../ui/Reveal";
 
 const badges = [
   { src: badgeGoogle, alt: "Google Verified" },
@@ -22,16 +23,15 @@ export function TrustStrip({ eyebrow }: { eyebrow?: string }) {
             <span className="h-px w-8 bg-crest" aria-hidden />
           </div>
         ) : null}
-        <div className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-12">
+        <Reveal className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-12">
           <div className="flex flex-wrap items-center justify-center gap-x-9 gap-y-4">
-            {badges.map((badge, index) => (
+            {badges.map((badge) => (
               <img
                 key={badge.alt}
                 src={badge.src}
                 alt={badge.alt}
                 loading="lazy"
-                style={{ animationDelay: `${index * 90}ms` }}
-                className="animate-fade-in h-11 w-11 object-contain sm:h-12 sm:w-12"
+                className="h-11 w-11 object-contain sm:h-12 sm:w-12"
               />
             ))}
           </div>
@@ -39,7 +39,7 @@ export function TrustStrip({ eyebrow }: { eyebrow?: string }) {
           <p className="border-2 border-ink/15 px-4 py-2 text-xs font-bold uppercase tracking-widest text-ink/70">
             5-Year Workmanship Warranty
           </p>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

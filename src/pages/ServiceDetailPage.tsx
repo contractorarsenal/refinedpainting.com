@@ -90,6 +90,7 @@ export function ServiceDetailPage() {
         title={service.title}
         description={detail.overview}
         placeholderLabel={`${service.title} Image`}
+        image={hasProjectProof[serviceId] ? hero : undefined}
         onEstimateClick={() => openQuoteModal(serviceId)}
       />
 
@@ -199,6 +200,51 @@ export function ServiceDetailPage() {
           </section>
           <PNWDifference />
         </>
+      ) : serviceId === "deck-fence" ? (
+        // Stain work and horizontal wood surfaces are explicitly excluded from the
+        // standard workmanship warranty (see `warranty.excluded`), and this service
+        // is almost entirely stained, horizontal surfaces. Showing the blanket
+        // 5-year warranty claim here would misrepresent coverage, so this section
+        // states the real, surface-dependent coverage instead.
+        <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+          <Container className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Warranty Coverage</span>
+              <h2 className="font-display text-2xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-3xl">
+                Coverage Varies by Surface
+              </h2>
+              <p className="text-sm leading-relaxed text-warm-white/65">
+                Our workmanship warranty covers peeling caused by inadequate surface preparation or improper
+                application on painted surfaces. Deck and fence staining falls outside that standard coverage:
+              </p>
+              <ul className="flex flex-col gap-1.5 text-sm leading-relaxed text-warm-white/65">
+                {warranty.excluded
+                  .filter((item) => /stained|horizontal/i.test(item))
+                  .map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span className="mt-2 size-1 shrink-0 rounded-full bg-warm-white/40" aria-hidden />
+                      {item}
+                    </li>
+                  ))}
+              </ul>
+              <LinkButton href="/services#warranty" variant="ghost" className="mt-1 self-start">
+                View Full Warranty Terms
+              </LinkButton>
+            </div>
+
+            <div className="flex flex-col gap-5 border-t border-warm-white/10 pt-8 lg:border-l lg:border-t-0 lg:pl-16 lg:pt-0">
+              <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">What to Expect</span>
+              <ul className="flex flex-col gap-4">
+                {(trustPoints[serviceId] ?? []).map((point) => (
+                  <li key={point} className="flex items-start gap-2.5">
+                    <Check className="mt-0.5 size-4 shrink-0 text-teal" aria-hidden />
+                    <span className="text-sm leading-relaxed text-warm-white/80">{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Container>
+        </section>
       ) : (
         <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
           <Container className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">

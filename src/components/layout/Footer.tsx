@@ -11,6 +11,7 @@ import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { DotGrid } from "../ui/DotGrid";
 import { Mascot } from "../ui/Mascot";
+import { Reveal } from "../ui/Reveal";
 
 const companyLinks = [
   { label: "About", href: "/about" },
@@ -35,7 +36,8 @@ export function Footer() {
         className="pointer-events-none absolute -bottom-8 right-[6%] hidden h-56 w-56 opacity-[0.15] lg:block"
       />
 
-      <Container className="relative grid grid-cols-1 gap-10 pb-12 pt-16 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr] lg:gap-10 lg:pt-20">
+      <Reveal>
+        <Container className="relative grid grid-cols-1 gap-10 pb-12 pt-16 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr] lg:gap-10 lg:pt-20">
         <div className="flex flex-col gap-5">
           <Link to="/" className="self-start">
             <img src={logoSrc} alt="Refined Painting" className="h-14 w-auto object-contain" />
@@ -109,7 +111,8 @@ export function Footer() {
             Call Now
           </LinkButton>
         </div>
-      </Container>
+        </Container>
+      </Reveal>
 
       <Container className="relative flex flex-col items-center gap-5 border-t border-warm-white/10 py-8">
         <span className="text-xs font-bold uppercase tracking-widest text-warm-white/45">
@@ -126,8 +129,6 @@ export function Footer() {
       <Container className="relative flex flex-col items-center justify-between gap-3 border-t border-warm-white/10 py-6 text-xs text-warm-white/50 sm:flex-row">
         <p>&copy; 2026 Refined Painting. All rights reserved.</p>
         <div className="flex items-center gap-6">
-          <span>Privacy Policy</span>
-          <span>Terms</span>
           <span className="text-warm-white/35">Made by Contractor Arsenal</span>
         </div>
       </Container>

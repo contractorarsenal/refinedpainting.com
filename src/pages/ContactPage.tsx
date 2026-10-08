@@ -22,19 +22,25 @@ export function ContactPage() {
     <>
       <section className="bg-cream pb-10 pt-36 sm:pb-12 sm:pt-60 lg:pb-14">
         <Container className="max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Start Your Project</span>
-          <h1 className="mt-3 text-balance font-display text-4xl font-black uppercase leading-[0.96] text-ink sm:text-5xl">
-            Let&rsquo;s Talk Through <span className="text-teal-dark">Your Project</span>
-          </h1>
-          <p className="mt-4 max-w-md text-balance text-base leading-relaxed text-ink/70 sm:text-lg">
-            Send us a message below, or call us directly to talk through your project.
-          </p>
+          <Reveal>
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Start Your Project</span>
+            <h1 className="mt-3 text-balance font-display text-4xl font-black uppercase leading-[0.96] text-ink sm:text-5xl">
+              Let&rsquo;s Talk Through <span className="text-teal-dark">Your Project</span>
+            </h1>
+            <p className="mt-4 max-w-md text-balance text-base leading-relaxed text-ink/70 sm:text-lg">
+              Send us a message below, or call us directly to talk through your project.
+            </p>
+          </Reveal>
         </Container>
       </section>
 
       <section className="border-t-2 border-crest bg-light-blue py-12 sm:py-14 lg:py-16">
-        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
-          <div className="flex flex-col gap-5">
+        {/* Mobile stacks in source order, so the form sits right after a short
+            trust/CTA block instead of behind the full info stack — the longer
+            address/hours/next-steps/photo block moves below the form. Desktop
+            uses explicit grid placement to keep the familiar two-column split. */}
+        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-x-14 lg:gap-y-10">
+          <div className="flex flex-col gap-5 lg:col-start-1 lg:row-start-1">
             <Reveal>
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ink/50">
                 <ShieldCheck className="size-4 text-crest" aria-hidden />
@@ -68,7 +74,13 @@ export function ContactPage() {
                 </LinkButton>
               </div>
             </Reveal>
+          </div>
 
+          <Reveal delay={120} className="lg:col-start-2 lg:row-start-1 lg:row-span-2">
+            <ContactForm />
+          </Reveal>
+
+          <div className="flex flex-col gap-5 lg:col-start-1 lg:row-start-2">
             <Reveal delay={140}>
               <div className="flex items-start gap-3 border-t border-ink/10 pt-5">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
@@ -119,8 +131,6 @@ export function ContactPage() {
               </div>
             </Reveal>
           </div>
-
-          <ContactForm />
         </Container>
       </section>
 

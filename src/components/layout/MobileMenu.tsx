@@ -1,7 +1,8 @@
 import { Phone, X } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { business, CTA } from "../../lib/content";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button } from "../ui/Button";
@@ -21,7 +22,9 @@ interface MobileMenuProps {
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const { openQuoteModal } = useQuoteModal();
+  const panelRef = useRef<HTMLDivElement>(null);
   useLockBodyScroll(isOpen);
+  useFocusTrap(panelRef, isOpen);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -37,6 +40,11 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   return (
     <div className="fixed inset-0 z-90 bg-ink/60 backdrop-blur-sm lg:hidden" onClick={onClose}>
       <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+        tabIndex={-1}
         className="ml-auto flex h-full w-[86%] max-w-sm animate-fade-up flex-col bg-warm-white shadow-lift"
         onClick={(e) => e.stopPropagation()}
       >

@@ -1,8 +1,13 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { useLocation } from "react-router-dom";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { PromoPopup } from "./PromoPopup";
 
 const DISMISSED_KEY = "refinedPainting.promoPopupDismissed";
+
+// Visitors here are already mid-conversion or have just converted — an
+// estimate interruption is the wrong move on any of these routes.
+const SUPPRESSED_ROUTES = ["/contact", "/thank-you"];
 
 function readDismissed() {
   try {
@@ -28,16 +33,20 @@ const PromoPopupContext = createContext<PromoPopupContextValue | null>(null);
 
 export function PromoPopupProvider({ children }: { children: ReactNode }) {
   const { isOpen: quoteOpen } = useQuoteModal();
+  const { pathname } = useLocation();
   const [dismissed, setDismissed] = useState(readDismissed);
   const [wantsToShow, setWantsToShow] = useState(false);
 
+  const suppressedRoute = SUPPRESSED_ROUTES.includes(pathname);
+
   // isOpen is fully derived: show once triggered, unless the quote modal is
-  // open or the popup has already been dismissed this session.
-  const isOpen = wantsToShow && !quoteOpen && !dismissed;
+  // open, we're on a route that suppresses the popup, or it's already been
+  // dismissed this session.
+  const isOpen = wantsToShow && !quoteOpen && !dismissed && !suppressedRoute;
 
   // Trigger after a 12-18s dwell OR 40-50% scroll depth, whichever comes first.
   useEffect(() => {
-    if (dismissed) return;
+    if (dismissed || suppressedRoute) return;
     const delay = 12000 + Math.random() * 6000;
     const timer = window.setTimeout(() => setWantsToShow(true), delay);
 
@@ -53,7 +62,7 @@ export function PromoPopupProvider({ children }: { children: ReactNode }) {
       window.clearTimeout(timer);
       window.removeEventListener("scroll", onScroll);
     };
-  }, [dismissed]);
+  }, [dismissed, suppressedRoute]);
 
   // If the user opens the booking flow, they're already converting. Retire the promo for this session.
   useEffect(() => {

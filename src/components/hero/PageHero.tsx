@@ -2,22 +2,26 @@ import { business } from "../../lib/content";
 import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { ImagePlaceholder } from "../ui/ImagePlaceholder";
+import { ProjectImage } from "../ui/ProjectImage";
 
 interface PageHeroProps {
   eyebrow?: string;
   title: string;
   description?: string;
   placeholderLabel?: string;
+  image?: { src: string; alt: string };
   onEstimateClick?: () => void;
 }
 
-/** Shared split header for /services/:slug detail pages only. Image area is an
- * intentional placeholder until real per-service photography is shot. */
+/** Shared split header for /services/:slug detail pages. Renders a real photo
+ * when one is passed; otherwise falls back to an intentional placeholder for
+ * services that don't have approved photography yet. */
 export function PageHero({
   eyebrow,
   title,
   description,
   placeholderLabel = "Service Image",
+  image,
   onEstimateClick,
 }: PageHeroProps) {
   return (
@@ -47,7 +51,13 @@ export function PageHero({
           </div>
         </div>
 
-        <ImagePlaceholder label={placeholderLabel} aspectClassName="aspect-4/3" className="max-w-md lg:justify-self-end" />
+        {image ? (
+          <div className="aspect-4/3 w-full max-w-md overflow-hidden rounded-xl shadow-card lg:justify-self-end">
+            <ProjectImage src={image.src} alt={image.alt} eager />
+          </div>
+        ) : (
+          <ImagePlaceholder label={placeholderLabel} aspectClassName="aspect-4/3" className="max-w-md lg:justify-self-end" />
+        )}
       </Container>
     </section>
   );

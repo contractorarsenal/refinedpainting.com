@@ -1,7 +1,8 @@
 import { ChevronLeft, X } from "lucide-react";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type RefObject } from "react";
 import { business, services, timelineOptions } from "../../lib/content";
 import { Mascot } from "../ui/Mascot";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { Button } from "../ui/Button";
 import { StepProgress } from "./StepProgress";
@@ -16,6 +17,7 @@ interface QuoteModalProps {
   isOpen: boolean;
   presetService?: ServiceSelection | null;
   onClose: () => void;
+  triggerRef: RefObject<HTMLElement | null>;
 }
 
 // Web3Forms access keys are explicitly public/safe for client-side use by
@@ -25,7 +27,7 @@ interface QuoteModalProps {
 const WEB3FORMS_ACCESS_KEY = "5325d12a-69cf-4914-9eed-810c0410edf5";
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
-export function QuoteModal({ isOpen, presetService, onClose }: QuoteModalProps) {
+export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: QuoteModalProps) {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<QuoteFormData>(initialQuoteData);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -33,6 +35,7 @@ export function QuoteModal({ isOpen, presetService, onClose }: QuoteModalProps) 
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useLockBodyScroll(isOpen);
+  useFocusTrap(dialogRef, isOpen, triggerRef);
 
   // A service card's "Learn More" can preselect its service so the visitor
   // doesn't have to pick it again on step 2.
@@ -42,6 +45,8 @@ export function QuoteModal({ isOpen, presetService, onClose }: QuoteModalProps) 
     }
   }, [isOpen, presetService]);
 
+  // Re-focus into the new step's content as the wizard advances — the trap
+  // above only handles focus on open/close, not step transitions.
   useEffect(() => {
     if (!isOpen) return;
     const timer = window.setTimeout(() => {

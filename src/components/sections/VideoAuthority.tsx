@@ -31,7 +31,7 @@ export function VideoAuthority() {
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section className="bg-ink py-14 text-warm-white sm:py-16 lg:py-20">
+    <section className="bg-ink py-12 text-warm-white sm:py-14 lg:py-18">
       <Container>
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[auto_1fr] lg:gap-16">
           <Reveal className="mx-auto lg:mx-0">
@@ -69,7 +69,12 @@ export function VideoAuthority() {
               <Button onClick={() => openQuoteModal("cabinets")} size="lg" className="w-full sm:w-auto">
                 {videoAuthority.cta}
               </Button>
-              <LinkButton href="#services" variant="outline-light" size="lg" className="w-full sm:w-auto">
+              <LinkButton
+                href="/services/cabinet-refinishing"
+                variant="outline-light"
+                size="lg"
+                className="w-full sm:w-auto"
+              >
                 {videoAuthority.secondaryCta}
               </LinkButton>
             </div>

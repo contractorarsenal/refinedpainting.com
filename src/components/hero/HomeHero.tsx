@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import heroPoster from "../../assets/images/home-hero-poster.webp";
 import heroVideo from "../../assets/videos/home-hero.mp4";
 import { business } from "../../lib/content";
@@ -16,16 +17,30 @@ const homeHeroMedia: HeroMedia = {
 
 export function HomeHero() {
   const { openQuoteModal } = useQuoteModal();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // `src` stays on the element (so it's discoverable in the static markup,
+  // not hidden from LCP analysis behind a JS-only assignment) but without
+  // `autoplay` and with `preload="none"` the browser won't fetch any of the
+  // 4.6MB file on its own. The poster paints immediately and is the real LCP
+  // candidate; play() is called manually post-mount, which starts the fetch
+  // only after that initial paint is already decided.
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || homeHeroMedia.type !== "video") return;
+    el.play().catch(() => {});
+  }, []);
 
   return (
     <section className="relative flex min-h-[640px] items-start overflow-hidden bg-ink sm:min-h-[720px] lg:min-h-[88vh]">
       <div className="absolute inset-0">
         {homeHeroMedia.type === "video" ? (
           <video
+            ref={videoRef}
             className="h-full w-full object-cover"
-            src={homeHeroMedia.src}
             poster={homeHeroMedia.poster}
-            autoPlay
+            src={homeHeroMedia.src}
+            preload="none"
             muted
             loop
             playsInline

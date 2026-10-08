@@ -50,38 +50,42 @@ function FeaturedSection({ id, index, bg }: { id: ServiceId; index: number; bg: 
   const reversed = index % 2 === 1;
 
   return (
-    <section id={serviceSlugs[id]} className={`scroll-mt-24 py-14 sm:py-16 lg:py-20 ${bg}`}>
+    <section id={serviceSlugs[id]} className={`scroll-mt-24 py-12 sm:py-14 lg:py-18 ${bg}`}>
       <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
         {/* Reading order: label, heading, value statement, key points, CTA, then visual. */}
+        <div className={`flex flex-col items-start gap-5 ${reversed ? "lg:order-1" : "lg:order-2"}`}>
+          <Reveal className="flex flex-col items-start gap-4">
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
+            <h3 className="font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+              {service.title}
+            </h3>
+            <p className="text-base font-semibold leading-relaxed text-ink/70">{sectionIntros[id]}</p>
+          </Reveal>
+
+          <Reveal delay={220}>
+            <ul className="flex flex-col gap-2.5">
+              {detail.whatsIncluded.slice(0, 3).map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm font-semibold text-ink/80">
+                  <Check className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal delay={380}>
+            <div className="flex flex-wrap gap-3">
+              <LinkButton href={`/services/${serviceSlugs[id]}`} variant="ghost">
+                Full Details
+              </LinkButton>
+              <QuoteButton id={id} />
+            </div>
+          </Reveal>
+        </div>
+
         <Reveal
-          delay={120}
-          className={`flex flex-col items-start gap-4 ${reversed ? "lg:order-1" : "lg:order-2"}`}
-        >
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{detail.eyebrow}</span>
-          <h3 className="font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
-            {service.title}
-          </h3>
-          <p className="text-base font-semibold leading-relaxed text-ink/70">{sectionIntros[id]}</p>
-
-          <ul className="mt-1 flex flex-col gap-2.5">
-            {detail.whatsIncluded.slice(0, 3).map((item) => (
-              <li key={item} className="flex items-start gap-2 text-sm font-semibold text-ink/80">
-                <Check className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-2 flex flex-wrap gap-3">
-            <LinkButton href={`/services/${serviceSlugs[id]}`} variant="ghost">
-              Full Details
-            </LinkButton>
-            <QuoteButton id={id} />
-          </div>
-        </Reveal>
-
-        <Reveal
-          className={`aspect-4/5 w-full overflow-hidden rounded-xl shadow-card lg:aspect-4/3 ${
+          delay={130}
+          className={`aspect-4/3 w-full overflow-hidden rounded-xl shadow-card ${
             reversed ? "lg:order-2" : "lg:order-1"
           }`}
         >
@@ -170,10 +174,10 @@ export function ServiceSections({ afterCabinets }: { afterCabinets?: ReactNode }
         </Fragment>
       ))}
 
-      <section className="border-t border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
+      <section className="border-t border-ink/10 bg-warm-white py-12 sm:py-14 lg:py-18">
         <Container>
           <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink/50">Weather &amp; Seasonal Work</span>
-          <div className="mt-6 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-10">
+          <div className="mt-6 grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-10">
             {paired.map((id) => (
               <PairedCard key={id} id={id} />
             ))}
@@ -181,7 +185,7 @@ export function ServiceSections({ afterCabinets }: { afterCabinets?: ReactNode }
         </Container>
       </section>
 
-      <section className="border-t border-ink/10 bg-cream py-14 sm:py-16 lg:py-20">
+      <section className="border-t border-ink/10 bg-cream py-12 sm:py-14 lg:py-18">
         <Container>
           <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink/50">Structural Disciplines</span>
           <div className="mt-6 grid grid-cols-1 gap-10 sm:grid-cols-2">
