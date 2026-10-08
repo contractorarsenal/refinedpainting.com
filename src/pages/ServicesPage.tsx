@@ -40,7 +40,7 @@ export function ServicesPage() {
 
   useDocumentMeta(
     "Painting Services | Refined Painting",
-    "Interior painting, exterior painting, cabinet refinishing, commercial painting, deck & fence staining and carpentry services from Refined Painting, serving Seattle and the Eastside.",
+    "Interior painting, exterior painting, cabinet refinishing, deck & fence staining and carpentry services from Refined Painting, serving Seattle and the Eastside.",
   );
 
   return (
@@ -91,52 +91,56 @@ export function ServicesPage() {
         </Container>
       </section>
 
-      {/* F2 — Choose Your Service: scannable overview before the detailed sections below */}
-      <section className="relative border-t border-ink/10 bg-sand py-12 sm:py-14 lg:py-18">
-        <Container>
+      {/* F2 — Choose Your Service: an editorial index, not a box grid, so it scans like a spec sheet rather than a SaaS feature grid. */}
+      <section className="relative overflow-hidden border-t border-ink/10 bg-sand py-12 sm:py-14 lg:py-18">
+        <GridTexture className="opacity-60" />
+        <Container className="relative">
           <Reveal>
             <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Choose Your Service</span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Service Index</span>
                 <h2 className="mt-3 text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
                   What Do You Need Done?
                 </h2>
               </div>
               <p className="max-w-xs text-sm leading-relaxed text-ink/55">
-                Six disciplines, one crew. Every service below follows the same prep-first process.
+                Five disciplines, one crew. Every service below follows the same prep-first process.
               </p>
             </div>
           </Reveal>
 
-          <div className="mt-12 grid grid-cols-1 gap-x-10 gap-y-9 sm:grid-cols-3">
+          <div className="mt-10 border-y border-ink/15">
             {services.map((service, index) => {
               const Icon = serviceIcons[service.id];
               return (
-                <Reveal key={service.id} delay={120 + index * 70}>
+                <Reveal key={service.id} delay={100 + index * 70}>
                   <a
                     href={`#${serviceSlugs[service.id]}`}
-                    className="group relative flex h-full flex-col items-start gap-3 border border-ink/10 bg-cream-light p-5 pt-6 transition-colors hover:border-crest/40"
+                    className="group relative flex items-center gap-5 border-b border-ink/10 py-5 transition-colors last:border-b-0 hover:bg-cream-light sm:gap-8 sm:py-6"
                   >
-                    <span className="absolute inset-x-0 top-0 h-0.5 bg-ink/15" aria-hidden />
                     <span
-                      className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-crest transition-transform duration-300 ease-out group-hover:scale-x-100"
+                      className="absolute inset-y-0 left-0 w-0.5 origin-top scale-y-0 bg-crest transition-transform duration-300 ease-out group-hover:scale-y-100"
                       aria-hidden
                     />
-                    <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-crest">
-                      Service {String(index + 1).padStart(2, "0")}
+                    <span className="w-10 shrink-0 font-display text-3xl font-black text-ink/15 transition-colors duration-300 group-hover:text-crest/50 sm:w-14 sm:text-4xl">
+                      {String(index + 1).padStart(2, "0")}
                     </span>
                     <Icon
-                      className="size-8 text-teal-dark transition-transform duration-300 group-hover:scale-110 group-hover:text-crest"
+                      className="size-6 shrink-0 text-teal-dark transition-transform duration-300 group-hover:scale-110 sm:size-7"
                       aria-hidden
                     />
-                    <span className="font-display text-lg font-extrabold uppercase leading-tight tracking-wide text-ink sm:text-xl">
-                      {service.title}
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-display text-lg font-extrabold uppercase leading-tight tracking-wide text-ink transition-colors group-hover:text-crest sm:text-xl">
+                        {service.title}
+                      </span>
+                      <span className="mt-0.5 hidden text-xs leading-relaxed text-ink/55 sm:block">
+                        {service.description}
+                      </span>
                     </span>
-                    <span className="text-xs leading-relaxed text-ink/55">{service.description}</span>
-                    <span className="mt-auto flex items-center gap-1 pt-1 text-[11px] font-bold uppercase tracking-wide text-ink/40 transition-colors group-hover:text-crest">
-                      View
-                      <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" aria-hidden />
-                    </span>
+                    <ArrowRight
+                      className="size-4 shrink-0 text-ink/30 transition-all duration-300 group-hover:translate-x-1 group-hover:text-crest sm:size-5"
+                      aria-hidden
+                    />
                   </a>
                 </Reveal>
               );

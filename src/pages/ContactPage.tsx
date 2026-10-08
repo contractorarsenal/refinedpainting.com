@@ -1,11 +1,9 @@
 import { Clock, MapPin, ShieldCheck } from "lucide-react";
-import interiorPhoto from "../assets/images/projects/interior-bright-finished.webp";
 import { ContactForm } from "../components/sections/ContactForm";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
 import { TrustStrip } from "../components/sections/TrustStrip";
 import { LinkButton } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
-import { ProjectImage } from "../components/ui/ProjectImage";
 import { Reveal } from "../components/ui/Reveal";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
 import { business, contactReassurance } from "../lib/content";
@@ -122,12 +120,6 @@ export function ContactPage() {
                     </li>
                   ))}
                 </ol>
-              </div>
-            </Reveal>
-
-            <Reveal delay={290}>
-              <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-card">
-                <ProjectImage src={interiorPhoto} alt="Freshly painted interior room ready for a walkthrough" />
               </div>
             </Reveal>
           </div>

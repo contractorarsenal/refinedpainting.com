@@ -1,6 +1,5 @@
-import { ArrowRight, Building2, Check, Hammer } from "lucide-react";
+import { Check } from "lucide-react";
 import { Fragment, type ReactNode } from "react";
-import { Link } from "react-router-dom";
 import cabinetsPhoto from "../../assets/images/projects/cabinets-sage-green.webp";
 import navyPhoto from "../../assets/images/projects/exterior-finished-navy.webp";
 import inProgressPhoto from "../../assets/images/projects/exterior-in-progress.webp";
@@ -39,10 +38,8 @@ const byId = (id: ServiceId) => services.find((s) => s.id === id)!;
 
 // Featured: Cabinet Refinishing and Interior Painting, each a large alternating image+content section.
 const featured: ServiceId[] = ["cabinets", "interior"];
-// Paired: Exterior and Deck & Fence, side by side, still substantial.
-const paired: ServiceId[] = ["exterior", "deck-fence"];
-// Compact: Commercial and Carpentry, condensed side by side, text-only.
-const compact: ServiceId[] = ["commercial", "carpentry"];
+// Expanded: Exterior, Deck & Fence, and Carpentry — all outdoor/structural work, shown as an even row of cards.
+const expanded: ServiceId[] = ["exterior", "deck-fence", "carpentry"];
 
 function FeaturedSection({ id, index, bg }: { id: ServiceId; index: number; bg: string }) {
   const service = byId(id);
@@ -143,40 +140,6 @@ function PairedCard({ id }: { id: ServiceId }) {
   );
 }
 
-const compactIcons: Partial<Record<ServiceId, typeof Building2>> = {
-  commercial: Building2,
-  carpentry: Hammer,
-};
-
-function CompactCard({ id, divider }: { id: ServiceId; divider?: boolean }) {
-  const service = byId(id);
-  const detail = serviceDetails[id];
-  const Icon = compactIcons[id];
-
-  return (
-    <Reveal
-      id={serviceSlugs[id]}
-      className={`scroll-mt-24 border-t-2 border-ink/10 pt-5 ${divider ? "sm:border-t-2 sm:border-l sm:border-l-ink/10 sm:pl-10" : ""}`}
-    >
-      <div className="flex items-start justify-between gap-3">
-        {Icon ? <Icon className="size-6 text-teal-dark" aria-hidden /> : null}
-        <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">{detail.eyebrow}</span>
-      </div>
-      <h3 className="mt-3 font-display text-lg font-extrabold uppercase leading-[0.98] text-ink sm:text-xl">
-        {service.title}
-      </h3>
-      <p className="mt-4 text-sm leading-relaxed text-ink/65">{sectionIntros[id]}</p>
-      <Link
-        to={`/services/${serviceSlugs[id]}`}
-        className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-crest transition-colors hover:text-ink"
-      >
-        Full Details
-        <ArrowRight className="size-3" aria-hidden />
-      </Link>
-    </Reveal>
-  );
-}
-
 export function ServiceSections({ afterCabinets }: { afterCabinets?: ReactNode } = {}) {
   return (
     <div className="flex flex-col">
@@ -192,36 +155,16 @@ export function ServiceSections({ afterCabinets }: { afterCabinets?: ReactNode }
           <div className="flex flex-col items-start gap-2 border-b border-ink/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">
-                Weather &amp; Seasonal Work
+                Exterior &amp; Structural Work
               </span>
               <h2 className="mt-2 font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink sm:text-3xl">
                 Built for Pacific Northwest Exposure
               </h2>
             </div>
           </div>
-          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
-            {paired.map((id) => (
+          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {expanded.map((id) => (
               <PairedCard key={id} id={id} />
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="border-t border-ink/10 bg-cream py-12 sm:py-14 lg:py-18">
-        <Container>
-          <div className="flex items-start justify-between gap-4 border-b border-ink/10 pb-6">
-            <div>
-              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">
-                Structural Disciplines
-              </span>
-              <h2 className="mt-2 font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink sm:text-3xl">
-                Commercial &amp; Carpentry Services
-              </h2>
-            </div>
-          </div>
-          <div className="mt-8 grid grid-cols-1 gap-10 sm:grid-cols-2">
-            {compact.map((id, index) => (
-              <CompactCard key={id} id={id} divider={index === 1} />
             ))}
           </div>
         </Container>

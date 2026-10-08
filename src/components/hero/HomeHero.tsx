@@ -66,7 +66,7 @@ export function HomeHero() {
           Seattle Painting Done Right From Day One
         </h1>
         <p className="relative max-w-xl text-balance text-base leading-relaxed text-warm-white/80 sm:text-lg">
-          Professional interior, exterior, cabinet and commercial painting backed by clear
+          Professional interior, exterior and cabinet painting backed by clear
           communication, careful prep and a 5-year workmanship warranty.
         </p>
 

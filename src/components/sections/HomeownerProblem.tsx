@@ -1,6 +1,7 @@
 import { CalendarX, MessageSquareWarning, PaintBucket, Trash2 } from "lucide-react";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
+import { GridTexture } from "../ui/Texture";
 
 const painPoints = [
   { icon: MessageSquareWarning, title: "Unclear Communication", description: "Scope changes and surprises instead of a clear plan." },
@@ -11,32 +12,37 @@ const painPoints = [
 
 export function HomeownerProblem() {
   return (
-    <section className="border-t border-ink/10 bg-cream py-14 sm:py-16 lg:py-20">
-      <Container>
-        <div className="mx-auto max-w-2xl text-center">
+    <section className="relative overflow-hidden border-t border-ink/10 bg-cream py-14 sm:py-16 lg:py-20">
+      <GridTexture className="opacity-70" />
+      <Container className="relative grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <Reveal className="flex flex-col items-start gap-5 lg:sticky lg:top-28 lg:self-start">
           <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Sound Familiar?</span>
-          <h2 className="mt-3 text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+          <h2 className="text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
             Painting Projects Go Wrong in Predictable Ways
           </h2>
-        </div>
+          <p className="max-w-sm text-balance font-display text-lg font-bold leading-snug text-ink/70">
+            Refined Painting was built around a more organized, professional process.
+          </p>
+        </Reveal>
 
-        <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-6 sm:grid-cols-4">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2">
           {painPoints.map((point, index) => (
             <Reveal key={point.title} delay={index * 70}>
-              <div className="flex flex-col items-start gap-2 border-t-2 border-ink/15 pt-4">
-                <point.icon className="size-5 text-ink/40" aria-hidden />
-                <h3 className="font-display text-sm font-extrabold uppercase tracking-wide text-ink">
-                  {point.title}
-                </h3>
-                <p className="text-xs leading-relaxed text-ink/55">{point.description}</p>
+              <div className="relative flex items-start gap-4 border-t-2 border-ink/15 pt-4">
+                <span className="font-display text-2xl font-black leading-none text-crest/35">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <point.icon className="size-5 text-ink/40" aria-hidden />
+                  <h3 className="mt-2 font-display text-sm font-extrabold uppercase tracking-wide text-ink sm:text-base">
+                    {point.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-ink/55">{point.description}</p>
+                </div>
               </div>
             </Reveal>
           ))}
         </div>
-
-        <p className="mx-auto mt-10 max-w-xl text-balance text-center font-display text-xl font-bold leading-snug text-ink sm:text-2xl">
-          Refined Painting was built around a more organized, professional process.
-        </p>
       </Container>
     </section>
   );

@@ -13,7 +13,6 @@ import {
   coreValues,
   localPartnerBullets,
   mission,
-  teamMembers,
   trustBullets,
   vision,
 } from "../lib/content";
@@ -112,50 +111,6 @@ export function AboutPage() {
                     {value.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink/65">{value.description}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* F4 — Team */}
-      <section className="border-t border-ink/10 bg-cream py-16 sm:py-20 lg:py-24">
-        <Container>
-          <Reveal>
-            <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">
-                  Architectural Craft Team
-                </span>
-                <h2 className="mt-2 font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
-                  Craftsmen at the Helm
-                </h2>
-                <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink/60">
-                  The people behind the work and communication on your project.
-                </p>
-              </div>
-              <p className="max-w-xs text-sm leading-relaxed text-ink/60">
-                Direct field leadership on every residential project.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {teamMembers.map((member, index) => (
-              <Reveal key={member.name} delay={180 + index * 100}>
-                <div className="flex items-center gap-5 border border-ink/10 bg-cream-light p-5">
-                  <div className="flex size-24 shrink-0 items-center justify-center bg-ink text-3xl font-black text-teal sm:size-28">
-                    {member.name.charAt(0)}
-                  </div>
-                  <div>
-                    <span className="block font-display text-xl font-extrabold uppercase tracking-wide text-ink">
-                      {member.name}
-                    </span>
-                    <span className="mt-1 block text-xs font-bold uppercase tracking-widest text-ink/45">
-                      Refined Painting
-                    </span>
-                  </div>
                 </div>
               </Reveal>
             ))}

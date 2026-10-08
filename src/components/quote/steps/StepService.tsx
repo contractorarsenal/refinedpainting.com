@@ -7,7 +7,6 @@ const optionIcons: Record<string, typeof Home> = {
   exterior: PaintRoller,
   cabinets: Building2,
   "deck-fence": TreeDeciduous,
-  commercial: Building2,
   carpentry: Hammer,
   "not-sure": HelpCircle,
 };

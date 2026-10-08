@@ -7,13 +7,12 @@ import { Reviews } from "../components/sections/Reviews";
 import { ServiceAreaSummary } from "../components/sections/ServiceAreaSummary";
 import { ServicesPreview } from "../components/sections/ServicesPreview";
 import { TrustStrip } from "../components/sections/TrustStrip";
-import { WhyChooseRefined } from "../components/sections/WhyChooseRefined";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 export function HomePage() {
   useDocumentMeta(
     "Seattle Painting Company | Interior & Exterior Painters | Refined Painting",
-    "Refined Painting provides professional interior, exterior, cabinet and commercial painting across Seattle and the Eastside. Licensed, insured, EPA Lead-Safe and backed by a 5-year workmanship warranty.",
+    "Refined Painting provides professional interior, exterior and cabinet painting across Seattle and the Eastside. Licensed, insured, EPA Lead-Safe and backed by a 5-year workmanship warranty.",
   );
 
   return (
@@ -30,9 +29,7 @@ export function HomePage() {
       <ProjectsPreview />
       {/* F6 — What happens if I contact them? */}
       <ProcessCondensed />
-      {/* F7 — Why them instead of another painter? */}
-      <WhyChooseRefined />
-      {/* F8 — Do other homeowners agree? */}
+      {/* F7 — Do other homeowners agree? */}
       <Reviews />
       {/* F9 — Do they serve me, and what do I do next? */}
       <ServiceAreaSummary />

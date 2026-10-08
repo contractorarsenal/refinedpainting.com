@@ -64,13 +64,6 @@ export const services: Service[] = [
     tone: "warm",
   },
   {
-    id: "commercial",
-    title: "Commercial Painting",
-    description:
-      "Scheduled around your business hours, with clear timelines for offices, retail, and multi-family properties.",
-    tone: "navy",
-  },
-  {
     id: "deck-fence",
     title: "Deck & Fence Staining",
     description:
@@ -90,7 +83,6 @@ export const serviceOptions: { id: ServiceId | "not-sure"; label: string }[] = [
   { id: "exterior", label: "Exterior" },
   { id: "cabinets", label: "Cabinets" },
   { id: "deck-fence", label: "Deck / Fence" },
-  { id: "commercial", label: "Commercial" },
   { id: "carpentry", label: "Carpentry / Repairs" },
   { id: "not-sure", label: "Not Sure Yet" },
 ];
@@ -353,43 +345,6 @@ export const coreValues: CoreValue[] = [
   },
 ];
 
-export interface WhyChoosePoint {
-  title: string;
-  description: string;
-}
-
-export const whyChooseUs: WhyChoosePoint[] = [
-  {
-    title: "Communication-First, On-Time Service",
-    description:
-      "Clear expectations, regular updates, and fast responses: proactive communication matters just as much as paint quality.",
-  },
-  {
-    title: "Detailed Scope + Transparent Options",
-    description:
-      "Every proposal lays out exactly what's included, what to expect, and how your timeline will work before any work begins.",
-  },
-  {
-    title: "Clean, Protected Job Sites + Daily Cleanup",
-    description:
-      "We treat every home as if it were our own: protecting surfaces, maintaining clean work areas, and minimizing disruption.",
-  },
-  {
-    title: "Premium Prep + High-End Finishes",
-    description:
-      "Great finishes start long before the first coat. Thorough surface prep is what determines how long the results last.",
-  },
-  {
-    title: "Color Guidance + Lead-Safe Practices",
-    description:
-      "A complimentary color consultation with Benjamin Moore and Sherwin-Williams samples, backed by EPA Lead-Safe work practices.",
-  },
-  {
-    title: "5-Year Warranty + Final Walkthrough Sign-Off",
-    description:
-      "A detailed walkthrough to confirm every detail meets your expectations, backed by our 5-year workmanship warranty.",
-  },
-];
 
 export const serviceSlugs: Record<ServiceId, string> = {
   interior: "interior-painting",
@@ -689,8 +644,6 @@ export const howWeWork: HowWeWorkPrinciple[] = [
     description: "A detailed walkthrough to confirm every detail, backed by our workmanship warranty.",
   },
 ];
-
-export const teamMembers = [{ name: "Jose" }, { name: "Luis" }];
 
 export const cabinetProofStat = {
   value: cabinetsRefinished,

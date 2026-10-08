@@ -217,8 +217,10 @@ export function Gallery() {
               type="button"
               onClick={() => setFilter(f)}
               aria-pressed={filter === f}
-              className={`rounded-full px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wide transition-colors ${
-                filter === f ? "bg-ink text-warm-white" : "text-ink/55 hover:bg-ink/5 hover:text-ink"
+              className={`border px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wide transition-colors ${
+                filter === f
+                  ? "border-crest bg-crest/10 text-crest"
+                  : "border-ink/15 text-ink/55 hover:border-ink/30 hover:text-ink"
               }`}
             >
               {f} ({filterCounts[f]})
