@@ -1,8 +1,13 @@
-import { ArrowRight, Building2, Hammer, Home, Layers, PaintRoller, ShieldCheck, TreeDeciduous } from "lucide-react";
+import { Building2, Hammer, Home, Layers, PaintRoller, ShieldCheck, TreeDeciduous } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import cabinetsPhoto from "../assets/images/projects/cabinets-sage-green.webp";
+import afterWhite from "../assets/images/projects/exterior-after-white.jpg";
+import interiorBright from "../assets/images/projects/interior-bright-finished.webp";
+import porchPhoto from "../assets/images/projects/porch-yellow-door.webp";
+import inProgressPhoto from "../assets/images/projects/exterior-in-progress.webp";
 import { FramedCTA } from "../components/sections/FramedCTA";
 import { Process } from "../components/sections/Process";
 import { PromoBanner } from "../components/sections/PromoBanner";
-import { ServiceJumpNav } from "../components/sections/ServiceJumpNav";
 import { ServiceSections } from "../components/sections/ServiceSections";
 import { VideoAuthority } from "../components/sections/VideoAuthority";
 import { Button, LinkButton } from "../components/ui/Button";
@@ -31,6 +36,54 @@ const serviceIcons: Record<ServiceId, typeof Home> = {
   "deck-fence": TreeDeciduous,
   carpentry: Hammer,
 };
+
+const serviceTileImages: Partial<Record<ServiceId, { src: string; alt: string }>> = {
+  interior: { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
+  cabinets: { src: cabinetsPhoto, alt: "Kitchen cabinets refinished in sage green" },
+  exterior: { src: afterWhite, alt: "Home exterior finished in crisp white" },
+  "deck-fence": { src: porchPhoto, alt: "Covered porch with stained and painted wood trim" },
+  carpentry: { src: inProgressPhoto, alt: "Exterior trim and siding mid-repair with protective covering" },
+};
+
+// Interior/Cabinets/Exterior are the primary row (larger tiles); Deck-Fence
+// and Carpentry form a secondary row — matches the approved service list,
+// with Commercial staying out of visible promotion.
+const primaryTileIds: ServiceId[] = ["interior", "cabinets", "exterior"];
+const secondaryTileIds: ServiceId[] = ["deck-fence", "carpentry"];
+
+function ServiceTile({ id, tall = false }: { id: ServiceId; tall?: boolean }) {
+  const service = services.find((s) => s.id === id);
+  const image = serviceTileImages[id];
+  const Icon = serviceIcons[id];
+  if (!service || !image) return null;
+
+  return (
+    <a
+      href={`#${serviceSlugs[id]}`}
+      className={`group relative block w-full overflow-hidden border border-ink/10 ${tall ? "aspect-4/5 lg:aspect-3/4" : "aspect-16/10"}`}
+    >
+      {image.src ? (
+        <img
+          src={image.src}
+          alt={image.alt}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        />
+      ) : null}
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/15 to-transparent transition-colors group-hover:from-ink/95" aria-hidden />
+      <span className="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full bg-warm-white/15 text-warm-white backdrop-blur-sm transition-colors duration-300 group-hover:bg-crest">
+        <Icon className="size-4" aria-hidden />
+      </span>
+      <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
+        <span className="font-display text-2xl font-extrabold uppercase leading-[0.96] text-warm-white sm:text-3xl">
+          {service.title}
+        </span>
+        <ArrowRight className="size-5 shrink-0 text-warm-white/70 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-warm-white" aria-hidden />
+      </span>
+    </a>
+  );
+}
 
 const primaryFaqs = faqs.slice(0, 5);
 const moreFaqs = faqs.slice(5);
@@ -91,8 +144,8 @@ export function ServicesPage() {
         </Container>
       </section>
 
-      {/* F2 — Choose Your Service: an editorial index, not a box grid, so it scans like a spec sheet rather than a SaaS feature grid. */}
-      <section className="relative overflow-hidden border-t border-ink/10 bg-sand py-12 sm:py-14 lg:py-18">
+      {/* F2 — Choose Your Service: large image-forward category tiles instead of a horizontal filter strip or box grid. */}
+      <section className="relative overflow-hidden border-t border-ink/10 bg-cream py-12 sm:py-14 lg:py-18">
         <GridTexture className="opacity-60" />
         <Container className="relative">
           <Reveal>
@@ -104,52 +157,28 @@ export function ServicesPage() {
                 </h2>
               </div>
               <p className="max-w-xs text-sm leading-relaxed text-ink/55">
-                Five disciplines, one crew. Every service below follows the same prep-first process.
+                Five disciplines, one crew. Every tile below follows the same prep-first process.
               </p>
             </div>
           </Reveal>
 
-          <div className="mt-10 border-y border-ink/15">
-            {services.map((service, index) => {
-              const Icon = serviceIcons[service.id];
-              return (
-                <Reveal key={service.id} delay={100 + index * 70}>
-                  <a
-                    href={`#${serviceSlugs[service.id]}`}
-                    className="group relative flex items-center gap-5 border-b border-ink/10 py-5 transition-colors last:border-b-0 hover:bg-cream-light sm:gap-8 sm:py-6"
-                  >
-                    <span
-                      className="absolute inset-y-0 left-0 w-0.5 origin-top scale-y-0 bg-crest transition-transform duration-300 ease-out group-hover:scale-y-100"
-                      aria-hidden
-                    />
-                    <span className="w-10 shrink-0 font-display text-3xl font-black text-ink/15 transition-colors duration-300 group-hover:text-crest/50 sm:w-14 sm:text-4xl">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <Icon
-                      className="size-6 shrink-0 text-teal-dark transition-transform duration-300 group-hover:scale-110 sm:size-7"
-                      aria-hidden
-                    />
-                    <span className="min-w-0 flex-1">
-                      <span className="block font-display text-lg font-extrabold uppercase leading-tight tracking-wide text-ink transition-colors group-hover:text-crest sm:text-xl">
-                        {service.title}
-                      </span>
-                      <span className="mt-0.5 hidden text-xs leading-relaxed text-ink/55 sm:block">
-                        {service.description}
-                      </span>
-                    </span>
-                    <ArrowRight
-                      className="size-4 shrink-0 text-ink/30 transition-all duration-300 group-hover:translate-x-1 group-hover:text-crest sm:size-5"
-                      aria-hidden
-                    />
-                  </a>
-                </Reveal>
-              );
-            })}
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
+            {primaryTileIds.map((id, index) => (
+              <Reveal key={id} delay={100 + index * 80}>
+                <ServiceTile id={id} tall />
+              </Reveal>
+            ))}
+          </div>
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+            {secondaryTileIds.map((id, index) => (
+              <Reveal key={id} delay={340 + index * 80}>
+                <ServiceTile id={id} />
+              </Reveal>
+            ))}
           </div>
         </Container>
       </section>
 
-      <ServiceJumpNav />
       <ServiceSections afterCabinets={<VideoAuthority />} />
       <Process />
       <PromoBanner />

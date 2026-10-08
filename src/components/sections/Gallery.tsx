@@ -135,9 +135,9 @@ function ProjectFigure({
         />
         <div className="absolute inset-0 bg-ink/0 transition-colors duration-300 group-hover:bg-ink/10" aria-hidden />
       </div>
-      <figcaption className="flex flex-1 flex-col items-start gap-1 border-t border-ink/10 px-4 py-3.5">
-        <span className="text-[10px] font-bold uppercase tracking-widest text-crest">{project.category}</span>
-        <span className="font-display text-base font-bold uppercase tracking-wide text-ink transition-colors group-hover:text-crest">
+      <figcaption className="flex flex-1 flex-col items-start gap-1 bg-ink px-4 py-3.5 transition-colors group-hover:bg-ink-2">
+        <span className="text-[10px] font-bold uppercase tracking-widest text-teal">{project.category}</span>
+        <span className="font-display text-base font-bold uppercase tracking-wide text-warm-white transition-colors group-hover:text-crest">
           {project.title}
         </span>
       </figcaption>
@@ -169,12 +169,12 @@ function FeaturedFigure({ project, onClick }: { project: ProjectEntry; onClick: 
         />
         <div className="absolute inset-0 bg-ink/0 transition-colors duration-300 group-hover:bg-ink/10" aria-hidden />
       </div>
-      <div className="flex flex-1 flex-col items-start gap-2 border-t border-ink/10 p-6">
-        <span className="text-[11px] font-bold uppercase tracking-widest text-crest">{project.category}</span>
-        <span className="font-display text-2xl font-extrabold uppercase tracking-wide text-ink transition-colors group-hover:text-crest sm:text-3xl">
+      <div className="flex flex-1 flex-col items-start gap-2 bg-ink p-6 transition-colors group-hover:bg-ink-2">
+        <span className="text-[11px] font-bold uppercase tracking-widest text-teal">{project.category}</span>
+        <span className="font-display text-2xl font-extrabold uppercase tracking-wide text-warm-white transition-colors group-hover:text-crest sm:text-3xl">
           {project.title}
         </span>
-        <p className="text-sm leading-relaxed text-ink/60">{blurb}</p>
+        <p className="text-sm leading-relaxed text-warm-white/65">{blurb}</p>
       </div>
     </button>
   );

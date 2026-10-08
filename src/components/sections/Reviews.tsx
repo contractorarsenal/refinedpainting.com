@@ -99,31 +99,31 @@ export function Reviews() {
             </div>
           </div>
 
-          <div className="relative flex flex-col gap-6 overflow-hidden border-2 border-ink/10 bg-ink p-8 text-warm-white sm:p-10">
+          <div className="relative flex flex-col gap-6 border-t-2 border-crest pt-6 lg:border-l-2 lg:border-t-0 lg:pl-10 lg:pt-0">
             <Mascot
               variant="watermark"
-              className="pointer-events-none absolute -bottom-10 -right-10 z-0 h-56 w-56 scale-x-[-1]"
+              className="pointer-events-none absolute -right-2 top-2 z-0 h-44 w-44 scale-x-[-1] sm:h-52 sm:w-52"
             />
             <div className="relative z-10 flex flex-col gap-6">
               <div>
                 <Stars />
-                <p className="mt-2 font-display text-4xl font-extrabold text-warm-white">
-                  {business.rating} <span className="text-lg font-bold text-warm-white/60">/ 5.0</span>
+                <p className="mt-2 font-display text-4xl font-extrabold text-ink">
+                  {business.rating} <span className="text-lg font-bold text-ink/45">/ 5.0</span>
                 </p>
-                <p className="text-sm font-semibold text-warm-white/70">{business.reviewCount} Google Reviews</p>
+                <p className="text-sm font-semibold text-ink/60">{business.reviewCount} Google Reviews</p>
               </div>
 
-              <div className="flex flex-wrap gap-4 border-y border-warm-white/15 py-6">
+              <div className="flex flex-wrap gap-4 border-y border-ink/10 py-6">
                 {badges.map((badge) => (
                   <img key={badge.alt} src={badge.src} alt={badge.alt} className="h-10 w-10 object-contain" loading="lazy" />
                 ))}
               </div>
 
-              <div className="flex flex-col gap-3">
-                <Button onClick={() => openQuoteModal()} icon="none" className="justify-center">
+              <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+                <Button onClick={() => openQuoteModal()} variant="secondary" icon="none" className="justify-center">
                   Get a Free Estimate
                 </Button>
-                <LinkButton href={googleReviewsUrl} external variant="outline-light" icon="arrow" className="justify-center">
+                <LinkButton href={googleReviewsUrl} external variant="outline-dark" icon="arrow" className="justify-center">
                   Read More Reviews
                 </LinkButton>
               </div>
