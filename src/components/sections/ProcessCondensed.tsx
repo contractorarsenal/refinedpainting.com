@@ -37,9 +37,12 @@ export function ProcessCondensed() {
             aria-hidden
           />
           {/* Mascot walk: one-time, reduced-motion-safe (global CSS collapses the
-              transition to ~instant under prefers-reduced-motion). */}
+              transition to ~instant under prefers-reduced-motion). ease-in-out
+              over 5s gives a slow start near 01, a quicker middle crossing
+              through 02/03, and a slow settle into 04 — a deliberate walk
+              rather than a slide. */}
           <div
-            className="pointer-events-none absolute -top-7 hidden -translate-x-1/2 transition-[left] duration-1900 ease-out lg:block"
+            className="pointer-events-none absolute -top-7 hidden -translate-x-1/2 transition-[left] duration-5000 ease-in-out lg:block"
             style={{ left: rowInView ? BIRD_END : BIRD_START }}
             aria-hidden
           >
