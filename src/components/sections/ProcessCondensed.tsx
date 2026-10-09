@@ -42,11 +42,11 @@ export function ProcessCondensed() {
               through 02/03, and a slow settle into 04 — a deliberate walk
               rather than a slide. */}
           <div
-            className="pointer-events-none absolute -top-7 hidden -translate-x-1/2 transition-[left] duration-5000 ease-in-out lg:block"
+            className="pointer-events-none absolute -top-10 hidden -translate-x-1/2 transition-[left] duration-5000 ease-in-out lg:block"
             style={{ left: rowInView ? BIRD_END : BIRD_START }}
             aria-hidden
           >
-            <Mascot variant="full" className="h-9 w-9 drop-shadow-[0_6px_10px_rgba(0,0,0,0.35)]" />
+            <Mascot variant="full" className="h-12 w-12 drop-shadow-[0_6px_10px_rgba(0,0,0,0.35)]" />
           </div>
 
           {processSteps.map((step, index) => (
