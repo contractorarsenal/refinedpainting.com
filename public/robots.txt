@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://refinedpainting.co/sitemap.xml

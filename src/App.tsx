@@ -3,11 +3,14 @@ import { FloatingContactButton } from "./components/layout/FloatingContactButton
 import { Footer } from "./components/layout/Footer";
 import { Header } from "./components/layout/Header";
 import { MobileCTABar } from "./components/layout/MobileCTABar";
+import { RouteAnalytics } from "./components/layout/RouteAnalytics";
 import { ScrollToTop } from "./components/layout/ScrollToTop";
 import { PromoPopupProvider } from "./components/promo/PromoPopupContext";
 import { QuoteModalProvider } from "./components/quote/QuoteModalContext";
 import { AboutPage } from "./pages/AboutPage";
+import { BlogCategoryPage } from "./pages/BlogCategoryPage";
 import { BlogPage } from "./pages/BlogPage";
+import { BlogPostPage } from "./pages/BlogPostPage";
 import { ContactPage } from "./pages/ContactPage";
 import { HomePage } from "./pages/HomePage";
 import { NotFoundPage } from "./pages/NotFoundPage";
@@ -21,6 +24,7 @@ function App() {
     <QuoteModalProvider>
       <PromoPopupProvider>
         <ScrollToTop />
+        <RouteAnalytics />
         <Header />
         <main className="pb-20 sm:pb-0">
           <Routes>
@@ -30,6 +34,8 @@ function App() {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/category/:slug" element={<BlogCategoryPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="*" element={<NotFoundPage />} />

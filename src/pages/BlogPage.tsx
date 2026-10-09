@@ -1,63 +1,105 @@
-import { BookOpen, Droplets, Hammer, Home, PaintRoller, Sun } from "lucide-react";
-import { LinkButton } from "../components/ui/Button";
+import { Link } from "react-router-dom";
+import { BlogCard } from "../components/blog/BlogCard";
+import { FinalCTA } from "../components/sections/FinalCTA";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
-import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import { getCategoryLabel } from "../content/blog/categories";
+import type { BlogCategorySlug } from "../content/blog/categories";
+import { blogPosts, getCategoriesWithPosts, getFeaturedPosts, getPostsByCategory } from "../content/blog/posts";
+import { usePageSEO } from "../hooks/usePageSEO";
 
-// Real future categories, not fabricated post titles — this page is an
-// honest placeholder until actual guides are written.
-const plannedCategories = [
-  { label: "Interior Painting", icon: Home },
-  { label: "Exterior Painting", icon: PaintRoller },
-  { label: "Cabinet Refinishing", icon: BookOpen },
-  { label: "Color Ideas", icon: Sun },
-  { label: "Seattle & PNW Painting Guidance", icon: Droplets },
-  { label: "Maintenance", icon: Hammer },
-];
+const SITE_URL = "https://refinedpainting.co";
 
 export function BlogPage() {
-  useDocumentMeta(
-    "Painting Tips & Ideas | Refined Painting",
-    "Guides and ideas on interior, exterior and cabinet painting from Refined Painting, serving Seattle and the Eastside. Coming soon.",
-  );
+  usePageSEO({
+    title: "Painting Advice for Seattle Homeowners | Refined Painting",
+    description:
+      "Practical guides covering project planning, interior and exterior painting, cabinets, Seattle weather, and what to expect when hiring a painter.",
+    canonical: `${SITE_URL}/blog`,
+  });
+
+  const featured = getFeaturedPosts();
+  const latest = [...blogPosts].sort((a, b) => (a.publishDate < b.publishDate ? 1 : -1));
+  const categoriesWithPosts = getCategoriesWithPosts();
 
   return (
-    <section className="bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
-      <Container>
-        <div className="max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Painting Tips &amp; Ideas</span>
-          <h1 className="mt-3 text-balance font-display text-3xl font-black uppercase leading-[0.96] text-ink sm:text-4xl lg:text-5xl">
-            Guides &amp; Resources, Coming Soon
-          </h1>
-          <p className="mt-4 max-w-md text-balance text-sm leading-relaxed text-ink/65 sm:text-base">
-            We're building out real guidance on color, prep, and maintenance for Seattle homeowners.
-            Here's what's planned.
-          </p>
-        </div>
+    <>
+      <section className="bg-cream pb-10 pt-28 sm:pt-32 lg:pb-14 lg:pt-36">
+        <Container className="max-w-2xl">
+          <Reveal>
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Guides &amp; Resources</span>
+            <h1 className="mt-3 text-balance font-display text-4xl font-black uppercase leading-[0.96] text-ink sm:text-5xl">
+              Painting Advice for Seattle Homeowners
+            </h1>
+            <p className="mt-4 max-w-xl text-balance text-base leading-relaxed text-ink/70 sm:text-lg">
+              Practical guides covering project planning, interior and exterior painting, cabinets, Seattle
+              weather, and what to expect when hiring a painter.
+            </p>
+          </Reveal>
+        </Container>
+      </section>
 
-        <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-9 sm:grid-cols-3">
-          {plannedCategories.map((category, index) => (
-            <Reveal key={category.label} delay={index * 60}>
-              <div className="flex flex-col items-start gap-2.5 border-t-2 border-ink/15 pt-4">
-                <category.icon className="size-6 text-teal-dark" aria-hidden />
-                <span className="font-display text-sm font-extrabold uppercase leading-tight tracking-wide text-ink sm:text-base">
-                  {category.label}
-                </span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-ink/35">Coming Soon</span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+      {featured.length > 0 ? (
+        <section className="border-t border-ink/10 bg-cream py-12 sm:py-14 lg:py-16">
+          <Container>
+            <div className="flex items-center gap-2">
+              <span className="size-1.5 bg-crest" aria-hidden />
+              <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-ink/50">Featured Articles</h2>
+            </div>
+            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {featured.map((post) => (
+                <BlogCard key={post.slug} post={post} featured />
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-ink/10 pt-10 sm:flex-row">
-          <LinkButton href="/projects" variant="outline-dark">
-            View Projects
-          </LinkButton>
-          <LinkButton href="/contact" variant="primary">
-            Contact Us
-          </LinkButton>
-        </div>
-      </Container>
-    </section>
+      <section className="border-t border-ink/10 bg-cream-light py-12 sm:py-16 lg:py-20">
+        <Container>
+          <div className="flex items-center gap-2">
+            <span className="size-1.5 bg-teal" aria-hidden />
+            <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-ink/50">Latest Guides</h2>
+          </div>
+          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {latest.map((post) => (
+              <BlogCard key={post.slug} post={post} />
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {categoriesWithPosts.length > 0 ? (
+        <section className="border-t border-ink/10 bg-cream py-12 sm:py-16 lg:py-20">
+          <Container>
+            <div className="flex items-center gap-2">
+              <span className="size-1.5 bg-crest" aria-hidden />
+              <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-ink/50">Browse by Topic</h2>
+            </div>
+            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {categoriesWithPosts.map((slug: BlogCategorySlug) => {
+                const count = getPostsByCategory(slug).length;
+                return (
+                  <Link
+                    key={slug}
+                    to={`/blog/category/${slug}`}
+                    className="group flex items-center justify-between border-t-2 border-ink/15 pt-4 transition-colors hover:border-crest"
+                  >
+                    <span className="font-display text-base font-extrabold uppercase tracking-wide text-ink group-hover:text-crest">
+                      {getCategoryLabel(slug)}
+                    </span>
+                    <span className="text-xs font-bold uppercase tracking-widest text-ink/35">
+                      {count} {count === 1 ? "Guide" : "Guides"}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </Container>
+        </section>
+      ) : null}
+
+      <FinalCTA />
+    </>
   );
 }
