@@ -2,8 +2,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { ArticleLayout } from "../components/blog/ArticleLayout";
 import { getPostBySlug } from "../content/blog/posts";
 import { usePageSEO } from "../hooks/usePageSEO";
-
-const SITE_URL = "https://refinedpainting.co";
+import { SITE_URL } from "../lib/content";
 
 export function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -15,6 +14,7 @@ export function BlogPostPage() {
     title: post ? `${post.title} | Refined Painting` : "Guide Not Found | Refined Painting",
     description: post ? post.metaDescription : "This guide could not be found.",
     canonical,
+    image: post ? `${SITE_URL}${post.heroImage.src}` : undefined,
     schema: post
       ? [
           {

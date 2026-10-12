@@ -1,3 +1,7 @@
+// Canonical production origin — used by usePageSEO for canonical/OG URLs
+// and by structured data across the site. Update here if the domain changes.
+export const SITE_URL = "https://refinedpainting.co";
+
 export const business = {
   name: "Refined Painting",
   phone: "(206) 258-7994",

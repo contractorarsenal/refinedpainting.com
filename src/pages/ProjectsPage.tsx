@@ -1,12 +1,14 @@
 import { ArrowRight, CheckCircle2, Layers, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
+import featurePhoto from "../assets/images/projects/exterior-after-pink.webp";
 import { BeforeAfter } from "../components/sections/BeforeAfter";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { Gallery } from "../components/sections/Gallery";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
 import { GridTexture } from "../components/ui/Texture";
-import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import { usePageSEO } from "../hooks/usePageSEO";
+import { SITE_URL } from "../lib/content";
 
 const qualityPoints = [
   {
@@ -27,10 +29,23 @@ const qualityPoints = [
 ];
 
 export function ProjectsPage() {
-  useDocumentMeta(
-    "Our Work | Refined Painting Projects",
-    "Browse recent interior, exterior and cabinet painting projects from Refined Painting, plus real before-and-after comparisons.",
-  );
+  usePageSEO({
+    title: "Our Work | Refined Painting Projects",
+    description:
+      "Browse recent interior, exterior and cabinet painting projects from Refined Painting, plus real before-and-after comparisons.",
+    canonical: `${SITE_URL}/projects`,
+    image: `${SITE_URL}${featurePhoto}`,
+    schema: [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: "Projects", item: `${SITE_URL}/projects` },
+        ],
+      },
+    ],
+  });
 
   return (
     <>

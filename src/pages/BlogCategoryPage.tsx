@@ -8,8 +8,7 @@ import { blogCategories, getCategoryLabel } from "../content/blog/categories";
 import type { BlogCategorySlug } from "../content/blog/categories";
 import { getCategoriesWithPosts, getPostsByCategory } from "../content/blog/posts";
 import { usePageSEO } from "../hooks/usePageSEO";
-
-const SITE_URL = "https://refinedpainting.co";
+import { SITE_URL } from "../lib/content";
 
 export function BlogCategoryPage() {
   const { slug } = useParams<{ slug: string }>();

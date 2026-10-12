@@ -32,10 +32,19 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
   const [data, setData] = useState<QuoteFormData>(initialQuoteData);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // A fresh value each time the modal opens, so a second estimate request
+  // later in the same session gets its own nonce rather than reusing one
+  // from render — see trackGenerateLead's dedup logic in lib/analytics.ts.
+  // Set from an effect (not inline during render) since Date.now() is impure.
+  const [leadNonce, setLeadNonce] = useState(() => Date.now());
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useLockBodyScroll(isOpen);
   useFocusTrap(dialogRef, isOpen, triggerRef);
+
+  useEffect(() => {
+    if (isOpen) setLeadNonce(Date.now());
+  }, [isOpen]);
 
   // A service card's "Learn More" can preselect its service so the visitor
   // doesn't have to pick it again on step 2.
@@ -115,8 +124,13 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
   const serviceLabel =
     services.find((s) => s.id === data.service)?.title ?? (data.service === "not-sure" ? "Not Sure Yet" : "");
   const timelineLabel = timelineOptions.find((o) => o.id === data.timeline)?.label ?? "";
+  // The nonce lets ThankYouPage fire generate_lead exactly once per real
+  // submission even if the visitor refreshes /thank-you afterward — see
+  // trackGenerateLead's dedup logic there.
   const redirectUrl =
-    typeof window !== "undefined" ? `${window.location.origin}/thank-you` : "/thank-you";
+    typeof window !== "undefined"
+      ? `${window.location.origin}/thank-you?form_type=quote&service=${encodeURIComponent(serviceLabel)}&lead=${leadNonce}`
+      : "/thank-you";
 
   return (
     <div

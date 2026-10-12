@@ -1,10 +1,22 @@
 import { useEffect } from "react";
+import defaultOgImage from "../assets/images/home-hero-poster.webp";
+import { SITE_URL } from "../lib/content";
+
+// Used whenever a page has no image of its own to share (About's team photo
+// slot, Contact, FAQ, Thank You, 404). Prevents pages from either showing no
+// preview image at all or carrying over a stale one from whatever page was
+// visited previously — see the og:image handling below.
+const DEFAULT_OG_IMAGE = `${SITE_URL}${defaultOgImage}`;
 
 interface PageSEOOptions {
   title: string;
   description: string;
   /** Absolute canonical URL for this page. */
   canonical: string;
+  /** Absolute URL to an Open Graph preview image. Omitted when no appropriate image exists for the page. */
+  image?: string;
+  /** Set true for pages that should never appear in search results (e.g. /thank-you). Defaults to indexable. */
+  noindex?: boolean;
   /** JSON-LD objects to inject as separate <script type="application/ld+json"> tags. */
   schema?: object[];
 }
@@ -18,23 +30,32 @@ function setMeta(selector: string, create: () => HTMLElement, content: string) {
   el.setAttribute("content", content);
 }
 
-/** Like useDocumentMeta, but adds canonical + Open Graph tags and optional
- * JSON-LD schema — used by blog pages only, so it can't affect the rest of
- * the site. Everything it creates is tagged data-seo-managed so it's cleanly
- * removed/replaced on route change instead of accumulating across pages. */
-export function usePageSEO({ title, description, canonical, schema }: PageSEOOptions) {
+function metaByName(name: string) {
+  return () => {
+    const m = document.createElement("meta");
+    m.setAttribute("name", name);
+    return m;
+  };
+}
+
+function metaByProperty(property: string) {
+  return () => {
+    const m = document.createElement("meta");
+    m.setAttribute("property", property);
+    return m;
+  };
+}
+
+/** Sets the document title/description plus canonical, Open Graph, robots
+ * indexing directives, and optional JSON-LD schema. Used on every page —
+ * every tag it manages is unconditionally set on every call, in
+ * either direction (indexable vs noindex, with vs without an image), so
+ * navigating between pages never leaves a stale tag from the previous one. */
+export function usePageSEO({ title, description, canonical, image, noindex = false, schema }: PageSEOOptions) {
   useEffect(() => {
     document.title = title;
 
-    setMeta(
-      'meta[name="description"]',
-      () => {
-        const m = document.createElement("meta");
-        m.setAttribute("name", "description");
-        return m;
-      },
-      description,
-    );
+    setMeta('meta[name="description"]', metaByName("description"), description);
 
     let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!link) {
@@ -44,33 +65,13 @@ export function usePageSEO({ title, description, canonical, schema }: PageSEOOpt
     }
     link.setAttribute("href", canonical);
 
-    setMeta(
-      'meta[property="og:title"]',
-      () => {
-        const m = document.createElement("meta");
-        m.setAttribute("property", "og:title");
-        return m;
-      },
-      title,
-    );
-    setMeta(
-      'meta[property="og:description"]',
-      () => {
-        const m = document.createElement("meta");
-        m.setAttribute("property", "og:description");
-        return m;
-      },
-      description,
-    );
-    setMeta(
-      'meta[property="og:url"]',
-      () => {
-        const m = document.createElement("meta");
-        m.setAttribute("property", "og:url");
-        return m;
-      },
-      canonical,
-    );
+    setMeta('meta[name="robots"]', metaByName("robots"), noindex ? "noindex, follow" : "index, follow");
+
+    setMeta('meta[property="og:title"]', metaByProperty("og:title"), title);
+    setMeta('meta[property="og:description"]', metaByProperty("og:description"), description);
+    setMeta('meta[property="og:url"]', metaByProperty("og:url"), canonical);
+
+    setMeta('meta[property="og:image"]', metaByProperty("og:image"), image ?? DEFAULT_OG_IMAGE);
 
     const schemaNodes: HTMLScriptElement[] = [];
     (schema ?? []).forEach((obj) => {
@@ -85,5 +86,5 @@ export function usePageSEO({ title, description, canonical, schema }: PageSEOOpt
     return () => {
       schemaNodes.forEach((node) => node.remove());
     };
-  }, [title, description, canonical, schema]);
+  }, [title, description, canonical, image, noindex, schema]);
 }

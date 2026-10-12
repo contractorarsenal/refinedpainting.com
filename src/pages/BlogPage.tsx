@@ -7,8 +7,7 @@ import { getCategoryLabel } from "../content/blog/categories";
 import type { BlogCategorySlug } from "../content/blog/categories";
 import { blogPosts, getCategoriesWithPosts, getFeaturedPosts, getPostsByCategory } from "../content/blog/posts";
 import { usePageSEO } from "../hooks/usePageSEO";
-
-const SITE_URL = "https://refinedpainting.co";
+import { SITE_URL } from "../lib/content";
 
 export function BlogPage() {
   usePageSEO({

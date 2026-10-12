@@ -1,9 +1,18 @@
+import { useLocation } from "react-router-dom";
 import { Container } from "../components/ui/Container";
 import { LinkButton } from "../components/ui/Button";
-import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import { usePageSEO } from "../hooks/usePageSEO";
+import { SITE_URL } from "../lib/content";
 
 export function NotFoundPage() {
-  useDocumentMeta("Page Not Found | Refined Painting", "The page you're looking for doesn't exist.");
+  const { pathname } = useLocation();
+
+  usePageSEO({
+    title: "Page Not Found | Refined Painting",
+    description: "The page you're looking for doesn't exist.",
+    canonical: `${SITE_URL}${pathname}`,
+    noindex: true,
+  });
 
   return (
     <section className="flex min-h-[60vh] items-center bg-ink pt-32">

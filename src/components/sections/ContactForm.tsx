@@ -41,6 +41,10 @@ export function ContactForm() {
   const [data, setData] = useState<ContactFormData>(initialData);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Lazy initializer runs Date.now() exactly once, on mount — not on every
+  // render (which a bare useState(Date.now()) or useRef(Date.now()) would
+  // still do, even though only the first value is kept either way).
+  const [leadNonce] = useState(() => Date.now());
 
   const update = (patch: Partial<ContactFormData>) => setData((prev) => ({ ...prev, ...patch }));
 
@@ -58,7 +62,13 @@ export function ContactForm() {
   };
 
   const fullName = `${data.firstName} ${data.lastName}`.trim();
-  const redirectUrl = typeof window !== "undefined" ? `${window.location.origin}/thank-you` : "/thank-you";
+  // The nonce lets ThankYouPage fire generate_lead exactly once per real
+  // submission even if the visitor refreshes /thank-you afterward — see
+  // trackGenerateLead's dedup logic there.
+  const redirectUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/thank-you?form_type=contact&lead=${leadNonce}`
+      : "/thank-you";
 
   return (
     <div className="relative border border-ink/10 bg-cream-light p-6 shadow-card sm:p-8 lg:p-10">

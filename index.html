@@ -1,13 +1,30 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCE6S4DT0K"></script>
+    <!-- Google tag (gtag.js) — measurement ID is also exported as GA_MEASUREMENT_ID in
+         src/lib/analytics.ts for app code; this literal copy can't import that constant
+         since it must run before any bundled JS, so keep both in sync when rotating IDs. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X3HQQ4CQDB"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-TCE6S4DT0K');
+      gtag('config', 'G-X3HQQ4CQDB');
+    </script>
+
+    <!-- Microsoft Clarity — project ID also mirrored as CLARITY_PROJECT_ID in
+         src/lib/analytics.ts, same constraint as the Google tag above.
+         Note: fixed a typo present in the snippet as originally supplied —
+         `c[a].q=c[a]||[]` threw "c[a].q.push is not a function" on every
+         load (c[a] at that point is the queue function itself, not an
+         array), silently breaking Clarity entirely. This is Microsoft's
+         actual published snippet: `c[a].q=c[a].q||[]`. -->
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "ywohcflaev");
     </script>
 
     <meta charset="UTF-8" />
@@ -41,7 +58,7 @@
         "@context": "https://schema.org",
         "@type": "PaintingContractor",
         "name": "Refined Painting",
-        "image": "https://refinedpainting.co/wp-content/uploads/2026/01/refined-painting-logo-mascot.png",
+        "image": "https://refinedpainting.co/favicon.svg",
         "telephone": "+1-206-258-7994",
         "priceRange": "$$",
         "address": {
@@ -63,6 +80,7 @@
           { "@type": "City", "name": "Lake Stevens" },
           { "@type": "City", "name": "Lynnwood" },
           { "@type": "City", "name": "Marysville" },
+          { "@type": "City", "name": "Medina" },
           { "@type": "City", "name": "Sammamish" },
           { "@type": "City", "name": "Shoreline" },
           { "@type": "City", "name": "Mercer Island" }

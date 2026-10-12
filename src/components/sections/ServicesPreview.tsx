@@ -1,6 +1,6 @@
 import { ArrowRight, Hammer, Layers, TreeDeciduous } from "lucide-react";
 import { Link } from "react-router-dom";
-import afterWhite from "../../assets/images/projects/exterior-after-white.jpg";
+import afterWhite from "../../assets/images/projects/exterior-after-white.webp";
 import interiorBright from "../../assets/images/projects/interior-bright-finished.webp";
 import type { ServiceId } from "../../lib/content";
 import { serviceSlugs, services } from "../../lib/content";
