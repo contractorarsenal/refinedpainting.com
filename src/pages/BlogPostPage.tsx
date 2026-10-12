@@ -29,7 +29,7 @@ export function BlogPostPage() {
             publisher: {
               "@type": "Organization",
               name: "Refined Painting",
-              logo: { "@type": "ImageObject", url: `${SITE_URL}/favicon.svg` },
+              logo: { "@type": "ImageObject", url: `${SITE_URL}/refined-painting-logo.webp` },
             },
             mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
           },

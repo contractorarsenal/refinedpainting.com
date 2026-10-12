@@ -28,35 +28,57 @@ export function trackPageview(path: string, title: string) {
 /** Generic GA4 custom-event sender. Every conversion-tracking call below
  * goes through this so there's one place that guards against gtag not being
  * ready yet (ad blockers, slow script load, etc). */
-function trackEvent(eventName: string, params: Record<string, unknown> = {}) {
+function trackEvent(eventName: string, params: object = {}) {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
   window.gtag("event", eventName, params);
 }
 
-const LEAD_NONCE_KEY = "rp_last_lead_nonce";
+const PENDING_LEAD_KEY = "rp_pending_lead";
 
-/** Fired once per confirmed Web3Forms redirect to /thank-you — never on
- * form validation errors or failed submissions, since those never reach
- * /thank-you in the first place (see ContactForm.tsx / QuoteModal.tsx, both
- * native-POST forms with no client-side success faking).
+interface PendingLead {
+  form_type: "contact" | "quote";
+  service?: string;
+}
+
+/** Called from inside each form's onSubmit, synchronously, right before the
+ * native POST to Web3Forms is allowed through (never on a validation
+ * failure, since those call preventDefault and return early before this
+ * would run). This is the only place that writes this key.
  *
- * `nonce` is the `lead=` timestamp each form stamps onto its own redirect
- * URL at submit time. Refreshing /thank-you re-mounts the page with the same
- * nonce still in the URL, so this skips firing again for that nonce — a
- * genuinely new submission later in the session gets a fresh nonce and
- * tracks normally. */
-export function trackGenerateLead(params: { form_type: "contact" | "quote"; service?: string; nonce: string | null }) {
-  if (!params.nonce) return;
-  if (typeof window !== "undefined") {
-    try {
-      if (window.sessionStorage.getItem(LEAD_NONCE_KEY) === params.nonce) return;
-      window.sessionStorage.setItem(LEAD_NONCE_KEY, params.nonce);
-    } catch {
-      // sessionStorage unavailable (private browsing, etc) — fall through and track anyway.
-    }
+ * Deliberately NOT a URL query param: a query string is visitor-controlled
+ * input — anyone can type /thank-you?form_type=contact into a browser and
+ * that must never produce a conversion. sessionStorage written by this
+ * exact function, from this exact tab, moments before a real submission, is
+ * not something an outside visitor can forge by constructing a URL. */
+export function markPendingLead(lead: PendingLead) {
+  if (typeof window === "undefined") return;
+  try {
+    window.sessionStorage.setItem(PENDING_LEAD_KEY, JSON.stringify(lead));
+  } catch {
+    // sessionStorage unavailable (private browsing, etc) — generate_lead just won't fire for this submission.
   }
-  const { nonce: _nonce, ...eventParams } = params;
-  trackEvent("generate_lead", eventParams);
+}
+
+/** Called once on /thank-you mount. Fires generate_lead only if this exact
+ * tab has a pending lead recorded by markPendingLead — i.e. only if this
+ * session actually ran a form through to a successful native submission.
+ * Immediately consumes (removes) the entry, so a refresh of /thank-you, or
+ * revisiting a bookmarked/shared link to it, finds nothing pending and
+ * correctly does not fire again. A manually constructed URL with made-up
+ * query params has no way to create this sessionStorage entry, so it cannot
+ * trigger a conversion either. */
+export function consumePendingLead() {
+  if (typeof window === "undefined") return;
+  let pending: PendingLead | null = null;
+  try {
+    const raw = window.sessionStorage.getItem(PENDING_LEAD_KEY);
+    if (raw) pending = JSON.parse(raw) as PendingLead;
+    window.sessionStorage.removeItem(PENDING_LEAD_KEY);
+  } catch {
+    return;
+  }
+  if (!pending || (pending.form_type !== "contact" && pending.form_type !== "quote")) return;
+  trackEvent("generate_lead", pending);
 }
 
 /** Fired from the single openQuoteModal() chokepoint in QuoteModalContext,

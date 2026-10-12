@@ -1,15 +1,12 @@
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 import { Mascot } from "../components/ui/Mascot";
 import { LinkButton } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { usePageSEO } from "../hooks/usePageSEO";
-import { trackGenerateLead } from "../lib/analytics";
+import { consumePendingLead } from "../lib/analytics";
 import { business, SITE_URL } from "../lib/content";
 
 export function ThankYouPage() {
-  const [searchParams] = useSearchParams();
-
   usePageSEO({
     title: "Thank You | Refined Painting",
     description: "Thanks for requesting a free estimate from Refined Painting. We'll be in touch soon.",
@@ -19,21 +16,14 @@ export function ThankYouPage() {
 
   // /thank-you is only ever reached via Web3Forms' own server-side redirect
   // after it confirms a submission — there's no other link to this page
-  // anywhere in the app (confirmed: only ContactForm.tsx and QuoteModal.tsx
-  // reference it, both as the hidden `redirect` field). That makes landing
-  // here itself the success signal; form_type/service/lead come from the
-  // query string each form stamps onto its own redirect URL.
+  // anywhere in the app. The conversion signal is intentionally NOT read
+  // from the URL (query params are visitor-controlled; anyone could type
+  // /thank-you?form_type=contact and fake a lead). consumePendingLead only
+  // fires if this exact browser tab's sessionStorage has an entry that
+  // ContactForm/QuoteModal wrote themselves, synchronously, immediately
+  // before their real native submission — see lib/analytics.ts.
   useEffect(() => {
-    const formType = searchParams.get("form_type");
-    if (formType !== "contact" && formType !== "quote") return;
-    trackGenerateLead({
-      form_type: formType,
-      service: searchParams.get("service") ?? undefined,
-      nonce: searchParams.get("lead"),
-    });
-    // Only ever needs to run once per mount — re-running on searchParams
-    // identity changes would risk re-firing for no reason.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    consumePendingLead();
   }, []);
 
   return (
