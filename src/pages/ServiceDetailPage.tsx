@@ -3,7 +3,7 @@ import { Navigate, useParams } from "react-router-dom";
 import cabinetsPhoto from "../assets/images/projects/cabinets-sage-green.webp";
 import navyPhoto from "../assets/images/projects/exterior-finished-navy.webp";
 import inProgressPhoto from "../assets/images/projects/exterior-in-progress.webp";
-import afterWhite from "../assets/images/projects/exterior-after-white.jpg";
+import afterWhite from "../assets/images/projects/exterior-after-white.webp";
 import interiorBright from "../assets/images/projects/interior-bright-finished.webp";
 import porchPhoto from "../assets/images/projects/porch-yellow-door.webp";
 import { PageHero } from "../components/hero/PageHero";
@@ -14,9 +14,18 @@ import { useQuoteModal } from "../components/quote/QuoteModalContext";
 import { Button, LinkButton } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { ProjectImage } from "../components/ui/ProjectImage";
-import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import { PageSEO } from "../components/seo/PageSEO";
 import type { ServiceId } from "../lib/content";
-import { getServiceIdFromSlug, processSteps, serviceDetails, services, warranty } from "../lib/content";
+import {
+  business,
+  getServiceIdFromSlug,
+  processSteps,
+  serviceAreas,
+  serviceDetails,
+  services,
+  SITE_URL,
+  warranty,
+} from "../lib/content";
 
 // Service-specific trust points for the "What to Expect" slot, pulled directly
 // from each service's own approved `whatsIncluded` list instead of repeating
@@ -76,15 +85,39 @@ export function ServiceDetailPage() {
   const detail = serviceId ? serviceDetails[serviceId] : undefined;
   const hero = serviceId ? heroImages[serviceId] : undefined;
 
-  useDocumentMeta(
-    service ? `${service.title} | Refined Painting` : "Painting Services | Refined Painting",
-    detail ? `${detail.overview} Serving Seattle and the Eastside.` : "Refined Painting services.",
-  );
+  const canonical = `${SITE_URL}/services/${slug ?? ""}`;
 
   if (!serviceId || !service || !detail || !hero) return <Navigate to="/services" replace />;
 
   return (
     <>
+      <PageSEO
+        title={`${service.title} | Refined Painting`}
+        description={`${detail.overview} Serving Seattle and the Eastside.`}
+        canonical={canonical}
+        image={hasProjectProof[serviceId] ? `${SITE_URL}${hero.src}` : undefined}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            serviceType: service.title,
+            name: service.title,
+            description: detail.overview,
+            url: canonical,
+            provider: { "@type": "PaintingContractor", name: business.name, url: SITE_URL },
+            areaServed: serviceAreas.map((city) => ({ "@type": "City", name: city })),
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+              { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
+              { "@type": "ListItem", position: 3, name: service.title, item: canonical },
+            ],
+          },
+        ]}
+      />
       <PageHero
         eyebrow={detail.eyebrow}
         title={service.title}

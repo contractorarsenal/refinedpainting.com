@@ -1,12 +1,14 @@
 import { ArrowRight, CheckCircle2, Layers, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
+import featurePhoto from "../assets/images/projects/exterior-after-pink.webp";
 import { BeforeAfter } from "../components/sections/BeforeAfter";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { Gallery } from "../components/sections/Gallery";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
 import { GridTexture } from "../components/ui/Texture";
-import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import { PageSEO } from "../components/seo/PageSEO";
+import { SITE_URL } from "../lib/content";
 
 const qualityPoints = [
   {
@@ -27,13 +29,24 @@ const qualityPoints = [
 ];
 
 export function ProjectsPage() {
-  useDocumentMeta(
-    "Our Work | Refined Painting Projects",
-    "Browse recent interior, exterior and cabinet painting projects from Refined Painting, plus real before-and-after comparisons.",
-  );
-
   return (
     <>
+      <PageSEO
+        title="Our Work | Refined Painting Projects"
+        description="Browse recent interior, exterior and cabinet painting projects from Refined Painting, plus real before-and-after comparisons."
+        canonical={`${SITE_URL}/projects`}
+        image={`${SITE_URL}${featurePhoto}`}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+              { "@type": "ListItem", position: 2, name: "Projects", item: `${SITE_URL}/projects` },
+            ],
+          },
+        ]}
+      />
       <section className="relative overflow-hidden bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
         <GridTexture />
         <Container className="relative grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-16">

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import afterWhite from "../../assets/images/projects/exterior-after-white.jpg";
+import afterWhite from "../../assets/images/projects/exterior-after-white.webp";
 import cabinetsPhoto from "../../assets/images/projects/cabinets-sage-green.webp";
 import interiorBright from "../../assets/images/projects/interior-bright-finished.webp";
 import { LinkButton } from "../ui/Button";

@@ -1,12 +1,20 @@
+import { useLocation } from "react-router-dom";
 import { Container } from "../components/ui/Container";
 import { LinkButton } from "../components/ui/Button";
-import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import { PageSEO } from "../components/seo/PageSEO";
+import { SITE_URL } from "../lib/content";
 
 export function NotFoundPage() {
-  useDocumentMeta("Page Not Found | Refined Painting", "The page you're looking for doesn't exist.");
+  const { pathname } = useLocation();
 
   return (
     <section className="flex min-h-[60vh] items-center bg-ink pt-32">
+      <PageSEO
+        title="Page Not Found | Refined Painting"
+        description="The page you're looking for doesn't exist."
+        canonical={`${SITE_URL}${pathname}`}
+        noindex
+      />
       <Container className="flex flex-col items-start gap-5 py-16 text-left">
         <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">404</span>
         <h1 className="font-display text-4xl font-black uppercase leading-[0.95] text-warm-white sm:text-5xl">

@@ -1,10 +1,12 @@
 import { ChevronLeft, X } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent, type RefObject } from "react";
+import { useWeb3FormsSubmit } from "../../hooks/useWeb3FormsSubmit";
 import { business, services, timelineOptions } from "../../lib/content";
 import { Mascot } from "../ui/Mascot";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { Button } from "../ui/Button";
+import { FormSubmitError } from "../ui/FormSubmitError";
 import { StepProgress } from "./StepProgress";
 import { StepContact } from "./steps/StepContact";
 import { StepDetails } from "./steps/StepDetails";
@@ -31,8 +33,17 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
   const [step, setStep] = useState(1);
   const [data, setData] = useState<QuoteFormData>(initialQuoteData);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
+
+  const serviceLabel =
+    services.find((s) => s.id === data.service)?.title ?? (data.service === "not-sure" ? "Not Sure Yet" : "");
+  const timelineLabel = timelineOptions.find((o) => o.id === data.timeline)?.label ?? "";
+  const fullName = `${data.firstName} ${data.lastName}`.trim();
+
+  const { status, errorMessage, submit, reset, isSubmitting } = useWeb3FormsSubmit({
+    formType: "quote",
+    service: serviceLabel,
+  });
 
   useLockBodyScroll(isOpen);
   useFocusTrap(dialogRef, isOpen, triggerRef);
@@ -71,9 +82,10 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
       setStep(1);
       setData(initialQuoteData);
       setErrors({});
-      setIsSubmitting(false);
+      reset();
     }, 300);
     return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -82,28 +94,37 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
 
   // The single <form> below spans all 5 steps. For steps 1-4, "Continue" is
   // intercepted purely to validate and advance the wizard. On the final
-  // step, once validation passes, this handler does NOT call
-  // preventDefault() — the browser submits the real <form action method>
-  // natively straight to Web3Forms, no fetch/XHR involved. Web3Forms then
-  // redirects the browser to /thank-you itself (see the hidden "redirect"
-  // field), so success is never faked client-side.
+  // step, once validation passes, this always calls preventDefault() too —
+  // submission goes through useWeb3FormsSubmit, which inspects Web3Forms'
+  // actual JSON response and only treats it as a completed lead once that
+  // response confirms success. action/method/redirect stay on the <form>
+  // below purely as a no-JS fallback (irrelevant once this handler runs).
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const stepErrors = validateStep(step, data);
     setErrors(stepErrors);
-    if (Object.keys(stepErrors).length > 0) {
-      e.preventDefault();
-      return;
-    }
+    if (Object.keys(stepErrors).length > 0) return;
 
     if (step < TOTAL_STEPS) {
-      e.preventDefault();
       setStep((s) => s + 1);
       return;
     }
 
-    // Final step, valid: let it submit for real. Just reflect a submitting
-    // state briefly for the click before the browser navigates away.
-    setIsSubmitting(true);
+    submit({
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: "Refined Painting — New Estimate Request",
+      from_name: "Refined Painting Website",
+      name: fullName,
+      first_name: data.firstName,
+      last_name: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      zip: data.zip,
+      service: serviceLabel,
+      timeline: timelineLabel,
+      details: data.details || "(none provided)",
+      botcheck: false,
+    });
   };
 
   const goBack = () => {
@@ -111,12 +132,7 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
     setStep((s) => Math.max(1, s - 1));
   };
 
-  const fullName = `${data.firstName} ${data.lastName}`.trim();
-  const serviceLabel =
-    services.find((s) => s.id === data.service)?.title ?? (data.service === "not-sure" ? "Not Sure Yet" : "");
-  const timelineLabel = timelineOptions.find((o) => o.id === data.timeline)?.label ?? "";
-  const redirectUrl =
-    typeof window !== "undefined" ? `${window.location.origin}/thank-you` : "/thank-you";
+  const redirectUrl = typeof window !== "undefined" ? `${window.location.origin}/thank-you` : "/thank-you";
 
   return (
     <div
@@ -193,6 +209,12 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
             {step === 5 && <StepContact data={data} errors={errors} onUpdate={update} />}
           </div>
 
+          {step === TOTAL_STEPS && status === "error" && errorMessage ? (
+            <div className="mt-6">
+              <FormSubmitError message={errorMessage} />
+            </div>
+          ) : null}
+
           <div className="mt-8 flex items-center gap-3 border-t border-ink/10 pt-5">
             {step > 1 ? (
               <Button
@@ -216,7 +238,13 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
               aria-busy={isSubmitting}
               className="ml-auto justify-center disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {step === TOTAL_STEPS ? (isSubmitting ? "Sending…" : "Request My Free Estimate") : "Continue"}
+              {step === TOTAL_STEPS
+                ? isSubmitting
+                  ? "Sending…"
+                  : status === "error"
+                    ? "Try Again"
+                    : "Request My Free Estimate"
+                : "Continue"}
             </Button>
           </div>
           {step === TOTAL_STEPS ? (

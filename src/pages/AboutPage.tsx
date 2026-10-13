@@ -6,25 +6,36 @@ import { Container } from "../components/ui/Container";
 import { ImagePlaceholder } from "../components/ui/ImagePlaceholder";
 import { Reveal } from "../components/ui/Reveal";
 import { GridTexture, LineTexture } from "../components/ui/Texture";
-import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import { PageSEO } from "../components/seo/PageSEO";
 import {
   aboutIntro,
   companyStory,
   coreValues,
   localPartnerBullets,
   mission,
+  SITE_URL,
   trustBullets,
   vision,
 } from "../lib/content";
 
 export function AboutPage() {
-  useDocumentMeta(
-    "About Refined Painting | Seattle & Eastside Painting Company",
-    "Refined Painting is a licensed, insured and EPA Lead-Safe painting company serving Seattle and the Eastside, built around clear communication and careful prep.",
-  );
-
   return (
     <>
+      <PageSEO
+        title="About Refined Painting | Seattle & Eastside Painting Company"
+        description="Refined Painting is a licensed, insured and EPA Lead-Safe painting company serving Seattle and the Eastside, built around clear communication and careful prep."
+        canonical={`${SITE_URL}/about`}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+              { "@type": "ListItem", position: 2, name: "About", item: `${SITE_URL}/about` },
+            ],
+          },
+        ]}
+      />
       {/* F1 — Strong company positioning */}
       <section className="relative overflow-hidden bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
         <GridTexture />

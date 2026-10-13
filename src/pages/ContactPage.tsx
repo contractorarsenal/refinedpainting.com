@@ -5,19 +5,29 @@ import { TrustStrip } from "../components/sections/TrustStrip";
 import { LinkButton } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
-import { useDocumentMeta } from "../hooks/useDocumentMeta";
-import { business, contactReassurance } from "../lib/content";
+import { PageSEO } from "../components/seo/PageSEO";
+import { business, contactReassurance, SITE_URL } from "../lib/content";
 
 const verifiedProof = ["Licensed & Insured", "EPA Lead-Safe Certified", "5-Year Workmanship Warranty"];
 
 export function ContactPage() {
-  useDocumentMeta(
-    "Contact Refined Painting | Free Estimate",
-    "Get a free painting estimate from Refined Painting. Call now or request an estimate online, serving Seattle and the Eastside.",
-  );
-
   return (
     <>
+      <PageSEO
+        title="Contact Refined Painting | Free Estimate"
+        description="Get a free painting estimate from Refined Painting. Call now or request an estimate online, serving Seattle and the Eastside."
+        canonical={`${SITE_URL}/contact`}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+              { "@type": "ListItem", position: 2, name: "Contact", item: `${SITE_URL}/contact` },
+            ],
+          },
+        ]}
+      />
       <section className="bg-cream pb-10 pt-36 sm:pb-12 sm:pt-60 lg:pb-14">
         <Container className="max-w-2xl">
           <Reveal>

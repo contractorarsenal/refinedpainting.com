@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build:client": "tsc -b && vite build",
+    "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr",
+    "prerender": "node scripts/prerender.mjs",
+    "build": "npm run build:client && npm run build:ssr && npm run prerender && rm -rf dist-ssr",
     "lint": "oxlint",
     "preview": "vite preview"
   },
@@ -14,6 +17,7 @@
     "lucide-react": "^1.41.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-router": "^7.18.4",
     "react-router-dom": "^7.18.4",
     "tailwindcss": "^4.3.3"
   },

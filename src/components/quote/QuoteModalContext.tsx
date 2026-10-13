@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useMemo, useRef, useState, type ReactNode } from "react";
+import { trackQuoteModalOpen } from "../../lib/analytics";
 import type { ServiceSelection } from "./quoteState";
 import { QuoteModal } from "./QuoteModal";
 
@@ -25,6 +26,10 @@ export function QuoteModalProvider({ children }: { children: ReactNode }) {
     triggerRef.current = document.activeElement as HTMLElement | null;
     setPresetService(service ?? null);
     setIsOpen(true);
+    trackQuoteModalOpen({
+      preset_service: service ?? null,
+      page_path: typeof window !== "undefined" ? window.location.pathname : "",
+    });
   }, []);
   const closeQuoteModal = useCallback(() => setIsOpen(false), []);
 

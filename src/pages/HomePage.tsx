@@ -1,3 +1,4 @@
+import homeHeroPoster from "../assets/images/home-hero-poster.webp";
 import { HomeHero } from "../components/hero/HomeHero";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { HomeownerProblem } from "../components/sections/HomeownerProblem";
@@ -7,16 +8,18 @@ import { Reviews } from "../components/sections/Reviews";
 import { ServiceAreaSummary } from "../components/sections/ServiceAreaSummary";
 import { ServicesPreview } from "../components/sections/ServicesPreview";
 import { TrustStrip } from "../components/sections/TrustStrip";
-import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import { PageSEO } from "../components/seo/PageSEO";
+import { SITE_URL } from "../lib/content";
 
 export function HomePage() {
-  useDocumentMeta(
-    "Seattle Painting Company | Interior & Exterior Painters | Refined Painting",
-    "Refined Painting provides professional interior, exterior and cabinet painting across Seattle and the Eastside. Licensed, insured, EPA Lead-Safe and backed by a 5-year workmanship warranty.",
-  );
-
   return (
     <>
+      <PageSEO
+        title="Seattle Painting Company | Interior & Exterior Painters | Refined Painting"
+        description="Refined Painting provides professional interior, exterior and cabinet painting across Seattle and the Eastside. Licensed, insured, EPA Lead-Safe and backed by a 5-year workmanship warranty."
+        canonical={SITE_URL}
+        image={`${SITE_URL}${homeHeroPoster}`}
+      />
       {/* F1 — What does Refined Painting do? */}
       <HomeHero />
       {/* F2 — Are these people legitimate? */}

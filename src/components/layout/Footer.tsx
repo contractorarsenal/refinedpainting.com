@@ -17,6 +17,7 @@ const companyLinks = [
   { label: "About", href: "/about" },
   { label: "Our Work", href: "/projects" },
   { label: "Blog / Guides", href: "/blog" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
   { label: "Warranty", href: "/services#warranty" },
   { label: "Service Areas", href: "/about#service-areas" },

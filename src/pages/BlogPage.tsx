@@ -6,24 +6,21 @@ import { Reveal } from "../components/ui/Reveal";
 import { getCategoryLabel } from "../content/blog/categories";
 import type { BlogCategorySlug } from "../content/blog/categories";
 import { blogPosts, getCategoriesWithPosts, getFeaturedPosts, getPostsByCategory } from "../content/blog/posts";
-import { usePageSEO } from "../hooks/usePageSEO";
-
-const SITE_URL = "https://refinedpainting.co";
+import { PageSEO } from "../components/seo/PageSEO";
+import { SITE_URL } from "../lib/content";
 
 export function BlogPage() {
-  usePageSEO({
-    title: "Painting Advice for Seattle Homeowners | Refined Painting",
-    description:
-      "Practical guides covering project planning, interior and exterior painting, cabinets, Seattle weather, and what to expect when hiring a painter.",
-    canonical: `${SITE_URL}/blog`,
-  });
-
   const featured = getFeaturedPosts();
   const latest = [...blogPosts].sort((a, b) => (a.publishDate < b.publishDate ? 1 : -1));
   const categoriesWithPosts = getCategoriesWithPosts();
 
   return (
     <>
+      <PageSEO
+        title="Painting Advice for Seattle Homeowners | Refined Painting"
+        description="Practical guides covering project planning, interior and exterior painting, cabinets, Seattle weather, and what to expect when hiring a painter."
+        canonical={`${SITE_URL}/blog`}
+      />
       <section className="bg-cream pb-10 pt-28 sm:pt-32 lg:pb-14 lg:pt-36">
         <Container className="max-w-2xl">
           <Reveal>

@@ -1,5 +1,5 @@
 import { Square } from "lucide-react";
-import prepPhoto from "../../assets/images/projects/exterior-before-tan.jpg";
+import prepPhoto from "../../assets/images/projects/exterior-before-tan.webp";
 import { Container } from "../ui/Container";
 import { DotGrid } from "../ui/DotGrid";
 import { ProjectImage } from "../ui/ProjectImage";

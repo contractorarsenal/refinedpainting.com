@@ -3,7 +3,7 @@ import { Fragment, type ReactNode } from "react";
 import cabinetsPhoto from "../../assets/images/projects/cabinets-sage-green.webp";
 import navyPhoto from "../../assets/images/projects/exterior-finished-navy.webp";
 import inProgressPhoto from "../../assets/images/projects/exterior-in-progress.webp";
-import afterWhite from "../../assets/images/projects/exterior-after-white.jpg";
+import afterWhite from "../../assets/images/projects/exterior-after-white.webp";
 import interiorBright from "../../assets/images/projects/interior-bright-finished.webp";
 import porchPhoto from "../../assets/images/projects/porch-yellow-door.webp";
 import type { ServiceId } from "../../lib/content";

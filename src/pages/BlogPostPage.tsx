@@ -1,9 +1,8 @@
 import { Navigate, useParams } from "react-router-dom";
 import { ArticleLayout } from "../components/blog/ArticleLayout";
+import { PageSEO } from "../components/seo/PageSEO";
 import { getPostBySlug } from "../content/blog/posts";
-import { usePageSEO } from "../hooks/usePageSEO";
-
-const SITE_URL = "https://refinedpainting.co";
+import { SITE_URL } from "../lib/content";
 
 export function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -11,12 +10,16 @@ export function BlogPostPage() {
 
   const canonical = `${SITE_URL}/blog/${slug ?? ""}`;
 
-  usePageSEO({
-    title: post ? `${post.title} | Refined Painting` : "Guide Not Found | Refined Painting",
-    description: post ? post.metaDescription : "This guide could not be found.",
-    canonical,
-    schema: post
-      ? [
+  if (!slug || !post) return <Navigate to="/blog" replace />;
+
+  return (
+    <>
+      <PageSEO
+        title={`${post.title} | Refined Painting`}
+        description={post.metaDescription}
+        canonical={canonical}
+        image={`${SITE_URL}${post.heroImage.src}`}
+        schema={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
@@ -29,7 +32,7 @@ export function BlogPostPage() {
             publisher: {
               "@type": "Organization",
               name: "Refined Painting",
-              logo: { "@type": "ImageObject", url: `${SITE_URL}/favicon.svg` },
+              logo: { "@type": "ImageObject", url: `${SITE_URL}/refined-painting-logo.webp` },
             },
             mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
           },
@@ -42,15 +45,11 @@ export function BlogPostPage() {
               { "@type": "ListItem", position: 3, name: post.title, item: canonical },
             ],
           },
-        ]
-      : undefined,
-  });
-
-  if (!slug || !post) return <Navigate to="/blog" replace />;
-
-  return (
-    <ArticleLayout post={post} toc={post.toc}>
-      <post.Body />
-    </ArticleLayout>
+        ]}
+      />
+      <ArticleLayout post={post} toc={post.toc}>
+        <post.Body />
+      </ArticleLayout>
+    </>
   );
 }

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import afterPink from "../../assets/images/projects/exterior-after-pink.jpg";
+import afterPink from "../../assets/images/projects/exterior-after-pink.webp";
 import afterInterior from "../../assets/images/projects/interior-bright-finished.webp";
-import afterWhite from "../../assets/images/projects/exterior-after-white.jpg";
-import beforeTan from "../../assets/images/projects/exterior-before-tan.jpg";
+import afterWhite from "../../assets/images/projects/exterior-after-white.webp";
+import beforeTan from "../../assets/images/projects/exterior-before-tan.webp";
 import beforeInterior from "../../assets/images/projects/interior-prep-room.webp";
-import beforeYellow from "../../assets/images/projects/exterior-before-yellow.jpg";
+import beforeYellow from "../../assets/images/projects/exterior-before-yellow.webp";
 import { useInView } from "../../hooks/useInView";
 import { Container } from "../ui/Container";
 import { SectionHeading } from "../ui/SectionHeading";
