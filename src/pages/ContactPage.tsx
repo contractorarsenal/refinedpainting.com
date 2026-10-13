@@ -1,4 +1,5 @@
 import { Clock, MapPin, ShieldCheck } from "lucide-react";
+import gloriaPhoto from "../assets/images/team/gloria-customer-service.webp";
 import { ContactForm } from "../components/sections/ContactForm";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
 import { TrustStrip } from "../components/sections/TrustStrip";
@@ -107,6 +108,29 @@ export function ContactPage() {
                 <div>
                   <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">Hours</span>
                   <span className="text-sm font-bold text-ink">{business.hours}</span>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal delay={215}>
+              <div className="flex items-start gap-4 border-t border-ink/10 pt-5">
+                <img
+                  src={gloriaPhoto}
+                  alt="Gloria, Customer Service Representative at Refined Painting"
+                  className="size-20 shrink-0 rounded-full object-cover object-[50%_22%] ring-2 ring-crest/20"
+                />
+                <div>
+                  <h3 className="font-display text-sm font-extrabold uppercase tracking-wide text-ink">
+                    Meet Gloria
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-ink/65">
+                    Have questions about your painting project? Gloria is part of the team here to help you get
+                    started and make sure your inquiry reaches the right people.
+                  </p>
+                  <p className="mt-2 text-sm font-extrabold text-ink">Gloria</p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-ink/45">
+                    Customer Service Representative
+                  </p>
                 </div>
               </div>
             </Reveal>
