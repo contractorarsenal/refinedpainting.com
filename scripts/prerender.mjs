@@ -51,10 +51,9 @@ function outputPathFor(route) {
   return join(distDir, ...route.split("/").filter(Boolean), "index.html");
 }
 
-const routes = getRoutes();
-const results = [];
-
-for (const route of routes) {
+// Shared by every route below AND by the dedicated 404 page — same merge
+// logic, just a different render() input and a different destination.
+function renderPage(route) {
   const rendered = render(route);
 
   const headInner = extractBetween(rendered, /<head[^>]*>/, "</head>");
@@ -67,12 +66,43 @@ for (const route of routes) {
 
   let page = baseTemplate.replace("</head>", `${headInner}</head>`);
   page = page.replace('<div id="root"></div>', `<div id="root">${appInner}</div>`);
+  return page;
+}
 
+const routes = getRoutes();
+const results = [];
+
+for (const route of routes) {
+  const page = renderPage(route);
   const outPath = outputPathFor(route);
   await mkdir(dirname(outPath), { recursive: true });
   await writeFile(outPath, page, "utf-8");
   results.push({ route, outPath: outPath.replace(projectRoot + "/", ""), bytes: page.length });
 }
+
+// Cloudflare Pages serves this file (with a real 404 status) for any
+// request that matches no static asset — no _redirects rule needed for
+// this, it's automatic. Rendered from the same App/router tree as every
+// other page (via the "*" route -> NotFoundPage) rather than a copy of the
+// generic shell, so crawlers and users get real "Page Not Found" content
+// before JS even runs, not a blank or misleading homepage.
+const notFoundPage = renderPage("/404");
+await writeFile(join(distDir, "404.html"), notFoundPage, "utf-8");
+console.log(`Wrote dist/404.html (${notFoundPage.length.toLocaleString()} bytes)`);
+
+// /thank-you is deliberately excluded from getRoutes() (never indexed, never
+// in the sitemap) but still needs a real prerendered file: without one,
+// Cloudflare would have to redirect /thank-you to the homepage's own
+// prerendered index.html (wrong page) or a route-less shell, and either way
+// the server HTML wouldn't match what the client router renders for that
+// URL — a genuine hydration mismatch (React error #418), not just a cosmetic
+// flash. Prerendering it directly, like every other route, means the static
+// file IS the correct page and no redirect is needed at all.
+const thankYouPage = renderPage("/thank-you");
+const thankYouPath = join(distDir, "thank-you", "index.html");
+await mkdir(dirname(thankYouPath), { recursive: true });
+await writeFile(thankYouPath, thankYouPage, "utf-8");
+console.log(`Wrote dist/thank-you/index.html (${thankYouPage.length.toLocaleString()} bytes)`);
 
 console.log(`Prerendered ${results.length} routes:`);
 for (const r of results) {
