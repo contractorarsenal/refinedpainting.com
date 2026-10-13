@@ -23,8 +23,14 @@ const compactIcons: Partial<Record<ServiceId, typeof Layers>> = {
 };
 
 export function ServicesPreview() {
-  const featured = services.filter((s) => featuredImages[s.id]);
-  const compact = services.filter((s) => !featuredImages[s.id]);
+  // Commercial stays out of visible promotion here too, same as the
+  // services grid on /services (see that page's comment) — this section has
+  // no icon/image slot for it and the compact grid is laid out for exactly
+  // 3 items, so it's excluded explicitly rather than relying on that to
+  // accidentally keep working.
+  const visibleServices = services.filter((s) => s.id !== "commercial");
+  const featured = visibleServices.filter((s) => featuredImages[s.id]);
+  const compact = visibleServices.filter((s) => !featuredImages[s.id]);
 
   return (
     <section id="services-preview" className="bg-cream-light py-14 sm:py-16 lg:py-20">

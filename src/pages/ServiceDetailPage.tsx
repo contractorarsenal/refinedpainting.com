@@ -14,7 +14,7 @@ import { useQuoteModal } from "../components/quote/QuoteModalContext";
 import { Button, LinkButton } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { ProjectImage } from "../components/ui/ProjectImage";
-import { usePageSEO } from "../hooks/usePageSEO";
+import { PageSEO } from "../components/seo/PageSEO";
 import type { ServiceId } from "../lib/content";
 import {
   business,
@@ -87,41 +87,37 @@ export function ServiceDetailPage() {
 
   const canonical = `${SITE_URL}/services/${slug ?? ""}`;
 
-  usePageSEO({
-    title: service ? `${service.title} | Refined Painting` : "Painting Services | Refined Painting",
-    description: detail ? `${detail.overview} Serving Seattle and the Eastside.` : "Refined Painting services.",
-    canonical,
-    image: service && hero && serviceId && hasProjectProof[serviceId] ? `${SITE_URL}${hero.src}` : undefined,
-    schema:
-      service && detail && serviceId
-        ? [
-            {
-              "@context": "https://schema.org",
-              "@type": "Service",
-              serviceType: service.title,
-              name: service.title,
-              description: detail.overview,
-              url: canonical,
-              provider: { "@type": "PaintingContractor", name: business.name, url: SITE_URL },
-              areaServed: serviceAreas.map((city) => ({ "@type": "City", name: city })),
-            },
-            {
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-                { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
-                { "@type": "ListItem", position: 3, name: service.title, item: canonical },
-              ],
-            },
-          ]
-        : undefined,
-  });
-
   if (!serviceId || !service || !detail || !hero) return <Navigate to="/services" replace />;
 
   return (
     <>
+      <PageSEO
+        title={`${service.title} | Refined Painting`}
+        description={`${detail.overview} Serving Seattle and the Eastside.`}
+        canonical={canonical}
+        image={hasProjectProof[serviceId] ? `${SITE_URL}${hero.src}` : undefined}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            serviceType: service.title,
+            name: service.title,
+            description: detail.overview,
+            url: canonical,
+            provider: { "@type": "PaintingContractor", name: business.name, url: SITE_URL },
+            areaServed: serviceAreas.map((city) => ({ "@type": "City", name: city })),
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+              { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
+              { "@type": "ListItem", position: 3, name: service.title, item: canonical },
+            ],
+          },
+        ]}
+      />
       <PageHero
         eyebrow={detail.eyebrow}
         title={service.title}

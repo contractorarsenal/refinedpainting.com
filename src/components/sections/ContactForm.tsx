@@ -1,9 +1,10 @@
 import { useState, type FormEvent } from "react";
-import { markPendingLead } from "../../lib/analytics";
+import { useWeb3FormsSubmit } from "../../hooks/useWeb3FormsSubmit";
 import { services } from "../../lib/content";
 import { isValidEmail, isValidName, isValidPhone } from "../../lib/formValidation";
 import { Button } from "../ui/Button";
 import { FormField as Field, formInputClasses as inputClasses } from "../ui/FormField";
+import { FormSubmitError } from "../ui/FormSubmitError";
 
 // Same existing Refined Painting Web3Forms form used by the estimate
 // wizard — do not swap this key or create a second form.
@@ -41,29 +42,39 @@ function validate(data: ContactFormData): Record<string, string> {
 export function ContactForm() {
   const [data, setData] = useState<ContactFormData>(initialData);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { status, errorMessage, submit, isSubmitting } = useWeb3FormsSubmit({ formType: "contact" });
 
   const update = (patch: Partial<ContactFormData>) => setData((prev) => ({ ...prev, ...patch }));
 
-  // Same pattern as the estimate wizard's final step: validate, and only if
-  // valid let the native <form> submission through to Web3Forms (no
-  // preventDefault, no fetch). Web3Forms then redirects to /thank-you.
-  // markPendingLead runs synchronously, in this event handler, right before
-  // that native submission — it's what lets ThankYouPage tell a real
-  // submission apart from someone just visiting /thank-you directly.
+  const fullName = `${data.firstName} ${data.lastName}`.trim();
+  // Kept as a no-JS fallback only — action/method/redirect below let the
+  // <form> still work as a plain native POST if JS never loads. Whenever JS
+  // is running, this handler always calls preventDefault() and the actual
+  // submission goes through useWeb3FormsSubmit instead, which is the only
+  // path that can confirm a real Web3Forms success before anything is
+  // treated as a completed lead.
+  const redirectUrl = typeof window !== "undefined" ? `${window.location.origin}/thank-you` : "/thank-you";
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const fieldErrors = validate(data);
     setErrors(fieldErrors);
-    if (Object.keys(fieldErrors).length > 0) {
-      e.preventDefault();
-      return;
-    }
-    markPendingLead({ form_type: "contact" });
-    setIsSubmitting(true);
-  };
+    if (Object.keys(fieldErrors).length > 0) return;
 
-  const fullName = `${data.firstName} ${data.lastName}`.trim();
-  const redirectUrl = typeof window !== "undefined" ? `${window.location.origin}/thank-you` : "/thank-you";
+    submit({
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: "Refined Painting — Contact Form",
+      from_name: "Refined Painting Website",
+      name: fullName,
+      first_name: data.firstName,
+      last_name: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      service: data.service,
+      message: data.message,
+      botcheck: false,
+    });
+  };
 
   return (
     <div className="relative border border-ink/10 bg-cream-light p-6 shadow-card sm:p-8 lg:p-10">
@@ -164,6 +175,8 @@ export function ContactForm() {
             />
           </Field>
 
+          {status === "error" && errorMessage ? <FormSubmitError message={errorMessage} /> : null}
+
           <Button
             type="submit"
             size="lg"
@@ -172,7 +185,7 @@ export function ContactForm() {
             aria-busy={isSubmitting}
             className="justify-center disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {isSubmitting ? "Sending…" : "Send Message"}
+            {isSubmitting ? "Sending…" : status === "error" ? "Try Again" : "Send Message"}
           </Button>
         </form>
     </div>

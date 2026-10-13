@@ -17,7 +17,7 @@ import { ImagePlaceholder } from "../components/ui/ImagePlaceholder";
 import { Reveal } from "../components/ui/Reveal";
 import { GridTexture } from "../components/ui/Texture";
 import { useQuoteModal } from "../components/quote/QuoteModalContext";
-import { usePageSEO } from "../hooks/usePageSEO";
+import { PageSEO } from "../components/seo/PageSEO";
 import type { ServiceId } from "../lib/content";
 import { business, cabinetProofStat, faqs, serviceSlugs, services, SITE_URL, warranty } from "../lib/content";
 
@@ -91,26 +91,24 @@ const moreFaqs = faqs.slice(5);
 export function ServicesPage() {
   const { openQuoteModal } = useQuoteModal();
 
-  usePageSEO({
-    title: "Painting Services | Refined Painting",
-    description:
-      "Interior painting, exterior painting, cabinet refinishing, deck & fence staining and carpentry services from Refined Painting, serving Seattle and the Eastside.",
-    canonical: `${SITE_URL}/services`,
-    image: `${SITE_URL}${afterWhite}`,
-    schema: [
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-          { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
-        ],
-      },
-    ],
-  });
-
   return (
     <>
+      <PageSEO
+        title="Painting Services | Refined Painting"
+        description="Interior painting, exterior painting, cabinet refinishing, deck & fence staining and carpentry services from Refined Painting, serving Seattle and the Eastside."
+        canonical={`${SITE_URL}/services`}
+        image={`${SITE_URL}${afterWhite}`}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+              { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
+            ],
+          },
+        ]}
+      />
       <section className="relative overflow-hidden bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
         <GridTexture />
         <Container className="relative grid grid-cols-1 items-stretch gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">

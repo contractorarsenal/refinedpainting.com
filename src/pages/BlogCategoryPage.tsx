@@ -7,7 +7,7 @@ import { Reveal } from "../components/ui/Reveal";
 import { blogCategories, getCategoryLabel } from "../content/blog/categories";
 import type { BlogCategorySlug } from "../content/blog/categories";
 import { getCategoriesWithPosts, getPostsByCategory } from "../content/blog/posts";
-import { usePageSEO } from "../hooks/usePageSEO";
+import { PageSEO } from "../components/seo/PageSEO";
 import { SITE_URL } from "../lib/content";
 
 export function BlogCategoryPage() {
@@ -18,19 +18,16 @@ export function BlogCategoryPage() {
   const label = isKnownCategory ? getCategoryLabel(slug as BlogCategorySlug) : "";
   const posts = hasPosts ? getPostsByCategory(slug as BlogCategorySlug) : [];
 
-  usePageSEO({
-    title: hasPosts ? `${label} Guides | Refined Painting` : "Guides | Refined Painting",
-    description: hasPosts
-      ? `${label} guides and resources from Refined Painting, serving Seattle and the Eastside.`
-      : "Painting guides from Refined Painting.",
-    canonical: `${SITE_URL}/blog/category/${slug ?? ""}`,
-  });
-
   // No empty category archives — only a real, populated category gets a page.
   if (!hasPosts) return <Navigate to="/blog" replace />;
 
   return (
     <>
+      <PageSEO
+        title={`${label} Guides | Refined Painting`}
+        description={`${label} guides and resources from Refined Painting, serving Seattle and the Eastside.`}
+        canonical={`${SITE_URL}/blog/category/${slug ?? ""}`}
+      />
       <section className="bg-cream pb-10 pt-28 sm:pt-32 lg:pb-12 lg:pt-36">
         <Container className="max-w-2xl">
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }, { label }]} />

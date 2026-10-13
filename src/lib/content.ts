@@ -1,4 +1,4 @@
-// Canonical production origin — used by usePageSEO for canonical/OG URLs
+// Canonical production origin — used by PageSEO for canonical/OG URLs
 // and by structured data across the site. Update here if the domain changes.
 export const SITE_URL = "https://refinedpainting.co";
 
@@ -66,6 +66,18 @@ export const services: Service[] = [
     title: "Cabinet Refinishing",
     description: "A durable, sprayed finish that gives kitchens and baths a new look without a full remodel.",
     tone: "warm",
+  },
+  // Deliberately absent from ServicesPage's primaryTileIds/secondaryTileIds
+  // grid (see the comment there) — kept out of visible promotion by design,
+  // but still needs to exist here so /services/commercial-painting itself
+  // resolves instead of silently redirecting to /services. serviceDetails
+  // and heroImages already had full commercial content; this array was the
+  // only place it was missing.
+  {
+    id: "commercial",
+    title: "Commercial Painting",
+    description: "Flexible, scheduled-around-your-business painting for offices, retail, and multi-family properties.",
+    tone: "slate",
   },
   {
     id: "deck-fence",

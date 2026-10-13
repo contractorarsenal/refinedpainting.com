@@ -6,7 +6,7 @@ import { LinkButton } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
 import { useQuoteModal } from "../components/quote/QuoteModalContext";
-import { usePageSEO } from "../hooks/usePageSEO";
+import { PageSEO } from "../components/seo/PageSEO";
 import { business, faqs, serviceSlugs, SITE_URL } from "../lib/content";
 
 const relatedServiceLinks = [
@@ -19,34 +19,32 @@ export function FaqPage() {
   const { openQuoteModal } = useQuoteModal();
   const canonical = `${SITE_URL}/faq`;
 
-  usePageSEO({
-    title: "Frequently Asked Questions | Refined Painting",
-    description:
-      "Answers to common questions about estimates, pricing, timelines, warranty coverage, and what to expect from Refined Painting in Seattle and the Eastside.",
-    canonical,
-    schema: [
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: faqs.map((item) => ({
-          "@type": "Question",
-          name: item.question,
-          acceptedAnswer: { "@type": "Answer", text: item.answer },
-        })),
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-          { "@type": "ListItem", position: 2, name: "FAQ", item: canonical },
-        ],
-      },
-    ],
-  });
-
   return (
     <>
+      <PageSEO
+        title="Frequently Asked Questions | Refined Painting"
+        description="Answers to common questions about estimates, pricing, timelines, warranty coverage, and what to expect from Refined Painting in Seattle and the Eastside."
+        canonical={canonical}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((item) => ({
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: { "@type": "Answer", text: item.answer },
+            })),
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+              { "@type": "ListItem", position: 2, name: "FAQ", item: canonical },
+            ],
+          },
+        ]}
+      />
       <section className="bg-cream pb-10 pt-28 sm:pt-32 lg:pb-12 lg:pt-36">
         <Container className="max-w-2xl">
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "FAQ" }]} />

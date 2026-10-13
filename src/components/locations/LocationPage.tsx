@@ -5,7 +5,7 @@ import { LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
 import { useQuoteModal } from "../quote/QuoteModalContext";
-import { usePageSEO } from "../../hooks/usePageSEO";
+import { PageSEO } from "../seo/PageSEO";
 import { getLocationBySlug } from "../../content/locations/locations";
 import { business, services, serviceSlugs, SITE_URL } from "../../lib/content";
 
@@ -19,14 +19,18 @@ export function LocationPage() {
 
   const canonical = `${SITE_URL}/locations/${citySlug ?? ""}`;
 
-  usePageSEO({
-    title: location ? `Painting Contractor in ${location.cityName}, WA | Refined Painting` : "Refined Painting",
-    description: location
-      ? `Refined Painting provides interior, exterior and cabinet painting for homeowners in ${location.cityName}, WA. Licensed, insured, EPA Lead-Safe, backed by a 5-year workmanship warranty.`
-      : "Refined Painting services.",
-    canonical,
-    schema: location
-      ? [
+  // Not just a missing-slug guard — status gates whether this is actually
+  // fit to show a visitor, independent of whether the route happens to be
+  // reachable (it isn't yet, but this keeps the component safe either way).
+  if (!location || location.status !== "ready") return <Navigate to="/about#service-areas" replace />;
+
+  return (
+    <>
+      <PageSEO
+        title={`Painting Contractor in ${location.cityName}, WA | Refined Painting`}
+        description={`Refined Painting provides interior, exterior and cabinet painting for homeowners in ${location.cityName}, WA. Licensed, insured, EPA Lead-Safe, backed by a 5-year workmanship warranty.`}
+        canonical={canonical}
+        schema={[
           {
             "@context": "https://schema.org",
             "@type": "Service",
@@ -45,17 +49,8 @@ export function LocationPage() {
               { "@type": "ListItem", position: 3, name: location.cityName, item: canonical },
             ],
           },
-        ]
-      : undefined,
-  });
-
-  // Not just a missing-slug guard — status gates whether this is actually
-  // fit to show a visitor, independent of whether the route happens to be
-  // reachable (it isn't yet, but this keeps the component safe either way).
-  if (!location || location.status !== "ready") return <Navigate to="/about#service-areas" replace />;
-
-  return (
-    <>
+        ]}
+      />
       <section className="bg-cream pb-10 pt-28 sm:pt-32 lg:pb-12 lg:pt-36">
         <Container className="max-w-2xl">
           <Breadcrumbs
