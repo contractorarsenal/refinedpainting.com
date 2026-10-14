@@ -269,10 +269,11 @@ export const promoBanner = {
 // Submitting this popup opens the real estimate form (see PromoPopup.tsx) —
 // there is no separate mailing list, so the copy here should never imply one.
 export const promoPopup = {
-  headline: "Planning a Painting Project?",
-  sub: "Get a free, no-pressure estimate from Refined Painting.",
+  headline: "Talk With Maria About Your Project",
+  sub: "Planning a painting project? Maria, our Project Coordinator, is here to help you get started and connect you with the right team.",
   cta: "Get My Free Estimate",
   dismiss: "No, Thanks",
+  person: { name: "Maria", role: "Project Coordinator" },
 };
 
 export const homesPainted = "200+";

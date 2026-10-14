@@ -1,11 +1,11 @@
 import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
+import mariaPhoto from "../../assets/images/team/maria-project-coordinator.webp";
 import { promoPopup } from "../../lib/content";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button } from "../ui/Button";
-import { Mascot } from "../ui/Mascot";
 
 interface PromoPopupProps {
   isOpen: boolean;
@@ -49,13 +49,29 @@ export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
           type="button"
           onClick={onClose}
           aria-label="Close popup"
-          className="absolute right-3 top-3 z-10 flex size-9 items-center justify-center rounded text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
+          className="absolute right-3 top-3 z-10 flex size-9 items-center justify-center rounded-full bg-cream/70 text-ink/60 backdrop-blur-sm transition-colors hover:bg-cream hover:text-ink"
         >
           <X className="size-5" aria-hidden />
         </button>
 
-        <div className="flex shrink-0 items-center justify-center bg-cream-dark/40 px-8 py-8 sm:w-[42%] sm:py-10">
-          <Mascot variant="full" className="h-32 w-32 sm:h-44 sm:w-44" />
+        {/* Fixed height on mobile (stacked above the copy) so a portrait
+            photo can't blow out the dialog's height; on desktop (flex-row)
+            it stretches to match the text column via the default flex
+            align-items: stretch, no explicit height needed. */}
+        <div className="relative h-56 shrink-0 overflow-hidden bg-cream-dark/40 sm:h-auto sm:w-[42%]">
+          <img
+            src={mariaPhoto}
+            alt="Maria, Project Coordinator at Refined Painting"
+            className="h-full w-full object-cover object-[center_22%]"
+          />
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/45 to-transparent px-5 pb-4 pt-12">
+            <p className="font-display text-base font-extrabold uppercase tracking-wide text-warm-white">
+              {promoPopup.person.name}
+            </p>
+            <p className="text-xs font-bold uppercase tracking-widest text-warm-white/80">
+              {promoPopup.person.role}
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-1 flex-col justify-center gap-4 px-7 py-8 sm:px-9 sm:py-10">
