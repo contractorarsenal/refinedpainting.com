@@ -62,7 +62,7 @@ export function HomeHero() {
         <span className="relative text-xs font-bold uppercase tracking-[0.16em] text-teal">
           Seattle &amp; Eastside Painting Company
         </span>
-        <h1 className="relative text-balance max-w-2xl font-display text-[3.25rem] font-black uppercase leading-[0.95] text-warm-white sm:text-6xl lg:text-7xl">
+        <h1 className="relative text-balance max-w-2xl font-display text-[2.75rem] font-black uppercase leading-[1.04] tracking-[0.005em] text-warm-white min-[400px]:text-[3.25rem] min-[400px]:leading-[1] sm:text-6xl sm:leading-[0.95] sm:tracking-normal lg:text-7xl">
           Seattle Painting Done Right From Day One
         </h1>
         <p className="relative max-w-xl text-balance text-base leading-relaxed text-warm-white/80 sm:text-lg">
