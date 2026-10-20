@@ -1,15 +1,14 @@
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useRef } from "react";
-import type { ProjectEntry } from "../sections/Gallery";
+import type { ProjectEntry } from "../../content/projects/projects";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button } from "../ui/Button";
 
-// Honest, category-level description — real, approved copy. These are
-// distinct real projects grouped by category, not multiple photos of one
-// project, so the copy and the "More {category} Work" label below never
-// imply otherwise.
+// Honest, category-level description — real, approved copy. It describes the
+// kind of work in the category, not any one photo, so it stays accurate for
+// every photo in a project.
 const categoryBlurb: Record<string, string> = {
   "Exterior Painting":
     "This project showcases the type of exterior preparation and finish work Refined Painting provides for homeowners throughout the Seattle area.",
@@ -20,23 +19,26 @@ const categoryBlurb: Record<string, string> = {
 };
 
 interface ProjectLightboxProps {
-  projects: ProjectEntry[];
-  index: number;
+  project: ProjectEntry;
+  photoIndex: number;
   onClose: () => void;
-  onNavigate: (index: number) => void;
+  onPhotoChange: (index: number) => void;
 }
 
-export function ProjectLightbox({ projects, index, onClose, onNavigate }: ProjectLightboxProps) {
+export function ProjectLightbox({ project, photoIndex, onClose, onPhotoChange }: ProjectLightboxProps) {
   const touchStartX = useRef<number | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const { openQuoteModal } = useQuoteModal();
   useLockBodyScroll(true);
   useFocusTrap(dialogRef, true);
 
-  const project = projects[index];
-  const hasOthers = projects.length > 1;
-  const goPrev = () => onNavigate((index - 1 + projects.length) % projects.length);
-  const goNext = () => onNavigate((index + 1) % projects.length);
+  // Navigation stays inside this project's photos; other projects are reached
+  // from the gallery grid.
+  const photos = project.photos;
+  const photo = photos[photoIndex];
+  const hasOthers = photos.length > 1;
+  const goPrev = () => onPhotoChange((photoIndex - 1 + photos.length) % photos.length);
+  const goNext = () => onPhotoChange((photoIndex + 1) % photos.length);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -47,9 +49,9 @@ export function ProjectLightbox({ projects, index, onClose, onNavigate }: Projec
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index]);
+  }, [photoIndex, photos.length]);
 
-  if (!project) return null;
+  if (!photo) return null;
 
   const blurb =
     categoryBlurb[project.category] ??
@@ -98,15 +100,22 @@ export function ProjectLightbox({ projects, index, onClose, onNavigate }: Projec
             details, thumbnails together) so nothing can end up clipped inside
             a separately-scrolling inner region. On desktop this wrapper is
             not itself scrollable — the image+details row takes the fixed
-            dialog height and the thumbnail strip sits below it as a footer. */}
+            dialog height and the photo strip sits below it as a footer. */}
         <div className="flex flex-1 flex-col overflow-y-auto lg:overflow-hidden">
           <div className="flex flex-col lg:min-h-0 lg:flex-1 lg:flex-row">
-            <div key={project.id} className="animate-fade-in relative shrink-0 bg-ink lg:h-full lg:w-[65%]">
+            <div key={`${project.id}-${photoIndex}`} className="animate-fade-in relative shrink-0 bg-ink lg:h-full lg:w-[65%]">
               <img
-                src={project.image}
-                alt={project.alt}
+                src={photo.lg}
+                srcSet={`${photo.sm} 720w, ${photo.lg} 1200w`}
+                sizes="(min-width: 1024px) 65vw, 100vw"
+                alt={photo.alt}
                 className="h-full max-h-[38vh] w-full object-cover sm:max-h-[46vh] lg:max-h-none"
               />
+              {photo.stage ? (
+                <span className="absolute left-3 top-3 bg-ink/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-warm-white">
+                  {photo.stage}
+                </span>
+              ) : null}
             </div>
 
             <div className="flex flex-1 flex-col gap-5 p-6 sm:p-7 lg:w-[35%] lg:overflow-y-auto lg:p-8">
@@ -139,7 +148,7 @@ export function ProjectLightbox({ projects, index, onClose, onNavigate }: Projec
                   Prev
                 </button>
                 <span className="text-xs font-semibold uppercase tracking-widest text-ink/35">
-                  {index + 1} / {projects.length}
+                  {photoIndex + 1} / {photos.length}
                 </span>
                 <button
                   type="button"
@@ -154,25 +163,25 @@ export function ProjectLightbox({ projects, index, onClose, onNavigate }: Projec
           </div>
         </div>
 
-        {/* Thumbnail strip — other real, distinct projects in this same category, labeled honestly as separate work, not sub-photos of this one project. Inside the same scroll wrapper as the image/details on mobile, so it's reached by the same single scroll gesture. */}
+        {/* Photo strip — every photo in this project, reached by the same single scroll gesture on mobile. */}
         {hasOthers ? (
           <div className="shrink-0 border-t border-ink/10 bg-cream-light px-5 py-4 sm:px-6">
             <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/40">
-              More {project.category} Work
+              Project Photos
             </span>
             <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1">
-              {projects.map((p, i) => (
+              {photos.map((p, i) => (
                 <button
-                  key={p.id}
+                  key={`${p.lg}-${i}`}
                   type="button"
-                  onClick={() => onNavigate(i)}
-                  aria-label={`View ${p.title}`}
-                  aria-current={i === index}
+                  onClick={() => onPhotoChange(i)}
+                  aria-label={`View photo ${i + 1} of ${photos.length}${p.stage ? `, ${p.stage}` : ""}`}
+                  aria-current={i === photoIndex}
                   className={`relative size-14 shrink-0 overflow-hidden border-2 transition-opacity sm:size-16 ${
-                    i === index ? "border-crest" : "border-transparent opacity-55 hover:opacity-100"
+                    i === photoIndex ? "border-crest" : "border-transparent opacity-55 hover:opacity-100"
                   }`}
                 >
-                  <img src={p.image} alt="" className="h-full w-full object-cover" />
+                  <img src={p.sm} alt="" className="h-full w-full object-cover" />
                 </button>
               ))}
             </div>

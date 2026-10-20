@@ -1,20 +1,17 @@
 import { Link } from "react-router-dom";
-import afterWhite from "../../assets/images/projects/exterior-after-white.webp";
+import { coverPhoto } from "../../content/projects/projects";
 import cabinetsPhoto from "../../assets/images/projects/cabinets-sage-green.webp";
-import interiorBright from "../../assets/images/projects/interior-bright-finished.webp";
 import { LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
 
+const exteriorCover = coverPhoto("red-siding-exterior");
+const interiorCover = coverPhoto("green-living-room-orange-entry");
+
 const previewItems = [
-  { id: "exterior", src: afterWhite, alt: "Home exterior finished in crisp white", label: "Exterior Painting" },
-  {
-    id: "interior",
-    src: interiorBright,
-    alt: "Bright, finished interior room with hardwood floors",
-    label: "Interior Painting",
-  },
+  { id: "exterior", src: exteriorCover.sm, alt: exteriorCover.alt, label: "Exterior Painting" },
+  { id: "interior", src: interiorCover.sm, alt: interiorCover.alt, label: "Interior Painting" },
   {
     id: "cabinets",
     src: cabinetsPhoto,

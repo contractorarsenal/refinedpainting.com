@@ -1,14 +1,19 @@
 import { ChevronDown } from "lucide-react";
-import { useId, useState } from "react";
+import { useState } from "react";
 
 export interface AccordionItemData {
   question: string;
   answer: string;
 }
 
-export function Accordion({ items }: { items: AccordionItemData[] }) {
+/**
+ * `id` is a unique, fixed prefix per Accordion on a page, passed in by the caller.
+ * Not generated with useId() for the same reason as DotGrid: generated ids differ
+ * between the prerendered HTML and client hydration.
+ */
+export function Accordion({ id, items }: { id: string; items: AccordionItemData[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const baseId = useId();
+  const baseId = id;
 
   return (
     <div className="divide-y divide-ink/10 border-y border-ink/10">

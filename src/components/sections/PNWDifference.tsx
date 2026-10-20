@@ -15,7 +15,7 @@ const bullets = [
 export function PNWDifference() {
   return (
     <section className="relative overflow-hidden border-t border-ink/10 bg-cream py-16 sm:py-20 lg:py-28">
-      <DotGrid className="text-ink" />
+      <DotGrid id="pnw-dot-grid" className="text-ink" />
       <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
         <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-card">
           <ProjectImage

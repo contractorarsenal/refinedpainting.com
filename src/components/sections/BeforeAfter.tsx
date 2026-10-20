@@ -5,6 +5,7 @@ import afterWhite from "../../assets/images/projects/exterior-after-white.webp";
 import beforeTan from "../../assets/images/projects/exterior-before-tan.webp";
 import beforeInterior from "../../assets/images/projects/interior-prep-room.webp";
 import beforeYellow from "../../assets/images/projects/exterior-before-yellow.webp";
+import { projects } from "../../content/projects/projects";
 import { useInView } from "../../hooks/useInView";
 import { Container } from "../ui/Container";
 import { SectionHeading } from "../ui/SectionHeading";
@@ -16,6 +17,22 @@ interface ComparisonPair {
   after: string;
   beforeAlt: string;
   afterAlt: string;
+}
+
+// Builds a pair from two photos of the same project in the registry. Only add
+// pairs where both photos show the same area, so the slider lines up.
+function pairFromProject(
+  id: string,
+  label: string,
+  projectId: string,
+  beforeIndex: number,
+  afterIndex: number,
+): ComparisonPair {
+  const project = projects.find((p) => p.id === projectId);
+  const before = project?.photos[beforeIndex];
+  const after = project?.photos[afterIndex];
+  if (!before || !after) throw new Error(`Missing before/after photos for "${projectId}"`);
+  return { id, label, before: before.lg, after: after.lg, beforeAlt: before.alt, afterAlt: after.alt };
 }
 
 const pairs: ComparisonPair[] = [
@@ -43,6 +60,10 @@ const pairs: ComparisonPair[] = [
     beforeAlt: "Interior room mid-prep with protective floor covering and ladder",
     afterAlt: "Same interior room finished, bright and ready for walkthrough",
   },
+  pairFromProject("entry-refresh", "Entry Refresh", "green-living-room-orange-entry", 4, 3),
+  pairFromProject("kitchen-walls", "Kitchen Walls", "blue-walls-orange-ceiling-kitchen", 3, 1),
+  pairFromProject("back-deck", "Back Deck", "back-deck-pergola-bench", 2, 1),
+  pairFromProject("rooftop-corner", "Rooftop Corner", "rooftop-deck-navy-siding", 3, 2),
 ];
 
 export function BeforeAfter() {

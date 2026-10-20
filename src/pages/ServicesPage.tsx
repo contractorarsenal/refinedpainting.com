@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import cabinetsPhoto from "../assets/images/projects/cabinets-sage-green.webp";
 import afterWhite from "../assets/images/projects/exterior-after-white.webp";
 import interiorBright from "../assets/images/projects/interior-bright-finished.webp";
-import porchPhoto from "../assets/images/projects/porch-yellow-door.webp";
+import { coverPhoto } from "../content/projects/projects";
 import inProgressPhoto from "../assets/images/projects/exterior-in-progress.webp";
 import { FramedCTA } from "../components/sections/FramedCTA";
 import { Process } from "../components/sections/Process";
@@ -37,11 +37,13 @@ const serviceIcons: Record<ServiceId, typeof Home> = {
   carpentry: Hammer,
 };
 
+const deckCover = coverPhoto("back-deck-pergola-bench");
+
 const serviceTileImages: Partial<Record<ServiceId, { src: string; alt: string }>> = {
   interior: { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
   cabinets: { src: cabinetsPhoto, alt: "Kitchen cabinets refinished in sage green" },
   exterior: { src: afterWhite, alt: "Home exterior finished in crisp white" },
-  "deck-fence": { src: porchPhoto, alt: "Covered porch with stained and painted wood trim" },
+  "deck-fence": { src: deckCover.lg, alt: deckCover.alt },
   carpentry: { src: inProgressPhoto, alt: "Exterior trim and siding mid-repair with protective covering" },
 };
 
@@ -230,7 +232,7 @@ export function ServicesPage() {
               Frequently Asked Service Questions
             </h2>
             <div className="mt-6 border border-ink/10 bg-cream-light px-5">
-              <Accordion items={primaryFaqs} />
+              <Accordion id="services-faq-primary" items={primaryFaqs} />
             </div>
             {moreFaqs.length ? (
               <details className="mt-2 group/more">
@@ -238,7 +240,7 @@ export function ServicesPage() {
                   Show More Questions
                 </summary>
                 <div className="border border-ink/10 bg-cream-light px-5">
-                  <Accordion items={moreFaqs} />
+                  <Accordion id="services-faq-more" items={moreFaqs} />
                 </div>
               </details>
             ) : null}

@@ -64,7 +64,7 @@ export function FaqPage() {
       <section className="border-t border-ink/10 bg-cream-light py-12 sm:py-16 lg:py-20">
         <Container className="max-w-3xl">
           <div className="border border-ink/10 bg-cream px-5 sm:px-6">
-            <Accordion items={faqs} />
+            <Accordion id="faq" items={faqs} />
           </div>
 
           <div className="mt-10 flex flex-col gap-4 border-t border-ink/10 pt-8 sm:flex-row sm:items-center sm:justify-between">

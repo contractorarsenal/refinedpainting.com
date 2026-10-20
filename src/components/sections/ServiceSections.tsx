@@ -5,7 +5,7 @@ import navyPhoto from "../../assets/images/projects/exterior-finished-navy.webp"
 import inProgressPhoto from "../../assets/images/projects/exterior-in-progress.webp";
 import afterWhite from "../../assets/images/projects/exterior-after-white.webp";
 import interiorBright from "../../assets/images/projects/interior-bright-finished.webp";
-import porchPhoto from "../../assets/images/projects/porch-yellow-door.webp";
+import { coverPhoto } from "../../content/projects/projects";
 import type { ServiceId } from "../../lib/content";
 import { serviceDetails, serviceSlugs, services } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
@@ -14,11 +14,13 @@ import { Container } from "../ui/Container";
 import { ProjectImage } from "../ui/ProjectImage";
 import { Reveal } from "../ui/Reveal";
 
+const deckCover = coverPhoto("back-deck-pergola-bench");
+
 const serviceImages: Record<ServiceId, { src: string; alt: string }> = {
   cabinets: { src: cabinetsPhoto, alt: "Kitchen cabinets refinished in sage green" },
   interior: { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
   exterior: { src: afterWhite, alt: "Home exterior finished in crisp white" },
-  "deck-fence": { src: porchPhoto, alt: "Covered porch with stained and painted wood trim" },
+  "deck-fence": { src: deckCover.lg, alt: deckCover.alt },
   commercial: { src: navyPhoto, alt: "Professionally finished exterior in a deep navy tone" },
   carpentry: { src: inProgressPhoto, alt: "Exterior trim and siding mid-repair with protective covering" },
 };

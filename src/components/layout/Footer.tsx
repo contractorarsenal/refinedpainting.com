@@ -32,7 +32,7 @@ export function Footer() {
         <span className="absolute left-0 top-0 h-full w-22.5 bg-crest" />
       </div>
 
-      <DotGrid className="text-warm-white" />
+      <DotGrid id="footer-dot-grid" className="text-warm-white" />
       <Mascot
         variant="watermark"
         className="pointer-events-none absolute -bottom-8 right-[6%] hidden h-56 w-56 opacity-[0.15] lg:block"

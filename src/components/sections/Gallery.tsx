@@ -1,12 +1,5 @@
-import cabinetsPhoto from "../../assets/images/projects/cabinets-sage-green.webp";
-import afterPink from "../../assets/images/projects/exterior-after-pink.webp";
-import afterWhite from "../../assets/images/projects/exterior-after-white.webp";
-import inProgressPhoto from "../../assets/images/projects/exterior-in-progress.webp";
-import interiorBright from "../../assets/images/projects/interior-bright-finished.webp";
-import interiorEmpty from "../../assets/images/projects/interior-empty-room.webp";
-import kitchenPhoto from "../../assets/images/projects/kitchen-blue-accent.webp";
-import porchPhoto from "../../assets/images/projects/porch-yellow-door.webp";
 import { useState } from "react";
+import { projects, type ProjectEntry, type ProjectPhoto } from "../../content/projects/projects";
 import { ProjectLightbox } from "../projects/ProjectLightbox";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
@@ -23,80 +16,6 @@ const categoryBlurb: Record<string, string> = {
     "This project showcases the type of cabinet preparation and finish work Refined Painting provides for homeowners throughout the Seattle area.",
 };
 
-/**
- * Structured so a future project detail route can key off `id` without
- * reshaping this data. `category` lines up with ServiceId for when these
- * link out to /projects/[id] or filter by service.
- */
-export interface ProjectEntry {
-  id: string;
-  title: string;
-  category: string;
-  image: string;
-  alt: string;
-  feature?: boolean;
-}
-
-const projects: ProjectEntry[] = [
-  {
-    id: "exterior-pink",
-    title: "Exterior Color Change",
-    category: "Exterior Painting",
-    image: afterPink,
-    alt: "Home exterior finished in a soft blush tone",
-    feature: true,
-  },
-  {
-    id: "interior-bright",
-    title: "Interior Refresh",
-    category: "Interior Painting",
-    image: interiorBright,
-    alt: "Bright, finished interior room with hardwood floors",
-  },
-  {
-    id: "cabinets-sage",
-    title: "Cabinet Refinishing",
-    category: "Cabinet Refinishing",
-    image: cabinetsPhoto,
-    alt: "Kitchen cabinets refinished in sage green",
-  },
-  {
-    id: "exterior-white",
-    title: "Full Exterior Repaint",
-    category: "Exterior Painting",
-    image: afterWhite,
-    alt: "Home exterior finished in crisp white",
-  },
-  {
-    id: "kitchen-accent",
-    title: "Accent Wall",
-    category: "Interior Painting",
-    image: kitchenPhoto,
-    alt: "Kitchen with a painted blue accent wall",
-  },
-  {
-    id: "porch-entry",
-    title: "Porch & Entry",
-    category: "Exterior Painting",
-    image: porchPhoto,
-    alt: "Covered porch with a bold yellow front door",
-  },
-  {
-    id: "exterior-in-progress",
-    title: "Exterior In Progress",
-    category: "Exterior Painting",
-    image: inProgressPhoto,
-    alt: "Exterior siding mid-repaint with protective covering",
-  },
-  {
-    id: "interior-empty",
-    title: "Interior Refresh",
-    category: "Interior Painting",
-    image: interiorEmpty,
-    alt: "Freshly painted bedroom ready for move-in",
-  },
-];
-
 const feature = projects.find((p) => p.feature) ?? projects[0];
 const rest = projects.filter((p) => p.id !== feature.id);
 const orderedProjects = [feature, ...rest];
@@ -110,6 +29,12 @@ const filterCounts: Record<(typeof filters)[number], number> = {
   "Cabinet Refinishing": projects.filter((p) => p.category === "Cabinet Refinishing").length,
 };
 
+// Each project's cover is its first photo. `sm` serves grid cards; `lg` serves
+// the larger featured tile and the browser picks the closest width via srcSet.
+function coverSrcSet(photo: ProjectPhoto) {
+  return `${photo.sm} 720w, ${photo.lg} 1200w`;
+}
+
 function ProjectFigure({
   project,
   aspect = "aspect-4/3",
@@ -119,6 +44,8 @@ function ProjectFigure({
   aspect?: string;
   onClick: () => void;
 }) {
+  const cover = project.photos[0];
+
   return (
     <button
       type="button"
@@ -127,8 +54,10 @@ function ProjectFigure({
     >
       <div className={`relative ${aspect} w-full overflow-hidden`}>
         <img
-          src={project.image}
-          alt={project.alt}
+          src={cover.sm}
+          srcSet={coverSrcSet(cover)}
+          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+          alt={cover.alt}
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -146,6 +75,7 @@ function ProjectFigure({
 }
 
 function FeaturedFigure({ project, onClick }: { project: ProjectEntry; onClick: () => void }) {
+  const cover = project.photos[0];
   const blurb =
     categoryBlurb[project.category] ??
     "This project showcases the type of work Refined Painting provides for homeowners throughout the Seattle area.";
@@ -161,8 +91,10 @@ function FeaturedFigure({ project, onClick }: { project: ProjectEntry; onClick: 
           Featured Project
         </span>
         <img
-          src={project.image}
-          alt={project.alt}
+          src={cover.lg}
+          srcSet={coverSrcSet(cover)}
+          sizes="(min-width: 1024px) 66vw, 100vw"
+          alt={cover.alt}
           loading="eager"
           decoding="async"
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -181,20 +113,16 @@ function FeaturedFigure({ project, onClick }: { project: ProjectEntry; onClick: 
 }
 
 export function Gallery() {
-  const [lightboxProjects, setLightboxProjects] = useState<ProjectEntry[] | null>(null);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [lightbox, setLightbox] = useState<{ project: ProjectEntry; photo: number } | null>(null);
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
 
   const filtered = filter === "All" ? orderedProjects : orderedProjects.filter((p) => p.category === filter);
   const showFeature = filter === "All";
 
-  // Scope the lightbox to the clicked project's own category, regardless of
-  // which gallery filter tab is active, so Prev/Next inside the viewer only
-  // ever shows photos from that same category.
+  // The lightbox opens on one project and steps through that project's own
+  // photos only, so a visitor sees every photo for the house they clicked.
   const openProject = (project: ProjectEntry) => {
-    const sameCategory = orderedProjects.filter((p) => p.category === project.category);
-    setLightboxProjects(sameCategory);
-    setActiveIndex(sameCategory.findIndex((p) => p.id === project.id));
+    setLightbox({ project, photo: 0 });
   };
 
   // The second project (after the feature) gets the smaller vertical slot
@@ -250,15 +178,12 @@ export function Gallery() {
         </div>
       </Container>
 
-      {lightboxProjects && activeIndex !== null ? (
+      {lightbox ? (
         <ProjectLightbox
-          projects={lightboxProjects}
-          index={activeIndex}
-          onClose={() => {
-            setActiveIndex(null);
-            setLightboxProjects(null);
-          }}
-          onNavigate={setActiveIndex}
+          project={lightbox.project}
+          photoIndex={lightbox.photo}
+          onClose={() => setLightbox(null)}
+          onPhotoChange={(photo) => setLightbox((prev) => (prev ? { ...prev, photo } : prev))}
         />
       ) : null}
     </section>

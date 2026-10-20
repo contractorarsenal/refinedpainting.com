@@ -5,7 +5,7 @@ import navyPhoto from "../assets/images/projects/exterior-finished-navy.webp";
 import inProgressPhoto from "../assets/images/projects/exterior-in-progress.webp";
 import afterWhite from "../assets/images/projects/exterior-after-white.webp";
 import interiorBright from "../assets/images/projects/interior-bright-finished.webp";
-import porchPhoto from "../assets/images/projects/porch-yellow-door.webp";
+import { coverPhoto } from "../content/projects/projects";
 import { PageHero } from "../components/hero/PageHero";
 import { Accordion } from "../components/ui/Accordion";
 import { FinalCTA } from "../components/sections/FinalCTA";
@@ -60,12 +60,14 @@ const trustPoints: Partial<Record<ServiceId, string[]>> = {
   ],
 };
 
+const deckCover = coverPhoto("back-deck-pergola-bench");
+
 const heroImages: Record<ServiceId, { src: string; alt: string }> = {
   interior: { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
   exterior: { src: afterWhite, alt: "Home exterior finished in crisp white" },
   cabinets: { src: cabinetsPhoto, alt: "Kitchen cabinets refinished in sage green" },
   commercial: { src: navyPhoto, alt: "Professionally finished exterior in a deep navy tone" },
-  "deck-fence": { src: porchPhoto, alt: "Covered porch with stained and painted wood trim" },
+  "deck-fence": { src: deckCover.lg, alt: deckCover.alt },
   carpentry: { src: inProgressPhoto, alt: "Exterior trim and siding mid-repair with protective covering" },
 };
 
@@ -214,7 +216,7 @@ export function ServiceDetailPage() {
             </h2>
           </div>
           <div className="mt-10">
-            <Accordion items={detail.faqs} />
+            <Accordion id="service-faq" items={detail.faqs} />
           </div>
         </Container>
       </section>
