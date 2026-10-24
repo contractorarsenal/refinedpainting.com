@@ -1,8 +1,8 @@
+import { Hammer } from "lucide-react";
 import { Check } from "lucide-react";
 import { Fragment, type ReactNode } from "react";
 import cabinetsPhoto from "../../assets/images/projects/cabinets-sage-green.webp";
 import navyPhoto from "../../assets/images/projects/exterior-finished-navy.webp";
-import inProgressPhoto from "../../assets/images/projects/exterior-in-progress.webp";
 import afterWhite from "../../assets/images/projects/exterior-after-white.webp";
 import interiorBright from "../../assets/images/projects/interior-bright-finished.webp";
 import { coverPhoto } from "../../content/projects/projects";
@@ -12,6 +12,7 @@ import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { ProjectImage } from "../ui/ProjectImage";
+import { ServiceIconPanel } from "../ui/ServiceIconPanel";
 import { Reveal } from "../ui/Reveal";
 
 const deckCover = coverPhoto("back-deck-pergola-bench");
@@ -22,7 +23,8 @@ const serviceImages: Record<ServiceId, { src: string; alt: string }> = {
   exterior: { src: afterWhite, alt: "Home exterior finished in crisp white" },
   "deck-fence": { src: deckCover.lg, alt: deckCover.alt },
   commercial: { src: navyPhoto, alt: "Professionally finished exterior in a deep navy tone" },
-  carpentry: { src: inProgressPhoto, alt: "Exterior trim and siding mid-repair with protective covering" },
+  // No carpentry photo is approved yet; rendered as a branded icon panel.
+  carpentry: { src: "", alt: "" },
 };
 
 // Short framing sentence shown above each service's title, so visitors know
@@ -92,7 +94,7 @@ function FeaturedSection({ id, index, bg }: { id: ServiceId; index: number; bg: 
           <span className="absolute left-3 top-3 z-10 bg-ink/85 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-warm-white">
             {service.title}
           </span>
-          <ProjectImage src={image.src} alt={image.alt} />
+          {image.src ? <ProjectImage src={image.src} alt={image.alt} /> : <ServiceIconPanel icon={Hammer} label={byId(id).title} />}
         </Reveal>
       </Container>
     </section>
@@ -116,7 +118,7 @@ function PairedCard({ id }: { id: ServiceId }) {
   return (
     <Reveal id={serviceSlugs[id]} className="scroll-mt-24 flex flex-col border border-ink/10 bg-cream-light">
       <div className="aspect-16/10 w-full overflow-hidden">
-        <ProjectImage src={image.src} alt={image.alt} />
+        {image.src ? <ProjectImage src={image.src} alt={image.alt} /> : <ServiceIconPanel icon={Hammer} label={byId(id).title} />}
       </div>
       <div className="flex flex-1 flex-col items-start gap-5 p-6 sm:p-7">
         <div>

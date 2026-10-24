@@ -1,14 +1,16 @@
+import { Layers, type LucideIcon } from "lucide-react";
 import { business } from "../../lib/content";
 import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
-import { ImagePlaceholder } from "../ui/ImagePlaceholder";
+import { ServiceIconPanel } from "../ui/ServiceIconPanel";
 import { ProjectImage } from "../ui/ProjectImage";
 
 interface PageHeroProps {
   eyebrow?: string;
   title: string;
   description?: string;
-  placeholderLabel?: string;
+  /** Shown when no approved photo exists. Branded icon panel, never a "coming soon" frame. */
+  icon?: LucideIcon;
   image?: { src: string; alt: string };
   onEstimateClick?: () => void;
 }
@@ -20,7 +22,7 @@ export function PageHero({
   eyebrow,
   title,
   description,
-  placeholderLabel = "Service Image",
+  icon = Layers,
   image,
   onEstimateClick,
 }: PageHeroProps) {
@@ -56,7 +58,9 @@ export function PageHero({
             <ProjectImage src={image.src} alt={image.alt} eager />
           </div>
         ) : (
-          <ImagePlaceholder label={placeholderLabel} aspectClassName="aspect-4/3" className="max-w-md lg:justify-self-end" />
+          <div className="aspect-4/3 w-full max-w-md overflow-hidden rounded-xl shadow-card lg:justify-self-end">
+            <ServiceIconPanel icon={icon} label={title} />
+          </div>
         )}
       </Container>
     </section>

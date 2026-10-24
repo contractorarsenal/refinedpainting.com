@@ -50,7 +50,7 @@ function ProjectFigure({
     <button
       type="button"
       onClick={onClick}
-      className="group flex h-full w-full flex-col border border-ink/10 bg-cream-light text-left"
+      className="group flex h-full w-full flex-col overflow-hidden rounded-sm border border-ink/15 bg-cream-light text-left shadow-card transition-shadow duration-300 hover:shadow-lift"
     >
       <div className={`relative ${aspect} w-full overflow-hidden`}>
         <img
@@ -84,7 +84,7 @@ function FeaturedFigure({ project, onClick }: { project: ProjectEntry; onClick: 
     <button
       type="button"
       onClick={onClick}
-      className="group flex h-full w-full flex-col border border-ink/10 bg-cream-light text-left"
+      className="group flex h-full w-full flex-col overflow-hidden rounded-sm border border-ink/15 bg-cream-light text-left shadow-card transition-shadow duration-300 hover:shadow-lift"
     >
       <div className="relative aspect-4/3 w-full overflow-hidden sm:aspect-16/9">
         <span className="absolute left-0 top-0 z-10 bg-crest px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-warm-white">
@@ -145,7 +145,7 @@ export function Gallery() {
               type="button"
               onClick={() => setFilter(f)}
               aria-pressed={filter === f}
-              className={`border px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wide transition-colors ${
+              className={`inline-flex min-h-11 items-center border px-3.5 py-2 text-[11px] font-bold uppercase tracking-wide transition-colors ${
                 filter === f
                   ? "border-crest bg-crest/10 text-crest"
                   : "border-ink/15 text-ink/55 hover:border-ink/30 hover:text-ink"

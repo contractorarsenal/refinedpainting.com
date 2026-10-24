@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import heroPoster from "../../assets/images/home-hero-poster.webp";
-import heroVideo from "../../assets/videos/home-hero.mp4";
+// Sequence built from home-hero.mp4 (source kept unchanged): truck arrival, a short
+// owner appearance, then the house shot. Joins use the source's own cut points.
+import heroVideo from "../../assets/videos/home-hero-sequence.mp4";
 import { business } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";
@@ -25,9 +27,11 @@ export function HomeHero() {
   // 4.6MB file on its own. The poster paints immediately and is the real LCP
   // candidate; play() is called manually post-mount, which starts the fetch
   // only after that initial paint is already decided.
+  // Reduced-motion visitors keep the poster and no playback.
   useEffect(() => {
     const el = videoRef.current;
     if (!el || homeHeroMedia.type !== "video") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     el.play().catch(() => {});
   }, []);
 

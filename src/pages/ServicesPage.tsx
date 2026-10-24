@@ -1,10 +1,10 @@
+import { ServiceIconPanel } from "../components/ui/ServiceIconPanel";
 import { Building2, Hammer, Home, Layers, PaintRoller, ShieldCheck, TreeDeciduous } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import cabinetsPhoto from "../assets/images/projects/cabinets-sage-green.webp";
 import afterWhite from "../assets/images/projects/exterior-after-white.webp";
 import interiorBright from "../assets/images/projects/interior-bright-finished.webp";
 import { coverPhoto } from "../content/projects/projects";
-import inProgressPhoto from "../assets/images/projects/exterior-in-progress.webp";
 import { FramedCTA } from "../components/sections/FramedCTA";
 import { Process } from "../components/sections/Process";
 import { PromoBanner } from "../components/sections/PromoBanner";
@@ -13,7 +13,7 @@ import { VideoAuthority } from "../components/sections/VideoAuthority";
 import { Button, LinkButton } from "../components/ui/Button";
 import { Accordion } from "../components/ui/Accordion";
 import { Container } from "../components/ui/Container";
-import { ImagePlaceholder } from "../components/ui/ImagePlaceholder";
+import { ProjectImage } from "../components/ui/ProjectImage";
 import { Reveal } from "../components/ui/Reveal";
 import { GridTexture } from "../components/ui/Texture";
 import { useQuoteModal } from "../components/quote/QuoteModalContext";
@@ -38,13 +38,15 @@ const serviceIcons: Record<ServiceId, typeof Home> = {
 };
 
 const deckCover = coverPhoto("back-deck-pergola-bench");
+const overviewCover = coverPhoto("green-living-room-orange-entry");
 
 const serviceTileImages: Partial<Record<ServiceId, { src: string; alt: string }>> = {
   interior: { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
   cabinets: { src: cabinetsPhoto, alt: "Kitchen cabinets refinished in sage green" },
   exterior: { src: afterWhite, alt: "Home exterior finished in crisp white" },
   "deck-fence": { src: deckCover.lg, alt: deckCover.alt },
-  carpentry: { src: inProgressPhoto, alt: "Exterior trim and siding mid-repair with protective covering" },
+  // No carpentry photo is approved yet; the tile renders a branded icon panel instead.
+  carpentry: { src: "", alt: "" },
 };
 
 // Interior/Cabinets/Exterior are the primary row (larger tiles); Deck-Fence
@@ -72,7 +74,9 @@ function ServiceTile({ id, tall = false }: { id: ServiceId; tall?: boolean }) {
           decoding="async"
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
-      ) : null}
+      ) : (
+        <ServiceIconPanel icon={Icon} label={service.title} className="absolute inset-0" />
+      )}
       <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/15 to-transparent transition-colors group-hover:from-ink/95" aria-hidden />
       <span className="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full bg-warm-white/15 text-warm-white backdrop-blur-sm transition-colors duration-300 group-hover:bg-crest">
         <Icon className="size-4" aria-hidden />
@@ -138,9 +142,11 @@ export function ServicesPage() {
 
           <div className="flex max-w-md flex-col gap-5 lg:justify-self-end">
             <div className="flex flex-col gap-2">
-              <ImagePlaceholder label="Project Photo Coming Soon" aspectClassName="aspect-4/3" />
+              <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-card">
+                <ProjectImage src={overviewCover.sm} alt={overviewCover.alt} eager />
+              </div>
               <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
-                Real project photography, added as work is completed
+                Refined Painting project
               </span>
             </div>
             <div className="grid grid-cols-2 gap-x-6 gap-y-5 border-t-2 border-crest pt-4">

@@ -1,5 +1,6 @@
 import { Clock, MapPin, ShieldCheck } from "lucide-react";
 import gloriaPhoto from "../assets/images/team/gloria-customer-service.webp";
+import { TeamCard } from "../components/ui/TeamCard";
 import { ContactForm } from "../components/sections/ContactForm";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
 import { TrustStrip } from "../components/sections/TrustStrip";
@@ -7,7 +8,7 @@ import { LinkButton } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
 import { PageSEO } from "../components/seo/PageSEO";
-import { business, contactReassurance, SITE_URL } from "../lib/content";
+import { business, contactReassurance, SITE_URL, teamMembers } from "../lib/content";
 
 const verifiedProof = ["Licensed & Insured", "EPA Lead-Safe Certified", "5-Year Workmanship Warranty"];
 
@@ -29,7 +30,7 @@ export function ContactPage() {
           },
         ]}
       />
-      <section className="bg-cream pb-10 pt-36 sm:pb-12 sm:pt-60 lg:pb-14">
+      <section className="bg-warm-white pb-10 pt-36 sm:pb-12 sm:pt-60 lg:pb-14">
         <Container className="max-w-2xl">
           <Reveal>
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Start Your Project</span>
@@ -54,11 +55,7 @@ export function ContactPage() {
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ink/50">
                 <ShieldCheck className="size-4 text-crest" aria-hidden />
                 Verified &amp; Approved
-                <span className="ml-auto flex items-center gap-1.5 text-[11px] font-bold uppercase text-teal-dark">
-                  <span className="size-1.5 rounded-full bg-teal-dark" aria-hidden />
-                  Available Now
-                </span>
-              </div>
+                              </div>
             </Reveal>
             <Reveal delay={40}>
               <ul className="flex flex-col gap-2 border-t border-ink/10 pt-4">
@@ -113,25 +110,14 @@ export function ContactPage() {
             </Reveal>
 
             <Reveal delay={215}>
-              <div className="flex items-start gap-4 border-t border-ink/10 pt-5">
-                <img
-                  src={gloriaPhoto}
-                  alt="Gloria, Customer Service Representative at Refined Painting"
-                  className="size-20 shrink-0 rounded-full object-cover object-[50%_22%] ring-2 ring-crest/20"
+              <div className="border-t border-ink/10 pt-5">
+                <TeamCard
+                  name={teamMembers.gloria.name}
+                  role={teamMembers.gloria.role}
+                  blurb={teamMembers.gloria.blurb}
+                  photo={gloriaPhoto}
+                  objectPosition="42% 50%"
                 />
-                <div>
-                  <h3 className="font-display text-sm font-extrabold uppercase tracking-wide text-ink">
-                    Meet Gloria
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-ink/65">
-                    Have questions about your painting project? Gloria is part of the team here to help you get
-                    started and make sure your inquiry reaches the right people.
-                  </p>
-                  <p className="mt-2 text-sm font-extrabold text-ink">Gloria</p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-ink/45">
-                    Customer Service Representative
-                  </p>
-                </div>
               </div>
             </Reveal>
 

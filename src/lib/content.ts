@@ -268,12 +268,28 @@ export const promoBanner = {
 // Configurable. Swap this copy any time the actual offer changes.
 // Submitting this popup opens the real estimate form (see PromoPopup.tsx) —
 // there is no separate mailing list, so the copy here should never imply one.
+// Team roles are fixed: Gloria is the first point of contact for questions,
+// estimates and getting started; Maria coordinates a project once the customer
+// has moved forward. Do not swap these roles in copy.
+export const teamMembers = {
+  gloria: {
+    name: "Gloria",
+    role: "Customer Service Representative",
+    blurb: "Questions, estimates, or getting started? Gloria is our Customer Service Representative.",
+  },
+  maria: {
+    name: "Maria",
+    role: "Project Coordinator",
+    blurb: "Once you move forward, Maria, our Project Coordinator, helps coordinate your project.",
+  },
+};
+
 export const promoPopup = {
-  headline: "Talk With Maria About Your Project",
-  sub: "Planning a painting project? Maria, our Project Coordinator, is here to help you get started and connect you with the right team.",
+  headline: "Talk With Gloria About Your Project",
+  sub: "Planning a painting project? Gloria, our Customer Service Representative, can answer your questions and help you get started with a free estimate.",
   cta: "Get My Free Estimate",
   dismiss: "No, Thanks",
-  person: { name: "Maria", role: "Project Coordinator" },
+  person: teamMembers.gloria,
 };
 
 export const homesPainted = "200+";

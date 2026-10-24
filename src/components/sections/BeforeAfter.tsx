@@ -73,7 +73,7 @@ export function BeforeAfter() {
   const active = pairs.find((p) => p.id === activeId) ?? pairs[0];
 
   return (
-    <section className="bg-off-white pb-20 pt-4 sm:pb-24 sm:pt-6 lg:pb-32">
+    <section className="border-y border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
       <Container>
         <SectionHeading
           align="center"
@@ -92,7 +92,7 @@ export function BeforeAfter() {
                 setValue(50);
               }}
               aria-pressed={activeId === pair.id}
-              className={`border-b-2 pb-1 text-xs font-bold uppercase tracking-wide transition-colors ${
+              className={`inline-flex min-h-11 items-center border-b-2 px-1 pb-1 text-xs font-bold uppercase tracking-wide transition-colors ${
                 activeId === pair.id
                   ? "border-teal-dark text-ink"
                   : "border-transparent text-ink/50 hover:text-ink/80"
@@ -106,7 +106,7 @@ export function BeforeAfter() {
         <div
           ref={sliderRef}
           key={active.id}
-          className="relative mx-auto mt-14 aspect-16/10 w-full max-w-3xl overflow-hidden sm:mt-15 sm:aspect-video"
+          className="relative mx-auto mt-14 aspect-16/10 w-full max-w-3xl overflow-hidden rounded-sm border border-ink/15 shadow-lift sm:mt-15 sm:aspect-video"
         >
           <input
             type="range"

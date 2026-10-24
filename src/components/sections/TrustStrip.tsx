@@ -5,11 +5,12 @@ import badgeNextdoor from "../../assets/images/badge-nextdoor.webp";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
 
+// Captions reuse claims already published on the site (see content.ts certifications).
 const badges = [
-  { src: badgeGoogle, alt: "Google Verified" },
-  { src: badgeEpa, alt: "EPA Lead-Safe Certified Firm" },
-  { src: badgeLicensed, alt: "Licensed and Insured" },
-  { src: badgeNextdoor, alt: "Nextdoor Neighborhood Favorite" },
+  { src: badgeGoogle, alt: "Google Verified badge", label: "Google Verified" },
+  { src: badgeEpa, alt: "EPA Lead-Safe Certified Firm badge", label: "EPA Lead-Safe Certified" },
+  { src: badgeLicensed, alt: "Licensed and Insured badge", label: "Licensed & Insured" },
+  { src: badgeNextdoor, alt: "Nextdoor Neighborhood Favorite badge", label: "Nextdoor Neighborhood Favorite" },
 ];
 
 export function TrustStrip({ eyebrow }: { eyebrow?: string }) {
@@ -24,17 +25,20 @@ export function TrustStrip({ eyebrow }: { eyebrow?: string }) {
           </div>
         ) : null}
         <Reveal className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-12">
-          <div className="flex flex-wrap items-center justify-center gap-x-9 gap-y-4">
+          <ul className="grid w-full max-w-3xl grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4 sm:gap-x-8">
             {badges.map((badge) => (
-              <img
-                key={badge.alt}
-                src={badge.src}
-                alt={badge.alt}
-                loading="lazy"
-                className="h-11 w-11 object-contain sm:h-12 sm:w-12"
-              />
+              <li key={badge.label} className="flex flex-col items-center gap-3 text-center">
+                <img
+                  src={badge.src}
+                  alt={badge.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-24 w-24 object-contain sm:h-28 sm:w-28"
+                />
+                <span className="text-xs font-bold uppercase tracking-wide text-ink/75">{badge.label}</span>
+              </li>
             ))}
-          </div>
+          </ul>
 
           <p className="border-2 border-ink/15 px-4 py-2 text-xs font-bold uppercase tracking-widest text-ink/70">
             5-Year Workmanship Warranty

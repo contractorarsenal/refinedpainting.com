@@ -1,8 +1,7 @@
+import { Building2, Hammer, type LucideIcon } from "lucide-react";
 import { Check } from "lucide-react";
 import { Navigate, useParams } from "react-router-dom";
 import cabinetsPhoto from "../assets/images/projects/cabinets-sage-green.webp";
-import navyPhoto from "../assets/images/projects/exterior-finished-navy.webp";
-import inProgressPhoto from "../assets/images/projects/exterior-in-progress.webp";
 import afterWhite from "../assets/images/projects/exterior-after-white.webp";
 import interiorBright from "../assets/images/projects/interior-bright-finished.webp";
 import { coverPhoto } from "../content/projects/projects";
@@ -62,17 +61,24 @@ const trustPoints: Partial<Record<ServiceId, string[]>> = {
 
 const deckCover = coverPhoto("back-deck-pergola-bench");
 
-const heroImages: Record<ServiceId, { src: string; alt: string }> = {
+const heroImages: Partial<Record<ServiceId, { src: string; alt: string }>> = {
   interior: { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
   exterior: { src: afterWhite, alt: "Home exterior finished in crisp white" },
   cabinets: { src: cabinetsPhoto, alt: "Kitchen cabinets refinished in sage green" },
-  commercial: { src: navyPhoto, alt: "Professionally finished exterior in a deep navy tone" },
   "deck-fence": { src: deckCover.lg, alt: deckCover.alt },
-  carpentry: { src: inProgressPhoto, alt: "Exterior trim and siding mid-repair with protective covering" },
 };
 
 // Only the services with real project photos on /projects get a proof frame —
 // no project photos exist yet for commercial, deck-fence, or carpentry.
+// Which services show their hero photo on the detail page. This is separate from
+// hasProjectProof, which only controls the "Real ... Projects" copy block below.
+// Commercial is excluded: no commercial project photography exists yet, and the
+// residential photo previously assigned to it is not a commercial example.
+const heroPhotoServices: ServiceId[] = ["interior", "exterior", "cabinets", "deck-fence"];
+
+// Icon panels for services that have no approved photo yet (never a placeholder frame).
+const serviceIcons: Partial<Record<ServiceId, LucideIcon>> = { carpentry: Hammer, commercial: Building2 };
+
 const hasProjectProof: Partial<Record<ServiceId, boolean>> = {
   interior: true,
   exterior: true,
@@ -124,8 +130,8 @@ export function ServiceDetailPage() {
         eyebrow={detail.eyebrow}
         title={service.title}
         description={detail.overview}
-        placeholderLabel={`${service.title} Image`}
-        image={hasProjectProof[serviceId] ? hero : undefined}
+        icon={serviceId ? serviceIcons[serviceId] : undefined}
+        image={serviceId && heroPhotoServices.includes(serviceId) ? hero : undefined}
         onEstimateClick={() => openQuoteModal(serviceId)}
       />
 

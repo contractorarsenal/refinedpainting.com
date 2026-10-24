@@ -19,9 +19,11 @@ export function FinalCTA({ tone = "red" }: FinalCTAProps) {
     <section
       className={`relative overflow-hidden py-24 text-warm-white sm:py-28 lg:py-32 ${isNavy ? "bg-ink" : "bg-crest"}`}
     >
+      {/* Shown from xl up, where the centred copy leaves a clear right margin; smaller widths overlap the proof row. */}
       <Mascot
         variant="full"
-        className="pointer-events-none absolute -bottom-10 right-[4%] hidden h-64 w-64 opacity-90 lg:block"
+        trimmed
+        className="pointer-events-none absolute bottom-0 right-[3%] hidden h-[22rem] w-auto select-none opacity-95 xl:block 2xl:h-[26rem]"
       />
       <Container className="relative flex flex-col items-center gap-6 text-center">
         <span className="text-xs font-bold uppercase tracking-[0.16em] text-warm-white/85">Ready When You Are</span>
@@ -59,6 +61,11 @@ export function FinalCTA({ tone = "red" }: FinalCTAProps) {
           <span className="hidden text-warm-white/35 sm:inline">•</span>
           <span className="text-sm font-semibold text-warm-white/90">5-Year Workmanship Warranty</span>
         </div>
+
+        {/* Phone and tablet: Chippy sits in flow below the CTA content with its own
+            space, so it never covers buttons or the proof row. Desktop keeps the
+            larger absolute placement above. */}
+        <Mascot trimmed variant="full" className="mx-auto mt-4 block h-44 w-auto select-none sm:h-52 xl:hidden" />
       </Container>
     </section>
   );

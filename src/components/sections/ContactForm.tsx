@@ -77,7 +77,7 @@ export function ContactForm() {
   };
 
   return (
-    <div className="relative border border-ink/10 bg-cream-light p-6 shadow-card sm:p-8 lg:p-10">
+    <div className="relative border border-ink/10 border-t-4 border-t-crest bg-cream-light p-6 shadow-lift sm:p-8 lg:p-10">
       <span className="absolute inset-x-0 top-0 h-1 bg-crest" aria-hidden />
       <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Project Inquiry</span>
       <h2 className="mt-2 font-display text-2xl font-extrabold uppercase leading-tight text-ink sm:text-3xl">

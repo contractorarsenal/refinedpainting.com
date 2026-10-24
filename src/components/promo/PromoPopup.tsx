@@ -1,11 +1,12 @@
 import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
-import mariaPhoto from "../../assets/images/team/maria-project-coordinator.webp";
-import { promoPopup } from "../../lib/content";
+import gloriaPhoto from "../../assets/images/team/gloria-customer-service.webp";
+import { promoPopup, teamMembers } from "../../lib/content";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button } from "../ui/Button";
+import { TeamCard } from "../ui/TeamCard";
 
 interface PromoPopupProps {
   isOpen: boolean;
@@ -43,7 +44,7 @@ export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
       <div
         ref={dialogRef}
         tabIndex={-1}
-        className="animate-fade-up relative flex w-full max-w-220 flex-col overflow-hidden rounded border-2 border-teal-dark bg-cream shadow-lift sm:flex-row"
+        className="animate-fade-up relative flex w-full max-w-md flex-col gap-5 rounded border-2 border-teal-dark bg-cream px-6 pb-7 pt-8 shadow-lift sm:px-8 sm:pb-8"
       >
         <button
           type="button"
@@ -54,27 +55,16 @@ export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
           <X className="size-5" aria-hidden />
         </button>
 
-        {/* Fixed height on mobile (stacked above the copy) so a portrait
-            photo can't blow out the dialog's height; on desktop (flex-row)
-            it stretches to match the text column via the default flex
-            align-items: stretch, no explicit height needed. */}
-        <div className="relative h-56 shrink-0 overflow-hidden bg-cream-dark/40 sm:h-auto sm:w-[42%]">
-          <img
-            src={mariaPhoto}
-            alt="Maria, Project Coordinator at Refined Painting"
-            className="h-full w-full object-cover object-[center_22%]"
-          />
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/45 to-transparent px-5 pb-4 pt-12">
-            <p className="font-display text-base font-extrabold uppercase tracking-wide text-warm-white">
-              {promoPopup.person.name}
-            </p>
-            <p className="text-xs font-bold uppercase tracking-widest text-warm-white/80">
-              {promoPopup.person.role}
-            </p>
-          </div>
-        </div>
+        <TeamCard
+          name={teamMembers.gloria.name}
+          role={teamMembers.gloria.role}
+          blurb={teamMembers.gloria.blurb}
+          photo={gloriaPhoto}
+          objectPosition="42% 50%"
+          className="border-b border-ink/10 pb-5"
+        />
 
-        <div className="flex flex-1 flex-col justify-center gap-4 px-7 py-8 sm:px-9 sm:py-10">
+        <div className="flex flex-col gap-4">
           <div className="h-1 w-14 bg-crest" aria-hidden />
           <h3 className="text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
             {promoPopup.headline}

@@ -144,7 +144,6 @@ export const projects: ProjectEntry[] = [
     id: "exterior-pink",
     title: "Exterior Color Change",
     category: "Exterior Painting",
-    feature: true,
     photos: [
       { sm: exteriorAfterPinkPhoto, lg: exteriorAfterPinkPhoto, alt: "Home exterior finished in a soft blush tone" },
     ],
@@ -266,6 +265,7 @@ export const projects: ProjectEntry[] = [
     id: "gray-green-home-front-fence",
     title: "Gray-Green Home Front and Fence",
     category: "Exterior Painting",
+    feature: true,
     photos: [
       { sm: grayGreenHomeFrontFinishedSm, lg: grayGreenHomeFrontFinishedLg, alt: "Gray-green home front with a white gabled porch, railings and concrete steps", stage: "Finished" },
       { sm: grayGreenFenceGarageFinishedSm, lg: grayGreenFenceGarageFinishedLg, alt: "Gray-green wood fence beside a white garage door", stage: "Finished" },

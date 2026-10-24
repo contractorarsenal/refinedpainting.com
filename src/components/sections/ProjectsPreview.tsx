@@ -6,7 +6,7 @@ import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
 
-const exteriorCover = coverPhoto("red-siding-exterior");
+const exteriorCover = coverPhoto("gray-green-home-front-fence");
 const interiorCover = coverPhoto("green-living-room-orange-entry");
 
 const previewItems = [

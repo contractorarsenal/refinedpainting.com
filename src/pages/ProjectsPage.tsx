@@ -72,8 +72,8 @@ export function ProjectsPage() {
         </Container>
       </section>
 
-      <Gallery />
       <BeforeAfter />
+      <Gallery />
 
       <section className="border-t border-ink/10 bg-sand py-14 sm:py-16 lg:py-20">
         <Container>

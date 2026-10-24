@@ -3,7 +3,9 @@ import { FinalCTA } from "../components/sections/FinalCTA";
 import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
 import { TrustStrip } from "../components/sections/TrustStrip";
 import { Container } from "../components/ui/Container";
-import { ImagePlaceholder } from "../components/ui/ImagePlaceholder";
+import gloriaPhoto from "../assets/images/team/gloria-customer-service.webp";
+import mariaPhoto from "../assets/images/team/maria-project-coordinator.webp";
+import { TeamCard } from "../components/ui/TeamCard";
 import { Reveal } from "../components/ui/Reveal";
 import { GridTexture, LineTexture } from "../components/ui/Texture";
 import { PageSEO } from "../components/seo/PageSEO";
@@ -16,6 +18,7 @@ import {
   SITE_URL,
   trustBullets,
   vision,
+  teamMembers,
 } from "../lib/content";
 
 export function AboutPage() {
@@ -55,7 +58,24 @@ export function AboutPage() {
           </Reveal>
 
           <Reveal delay={130} className="max-w-md lg:justify-self-end">
-            <ImagePlaceholder label="Team Photo Coming Soon" aspectClassName="aspect-4/3" />
+            <div className="flex flex-col gap-6 border border-ink/10 bg-cream-light p-6 sm:p-8">
+              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Who You Will Work With</span>
+              <TeamCard
+                name={teamMembers.gloria.name}
+                role={teamMembers.gloria.role}
+                blurb={teamMembers.gloria.blurb}
+                photo={gloriaPhoto}
+                objectPosition="42% 50%"
+              />
+              <TeamCard
+                name={teamMembers.maria.name}
+                role={teamMembers.maria.role}
+                blurb={teamMembers.maria.blurb}
+                photo={mariaPhoto}
+                objectPosition="50% 20%"
+                className="border-t border-ink/10 pt-6"
+              />
+            </div>
           </Reveal>
         </Container>
       </section>
