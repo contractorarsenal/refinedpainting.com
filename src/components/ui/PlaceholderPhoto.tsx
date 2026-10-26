@@ -46,7 +46,7 @@ export function PlaceholderPhoto({ label, tone = "slate", className = "" }: Plac
           fill="none"
         />
       </svg>
-      <span className="relative z-10 m-3 bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-warm-white/90">
+      <span className="relative z-10 m-3 bg-ink px-2.5 py-1 text-[11px] font-bold uppercase tracking-widest text-warm-white/90">
         {label} · sample
       </span>
     </div>

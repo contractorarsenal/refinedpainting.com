@@ -115,7 +115,7 @@ export function ServicesPage() {
           },
         ]}
       />
-      <section className="relative overflow-hidden bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
+      <section className="relative overflow-hidden bg-cream pb-12 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
         <GridTexture />
         <Container className="relative grid grid-cols-1 items-stretch gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
           <div className="flex flex-col items-start gap-4">
@@ -145,7 +145,7 @@ export function ServicesPage() {
               <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-card">
                 <ProjectImage src={overviewCover.sm} alt={overviewCover.alt} eager />
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+              <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink/35">
                 Refined Painting project
               </span>
             </div>
@@ -153,7 +153,7 @@ export function ServicesPage() {
               {proofRow.map((item) => (
                 <div key={item.label}>
                   <span className="block font-display text-xl font-black leading-none text-crest">{item.value}</span>
-                  <span className="mt-1 block text-[10px] font-bold uppercase tracking-widest text-ink/50">
+                  <span className="mt-1 block text-[11px] font-bold uppercase tracking-widest text-ink/50">
                     {item.label}
                   </span>
                 </div>

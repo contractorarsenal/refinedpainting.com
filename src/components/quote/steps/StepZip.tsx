@@ -32,7 +32,7 @@ export function StepZip({ data, errors, onUpdate }: StepZipProps) {
             maxLength={5}
             value={data.zip}
             onChange={(e) => onUpdate({ zip: e.target.value.replace(/\D/g, "") })}
-            placeholder="98103"
+            placeholder="e.g. 98103"
             aria-invalid={Boolean(errors.zip)}
             aria-describedby={errors.zip ? "zip-error" : undefined}
             className="w-full rounded border-2 border-ink/15 bg-warm-white py-4 pl-12 pr-4 text-lg font-semibold tracking-wide text-ink outline-none transition-colors focus:border-teal-dark"

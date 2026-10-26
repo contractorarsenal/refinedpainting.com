@@ -18,7 +18,7 @@ export function FramedCTA({
   const { openQuoteModal } = useQuoteModal();
 
   return (
-    <section className="border-t border-ink/10 bg-sand py-16 sm:py-20 lg:py-24">
+    <section className="border-t border-ink/10 bg-sand py-10 sm:py-20 lg:py-24">
       <Container>
         <div className="relative border border-ink/10 bg-cream-light p-8 sm:p-12 lg:p-14">
           <span className="absolute left-0 top-0 h-1 w-14 bg-crest" aria-hidden />

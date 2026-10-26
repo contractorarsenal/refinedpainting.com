@@ -43,7 +43,7 @@ export function Reviews() {
   }, [paused]);
 
   return (
-    <section className="bg-light-blue py-16 sm:py-20 lg:py-28">
+    <section className="bg-light-blue py-10 sm:py-20 lg:py-28">
       <Container>
         <SectionHeading eyebrow="What Your Neighbors Are Saying" title="Refined Painting Reviews" />
 
@@ -71,7 +71,7 @@ export function Reviews() {
                 type="button"
                 onClick={() => go(-1)}
                 aria-label="Previous review"
-                className="flex size-10 items-center justify-center rounded-full border-2 border-ink/15 text-ink transition-colors hover:border-crest hover:text-crest"
+                className="relative flex size-10 items-center justify-center rounded-full border-2 border-ink/15 text-ink transition-colors hover:border-crest hover:text-crest before:absolute before:-inset-2 before:content-['']"
               >
                 <ChevronLeft className="size-5" aria-hidden />
               </button>
@@ -79,7 +79,7 @@ export function Reviews() {
                 type="button"
                 onClick={() => go(1)}
                 aria-label="Next review"
-                className="flex size-10 items-center justify-center rounded-full border-2 border-ink/15 text-ink transition-colors hover:border-crest hover:text-crest"
+                className="relative flex size-10 items-center justify-center rounded-full border-2 border-ink/15 text-ink transition-colors hover:border-crest hover:text-crest before:absolute before:-inset-2 before:content-['']"
               >
                 <ChevronRight className="size-5" aria-hidden />
               </button>
@@ -92,7 +92,7 @@ export function Reviews() {
                     aria-selected={i === active}
                     aria-label={`Review ${i + 1}`}
                     onClick={() => setActive(i)}
-                    className={`h-2 w-6 transition-colors ${i === active ? "bg-crest" : "bg-ink/15"}`}
+                    className={`relative h-2 w-6 transition-colors before:absolute before:-inset-x-2 before:-inset-y-4 before:content-[''] ${i === active ? "bg-crest" : "bg-ink/15"}`}
                   />
                 ))}
               </div>

@@ -40,7 +40,7 @@ export function AboutPage() {
         ]}
       />
       {/* F1 — Strong company positioning */}
-      <section className="relative overflow-hidden bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
+      <section className="relative overflow-hidden bg-cream pb-12 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
         <GridTexture />
         <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
           <Reveal>
@@ -117,7 +117,7 @@ export function AboutPage() {
       </section>
 
       {/* F3 — How we think about the work */}
-      <section className="border-t border-ink/10 bg-cream-light py-16 sm:py-20 lg:py-24">
+      <section className="border-t border-ink/10 bg-cream-light py-10 sm:py-20 lg:py-24">
         <Container>
           <Reveal className="flex flex-col items-start gap-3 border-b border-ink/10 pb-8 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -135,7 +135,7 @@ export function AboutPage() {
             {coreValues.map((value, index) => (
               <Reveal key={value.title} delay={180 + index * 80}>
                 <div className="border-t-2 border-crest pt-4">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/40">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink/40">
                     Standard {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-1.5 font-display text-base font-extrabold uppercase tracking-wide text-ink sm:text-lg">
@@ -150,7 +150,7 @@ export function AboutPage() {
       </section>
 
       {/* F5 — What you can expect from us (practical, homeowner-facing standards) */}
-      <section className="relative overflow-hidden border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+      <section className="relative overflow-hidden border-t border-ink/10 bg-ink py-10 text-warm-white sm:py-20 lg:py-24">
         <LineTexture tone="warm-white" className="opacity-50" />
         <Container className="relative mx-auto max-w-2xl text-center">
           <Reveal>

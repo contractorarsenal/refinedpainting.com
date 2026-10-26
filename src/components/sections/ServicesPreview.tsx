@@ -33,7 +33,7 @@ export function ServicesPreview() {
   const visibleServices = services.filter((s) => s.id !== "commercial");
 
   return (
-    <section id="services-preview" className="bg-cream-light py-14 sm:py-16 lg:py-20">
+    <section id="services-preview" className="bg-cream-light py-10 sm:py-16 lg:py-20">
       <Container>
         <SectionHeading
           align="center"

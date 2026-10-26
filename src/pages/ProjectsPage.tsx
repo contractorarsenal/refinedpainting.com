@@ -47,7 +47,7 @@ export function ProjectsPage() {
           },
         ]}
       />
-      <section className="relative overflow-hidden bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
+      <section className="relative overflow-hidden bg-cream pb-12 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
         <GridTexture />
         <Container className="relative grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
           <Reveal>
@@ -75,7 +75,7 @@ export function ProjectsPage() {
       <BeforeAfter />
       <Gallery />
 
-      <section className="border-t border-ink/10 bg-sand py-14 sm:py-16 lg:py-20">
+      <section className="border-t border-ink/10 bg-sand py-10 sm:py-16 lg:py-20">
         <Container>
           <Reveal>
             <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Craftsmanship Standard</span>
@@ -87,7 +87,7 @@ export function ProjectsPage() {
             {qualityPoints.map((point, index) => (
               <Reveal key={point.title} delay={180 + index * 80}>
                 <div className="border border-ink/10 bg-cream-light p-5">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-crest">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">
                     Standard {String(index + 1).padStart(2, "0")}
                   </span>
                   <point.icon className="mt-2 size-5 text-teal-dark" aria-hidden />

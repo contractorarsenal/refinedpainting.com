@@ -60,7 +60,7 @@ export function ContactPage() {
             <Reveal delay={40}>
               <ul className="flex flex-col gap-2 border-t border-ink/10 pt-4">
                 {verifiedProof.map((item) => (
-                  <li key={item} className="text-sm font-bold text-ink">
+                  <li key={item} className="text-[15px] font-bold text-ink">
                     {item}
                   </li>
                 ))}
@@ -92,7 +92,7 @@ export function ContactPage() {
                 <MapPin className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
                 <div>
                   <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">Office</span>
-                  <span className="text-sm font-bold text-ink">
+                  <span className="text-[15px] font-bold text-ink">
                     {business.address.street}, {business.address.city}, {business.address.state}{" "}
                     {business.address.zip}
                   </span>
@@ -104,7 +104,7 @@ export function ContactPage() {
                 <Clock className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
                 <div>
                   <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">Hours</span>
-                  <span className="text-sm font-bold text-ink">{business.hours}</span>
+                  <span className="text-[15px] font-bold text-ink">{business.hours}</span>
                 </div>
               </div>
             </Reveal>
@@ -136,7 +136,7 @@ export function ContactPage() {
                       <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-crest text-[11px] font-bold text-warm-white">
                         {index + 1}
                       </span>
-                      <span className="text-sm leading-relaxed text-ink/65">{step}</span>
+                      <span className="text-[15px] leading-relaxed text-ink/75">{step}</span>
                     </li>
                   ))}
                 </ol>

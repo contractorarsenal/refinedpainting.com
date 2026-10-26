@@ -12,7 +12,7 @@ const painPoints = [
 
 export function HomeownerProblem() {
   return (
-    <section className="relative overflow-hidden border-t border-ink/10 bg-cream py-14 sm:py-16 lg:py-20">
+    <section className="relative overflow-hidden border-t border-ink/10 bg-cream py-10 sm:py-16 lg:py-20">
       <GridTexture className="opacity-70" />
       <Container className="relative grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <Reveal className="flex flex-col items-start gap-5 lg:sticky lg:top-28 lg:self-start">

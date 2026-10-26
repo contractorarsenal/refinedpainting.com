@@ -91,7 +91,7 @@ function FeaturedSection({ id, index, bg }: { id: ServiceId; index: number; bg: 
             reversed ? "lg:order-2" : "lg:order-1"
           }`}
         >
-          <span className="absolute left-3 top-3 z-10 bg-ink/85 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-warm-white">
+          <span className="absolute left-3 top-3 z-10 bg-ink/85 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-warm-white">
             {service.title}
           </span>
           {image.src ? <ProjectImage src={image.src} alt={image.alt} /> : <ServiceIconPanel icon={Hammer} label={byId(id).title} />}

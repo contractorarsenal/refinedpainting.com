@@ -8,7 +8,7 @@ const featuredAreas = ["Seattle", "Bellevue", "Kirkland", "Redmond", "Bothell", 
 /** Short homepage summary — the full city list lives on /about and /contact via ServiceAreaStrip. */
 export function ServiceAreaSummary() {
   return (
-    <section className="bg-cream py-16 sm:py-20 lg:py-24">
+    <section className="bg-cream py-10 sm:py-20 lg:py-24">
       <Container className="flex flex-col items-center text-center">
         <SectionHeading
           align="center"

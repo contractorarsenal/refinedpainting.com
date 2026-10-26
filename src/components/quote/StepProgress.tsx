@@ -35,7 +35,7 @@ export function StepProgress({ current }: { current: number }) {
               ) : null}
             </div>
             <span
-              className={`mt-1.5 hidden text-[10px] font-bold uppercase tracking-wide sm:block ${
+              className={`mt-1.5 hidden text-[11px] font-bold uppercase tracking-wide sm:block ${
                 isActive || isDone ? "text-ink" : "text-ink/35"
               }`}
             >

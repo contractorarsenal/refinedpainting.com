@@ -29,7 +29,7 @@ function App() {
         <RouteAnalytics />
         <ConversionTracking />
         <Header />
-        <main className="pb-20 sm:pb-0">
+        <main className="pb-[calc(5.5rem+env(safe-area-inset-bottom))] sm:pb-0">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<ServicesPage />} />

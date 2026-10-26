@@ -286,7 +286,7 @@ export const teamMembers = {
 
 export const promoPopup = {
   headline: "Talk With Gloria About Your Project",
-  sub: "Planning a painting project? Gloria, our Customer Service Representative, can answer your questions and help you get started with a free estimate.",
+  sub: "Planning a painting project? Gloria can answer your questions and help you get started with a free estimate.",
   cta: "Get My Free Estimate",
   dismiss: "No, Thanks",
   person: teamMembers.gloria,

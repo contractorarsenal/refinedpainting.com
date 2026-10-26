@@ -73,7 +73,7 @@ export function BeforeAfter() {
   const active = pairs.find((p) => p.id === activeId) ?? pairs[0];
 
   return (
-    <section className="border-y border-ink/10 bg-warm-white py-14 sm:py-16 lg:py-20">
+    <section className="border-y border-ink/10 bg-warm-white py-10 sm:py-16 lg:py-20">
       <Container>
         <SectionHeading
           align="center"
@@ -82,7 +82,7 @@ export function BeforeAfter() {
           description="Drag the slider to compare real Refined Painting projects, before and after."
         />
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
+        <div className="-mx-5 mt-8 flex gap-6 overflow-x-auto border-b border-ink/10 px-5 pb-0 [scrollbar-width:none] sm:mx-0 sm:mt-10 sm:flex-wrap sm:justify-center sm:overflow-visible sm:border-0 sm:px-0 [&::-webkit-scrollbar]:hidden">
           {pairs.map((pair) => (
             <button
               key={pair.id}
@@ -92,7 +92,7 @@ export function BeforeAfter() {
                 setValue(50);
               }}
               aria-pressed={activeId === pair.id}
-              className={`inline-flex min-h-11 items-center border-b-2 px-1 pb-1 text-xs font-bold uppercase tracking-wide transition-colors ${
+              className={`inline-flex min-h-11 shrink-0 items-center whitespace-nowrap border-b-2 px-1 pb-1 text-xs font-bold uppercase tracking-wide transition-colors ${
                 activeId === pair.id
                   ? "border-teal-dark text-ink"
                   : "border-transparent text-ink/50 hover:text-ink/80"
@@ -106,7 +106,7 @@ export function BeforeAfter() {
         <div
           ref={sliderRef}
           key={active.id}
-          className="relative mx-auto mt-14 aspect-16/10 w-full max-w-3xl overflow-hidden rounded-sm border border-ink/15 shadow-lift sm:mt-15 sm:aspect-video"
+          className="relative mx-auto mt-8 aspect-16/10 w-full max-w-3xl overflow-hidden rounded-sm border border-ink/15 shadow-lift sm:mt-15 sm:aspect-video"
         >
           <input
             type="range"
@@ -141,10 +141,10 @@ export function BeforeAfter() {
             </svg>
           </div>
 
-          <span className="pointer-events-none absolute left-3 top-3 bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-warm-white">
+          <span className="pointer-events-none absolute left-3 top-3 bg-ink px-2.5 py-1 text-[11px] font-bold uppercase tracking-widest text-warm-white">
             Before
           </span>
-          <span className="pointer-events-none absolute right-3 top-3 bg-teal-dark px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-warm-white">
+          <span className="pointer-events-none absolute right-3 top-3 bg-teal-dark px-2.5 py-1 text-[11px] font-bold uppercase tracking-widest text-warm-white">
             After
           </span>
         </div>

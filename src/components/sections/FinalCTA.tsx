@@ -17,7 +17,7 @@ export function FinalCTA({ tone = "red" }: FinalCTAProps) {
 
   return (
     <section
-      className={`relative overflow-hidden py-24 text-warm-white sm:py-28 lg:py-32 ${isNavy ? "bg-ink" : "bg-crest"}`}
+      className={`relative overflow-hidden py-16 text-warm-white sm:py-28 lg:py-32 ${isNavy ? "bg-ink" : "bg-crest"}`}
     >
       {/* Shown from xl up, where the centred copy leaves a clear right margin; smaller widths overlap the proof row. */}
       <Mascot

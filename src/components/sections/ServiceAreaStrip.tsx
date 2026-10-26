@@ -4,7 +4,7 @@ import { Container } from "../ui/Container";
 
 export function ServiceAreaStrip() {
   return (
-    <section id="service-areas" className="relative scroll-mt-24 bg-cream py-16 sm:py-20 lg:py-28">
+    <section id="service-areas" className="relative scroll-mt-24 bg-cream py-10 sm:py-20 lg:py-28">
       <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[1.6fr_1fr] lg:gap-16">
         <div>
           <span className="flex size-8 items-center justify-center bg-crest text-warm-white" aria-hidden>

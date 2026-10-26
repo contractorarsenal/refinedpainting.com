@@ -17,7 +17,7 @@ export function ProcessCondensed() {
   const { ref: rowRef, inView: rowInView } = useInView<HTMLDivElement>(0.4);
 
   return (
-    <section className="relative overflow-hidden bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+    <section className="relative overflow-hidden bg-ink py-10 text-warm-white sm:py-20 lg:py-24">
       <LineTexture tone="warm-white" className="opacity-50" />
       <Container className="relative">
         <SectionHeading
@@ -56,7 +56,7 @@ export function ProcessCondensed() {
                 <h3 className="mt-2 font-display text-base font-extrabold uppercase tracking-wide text-warm-white">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-warm-white/60">
+                <p className="mt-2 text-base leading-relaxed text-warm-white/80">
                   {step.description.split(".")[0]}.
                 </p>
               </div>

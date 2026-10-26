@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { projects, type ProjectEntry, type ProjectPhoto } from "../../content/projects/projects";
 import { ProjectLightbox } from "../projects/ProjectLightbox";
+import { Button } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
 
@@ -28,6 +29,13 @@ const filterCounts: Record<(typeof filters)[number], number> = {
   "Exterior Painting": projects.filter((p) => p.category === "Exterior Painting").length,
   "Cabinet Refinishing": projects.filter((p) => p.category === "Cabinet Refinishing").length,
 };
+
+// Projects shown at first and added per "Load more" press. Eight keeps the
+// grid in full rows at two and three columns, and it keeps the phone list short
+// enough to scan. Photos for unshown projects are not requested until their
+// cards are rendered (cover images are lazy-loaded; full-size images only load
+// inside the lightbox).
+const PAGE_SIZE = 8;
 
 // Each project's cover is its first photo. `sm` serves grid cards; `lg` serves
 // the larger featured tile and the browser picks the closest width via srcSet.
@@ -65,7 +73,7 @@ function ProjectFigure({
         <div className="absolute inset-0 bg-ink/0 transition-colors duration-300 group-hover:bg-ink/10" aria-hidden />
       </div>
       <figcaption className="flex flex-1 flex-col items-start gap-1 bg-ink px-4 py-3.5 transition-colors group-hover:bg-ink-2">
-        <span className="text-[10px] font-bold uppercase tracking-widest text-teal">{project.category}</span>
+        <span className="text-[11px] font-bold uppercase tracking-widest text-teal">{project.category}</span>
         <span className="font-display text-base font-bold uppercase tracking-wide text-warm-white transition-colors group-hover:text-crest">
           {project.title}
         </span>
@@ -87,7 +95,7 @@ function FeaturedFigure({ project, onClick }: { project: ProjectEntry; onClick: 
       className="group flex h-full w-full flex-col overflow-hidden rounded-sm border border-ink/15 bg-cream-light text-left shadow-card transition-shadow duration-300 hover:shadow-lift"
     >
       <div className="relative aspect-4/3 w-full overflow-hidden sm:aspect-16/9">
-        <span className="absolute left-0 top-0 z-10 bg-crest px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-warm-white">
+        <span className="absolute left-0 top-0 z-10 bg-crest px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-warm-white">
           Featured Project
         </span>
         <img
@@ -115,8 +123,18 @@ function FeaturedFigure({ project, onClick }: { project: ProjectEntry; onClick: 
 export function Gallery() {
   const [lightbox, setLightbox] = useState<{ project: ProjectEntry; photo: number } | null>(null);
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+
+  // Changing the filter starts the list over at the first page, so each
+  // category is read from the top rather than inheriting a previous "Load more".
+  const selectFilter = (f: (typeof filters)[number]) => {
+    setFilter(f);
+    setVisibleCount(PAGE_SIZE);
+  };
 
   const filtered = filter === "All" ? orderedProjects : orderedProjects.filter((p) => p.category === filter);
+  const visible = filtered.slice(0, visibleCount);
+  const remaining = filtered.length - visible.length;
   const showFeature = filter === "All";
 
   // The lightbox opens on one project and steps through that project's own
@@ -128,7 +146,7 @@ export function Gallery() {
   // The second project (after the feature) gets the smaller vertical slot
   // beside it in the editorial layout; everything else flows into the grid.
   const secondary = showFeature ? rest[0] : null;
-  const gridProjects = showFeature ? filtered.filter((p) => p.id !== feature.id && p.id !== secondary?.id) : filtered;
+  const gridProjects = showFeature ? visible.filter((p) => p.id !== feature.id && p.id !== secondary?.id) : visible;
 
   return (
     <section className="relative overflow-hidden bg-off-white pb-10 pt-10 sm:pb-12 lg:pb-16">
@@ -143,7 +161,7 @@ export function Gallery() {
             <button
               key={f}
               type="button"
-              onClick={() => setFilter(f)}
+              onClick={() => selectFilter(f)}
               aria-pressed={filter === f}
               className={`inline-flex min-h-11 items-center border px-3.5 py-2 text-[11px] font-bold uppercase tracking-wide transition-colors ${
                 filter === f
@@ -175,6 +193,21 @@ export function Gallery() {
               <ProjectFigure project={project} onClick={() => openProject(project)} />
             </Reveal>
           ))}
+        </div>
+
+        <div className="mt-10 flex flex-col items-center gap-3 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-ink/50" aria-live="polite">
+            Showing {visible.length} of {filtered.length} {filtered.length === 1 ? "project" : "projects"}
+          </p>
+          {remaining > 0 ? (
+            <Button
+              variant="outline-dark"
+              icon="none"
+              onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+            >
+              Load more projects
+            </Button>
+          ) : null}
         </div>
       </Container>
 
