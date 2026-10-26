@@ -50,7 +50,7 @@ export function ServicesPreview() {
               <Reveal key={service.id} as="li" delay={index * 60} className="w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.85rem)]">
                 <Link
                   to={`/services/${serviceSlugs[service.id]}`}
-                  className="group relative block overflow-hidden rounded-lg border border-ink/10 bg-ink"
+                  className="group relative block overflow-hidden rounded-lg border border-ink/10 bg-ink transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
                 >
                   <div className="aspect-4/3 w-full overflow-hidden">
                     {serviceIcons[service.id] ? (

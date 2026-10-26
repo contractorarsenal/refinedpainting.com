@@ -1,4 +1,3 @@
-import { Building2, Hammer, type LucideIcon } from "lucide-react";
 import { Check } from "lucide-react";
 import { useParams } from "react-router-dom";
 import cabinetsPhoto from "../assets/images/projects/cabinets-sage-green.webp";
@@ -71,15 +70,6 @@ const heroImages: Partial<Record<ServiceId, { src: string; alt: string }>> = {
 
 // Only the services with real project photos on /projects get a proof frame —
 // no project photos exist yet for commercial, deck-fence, or carpentry.
-// Which services show their hero photo on the detail page. This is separate from
-// hasProjectProof, which only controls the "Real ... Projects" copy block below.
-// Commercial is excluded: no commercial project photography exists yet, and the
-// residential photo previously assigned to it is not a commercial example.
-const heroPhotoServices: ServiceId[] = ["interior", "exterior", "cabinets", "deck-fence"];
-
-// Icon panels for services that have no approved photo yet (never a placeholder frame).
-const serviceIcons: Partial<Record<ServiceId, LucideIcon>> = { carpentry: Hammer, commercial: Building2 };
-
 const hasProjectProof: Partial<Record<ServiceId, boolean>> = {
   interior: true,
   exterior: true,
@@ -136,8 +126,6 @@ export function ServiceDetailPage() {
         eyebrow={detail.eyebrow}
         title={service.title}
         description={detail.overview}
-        icon={serviceId ? serviceIcons[serviceId] : undefined}
-        image={serviceId && heroPhotoServices.includes(serviceId) ? hero : undefined}
         onEstimateClick={() => openQuoteModal(serviceId)}
       />
 

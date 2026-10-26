@@ -1,11 +1,10 @@
 import { ArrowRight, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import { serviceAreas } from "../../lib/content";
 import { Container } from "../ui/Container";
 import { SectionHeading } from "../ui/SectionHeading";
 
-const featuredAreas = ["Seattle", "Bellevue", "Kirkland", "Redmond", "Bothell", "Lynnwood"];
-
-/** Short homepage summary — the full city list lives on /about and /contact via ServiceAreaStrip. */
+/** Homepage summary of every verified service area in src/lib/content.ts. The same list drives ServiceAreaStrip on /about and /contact. */
 export function ServiceAreaSummary() {
   return (
     <section className="bg-cream py-10 sm:py-20 lg:py-24">
@@ -18,7 +17,7 @@ export function ServiceAreaSummary() {
         />
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-          {featuredAreas.map((area) => (
+          {serviceAreas.map((area) => (
             <span
               key={area}
               className="flex items-center gap-1.5 border border-ink/15 bg-cream-light px-3 py-1.5 text-xs font-bold text-ink/75"

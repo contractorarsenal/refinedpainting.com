@@ -9,14 +9,17 @@ import { SectionHeading } from "../ui/SectionHeading";
 const exteriorCover = coverPhoto("gray-green-home-front-fence");
 const interiorCover = coverPhoto("green-living-room-orange-entry");
 
+// Caption bands use brand colour, not the photo: red for exterior and cabinets,
+// navy for interior. White text on each band stays above 4.5:1.
 const previewItems = [
-  { id: "exterior", src: exteriorCover.sm, alt: exteriorCover.alt, label: "Exterior Painting" },
-  { id: "interior", src: interiorCover.sm, alt: interiorCover.alt, label: "Interior Painting" },
+  { id: "exterior", src: exteriorCover.sm, alt: exteriorCover.alt, label: "Exterior Painting", band: "bg-crest group-hover:bg-crest-dark" },
+  { id: "interior", src: interiorCover.sm, alt: interiorCover.alt, label: "Interior Painting", band: "bg-ink group-hover:bg-ink-2" },
   {
     id: "cabinets",
     src: cabinetsPhoto,
     alt: "Kitchen cabinets refinished in sage green",
     label: "Cabinet Refinishing",
+    band: "bg-crest group-hover:bg-crest-dark",
   },
 ];
 
@@ -38,7 +41,10 @@ export function ProjectsPreview() {
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
           {previewItems.map((item, index) => (
             <Reveal key={item.id} delay={index * 80}>
-              <Link to="/projects" className="group flex h-full flex-col border border-ink/10 bg-cream-light">
+              <Link
+                to="/projects"
+                className="group flex h-full flex-col border border-ink/10 bg-cream-light transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
+              >
                 <div className="relative aspect-4/3 w-full overflow-hidden">
                   <img
                     src={item.src}
@@ -48,7 +54,7 @@ export function ProjectsPreview() {
                     className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 </div>
-                <span className="border-t border-ink/10 px-4 py-3.5 text-xs font-bold uppercase tracking-widest text-ink/60 transition-colors group-hover:text-crest">
+                <span className={`px-4 py-3.5 text-xs font-bold uppercase tracking-widest text-warm-white transition-colors duration-300 ${item.band}`}>
                   {item.label}
                 </span>
               </Link>

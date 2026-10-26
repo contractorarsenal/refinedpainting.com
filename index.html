@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Marks the document as JavaScript-enabled before first paint, so scroll reveals
+         hide content only when the page can reveal it (see [data-reveal] in src/index.css). -->
+    <script>document.documentElement.classList.add("js");</script>
     <!-- Google tag (gtag.js) — measurement ID is also exported as GA_MEASUREMENT_ID in
          src/lib/analytics.ts for app code; this literal copy can't import that constant
          since it must run before any bundled JS, so keep both in sync when rotating IDs. -->

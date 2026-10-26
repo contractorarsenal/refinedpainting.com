@@ -142,7 +142,7 @@ export interface ProjectEntry {
 export const projects: ProjectEntry[] = [
   {
     id: "exterior-pink",
-    title: "Exterior Color Change",
+    title: "Blush-Tone Exterior",
     category: "Exterior Painting",
     photos: [
       { sm: exteriorAfterPinkPhoto, lg: exteriorAfterPinkPhoto, alt: "Home exterior finished in a soft blush tone" },
@@ -150,7 +150,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "interior-bright",
-    title: "Interior Refresh",
+    title: "Bright Hardwood Room",
     category: "Interior Painting",
     photos: [
       { sm: interiorBrightFinishedPhoto, lg: interiorBrightFinishedPhoto, alt: "Bright, finished interior room with hardwood floors" },
@@ -158,7 +158,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "cabinets-sage",
-    title: "Cabinet Refinishing",
+    title: "Sage Green Cabinets",
     category: "Cabinet Refinishing",
     photos: [
       { sm: cabinetsSageGreenPhoto, lg: cabinetsSageGreenPhoto, alt: "Kitchen cabinets refinished in sage green" },
@@ -166,7 +166,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "exterior-white",
-    title: "Full Exterior Repaint",
+    title: "Crisp White Exterior",
     category: "Exterior Painting",
     photos: [
       { sm: exteriorAfterWhitePhoto, lg: exteriorAfterWhitePhoto, alt: "Home exterior finished in crisp white" },
@@ -174,7 +174,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "kitchen-accent",
-    title: "Accent Wall",
+    title: "Blue Accent Kitchen",
     category: "Interior Painting",
     photos: [
       { sm: kitchenBlueAccentPhoto, lg: kitchenBlueAccentPhoto, alt: "Kitchen with a painted blue accent wall" },
@@ -182,7 +182,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "porch-entry",
-    title: "Porch & Entry",
+    title: "Yellow Door Porch",
     category: "Exterior Painting",
     photos: [
       { sm: porchYellowDoorPhoto, lg: porchYellowDoorPhoto, alt: "Covered porch with a bold yellow front door" },
@@ -190,7 +190,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "exterior-in-progress",
-    title: "Exterior In Progress",
+    title: "Siding Repaint in Progress",
     category: "Exterior Painting",
     photos: [
       { sm: exteriorInProgressPhoto, lg: exteriorInProgressPhoto, alt: "Exterior siding mid-repaint with protective covering" },
@@ -198,7 +198,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "interior-empty",
-    title: "Interior Refresh",
+    title: "Move-In Ready Bedroom",
     category: "Interior Painting",
     photos: [
       { sm: interiorEmptyRoomPhoto, lg: interiorEmptyRoomPhoto, alt: "Freshly painted bedroom ready for move-in" },
@@ -206,7 +206,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "shingle-siding-exterior",
-    title: "Shingle Siding Exterior",
+    title: "Brown Shingle Home and Deck",
     category: "Exterior Painting",
     photos: [
       { sm: shingleSidingSideDeckSm, lg: shingleSidingSideDeckLg, alt: "Side of a brown shingle-siding home with a wooden deck and steps", stage: "Finished" },
@@ -228,7 +228,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "green-living-room-orange-entry",
-    title: "Green Living Room and Orange Entry",
+    title: "Green Living Room, Orange Entry",
     category: "Interior Painting",
     photos: [
       { sm: vaultedLivingRoomGreenWallsSm, lg: vaultedLivingRoomGreenWallsLg, alt: "Living room with green walls, a wood-plank ceiling and track lighting", stage: "Finished" },
@@ -241,7 +241,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "staircase-and-hallway",
-    title: "Staircase and Hallway",
+    title: "Staircase With Runner Rug",
     category: "Interior Painting",
     photos: [
       { sm: staircaseRunnerRugEntrySm, lg: staircaseRunnerRugEntryLg, alt: "Staircase with a patterned runner rug beside a white front door", stage: "Finished" },
@@ -275,7 +275,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "blue-walls-orange-ceiling-kitchen",
-    title: "Kitchen With Blue Walls and Orange Ceiling",
+    title: "Blue Walls, Orange Ceiling",
     category: "Interior Painting",
     photos: [
       { sm: blueWallsOrangeCeilingOpenKitchenSm, lg: blueWallsOrangeCeilingOpenKitchenLg, alt: "Open kitchen and dining area with blue walls and an orange ceiling", stage: "Finished" },
@@ -286,7 +286,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "back-deck-pergola-bench",
-    title: "Back Deck With Pergola and Bench",
+    title: "Pergola Deck and Fire Pit",
     category: "Exterior Painting",
     photos: [
       { sm: backDeckBuiltInBenchFirePitSm, lg: backDeckBuiltInBenchFirePitLg, alt: "Back deck with a built-in bench around a fire pit", stage: "Finished" },
@@ -297,7 +297,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "white-siding-awning-entry",
-    title: "White Siding With Awning and Entry Steps",
+    title: "White Siding and Awning",
     category: "Exterior Painting",
     photos: [
       { sm: whiteSidingAwningEntryStepsSm, lg: whiteSidingAwningEntryStepsLg, alt: "White siding with an awning over entry steps and a brown railing", stage: "Finished" },
@@ -308,7 +308,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "red-siding-exterior",
-    title: "Red Siding Exterior",
+    title: "Red Siding Home",
     category: "Exterior Painting",
     photos: [
       { sm: redSidingFrontDoorStepsSm, lg: redSidingFrontDoorStepsLg, alt: "Red siding home with a front door and steps", stage: "Finished" },
@@ -319,7 +319,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "rooftop-deck-navy-siding",
-    title: "Rooftop Deck and Navy Siding",
+    title: "Navy Siding and Rooftop Deck",
     category: "Exterior Painting",
     photos: [
       { sm: rooftopDeckFireTableFinishedSm, lg: rooftopDeckFireTableFinishedLg, alt: "Rooftop deck with a fire table, railings and gray deck boards", stage: "Finished" },
@@ -330,7 +330,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "red-front-door-green-siding",
-    title: "Red Front Door and Green Siding",
+    title: "Red Door on Green Siding",
     category: "Exterior Painting",
     photos: [
       { sm: redFrontDoorGreenSidingSm, lg: redFrontDoorGreenSidingLg, alt: "Bright red front door with a brass mail slot on green siding", stage: "Finished" },
@@ -341,7 +341,7 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "kitchen-exposed-beams-brick-wall",
-    title: "Kitchen With Exposed Beams and Brick Wall",
+    title: "Exposed Beams and Brick Kitchen",
     category: "Interior Painting",
     photos: [
       { sm: kitchenExposedBeamsBrickWallSm, lg: kitchenExposedBeamsBrickWallLg, alt: "Kitchen with exposed wood beams, a brick wall and a gas range", stage: "Finished" },

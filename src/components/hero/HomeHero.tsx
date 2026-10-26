@@ -1,9 +1,10 @@
 import { Play } from "lucide-react";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import heroPoster from "../../assets/images/home-hero-poster.webp";
-// Sequence built from home-hero.mp4 (source kept unchanged): truck arrival, a short
-// owner appearance, then the house shot. Joins use the source's own cut points.
-import heroVideo from "../../assets/videos/home-hero-sequence.mp4";
+// The client-edited hero video, transcoded for the web from the original MOV kept
+// outside the repository. The full sequence is used untrimmed (6.8s, 1920x1080, 30fps,
+// no audio). The poster is a frame from the house shot at 5.5s.
+import heroVideo from "../../assets/videos/home-hero-final.mp4";
 import { business } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";

@@ -42,41 +42,43 @@ export function AboutPage() {
       {/* F1 — Strong company positioning */}
       <section className="relative overflow-hidden bg-cream pb-12 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
         <GridTexture />
-        <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
-          <Reveal>
+        <Container className="relative flex flex-col items-center gap-5 text-center">
+          <Reveal className="flex flex-col items-center gap-5">
             <span className="h-1 w-10 bg-crest" aria-hidden />
-            <span className="mt-4 block text-xs font-bold uppercase tracking-[0.16em] text-crest">
+            <span className="block text-xs font-bold uppercase tracking-[0.16em] text-crest">
               About Refined Painting
             </span>
-            <h1 className="mt-3 text-balance font-display text-3xl font-black uppercase leading-[0.96] text-ink sm:text-4xl lg:text-5xl">
+            <h1 className="max-w-3xl text-balance font-display text-3xl font-black uppercase leading-[0.96] text-ink sm:text-4xl lg:text-5xl">
               Clear Communication. Careful Preparation. High-End Results.
             </h1>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/70 sm:text-base">{aboutIntro}</p>
-            <p className="mt-6 border-t border-ink/10 pt-5 text-xs font-bold uppercase tracking-wide text-ink/45">
+            <p className="max-w-xl text-balance text-sm leading-relaxed text-ink/70 sm:text-base">{aboutIntro}</p>
+            <p className="border-t border-ink/10 pt-5 text-xs font-bold uppercase tracking-wide text-ink/45">
               {trustBullets.slice(0, 3).join(" · ")}
             </p>
           </Reveal>
+        </Container>
+      </section>
 
-          <Reveal delay={130} className="max-w-md lg:justify-self-end">
-            <div className="flex flex-col gap-6 border border-ink/10 bg-cream-light p-6 sm:p-8">
-              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Who You Will Work With</span>
-              <TeamCard
-                name={teamMembers.gloria.name}
-                role={teamMembers.gloria.role}
-                blurb={teamMembers.gloria.blurb}
-                photo={gloriaPhoto}
-                objectPosition="42% 50%"
-              />
-              <TeamCard
-                name={teamMembers.maria.name}
-                role={teamMembers.maria.role}
-                blurb={teamMembers.maria.blurb}
-                photo={mariaPhoto}
-                objectPosition="50% 20%"
-                className="border-t border-ink/10 pt-6"
-              />
-            </div>
-          </Reveal>
+      {/* The team moves below the centred intro so the header stays a single column. */}
+      <section className="border-t border-ink/10 bg-cream-light py-12 sm:py-14 lg:py-16">
+        <Container className="flex flex-col gap-8">
+          <span className="text-center text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Who You Will Work With</span>
+          <div className="mx-auto grid w-full max-w-3xl grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10">
+            <TeamCard
+              name={teamMembers.gloria.name}
+              role={teamMembers.gloria.role}
+              blurb={teamMembers.gloria.blurb}
+              photo={gloriaPhoto}
+              objectPosition="42% 50%"
+            />
+            <TeamCard
+              name={teamMembers.maria.name}
+              role={teamMembers.maria.role}
+              blurb={teamMembers.maria.blurb}
+              photo={mariaPhoto}
+              objectPosition="50% 20%"
+            />
+          </div>
         </Container>
       </section>
 

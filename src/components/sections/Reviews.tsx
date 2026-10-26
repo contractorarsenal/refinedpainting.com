@@ -43,7 +43,7 @@ export function Reviews() {
   }, [paused]);
 
   return (
-    <section className="bg-light-blue py-10 sm:py-20 lg:py-28">
+    <section className="bg-warm-white py-10 sm:py-20 lg:py-28">
       <Container>
         <SectionHeading eyebrow="What Your Neighbors Are Saying" title="Refined Painting Reviews" />
 

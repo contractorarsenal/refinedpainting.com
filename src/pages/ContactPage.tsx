@@ -1,4 +1,4 @@
-import { Clock, MapPin, ShieldCheck } from "lucide-react";
+import { Clock, MapPin } from "lucide-react";
 import gloriaPhoto from "../assets/images/team/gloria-customer-service.webp";
 import { TeamCard } from "../components/ui/TeamCard";
 import { ContactForm } from "../components/sections/ContactForm";
@@ -52,10 +52,13 @@ export function ContactPage() {
         <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-x-14 lg:gap-y-10">
           <div className="flex flex-col gap-5 lg:col-start-1 lg:row-start-1">
             <Reveal>
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ink/50">
-                <ShieldCheck className="size-4 text-crest" aria-hidden />
-                Verified &amp; Approved
-                              </div>
+              <TeamCard
+                name={teamMembers.gloria.name}
+                role={teamMembers.gloria.role}
+                blurb={teamMembers.gloria.blurb}
+                photo={gloriaPhoto}
+                objectPosition="42% 50%"
+              />
             </Reveal>
             <Reveal delay={40}>
               <ul className="flex flex-col gap-2 border-t border-ink/10 pt-4">
@@ -106,18 +109,6 @@ export function ContactPage() {
                   <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">Hours</span>
                   <span className="text-[15px] font-bold text-ink">{business.hours}</span>
                 </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={215}>
-              <div className="border-t border-ink/10 pt-5">
-                <TeamCard
-                  name={teamMembers.gloria.name}
-                  role={teamMembers.gloria.role}
-                  blurb={teamMembers.gloria.blurb}
-                  photo={gloriaPhoto}
-                  objectPosition="42% 50%"
-                />
               </div>
             </Reveal>
 

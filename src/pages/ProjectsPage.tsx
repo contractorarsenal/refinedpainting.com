@@ -49,25 +49,16 @@ export function ProjectsPage() {
       />
       <section className="relative overflow-hidden bg-cream pb-12 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
         <GridTexture />
-        <Container className="relative grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
-          <Reveal>
+        <Container className="relative flex flex-col items-center gap-5 text-center">
+          <Reveal className="flex flex-col items-center gap-5">
             <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Project Index</span>
-            <h1 className="mt-3 text-balance font-display text-4xl font-black uppercase leading-[0.96] text-ink sm:text-5xl">
+            <h1 className="max-w-3xl text-balance font-display text-4xl font-black uppercase leading-[0.96] text-ink sm:text-5xl">
               Real Homes, Real Work
             </h1>
-            <p className="mt-4 max-w-xl text-balance text-base leading-relaxed text-ink/65 sm:text-lg">
+            <p className="max-w-xl text-balance text-base leading-relaxed text-ink/65 sm:text-lg">
               Explore recent interior, exterior, cabinet and specialty painting projects completed by Refined
               Painting. Click any photo for a closer look.
             </p>
-          </Reveal>
-
-          <Reveal delay={130} className="border border-ink/10 bg-cream-light p-6">
-            <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Every Project Is Backed By</span>
-            <ul className="mt-3 flex flex-col gap-2.5 border-t border-ink/10 pt-3">
-              <li className="text-sm font-bold text-ink">5-Year Workmanship Warranty</li>
-              <li className="text-sm font-bold text-ink">Licensed &amp; Insured</li>
-              <li className="text-sm font-bold text-ink">EPA Lead-Safe Certified</li>
-            </ul>
           </Reveal>
         </Container>
       </section>

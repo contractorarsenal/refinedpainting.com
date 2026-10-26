@@ -58,7 +58,7 @@ function ProjectFigure({
     <button
       type="button"
       onClick={onClick}
-      className="group flex h-full w-full flex-col overflow-hidden rounded-sm border border-ink/15 bg-cream-light text-left shadow-card transition-shadow duration-300 hover:shadow-lift"
+      className="group flex h-full w-full flex-col overflow-hidden rounded-sm border border-ink/15 bg-cream-light text-left shadow-card transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
     >
       <div className={`relative ${aspect} w-full overflow-hidden`}>
         <img
@@ -92,7 +92,7 @@ function FeaturedFigure({ project, onClick }: { project: ProjectEntry; onClick: 
     <button
       type="button"
       onClick={onClick}
-      className="group flex h-full w-full flex-col overflow-hidden rounded-sm border border-ink/15 bg-cream-light text-left shadow-card transition-shadow duration-300 hover:shadow-lift"
+      className="group flex h-full w-full flex-col overflow-hidden rounded-sm border border-ink/15 bg-cream-light text-left shadow-card transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
     >
       <div className="relative aspect-4/3 w-full overflow-hidden sm:aspect-16/9">
         <span className="absolute left-0 top-0 z-10 bg-crest px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-warm-white">

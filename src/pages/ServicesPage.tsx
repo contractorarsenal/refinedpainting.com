@@ -1,34 +1,24 @@
-import { ServiceIconPanel } from "../components/ui/ServiceIconPanel";
-import { Building2, Hammer, Home, Layers, PaintRoller, ShieldCheck, TreeDeciduous } from "lucide-react";
-import { ArrowRight } from "lucide-react";
-import cabinetsPhoto from "../assets/images/projects/cabinets-sage-green.webp";
+import { ArrowRight, Building2, Hammer, Home, Layers, PaintRoller, ShieldCheck, TreeDeciduous, type LucideIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 import afterWhite from "../assets/images/projects/exterior-after-white.webp";
-import interiorBright from "../assets/images/projects/interior-bright-finished.webp";
 import { coverPhoto } from "../content/projects/projects";
 import { FramedCTA } from "../components/sections/FramedCTA";
 import { Process } from "../components/sections/Process";
 import { PromoBanner } from "../components/sections/PromoBanner";
-import { ServiceSections } from "../components/sections/ServiceSections";
 import { VideoAuthority } from "../components/sections/VideoAuthority";
 import { Button, LinkButton } from "../components/ui/Button";
 import { Accordion } from "../components/ui/Accordion";
 import { Container } from "../components/ui/Container";
-import { ProjectImage } from "../components/ui/ProjectImage";
-import { Reveal } from "../components/ui/Reveal";
-import { GridTexture } from "../components/ui/Texture";
 import { useQuoteModal } from "../components/quote/QuoteModalContext";
 import { PageSEO } from "../components/seo/PageSEO";
 import type { ServiceId } from "../lib/content";
-import { business, cabinetProofStat, faqs, serviceSlugs, services, SITE_URL, warranty } from "../lib/content";
+import { business, faqs, serviceSlugs, services, SITE_URL, warranty } from "../lib/content";
 
-const proofRow = [
-  { value: cabinetProofStat.value, label: cabinetProofStat.label },
-  { value: "5-Year", label: "Workmanship Warranty" },
-  { value: "EPA", label: "Lead-Safe Certified" },
-  { value: "Licensed", label: "& Insured" },
-];
+// A finished exterior in daylight: the page's photograph, chosen over
+// preparation or in-progress shots.
+const headerPhoto = coverPhoto("gray-green-home-front-fence");
 
-const serviceIcons: Record<ServiceId, typeof Home> = {
+const serviceIcons: Record<ServiceId, LucideIcon> = {
   interior: Home,
   exterior: PaintRoller,
   cabinets: Layers,
@@ -37,65 +27,35 @@ const serviceIcons: Record<ServiceId, typeof Home> = {
   carpentry: Hammer,
 };
 
-const deckCover = coverPhoto("back-deck-pergola-bench");
-const overviewCover = coverPhoto("green-living-room-orange-entry");
-
-const serviceTileImages: Partial<Record<ServiceId, { src: string; alt: string }>> = {
-  interior: { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
-  cabinets: { src: cabinetsPhoto, alt: "Kitchen cabinets refinished in sage green" },
-  exterior: { src: afterWhite, alt: "Home exterior finished in crisp white" },
-  "deck-fence": { src: deckCover.lg, alt: deckCover.alt },
-  // No carpentry photo is approved yet; the tile renders a branded icon panel instead.
-  carpentry: { src: "", alt: "" },
-};
-
-// Interior/Cabinets/Exterior are the primary row (larger tiles); Deck-Fence
-// and Carpentry form a secondary row — matches the approved service list,
-// with Commercial staying out of visible promotion.
-const primaryTileIds: ServiceId[] = ["interior", "cabinets", "exterior"];
-const secondaryTileIds: ServiceId[] = ["deck-fence", "carpentry"];
-
-function ServiceTile({ id, tall = false }: { id: ServiceId; tall?: boolean }) {
-  const service = services.find((s) => s.id === id);
-  const image = serviceTileImages[id];
-  const Icon = serviceIcons[id];
-  if (!service || !image) return null;
-
-  return (
-    <a
-      href={`#${serviceSlugs[id]}`}
-      className={`group relative block w-full overflow-hidden border border-ink/10 ${tall ? "aspect-4/5 lg:aspect-3/4" : "aspect-16/10"}`}
-    >
-      {image.src ? (
-        <img
-          src={image.src}
-          alt={image.alt}
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-        />
-      ) : (
-        <ServiceIconPanel icon={Icon} label={service.title} className="absolute inset-0" />
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/15 to-transparent transition-colors group-hover:from-ink/95" aria-hidden />
-      <span className="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full bg-warm-white/15 text-warm-white backdrop-blur-sm transition-colors duration-300 group-hover:bg-crest">
-        <Icon className="size-4" aria-hidden />
-      </span>
-      <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
-        <span className="font-display text-2xl font-extrabold uppercase leading-[0.96] text-warm-white sm:text-3xl">
-          {service.title}
-        </span>
-        <ArrowRight className="size-5 shrink-0 text-warm-white/70 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-warm-white" aria-hidden />
-      </span>
-    </a>
-  );
-}
+// The five primary services, in the order the homepage shows them. Commercial
+// is reached from the text link below the choices, not as a tile.
+const choiceIds: ServiceId[] = ["interior", "exterior", "cabinets", "deck-fence", "carpentry"];
 
 const primaryFaqs = faqs.slice(0, 5);
 const moreFaqs = faqs.slice(5);
 
+function ServiceChoice({ id, className = "" }: { id: ServiceId; className?: string }) {
+  const service = services.find((s) => s.id === id);
+  const Icon = serviceIcons[id];
+  if (!service) return null;
+
+  return (
+    <Link
+      to={`/services/${serviceSlugs[id]}`}
+      className={`group flex min-h-24 flex-col justify-between gap-4 border border-crest bg-crest p-4 text-left text-warm-white transition duration-200 ease-out hover:-translate-y-0.5 hover:border-crest-dark hover:bg-crest-dark active:translate-y-0 active:bg-crest-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-warm-white sm:p-5 ${className}`}
+    >
+      <Icon className="size-5 text-warm-white" aria-hidden />
+      <span className="flex items-end justify-between gap-2 font-display text-base font-extrabold uppercase leading-tight tracking-wide text-warm-white sm:text-lg">
+        {service.title}
+        <ArrowRight className="size-4 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden />
+      </span>
+    </Link>
+  );
+}
+
 export function ServicesPage() {
   const { openQuoteModal } = useQuoteModal();
+  const commercial = services.find((s) => s.id === "commercial");
 
   return (
     <>
@@ -115,90 +75,68 @@ export function ServicesPage() {
           },
         ]}
       />
-      <section className="relative overflow-hidden bg-cream pb-12 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
-        <GridTexture />
-        <Container className="relative grid grid-cols-1 items-stretch gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
-          <div className="flex flex-col items-start gap-4">
-            <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Service Index</span>
-            <h1 className="text-balance font-display text-3xl font-black uppercase leading-[0.98] text-ink sm:text-4xl lg:text-5xl">
-              Built Around <span className="text-teal-dark">Quality</span>, Care &amp; Communication.
-            </h1>
-            <p className="max-w-md text-balance text-sm leading-relaxed text-ink/65 sm:text-base">
-              Refined Painting provides interior, exterior, cabinet and specialty painting services for
-              homeowners and businesses throughout Seattle and the Eastside.
+
+      {/* Header and service choices share one photographed band, so the five
+          services are available without scrolling past repeated cards. */}
+      <section className="relative overflow-hidden bg-ink text-warm-white">
+        <img
+          src={headerPhoto.lg}
+          srcSet={`${headerPhoto.sm} 720w, ${headerPhoto.lg} 1200w`}
+          sizes="100vw"
+          alt={headerPhoto.alt}
+          className="absolute inset-0 h-full w-full object-cover object-[50%_60%]"
+          loading="eager"
+          decoding="async"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-near-black/70 via-near-black/25 to-near-black/85" aria-hidden />
+
+        <Container className="relative flex flex-col items-center gap-5 pb-12 pt-36 text-center sm:pb-14 sm:pt-44">
+          <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-teal">Service Index</span>
+          <h1 className="max-w-3xl text-balance font-display text-3xl font-black uppercase leading-[0.98] text-warm-white sm:text-4xl lg:text-5xl">
+            Built Around <span className="text-teal">Quality</span>, Care &amp; Communication.
+          </h1>
+          <p className="max-w-xl text-balance text-sm leading-relaxed text-warm-white/85 sm:text-base">
+            Refined Painting provides interior, exterior, cabinet and specialty painting services for homeowners and
+            businesses throughout Seattle and the Eastside.
+          </p>
+          <div className="mt-1 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row">
+            <Button onClick={() => openQuoteModal()} size="md" className="w-full sm:w-auto">
+              Request Free Estimate
+            </Button>
+            <LinkButton href={business.phoneHref} variant="outline-light" size="md" icon="phone" className="w-full sm:w-auto">
+              Call Now
+            </LinkButton>
+          </div>
+          <span className="text-[11px] font-bold uppercase tracking-widest text-warm-white/80">
+            Benjamin Moore &amp; Sherwin-Williams Certified
+          </span>
+
+          <div className="mt-8 grid w-full grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
+            {choiceIds.map((id, index) => (
+              <ServiceChoice
+                key={id}
+                id={id}
+                className={index === choiceIds.length - 1 ? "col-span-2 sm:col-span-1" : ""}
+              />
+            ))}
+          </div>
+
+          {commercial ? (
+            <p className="text-sm text-warm-white/75">
+              {commercial.description}{" "}
+              <Link
+                to={`/services/${serviceSlugs.commercial}`}
+                className="inline-flex items-center gap-1 font-bold text-warm-white underline decoration-crest decoration-2 underline-offset-4 transition-colors hover:text-teal"
+              >
+                View Commercial Painting
+                <ArrowRight className="size-3.5" aria-hidden />
+              </Link>
             </p>
-            <div className="mt-1 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <Button onClick={() => openQuoteModal()} size="md" className="w-full sm:w-auto">
-                Request Free Estimate
-              </Button>
-              <LinkButton href={business.phoneHref} variant="outline-dark" size="md" icon="phone" className="w-full sm:w-auto">
-                Call Now
-              </LinkButton>
-            </div>
-            <span className="mt-1 text-[11px] font-bold uppercase tracking-widest text-ink/40">
-              Benjamin Moore &amp; Sherwin-Williams Certified
-            </span>
-          </div>
-
-          <div className="flex max-w-md flex-col gap-5 lg:justify-self-end">
-            <div className="flex flex-col gap-2">
-              <div className="aspect-4/3 w-full overflow-hidden rounded-xl shadow-card">
-                <ProjectImage src={overviewCover.sm} alt={overviewCover.alt} eager />
-              </div>
-              <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink/35">
-                Refined Painting project
-              </span>
-            </div>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-5 border-t-2 border-crest pt-4">
-              {proofRow.map((item) => (
-                <div key={item.label}>
-                  <span className="block font-display text-xl font-black leading-none text-crest">{item.value}</span>
-                  <span className="mt-1 block text-[11px] font-bold uppercase tracking-widest text-ink/50">
-                    {item.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+          ) : null}
         </Container>
       </section>
 
-      {/* F2 — Choose Your Service: large image-forward category tiles instead of a horizontal filter strip or box grid. */}
-      <section className="relative overflow-hidden border-t border-ink/10 bg-cream py-12 sm:py-14 lg:py-18">
-        <GridTexture className="opacity-60" />
-        <Container className="relative">
-          <Reveal>
-            <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Service Index</span>
-                <h2 className="mt-3 text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
-                  What Do You Need Done?
-                </h2>
-              </div>
-              <p className="max-w-xs text-sm leading-relaxed text-ink/55">
-                Five disciplines, one crew. Every tile below follows the same prep-first process.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
-            {primaryTileIds.map((id, index) => (
-              <Reveal key={id} delay={100 + index * 80}>
-                <ServiceTile id={id} tall />
-              </Reveal>
-            ))}
-          </div>
-          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
-            {secondaryTileIds.map((id, index) => (
-              <Reveal key={id} delay={340 + index * 80}>
-                <ServiceTile id={id} />
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <ServiceSections afterCabinets={<VideoAuthority />} />
+      <VideoAuthority />
       <Process />
       <PromoBanner />
 
