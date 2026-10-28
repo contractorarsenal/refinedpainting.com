@@ -1,10 +1,10 @@
 import { Play } from "lucide-react";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import heroPoster from "../../assets/images/home-hero-poster.webp";
+import heroPoster from "../../assets/images/home-hero-main-poster.webp";
 // The client-edited hero video, transcoded for the web from the original MOV kept
-// outside the repository. The full sequence is used untrimmed (6.8s, 1920x1080, 30fps,
-// no audio). The poster is a frame from the house shot at 5.5s.
-import heroVideo from "../../assets/videos/home-hero-final.mp4";
+// outside the repository. The full sequence is used untrimmed (7.5s, 1920x1080, 30fps,
+// H.264 High, yuv420p, faststart, no audio). The poster is a frame from the truck shot at 1.0s.
+import heroVideo from "../../assets/videos/home-hero-main.mp4";
 import { business } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";
@@ -50,7 +50,7 @@ export function HomeHero() {
   );
 
   // The poster is the LCP candidate and paints first. `preload="none"` keeps the
-  // 3.4MB file off the wire until playback is actually attempted.
+  // 6MB file off the wire until playback is actually attempted.
   // Reduced-motion visitors never get an autoplay attempt; they choose to play.
   useEffect(() => {
     const el = videoRef.current;
@@ -79,7 +79,7 @@ export function HomeHero() {
         {homeHeroMedia.type === "video" ? (
           <video
             ref={videoRef}
-            className="h-full w-full object-cover object-[55%_50%] sm:object-center"
+            className="h-full w-full object-cover object-[20%_50%] sm:object-center"
             poster={homeHeroMedia.poster}
             src={homeHeroMedia.src}
             preload="none"
