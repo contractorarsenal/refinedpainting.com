@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { processSteps } from "../../lib/content";
 import { Container } from "../ui/Container";
 import { Mascot } from "../ui/Mascot";
@@ -19,7 +18,7 @@ export function ProcessCondensed() {
   const { ref: rowRef, inView: rowInView } = useInView<HTMLDivElement>(0.4);
 
   return (
-    <section className="relative overflow-hidden bg-ink py-10 text-warm-white sm:py-20 lg:py-24">
+    <section id="how-it-works" className="relative overflow-hidden bg-ink py-10 text-warm-white sm:py-20 lg:py-24">
       <LineTexture tone="warm-white" className="opacity-50" />
       <Container className="relative">
         <SectionHeading
@@ -66,15 +65,6 @@ export function ProcessCondensed() {
               </div>
             </Reveal>
           ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Link
-            to="/services#process"
-            className="inline-flex items-center gap-1.5 border-b-2 border-crest pb-1 text-sm font-bold uppercase tracking-wide text-warm-white transition-colors hover:text-crest"
-          >
-            See Our Process
-          </Link>
         </div>
       </Container>
     </section>

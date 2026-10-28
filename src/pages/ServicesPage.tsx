@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import afterWhite from "../assets/images/projects/exterior-after-white.webp";
 import { coverPhoto } from "../content/projects/projects";
 import { FramedCTA } from "../components/sections/FramedCTA";
-import { Process } from "../components/sections/Process";
 import { PromoBanner } from "../components/sections/PromoBanner";
 import { VideoAuthority } from "../components/sections/VideoAuthority";
 import { Button, LinkButton } from "../components/ui/Button";
@@ -137,7 +136,6 @@ export function ServicesPage() {
       </section>
 
       <VideoAuthority />
-      <Process />
       <PromoBanner />
 
       <section id="warranty" className="scroll-mt-24 border-t border-ink/10 bg-sand py-12 sm:py-14 lg:py-18">

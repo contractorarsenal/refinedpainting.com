@@ -12,15 +12,15 @@ const painPoints = [
 
 export function HomeownerProblem() {
   return (
-    <section className="relative overflow-hidden border-t border-ink/10 bg-cream py-10 sm:py-16 lg:py-20">
-      <GridTexture className="opacity-70" />
+    <section className="relative overflow-hidden bg-crest py-10 sm:py-16 lg:py-20">
+      <GridTexture className="opacity-30" />
       <Container className="relative grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <Reveal className="flex flex-col items-start gap-5 lg:sticky lg:top-28 lg:self-start">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Sound Familiar?</span>
-          <h2 className="text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-warm-white">Sound Familiar?</span>
+          <h2 className="text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-4xl">
             Painting Projects Go Wrong in Predictable Ways
           </h2>
-          <p className="max-w-sm text-balance font-display text-lg font-bold leading-snug text-ink/70">
+          <p className="max-w-sm text-balance font-display text-lg font-bold leading-snug text-warm-white">
             Refined Painting was built around a more organized, professional process.
           </p>
         </Reveal>
@@ -28,7 +28,7 @@ export function HomeownerProblem() {
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
           {painPoints.map((point, index) => (
             <Reveal key={point.title} delay={index * 70} as="li">
-              <div className="flex h-full flex-col gap-4 border border-ink/10 border-t-4 border-t-crest bg-warm-white p-6 shadow-card sm:p-7">
+              <div className="flex h-full flex-col gap-4 border border-ink/10 border-t-4 border-t-ink bg-warm-white p-6 shadow-card sm:p-7">
                 <div className="flex items-center justify-between">
                   <point.icon className="size-6 text-crest" aria-hidden />
                   <span className="font-display text-3xl font-black leading-none text-ink/25">

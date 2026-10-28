@@ -4,8 +4,8 @@ import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
 import { TrustStrip } from "../components/sections/TrustStrip";
 import { Container } from "../components/ui/Container";
 import gloriaPhoto from "../assets/images/team/gloria-customer-service.webp";
-import mariaPhoto from "../assets/images/team/maria-project-coordinator.webp";
-import { TeamCard } from "../components/ui/TeamCard";
+import mariaPhoto from "../assets/images/team/maria-project-coordinator-portrait.webp";
+import { TeamProfileCard } from "../components/ui/TeamProfileCard";
 import { Reveal } from "../components/ui/Reveal";
 import { GridTexture, LineTexture } from "../components/ui/Texture";
 import { PageSEO } from "../components/seo/PageSEO";
@@ -59,57 +59,65 @@ export function AboutPage() {
         </Container>
       </section>
 
-      {/* The team moves below the centred intro so the header stays a single column. */}
-      <section className="border-t border-ink/10 bg-cream-light py-12 sm:py-14 lg:py-16">
-        <Container className="flex flex-col gap-8">
-          <span className="text-center text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Who You Will Work With</span>
-          <div className="mx-auto grid w-full max-w-3xl grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10">
-            <TeamCard
+      {/* The Refined Pledge sits directly below the introduction, as the page's focal statement. */}
+      <section className="bg-ink py-14 text-warm-white sm:py-20 lg:py-24">
+        <Container className="flex flex-col items-center gap-6 text-center">
+          <span className="h-1 w-16 bg-crest" aria-hidden />
+          <h2 className="font-display text-2xl font-black uppercase tracking-wide text-teal sm:text-3xl">The Refined Pledge</h2>
+          <p className="max-w-4xl text-balance font-display text-3xl font-extrabold uppercase leading-[1.02] text-warm-white sm:text-4xl lg:text-5xl">
+            &ldquo;{mission}&rdquo;
+          </p>
+          <p className="max-w-xl text-balance text-base leading-relaxed text-warm-white/75">{vision}</p>
+          <p className="border-t border-warm-white/15 pt-5 text-xs font-bold uppercase tracking-widest text-warm-white/55">
+            Locally Owned &middot; King &amp; Snohomish Counties
+          </p>
+        </Container>
+      </section>
+
+      {/* Team cards: full-size portraits with name, role, and description. */}
+      <section className="border-t border-ink/10 bg-cream-light py-12 sm:py-16 lg:py-20">
+        <Container className="flex flex-col items-center gap-10">
+          <h2 className="text-center font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+            Who You Will Work With
+          </h2>
+          <div className="grid w-full max-w-3xl grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8">
+            <TeamProfileCard
               name={teamMembers.gloria.name}
               role={teamMembers.gloria.role}
               blurb={teamMembers.gloria.blurb}
               photo={gloriaPhoto}
-              objectPosition="42% 50%"
+              objectPosition="43% 50%"
             />
-            <TeamCard
+            <TeamProfileCard
               name={teamMembers.maria.name}
               role={teamMembers.maria.role}
               blurb={teamMembers.maria.blurb}
               photo={mariaPhoto}
-              objectPosition="50% 20%"
+              objectPosition="50% 50%"
             />
           </div>
         </Container>
       </section>
 
-      {/* F2 — Why Refined exists / approved story */}
-      <section className="bg-ink pt-12 text-warm-white sm:pt-14 lg:pt-16">
-        <Container className="grid grid-cols-1 lg:grid-cols-2">
-          <Reveal className="flex flex-col gap-6 py-10 pr-0 lg:py-16 lg:pr-12">
-            <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">The Refined Pledge</span>
-            <p className="text-balance font-display text-2xl font-extrabold leading-tight text-warm-white sm:text-3xl">
-              &ldquo;{mission}&rdquo;
-            </p>
-            <p className="max-w-sm text-sm leading-relaxed text-warm-white/55">{vision}</p>
-            <div className="mt-auto border-t border-warm-white/10 pt-5 text-xs font-bold uppercase tracking-widest text-warm-white/40">
-              Locally Owned &middot; King &amp; Snohomish Counties
-            </div>
+      {/* Company story: the Pledge now sits near the top of the page, so this section keeps the story and trust points only. */}
+      <section className="border-t border-ink/10 bg-cream py-12 sm:py-16 lg:py-20">
+        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <Reveal className="flex flex-col gap-5">
+            <h2 className="text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+              {companyStory.heading}
+            </h2>
           </Reveal>
-          <Reveal
-            delay={130}
-            className="flex flex-col gap-6 border-t border-warm-white/10 py-10 lg:border-l lg:border-t-0 lg:py-16 lg:pl-12"
-          >
-            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{companyStory.heading}</span>
+          <Reveal delay={130} className="flex flex-col gap-6">
             <div className="flex flex-col gap-4">
               {companyStory.paragraphs.map((p) => (
-                <p key={p} className="text-sm leading-relaxed text-warm-white/65">
+                <p key={p} className="text-base leading-relaxed text-ink/75">
                   {p}
                 </p>
               ))}
             </div>
-            <div className="mt-auto grid grid-cols-3 gap-4 border-t border-warm-white/10 pt-5">
+            <div className="grid grid-cols-1 gap-3 border-t border-ink/10 pt-5 sm:grid-cols-3 sm:gap-4">
               {trustBullets.slice(0, 3).map((bullet) => (
-                <span key={bullet} className="text-[11px] font-bold uppercase leading-snug tracking-wide text-teal">
+                <span key={bullet} className="text-[11px] font-bold uppercase leading-snug tracking-wide text-ink/80">
                   {bullet}
                 </span>
               ))}
