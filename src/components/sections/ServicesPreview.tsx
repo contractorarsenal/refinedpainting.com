@@ -1,14 +1,11 @@
-import { ArrowRight, Hammer, type LucideIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import cabinetsPhoto from "../../assets/images/projects/cabinets-sage-green.webp";
-import afterWhite from "../../assets/images/projects/exterior-after-white.webp";
-import interiorBright from "../../assets/images/projects/interior-bright-finished.webp";
 import { coverPhoto } from "../../content/projects/projects";
 import type { ServiceId } from "../../lib/content";
 import { serviceSlugs, services } from "../../lib/content";
 import { Container } from "../ui/Container";
 import { ProjectImage } from "../ui/ProjectImage";
-import { ServiceIconPanel } from "../ui/ServiceIconPanel";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
 
@@ -16,18 +13,21 @@ import { SectionHeading } from "../ui/SectionHeading";
 // radius, title over a bottom gradient. Commercial stays out of promotion here
 // (same as the services grid on /services) because no commercial project
 // photography exists yet.
-const deckCover = coverPhoto("back-deck-pergola-bench");
+// These are service illustrations. Each photo shows a visible subject only and does
+// not claim the pictured work was done for a specific service.
+const interiorPhoto = coverPhoto("blue-walls-orange-ceiling-kitchen");
+const exteriorPhoto = coverPhoto("blue-craftsman-screened-porch");
+const deckPhoto = coverPhoto("shingle-siding-exterior");
+const carpentryPhoto = coverPhoto("kitchen-exposed-beams-brick-wall");
 
-const serviceImages: Partial<Record<ServiceId, { src: string; alt: string }>> = {
-  interior: { src: interiorBright, alt: "Bright, finished interior room with hardwood floors" },
-  exterior: { src: afterWhite, alt: "Home exterior finished in crisp white" },
+// `position` keeps the important subject inside the 4:3 crop of a portrait photo.
+const serviceImages: Partial<Record<ServiceId, { src: string; alt: string; position?: string }>> = {
+  interior: { src: interiorPhoto.sm, alt: interiorPhoto.alt },
+  exterior: { src: exteriorPhoto.sm, alt: exteriorPhoto.alt },
   cabinets: { src: cabinetsPhoto, alt: "Kitchen cabinets refinished in sage green" },
-  "deck-fence": { src: deckCover.sm, alt: deckCover.alt },
+  "deck-fence": { src: deckPhoto.sm, alt: deckPhoto.alt, position: "object-[50%_35%]" },
+  carpentry: { src: carpentryPhoto.sm, alt: carpentryPhoto.alt, position: "object-[50%_20%]" },
 };
-
-// No carpentry photo is approved yet. Carpentry uses a branded icon panel instead of
-// an unrelated exterior photo, until a real carpentry project photo is supplied.
-const serviceIcons: Partial<Record<ServiceId, LucideIcon>> = { carpentry: Hammer };
 
 export function ServicesPreview() {
   const visibleServices = services.filter((s) => s.id !== "commercial");
@@ -53,11 +53,11 @@ export function ServicesPreview() {
                   className="group relative block overflow-hidden rounded-lg border border-ink/10 bg-ink transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
                 >
                   <div className="aspect-4/3 w-full overflow-hidden">
-                    {serviceIcons[service.id] ? (
-                      <ServiceIconPanel icon={serviceIcons[service.id]!} label={service.title} className="transition-transform duration-700 ease-out group-hover:scale-105" />
-                    ) : (
-                      <ProjectImage src={image.src} alt={image.alt} className="transition-transform duration-700 ease-out group-hover:scale-105" />
-                    )}
+                    <ProjectImage
+                      src={image.src}
+                      alt={image.alt}
+                      className={`transition-transform duration-700 ease-out group-hover:scale-105 ${image.position ?? ""}`}
+                    />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent" aria-hidden />
                   <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5 sm:p-6">

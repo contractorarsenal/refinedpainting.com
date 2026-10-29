@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+import { useSearchParams } from "react-router-dom";
 import { projects, type ProjectEntry, type ProjectPhoto } from "../../content/projects/projects";
 import { ProjectLightbox } from "../projects/ProjectLightbox";
 import { Button } from "../ui/Button";
@@ -120,10 +121,25 @@ function FeaturedFigure({ project, onClick }: { project: ProjectEntry; onClick: 
   );
 }
 
+// Server render and first hydration pass see `false`; the client then sees `true`.
+// That keeps the prerendered page and the first client render identical, with no
+// effect needed to read the browser's URL.
+const subscribeNothing = () => () => {};
+const isClientSnapshot = () => true;
+const isServerSnapshot = () => false;
+
 export function Gallery() {
-  const [lightbox, setLightbox] = useState<{ project: ProjectEntry; photo: number } | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [photo, setPhoto] = useState(0);
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const isClient = useSyncExternalStore(subscribeNothing, isClientSnapshot, isServerSnapshot);
+
+  // The open lightbox is the URL's `?project=<id>`. Homepage "Recent Projects" cards
+  // link here directly, so direct links and in-app navigation behave the same.
+  // Unknown or missing ids open nothing and leave the gallery as it was.
+  const openId = searchParams.get("project");
+  const lightboxProject = isClient ? projects.find((p) => p.id === openId) ?? null : null;
 
   // Changing the filter starts the list over at the first page, so each
   // category is read from the top rather than inheriting a previous "Load more".
@@ -139,8 +155,16 @@ export function Gallery() {
 
   // The lightbox opens on one project and steps through that project's own
   // photos only, so a visitor sees every photo for the house they clicked.
+  // Opening adds ?project=<id> to the history, so the browser Back button closes it.
   const openProject = (project: ProjectEntry) => {
-    setLightbox({ project, photo: 0 });
+    setPhoto(0);
+    setSearchParams({ project: project.id });
+  };
+
+  // Closing removes the parameter without a new history entry, so the lightbox
+  // cannot reopen from the same URL.
+  const closeLightbox = () => {
+    setSearchParams({}, { replace: true });
   };
 
   // The second project (after the feature) gets the smaller vertical slot
@@ -211,12 +235,12 @@ export function Gallery() {
         </div>
       </Container>
 
-      {lightbox ? (
+      {lightboxProject ? (
         <ProjectLightbox
-          project={lightbox.project}
-          photoIndex={lightbox.photo}
-          onClose={() => setLightbox(null)}
-          onPhotoChange={(photo) => setLightbox((prev) => (prev ? { ...prev, photo } : prev))}
+          project={lightboxProject}
+          photoIndex={photo < lightboxProject.photos.length ? photo : 0}
+          onClose={closeLightbox}
+          onPhotoChange={setPhoto}
         />
       ) : null}
     </section>

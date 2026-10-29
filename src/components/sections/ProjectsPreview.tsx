@@ -6,20 +6,38 @@ import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
 
-const exteriorCover = coverPhoto("gray-green-home-front-fence");
-const interiorCover = coverPhoto("green-living-room-orange-entry");
+const exteriorProjectId = "modern-gray-exterior";
+const interiorProjectId = "blue-walls-orange-ceiling-kitchen";
+const exteriorCover = coverPhoto(exteriorProjectId);
+const interiorCover = coverPhoto(interiorProjectId);
 
 // Caption bands use brand colour, not the photo: red for exterior and cabinets,
 // navy for interior. White text on each band stays above 4.5:1.
+// Each card opens its own project in the Projects gallery lightbox via ?project=<id>.
 const previewItems = [
-  { id: "exterior", src: exteriorCover.sm, alt: exteriorCover.alt, label: "Exterior Painting", band: "bg-crest group-hover:bg-crest-dark" },
-  { id: "interior", src: interiorCover.sm, alt: interiorCover.alt, label: "Interior Painting", band: "bg-ink group-hover:bg-ink-2" },
+  {
+    id: "exterior",
+    src: exteriorCover.sm,
+    alt: exteriorCover.alt,
+    label: "Exterior Painting",
+    band: "bg-crest group-hover:bg-crest-dark",
+    to: `/projects?project=${exteriorProjectId}`,
+  },
+  {
+    id: "interior",
+    src: interiorCover.sm,
+    alt: interiorCover.alt,
+    label: "Interior Painting",
+    band: "bg-ink group-hover:bg-ink-2",
+    to: `/projects?project=${interiorProjectId}`,
+  },
   {
     id: "cabinets",
     src: cabinetsPhoto,
     alt: "Kitchen cabinets refinished in sage green",
     label: "Cabinet Refinishing",
     band: "bg-crest group-hover:bg-crest-dark",
+    to: "/projects",
   },
 ];
 
@@ -42,7 +60,7 @@ export function ProjectsPreview() {
           {previewItems.map((item, index) => (
             <Reveal key={item.id} delay={index * 80}>
               <Link
-                to="/projects"
+                to={item.to}
                 className="group flex h-full flex-col border border-ink/10 bg-cream-light transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
               >
                 <div className="relative aspect-4/3 w-full overflow-hidden">
