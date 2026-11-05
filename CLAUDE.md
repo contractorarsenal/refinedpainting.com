@@ -125,8 +125,8 @@ Location pages (`/locations/:citySlug`) are **intentionally unpublished**. The f
 - **Three separate concepts, never conflate:** (1) *Physical business address*: 7212 Linden Ave N, Seattle. There is no evidence it is a customer-visit office, so label it "Address", not "Office". (2) *Website areas served*: the 14-city list above, kept unchanged until the owner makes an explicit website decision. (3) *Ad targeting*: Bellevue, Kirkland, Redmond, Sammamish, and Seattle is **excluded from ads**. Ad targeting is not a website instruction. Do not remove Seattle from site copy or schema because of the ad exclusion, and never describe a service city as an office.
 - **Team roles:** Gloria is the first contact (questions, estimates, getting started). Maria, Project Coordinator, coordinates once the customer moves forward. **Victoria:** her name and her role helping customers compare color options are confirmed by Jay. The offer terms ("complimentary with qualifying painting projects") are not documented.
 - **Do not trust existing site copy as proof of a claim.** Each fact's evidence is tracked in `docs/BUSINESS-INFO-REGISTER.md`.
-- **Claims on site:** licensed and insured; EPA Lead-Safe certified; 5-year workmanship warranty (see `warranty` in `content.ts`); "Google Verified" and "Nextdoor Neighborhood Favorite" badges; 5.0 rating with 227 reviews; repaint-cycle guidance (exterior 7–12 years, decks 2–4 years).
-- **Verify before relying on these in any new copy:** every claim above, especially the 227 review count, the 5.0 rating (hardcoded in `content.ts` and the homepage JSON-LD), the warranty terms, and the badges. Obtain proof from the client first.
+- **Claims on site:** licensed and insured; EPA Lead-Safe certified; 5-year workmanship warranty (see `warranty` in `content.ts`); "Google Verified" and "Nextdoor Neighborhood Favorite" badges; 5.0 stars from 242 Google reviews (source: the Google listing, as reported by Jay); repaint-cycle guidance (exterior 7–12 years, decks 2–4 years).
+- **Verify before relying on these in any new copy:** every claim above, especially the warranty terms and the Google Verified and Nextdoor badges. Licensed, insured and EPA Lead-Safe are confirmed by Jay (no license or certificate numbers on file; never invent any). The rating and count (`business` in `content.ts` and `reviewSummary`) come from the Google listing and update together. They are no longer in the JSON-LD. Obtain proof from the client first.
 - **Do not add new certifications, pricing, timelines, or awards** without verified source material. Blog backlog items must be fact-checked before publishing (see `src/content/blog/backlog.ts`).
 
 ---
@@ -252,9 +252,9 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 - **Crawlers:** `robots.txt` allows everything, including OAI-SearchBot (ChatGPT search). Cloudflare dashboard bot and WAF settings are unverified. Do not add `llms.txt`, hidden AI instructions or thin city pages. `businessFaqs` in `content.ts` feeds /faq and its FAQPage markup and must stay confirmed-facts-only.
 - Service-page descriptions come from `metaDescription` in each `serviceDetails` entry (about 150 characters).
 - Structured data:
-  - `index.html`: `PaintingContractor` JSON-LD (address, phone, hours, areaServed, aggregateRating).
+  - `index.html`: `PaintingContractor` JSON-LD (address, phone, hours, areaServed). No `aggregateRating`: it was removed by owner decision.
   - `ServiceDetailPage`, `BlogPostPage`, `LocationPage`, `FaqPage`: BreadcrumbList and related schema.
-- **Known schema concern:** `aggregateRating` (5.0 / 227) is hardcoded on the homepage JSON-LD. Verify it reflects real reviews before any change, and keep it accurate.
+- **Rating markup:** `aggregateRating` was deliberately removed from the JSON-LD (self-serving LocalBusiness rating sourced from the Google listing, so not eligible for rich results). Do not re-add it. The visible "5.0 stars from 242 Google reviews" stays and is driven by `business` in `content.ts`.
 - `robots.txt` allows all crawlers.
 
 ---
@@ -303,8 +303,8 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 5. **No branch protection on `main`.** Direct pushes deploy.
 6. **Merged branch not deleted:** `feat/analytics-clarity-seo-fixes` (fully merged into `main`).
 7. **Web3Forms key duplicated** in two components, plus the endpoint in a hook. Rotation must touch all of them.
-8. **Business claims need proof:** licensed and insured, EPA Lead-Safe, 5-year warranty, 227 reviews, 5.0 rating, the badges.
-9. **Hardcoded aggregateRating in JSON-LD** on the homepage. See §9.
+8. **Claims still needing proof:** the 5-year warranty terms and the Google Verified and Nextdoor badges. (Rating and count come from the Google listing. Licensed, insured and EPA Lead-Safe are owner-confirmed, with no numbers on file.)
+9. **Rating is visible text only.** There is no `aggregateRating` markup (removed by decision). See §9.
 10. **Location pages unpublished** by design. Content not ready.
 11. **Repository is public.** Do not commit anything sensitive.
 12. **Unconfirmed estimate-delivery timing** (proposal "within 24–48 hours") appears in process steps, the FAQ and two blog posts. The first-reply time is confirmed (see §5).

@@ -19,10 +19,10 @@ Status: **Confirmed** (owner stated it), **Consistent** (the site agrees with it
 | Victoria offer: "Complimentary with qualifying painting projects" | `promoBanner.support`; earlier copy said samples are brought to the home | None on file | **Needs decision:** what makes a project "qualifying" (minimum size, services, areas)? |
 | Pricing: interior $2,500–$12,000, exterior $5,000–$20,000+ | FAQs in `content.ts` (cost questions for interior, exterior, general), Interior/Cabinet cost blog posts | None on file | **Needs decision:** owner-approved ranges, or remove. Blog posts are Seattle cost articles and carry their own figures; check them too. |
 | `priceRange: "$$"` | JSON-LD in `index.html` | None on file | **Needs decision:** keep or remove. Unsupported schema value. |
-| Rating 5.0, 227 reviews | `business.rating`, `business.reviewCount`, hero, Reviews section, JSON-LD `aggregateRating` | None on file. Not tied to a named source. | **Needs decision:** current Google count and rating with a screenshot, or remove. The text says "5.0 Google Rating", so it must match Google. A wrong `aggregateRating` is a structured-data risk. |
+| Google rating 5.0 stars from 242 Google reviews | `business.rating`, `business.reviewCount`, `reviewSummary` (hero, closing CTA), Reviews section. Not in the JSON-LD (see below). | Source: the business's Google listing, as reported by Jay on 2026-11-05 (replaces the earlier 227). No screenshot is stored in the repo, and the count changes as reviews arrive. | **Confirmed from the Google listing (owner-reported).** Update `business.reviewCount` when the count changes; `reviewSummary` and the Reviews card follow. |
 | Testimonials in the Reviews section | `Reviews.tsx` | None on file | **Needs decision:** confirm each is a real, permitted review. |
-| Licensed & Insured | UtilityBar, FinalCTA, trust strip, badge image, FAQ | Badge image in repo only | **Needs decision:** license number and insurance proof, or soften wording. |
-| EPA Lead-Safe Certified | UtilityBar, trust strip, FAQ, About, badge image | Badge image in repo only | **Needs decision:** firm certificate (EPA RRP) and expiry. |
+| Licensed & Insured | UtilityBar, FinalCTA, trust strip, badge image, FAQ | Confirmed by Jay on 2026-11-05. No license number, insurer or certificate is on file, and none is shown on the site. | **Confirmed by the owner.** Do not add numbers or documents to the site unless the owner supplies them. |
+| EPA Lead-Safe Certified | UtilityBar, trust strip, FAQ, About, badge image | Confirmed by Jay on 2026-11-05. No certification number or expiry is on file, and none is shown on the site. | **Confirmed by the owner.** Do not add a certificate number or expiry unless the owner supplies it. |
 | Google Verified badge | trust strip, footer, Reviews | Badge image in repo only | **Needs decision:** proof of the Google badge/program. |
 | Nextdoor Neighborhood Favorite badge | trust strip, footer, Reviews | Badge image in repo only | **Needs decision:** award year and proof. |
 | 5-year workmanship warranty | hero, FAQ, About, process, `warranty` block in `content.ts` (including a "scheduled within 12 months of notification" term) | Live WordPress has a `/warranty/` page, which is also the owner's copy, not independent | **Needs decision:** owner-signed warranty terms. Decide what happens to the `/warranty/` URL. |
@@ -45,3 +45,14 @@ If the owner confirms a response time and a proposal time, use one wording every
 
 ## Added 2026-11-05: quick-fact FAQs (`businessFaqs`)
 Seven questions on /faq and in its FAQPage markup: services, areas served, hours, first-reply time, first contact (Gloria, then Maria), color help (Victoria's role only, no offer terms), and how to request an estimate. Each answer uses confirmed facts or constants from `content.ts`. They deliberately contain no pricing, credentials, review counts, warranty terms or estimate-delivery times.
+
+## Added 2026-11-05: confirmations from Jay
+- **Lead inbox delivery:** Jay confirmed that estimate and contact submissions reach the business inbox (Web3Forms destination). This is the owner's confirmation. It was not independently verified from this repo, and no test lead was sent for it.
+- **Licensed, insured, EPA Lead-Safe:** confirmed by Jay. No credential numbers are recorded; do not invent any.
+- **Google rating and count:** 5.0 stars from 242 Google reviews, from the Google listing.
+
+## `aggregateRating` markup: removed (decision recorded 2026-11-05)
+The homepage JSON-LD used to declare `aggregateRating` (5.0, 242). It was removed on the owner's decision, after this eligibility review. My understanding of Google's review-snippet guidance (confirm against the current documentation at developers.google.com/search/docs/appearance/structured-data/review-snippet):
+- Review rich results are not shown for a LocalBusiness or Organization when the rating is "self-serving", meaning the business marks up reviews about itself on its own site. The markup could not have earned star rich results.
+- Ratings should come from users and be visible on the page. These figures come from the Google listing, not from reviews collected on this site.
+- Result: removing it loses no rich-result eligibility and removes a structured-data risk. The visible "5.0 stars from 242 Google reviews" text stays and is unaffected. The rest of the schema (address, phone, hours, areas served, `url`) is unchanged. Do not re-add `aggregateRating` without a new decision.

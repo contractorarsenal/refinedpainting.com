@@ -28,9 +28,8 @@ Do not redesign. Keep the approved hero video, Victoria card on `/services`, Abo
 ## Launch blockers (owner decisions or access)
 1. Estimate-delivery timing: confirm "within 24–48 hours" or approve neutral wording.
 2. Pricing ranges in FAQs and the two Seattle cost blog posts: approve or remove.
-3. Rating 5.0 / 227 reviews (also in `aggregateRating`): proof or removal.
-4. Licensed and insured, EPA Lead-Safe, Google Verified, Nextdoor badges, and the 5-year warranty terms: proof or softened wording.
-5. Lead inbox: confirm in Web3Forms that submissions reach the business. Not verified. No test lead was sent.
+4. Google Verified and Nextdoor badges, and the 5-year warranty terms: proof or softened wording. Licensed, insured and EPA Lead-Safe are confirmed by Jay (no numbers on file).
+5. Lead inbox: delivery confirmed by Jay. Not independently verified, and no test lead was sent for it.
 6. Analytics ownership: `G-X3HQQ4CQDB` (React) vs `G-TCE6S4DT0K` (WordPress).
 7. Cloudflare dashboard checks: Pages custom domain state, apex and `www` records, WordPress origin for rollback. Not verified.
 8. WordPress redirect decisions for the legacy URLs listed under "Legacy WordPress URLs" below.
@@ -74,7 +73,7 @@ Do not delete or merge: `ace/change/*`, `feat/analytics-clarity-seo-fixes`, `pre
 - Seven quick-fact FAQs added to /faq and its FAQPage markup (services, areas, hours, first reply, Gloria/Maria, Victoria's color help, how to request an estimate), confirmed facts only. All 17 FAQ questions appear in the visible HTML.
 
 **Remaining content and schema issues (not changed, need decisions):**
-- `aggregateRating` (5.0 / 227) and `priceRange: "$$"` sit in the JSON-LD embedded in every page, including /404 and /thank-you. Neither has evidence on file.
+- `priceRange: "$$"` sits in the JSON-LD embedded in every page, including /404 and /thank-you, with no evidence on file. (`aggregateRating` was removed from the markup; the visible "5.0 stars from 242 Google reviews" stays.)
 - FAQ answers on /faq and in its schema still include the unverified price ranges and warranty and credential statements.
 - About page meta description still names licensing and EPA claims.
 - The /projects gallery renders 8 of 39 projects in the HTML. The rest load through "Load more" in JavaScript, so their titles and photo alt text are not crawlable.
