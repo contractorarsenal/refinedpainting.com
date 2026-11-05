@@ -117,3 +117,10 @@ No Search Console access, and the archive's index was not reachable for traffic 
 - **Waiting on Jay:** layout approval, neighborhood names per city, project-to-city assignments, local review and context. The full proposal is `docs/CITY-PAGE-PROPOSAL.md`.
 - **Layout preview:** the temporary sample page was used for review and has been removed. Its URL (`/service-areas/layout-preview/`) returns 404, and it is not in the sitemap. The last row of service cards is centered, matching the homepage. The hub has no visible breadcrumb.
 
+## Seattle city page (branch `feat/seattle-city-page`)
+- **Published:** `/service-areas/seattle-wa/` (the original WordPress URL). Jay approved Seattle and confirmed Refined Painting serves Greenwood, Ballard, Fremont, Wallingford, Queen Anne and Capitol Hill. The page is on the shared city layout: heading and estimate buttons, a short homeowner-focused services intro with the centered photo cards, one "Seattle Neighborhoods We Serve" section listing all six names, "How to Request an Estimate", and the closing CTA. The hub links to it, and it is in the sitemap with a trailing-slash canonical.
+- **Skipped on purpose:** Recent Projects and the testimonial sections. No project location or Seattle review is verified. The service photos are existing illustrations and are not labeled as Seattle projects.
+- **Copy limits:** the page repeats only confirmed facts (services, the six neighborhoods, the estimate request steps, the first-reply time "typically within about an hour during business hours"). It does not state an estimate-delivery time.
+- **Still unpublished:** the other 13 city pages. Ad targeting is unchanged and is not mentioned on the page; Seattle's website coverage is separate from it.
+- **To add later:** tagged Seattle projects (Drive "House" folders confirmed to be in Seattle, city name only), a permitted Seattle review, and any local context Jay can speak to.
+

@@ -56,3 +56,7 @@ The homepage JSON-LD used to declare `aggregateRating` (5.0, 242). It was remove
 - Review rich results are not shown for a LocalBusiness or Organization when the rating is "self-serving", meaning the business marks up reviews about itself on its own site. The markup could not have earned star rich results.
 - Ratings should come from users and be visible on the page. These figures come from the Google listing, not from reviews collected on this site.
 - Result: removing it loses no rich-result eligibility and removes a structured-data risk. The visible "5.0 stars from 242 Google reviews" text stays and is unaffected. The rest of the schema (address, phone, hours, areas served, `url`) is unchanged. Do not re-add `aggregateRating` without a new decision.
+
+## Added 2026-11-05: Seattle neighborhoods
+Jay confirmed that Refined Painting serves **Greenwood, Ballard, Fremont, Wallingford, Queen Anne and Capitol Hill**. They appear only in the "Seattle Neighborhoods We Serve" section and one sentence on `/service-areas/seattle-wa/`. This is website coverage and is separate from ad targeting. No project or review is tied to a Seattle neighborhood.
+

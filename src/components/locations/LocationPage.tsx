@@ -49,6 +49,7 @@ export function LocationPage() {
       <CityPageLayout
         cityName={location.cityName}
         intro={location.uniqueLocalContext}
+        servicesIntro={location.servicesIntro}
         neighborhoods={location.neighborhoods}
         projects={location.localProjectImages}
         testimonial={location.localTestimonial}
