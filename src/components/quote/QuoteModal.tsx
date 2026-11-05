@@ -2,17 +2,18 @@ import { ChevronLeft, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState, type FormEvent, type RefObject } from "react";
 import { useWeb3FormsSubmit } from "../../hooks/useWeb3FormsSubmit";
 import { business, services, timelineOptions } from "../../lib/content";
+import { formatProjectAddress } from "../../lib/formValidation";
 import { Mascot } from "../ui/Mascot";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { Button } from "../ui/Button";
 import { FormSubmitError } from "../ui/FormSubmitError";
 import { StepProgress } from "./StepProgress";
+import { StepAddress } from "./steps/StepAddress";
 import { StepContact } from "./steps/StepContact";
 import { StepDetails } from "./steps/StepDetails";
 import { StepService } from "./steps/StepService";
 import { StepTimeline } from "./steps/StepTimeline";
-import { StepZip } from "./steps/StepZip";
 import { initialQuoteData, TOTAL_STEPS, validateStep, type QuoteFormData, type ServiceSelection } from "./quoteState";
 
 interface QuoteModalProps {
@@ -39,6 +40,7 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
     services.find((s) => s.id === data.service)?.title ?? (data.service === "not-sure" ? "Not Sure Yet" : "");
   const timelineLabel = timelineOptions.find((o) => o.id === data.timeline)?.label ?? "";
   const fullName = `${data.firstName} ${data.lastName}`.trim();
+  const projectAddress = formatProjectAddress(data);
 
   const { status, errorMessage, submit, reset, isSubmitting } = useWeb3FormsSubmit({
     formType: "quote",
@@ -140,7 +142,15 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
       last_name: data.lastName,
       email: data.email,
       phone: data.phone,
+      // zip is kept as its own field (in addition to street_address/city/state
+      // and the formatted project_address below) so existing Make mappings
+      // that already key off "zip" keep working unchanged.
       zip: data.zip,
+      street_address: data.streetAddress,
+      address_unit: data.addressUnit,
+      city: data.city,
+      state: data.state,
+      project_address: projectAddress,
       service: serviceLabel,
       timeline: timelineLabel,
       details: data.details || "(none provided)",
@@ -248,12 +258,17 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
               <input type="hidden" name="email" value={data.email} />
               <input type="hidden" name="phone" value={data.phone} />
               <input type="hidden" name="zip" value={data.zip} />
+              <input type="hidden" name="street_address" value={data.streetAddress} />
+              <input type="hidden" name="address_unit" value={data.addressUnit} />
+              <input type="hidden" name="city" value={data.city} />
+              <input type="hidden" name="state" value={data.state} />
+              <input type="hidden" name="project_address" value={projectAddress} />
               <input type="hidden" name="service" value={serviceLabel} />
               <input type="hidden" name="timeline" value={timelineLabel} />
               <input type="hidden" name="details" value={data.details || "(none provided)"} />
 
               <div className="flex-1">
-                {step === 1 && <StepZip data={data} errors={errors} onUpdate={update} />}
+                {step === 1 && <StepAddress data={data} errors={errors} onUpdate={update} />}
                 {step === 2 && <StepService data={data} errors={errors} onUpdate={update} />}
                 {step === 3 && <StepTimeline data={data} errors={errors} onUpdate={update} />}
                 {step === 4 && <StepDetails data={data} onUpdate={update} />}

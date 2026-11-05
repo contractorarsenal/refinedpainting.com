@@ -1,7 +1,15 @@
 import { useState, type FormEvent } from "react";
 import { useWeb3FormsSubmit } from "../../hooks/useWeb3FormsSubmit";
 import { services } from "../../lib/content";
-import { isValidEmail, isValidName, isValidPhone } from "../../lib/formValidation";
+import {
+  formatProjectAddress,
+  isNonEmpty,
+  isValidEmail,
+  isValidName,
+  isValidPhone,
+  isValidState,
+  isValidZip,
+} from "../../lib/formValidation";
 import { Button } from "../ui/Button";
 import { FormField as Field, formInputClasses as inputClasses } from "../ui/FormField";
 import { FormSubmitError } from "../ui/FormSubmitError";
@@ -16,6 +24,11 @@ interface ContactFormData {
   lastName: string;
   email: string;
   phone: string;
+  streetAddress: string;
+  addressUnit: string;
+  city: string;
+  state: string;
+  zip: string;
   service: string;
   message: string;
 }
@@ -25,6 +38,11 @@ const initialData: ContactFormData = {
   lastName: "",
   email: "",
   phone: "",
+  streetAddress: "",
+  addressUnit: "",
+  city: "",
+  state: "",
+  zip: "",
   service: "",
   message: "",
 };
@@ -35,6 +53,10 @@ function validate(data: ContactFormData): Record<string, string> {
   if (!isValidName(data.lastName)) errors.lastName = "Last name is required.";
   if (!isValidEmail(data.email)) errors.email = "Enter a valid email address.";
   if (!isValidPhone(data.phone)) errors.phone = "Enter a valid phone number.";
+  if (!isNonEmpty(data.streetAddress)) errors.streetAddress = "Street address is required.";
+  if (!isNonEmpty(data.city)) errors.city = "City is required.";
+  if (!isValidState(data.state)) errors.state = "Enter a valid 2-letter state.";
+  if (!isValidZip(data.zip)) errors.zip = "Enter a valid 5-digit ZIP code.";
   if (!data.message.trim()) errors.message = "Enter a short message.";
   return errors;
 }
@@ -47,6 +69,7 @@ export function ContactForm() {
   const update = (patch: Partial<ContactFormData>) => setData((prev) => ({ ...prev, ...patch }));
 
   const fullName = `${data.firstName} ${data.lastName}`.trim();
+  const projectAddress = formatProjectAddress(data);
   // Kept as a no-JS fallback only — action/method/redirect below let the
   // <form> still work as a plain native POST if JS never loads. Whenever JS
   // is running, this handler always calls preventDefault() and the actual
@@ -70,6 +93,12 @@ export function ContactForm() {
       last_name: data.lastName,
       email: data.email,
       phone: data.phone,
+      street_address: data.streetAddress,
+      address_unit: data.addressUnit,
+      city: data.city,
+      state: data.state,
+      zip: data.zip,
+      project_address: projectAddress,
       service: data.service,
       message: data.message,
       // Identifies which form sent this lead (the quote pop-up sends "quote_popup").
@@ -103,6 +132,7 @@ export function ContactForm() {
           <input type="hidden" name="form_source" value="contact_page" />
           <input type="hidden" name="redirect" value={redirectUrl} />
           <input type="hidden" name="name" value={fullName} />
+          <input type="hidden" name="project_address" value={projectAddress} />
           {/* Web3Forms' own honeypot convention, checked server-side by Web3Forms itself. */}
           <input type="checkbox" name="botcheck" style={{ display: "none" }} tabIndex={-1} aria-hidden="true" />
 
@@ -146,6 +176,66 @@ export function ContactForm() {
                 placeholder="(555) 555-0100"
                 value={data.phone}
                 onChange={(e) => update({ phone: e.target.value })}
+                className={inputClasses}
+              />
+            </Field>
+          </div>
+
+          <Field label="Street Address" error={errors.streetAddress}>
+            <input
+              type="text"
+              name="street_address"
+              autoComplete="address-line1"
+              value={data.streetAddress}
+              onChange={(e) => update({ streetAddress: e.target.value })}
+              className={inputClasses}
+            />
+          </Field>
+
+          <Field label="Apartment / Unit (Optional)">
+            <input
+              type="text"
+              name="address_unit"
+              autoComplete="address-line2"
+              value={data.addressUnit}
+              onChange={(e) => update({ addressUnit: e.target.value })}
+              className={inputClasses}
+            />
+          </Field>
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-[2fr_1fr_1fr]">
+            <Field label="City" error={errors.city}>
+              <input
+                type="text"
+                name="city"
+                autoComplete="address-level2"
+                value={data.city}
+                onChange={(e) => update({ city: e.target.value })}
+                className={inputClasses}
+              />
+            </Field>
+            <Field label="State" error={errors.state}>
+              <input
+                type="text"
+                name="state"
+                autoComplete="address-level1"
+                maxLength={2}
+                placeholder="WA"
+                value={data.state}
+                onChange={(e) => update({ state: e.target.value.toUpperCase() })}
+                className={inputClasses}
+              />
+            </Field>
+            <Field label="ZIP Code" error={errors.zip}>
+              <input
+                type="text"
+                name="zip"
+                inputMode="numeric"
+                autoComplete="postal-code"
+                maxLength={5}
+                placeholder="5-digit ZIP code"
+                value={data.zip}
+                onChange={(e) => update({ zip: e.target.value.replace(/\D/g, "") })}
                 className={inputClasses}
               />
             </Field>
