@@ -16,7 +16,7 @@ export function WhatHappensDuringPaintingEstimate() {
       <ArticleCallout type="answer">
         <p>
           A Refined Painting estimate starts with a conversation, not a sales pitch. After you submit the
-          contact form, our team typically reaches out within one business day. From there, we visit your
+          contact form, our team typically responds within about an hour during business hours. From there, we visit your
           home, take measurements, discuss your project, and answer your questions, then follow up with a
           detailed written proposal within 24 to 48 hours. You're not committing to anything by requesting
           one.
@@ -42,8 +42,8 @@ export function WhatHappensDuringPaintingEstimate() {
             we need to get started, whether that's interior, exterior, cabinets, or something else.
           </>,
           <>
-            <strong className="text-ink">We reach out.</strong> Our team typically contacts you within one
-            business day to talk through what you're looking for.
+            <strong className="text-ink">We reach out.</strong> Our team typically contacts you within about
+            an hour during business hours to talk through what you're looking for.
           </>,
           <>
             <strong className="text-ink">We visit your home.</strong> We walk the space, take measurements,

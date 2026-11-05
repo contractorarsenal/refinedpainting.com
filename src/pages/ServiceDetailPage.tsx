@@ -97,7 +97,7 @@ export function ServiceDetailPage() {
     <>
       <PageSEO
         title={`${service.title} | Refined Painting`}
-        description={`${detail.overview} Serving Seattle and the Eastside.`}
+        description={detail.metaDescription}
         canonical={canonical}
         image={hero && hasProjectProof[serviceId] ? `${SITE_URL}${hero.src}` : undefined}
         schema={[

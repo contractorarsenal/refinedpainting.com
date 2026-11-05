@@ -1,6 +1,6 @@
 # Refined Painting: Project Status
 
-Updated 2026-11-04. No credentials or keys in this file.
+Updated 2026-11-05. No credentials or keys in this file.
 
 ## Release status
 - **Approved site:** `5e9afcd` merged to `main` by PR #7 as `12038c6`. Deployed by Cloudflare Pages to https://refinedpainting-com.pages.dev (success).
@@ -17,15 +17,16 @@ Updated 2026-11-04. No credentials or keys in this file.
 Do not redesign. Keep the approved hero video, Victoria card on `/services`, About team and Pledge layout, red "See the Difference" band, 8-per-page project gallery with lightbox deep links, and the existing form fields, validation and destination. Extend existing tokens only. No stock photos, invented testimonials or invented statistics.
 
 ## Verified findings (2026-11-04)
-- Hours agree everywhere in the repo: Mon–Sat 9–5 (footer, Contact, JSON-LD). BBB reportedly says Saturday 4 PM. No owner record on file.
+- Hours: Mon–Sat 9–5 is confirmed by the owner (Saturday closes at 5 PM) and agrees across footer, Contact, FAQ and JSON-LD. BBB reportedly lists 4 PM; the external listing was not changed.
+- First reply: "typically within about an hour during business hours" is confirmed and now used consistently (Contact page, What Happens Next, FAQ, one blog post). It is not a guarantee or an estimate-delivery time.
 - Contact details match between visible text and JSON-LD. Canonicals and sitemap use `https://refinedpainting.co`.
 - Both forms had Seattle-flavored examples: ZIP "98103" (the office ZIP) and phone "(206) 555-0100". Replaced with neutral placeholders.
 - Contact page labeled the Seattle address "Office". Relabeled "Address".
-- Timeline promises exist in 4+ places and are consistent with each other but unconfirmed.
+- Estimate-delivery promises ("proposal within 24–48 hours") remain unconfirmed in 5 places and were left as written.
 - Full fact-by-fact evidence: `docs/BUSINESS-INFO-REGISTER.md`.
 
 ## Launch blockers (owner decisions or access)
-1. Saturday closing time: 5 PM or 4 PM. Hours stay unchanged pending Jose's confirmation.
+1. Estimate-delivery timing: confirm "within 24–48 hours" or approve neutral wording.
 2. Pricing ranges in FAQs and the two Seattle cost blog posts: approve or remove.
 3. Rating 5.0 / 227 reviews (also in `aggregateRating`): proof or removal.
 4. Licensed and insured, EPA Lead-Safe, Google Verified, Nextdoor badges, and the 5-year warranty terms: proof or softened wording.
@@ -62,3 +63,37 @@ None of these redirect to the homepage. WordPress admin, feed and login URLs als
 
 ## Git housekeeping
 Do not delete or merge: `ace/change/*`, `feat/analytics-clarity-seo-fixes`, `preview/mobile-fixes-2026-10-26`.
+
+## SEO, AEO and GEO review (2026-11-05, branch `seo-aeo-geo/response-time-and-metadata`)
+**Already sound (checked on the built output, 20 pages):** one `<title>` and one description per page, no duplicates, one `<h1>` per page, canonicals and sitemap in the trailing-slash form, 18 sitemap URLs covering every indexable route, no broken internal links, `robots.txt` allows all crawlers, BreadcrumbList on content pages, Service schema on service pages, FAQPage on /faq.
+
+**Fixed:**
+- Service-page descriptions were 200–243 characters (cut off in results). Each now has a `metaDescription` of about 150 characters built only from what the page says.
+- Home title (78 chars) and description (189) shortened; the home description no longer repeats unverified credential claims. About and Services titles/descriptions tightened. Blog post titles drop the brand suffix when the title would exceed 60 characters.
+- `url` added to the PaintingContractor JSON-LD.
+- Seven quick-fact FAQs added to /faq and its FAQPage markup (services, areas, hours, first reply, Gloria/Maria, Victoria's color help, how to request an estimate), confirmed facts only. All 17 FAQ questions appear in the visible HTML.
+
+**Remaining content and schema issues (not changed, need decisions):**
+- `aggregateRating` (5.0 / 227) and `priceRange: "$$"` sit in the JSON-LD embedded in every page, including /404 and /thank-you. Neither has evidence on file.
+- FAQ answers on /faq and in its schema still include the unverified price ranges and warranty and credential statements.
+- About page meta description still names licensing and EPA claims.
+- The /projects gallery renders 8 of 39 projects in the HTML. The rest load through "Load more" in JavaScript, so their titles and photo alt text are not crawlable.
+
+## AI search crawlers (OAI-SearchBot and ChatGPT search)
+**Documented requirement (OpenAI's crawler documentation, as I understand it; re-read https://platform.openai.com/docs/bots before relying on it):** OAI-SearchBot is the crawler for ChatGPT search results. A site must not disallow it in `robots.txt` to be eligible to appear, and a robots.txt change can take about a day to take effect. OpenAI publishes OAI-SearchBot IP ranges (https://openai.com/searchbot.json) for allow-listing.
+
+**Verified on 2026-11-05:**
+- `robots.txt` is `User-agent: *` / `Allow: /` with the sitemap line. Nothing disallows OAI-SearchBot, ChatGPT-User or GPTBot.
+- With each of those user-agent strings, `/`, `/services/`, `/sitemap.xml` and `/robots.txt` all returned 200 from Cloudflare, the same as a normal browser.
+- The pages are real HTML, prerendered, and server-rendered text (no JavaScript needed for content).
+
+**Not verifiable from here:** Cloudflare dashboard settings keyed on IP, ASN or bot score, which my test could not exercise because it came from a normal IP. Check Security → Bots (Bot Fight Mode / Super Bot Fight Mode), the AI Crawl Control or "Block AI bots" toggle, WAF custom rules, and Security Events for blocked OAI-SearchBot requests. Being crawlable only makes the pages eligible. Whether ChatGPT shows or cites the site is not something I can verify or promise, and no tactic listed here claims to change it.
+
+**Speculative (no documented effect, not done):** `llms.txt`, hidden instructions to AI systems, extra schema types added for AI, keyword-heavy city pages.
+
+## Legacy WordPress URL recommendations
+No Search Console access, and the archive's index was not reachable for traffic data, so the order below is by page type, not by traffic. Export Search Console's Pages report (last 12 months) to confirm.
+1. **Restore after owner-approved content:** `/warranty/` (high-intent, but warranty terms are unconfirmed; the archived page is titled "Painting Warranty | 5-Year Coverage"). Restore only with owner-signed terms.
+2. **Restore as real articles after a fact check (no redirect):** `/blog/best-time-to-paint-your-home-exterior-in-seattle/`, `/blog/kitchen-cabinet-refinishing-process/`, `/blog/how-to-choose-interior-paint-colors-for-your-home/`. These archived copies exist. A redirect to a service page would not match what the article answered.
+3. **One real Seattle service-area page, if wanted:** the archive shows `/service-areas/seattle-wa/` ("Painters in Seattle WA") existed. Build one only from verified local content, not a template. Do not build the other 13 city pages as thin copies.
+4. **Leave as 404:** `/service-areas/palmer-wa/` (Palmer is not in the site's city list), the other city pages, and sub-service pages with no matching content or archived copy (popcorn ceiling removal, garage door painting, trim and fascia, baseboard, finish carpentry), plus the remaining blog posts until a deliberate decision.
