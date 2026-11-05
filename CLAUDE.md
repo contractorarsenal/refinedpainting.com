@@ -118,7 +118,8 @@ Location pages (`/locations/:citySlug`) are **intentionally unpublished**. The f
 - **Address:** 7212 Linden Ave N, Seattle, WA 98103
 - **Phone:** (206) 258-7994 (`tel:+12062587994`)
 - **Email:** No business email address is published on the site. The only addresses in code are input placeholders.
-- **Hours:** Monday–Saturday, 9 AM–5 PM on the site and in JSON-LD (consistent). **Owner decision pending:** BBB reportedly lists Saturday to 4 PM. Neither source is authoritative; do not change until the owner confirms.
+- **Hours:** Monday–Saturday, 9 AM–5 PM, confirmed by the owner (Saturday closes at 5 PM). Site copy and JSON-LD agree. BBB reportedly lists 4 PM; external profiles are not changed from this repo.
+- **First reply:** "typically within about an hour during business hours" is confirmed. Always say "typically", tie it to business hours, and never present it as a guarantee or an estimate-delivery time. **Estimate-delivery timing ("within 24–48 hours") is unconfirmed.**
 - **Services:** Interior, exterior, cabinet refinishing, commercial, deck & fence staining, carpentry/repairs
 - **Service areas (14):** Seattle, Bellevue, Bothell, Everett, Kenmore, Kirkland, Lake Stevens, Lynnwood, Marysville, Medina, Mercer Island, Redmond, Sammamish, Shoreline. Schema `areaServed` matches this list.
 - **Three separate concepts, never conflate:** (1) *Physical business address*: 7212 Linden Ave N, Seattle. There is no evidence it is a customer-visit office, so label it "Address", not "Office". (2) *Website areas served*: the 14-city list above, kept unchanged until the owner makes an explicit website decision. (3) *Ad targeting*: Bellevue, Kirkland, Redmond, Sammamish, and Seattle is **excluded from ads**. Ad targeting is not a website instruction. Do not remove Seattle from site copy or schema because of the ad exclusion, and never describe a service city as an office.
@@ -248,6 +249,8 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 - `/thank-you` is prerendered and excluded from the sitemap.
 - **Trailing slashes:** Pages serves `/<route>/` with 200 and 308-redirects the slashless form. Canonicals, `og:url`, sitemap URLs and schema URLs must use the trailing-slash form (`https://refinedpainting.co/services/`). The sitemap generator in `scripts/prerender.mjs` adds the slash. Keep new `canonical` values in the same form.
 - **Redirects:** `public/_redirects` holds the legacy WordPress redirects (see `PROJECT-STATUS.md`). List both the slash and slashless source so each takes one hop. Never redirect unmatched legacy URLs to the homepage.
+- **Crawlers:** `robots.txt` allows everything, including OAI-SearchBot (ChatGPT search). Cloudflare dashboard bot and WAF settings are unverified. Do not add `llms.txt`, hidden AI instructions or thin city pages. `businessFaqs` in `content.ts` feeds /faq and its FAQPage markup and must stay confirmed-facts-only.
+- Service-page descriptions come from `metaDescription` in each `serviceDetails` entry (about 150 characters).
 - Structured data:
   - `index.html`: `PaintingContractor` JSON-LD (address, phone, hours, areaServed, aggregateRating).
   - `ServiceDetailPage`, `BlogPostPage`, `LocationPage`, `FaqPage`: BreadcrumbList and related schema.
@@ -304,7 +307,7 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 9. **Hardcoded aggregateRating in JSON-LD** on the homepage. See §9.
 10. **Location pages unpublished** by design. Content not ready.
 11. **Repository is public.** Do not commit anything sensitive.
-12. **Unconfirmed response and estimate timelines** ("reaches out within one business day", proposal "within 24–48 hours") appear on the Contact page, FAQ, process steps and two blog posts. The owner has not confirmed them.
+12. **Unconfirmed estimate-delivery timing** (proposal "within 24–48 hours") appears in process steps, the FAQ and two blog posts. The first-reply time is confirmed (see §5).
 13. **Form placeholders** are neutral since the cleanup: ZIP "5-digit ZIP code", phone "(555) 555-0100". Do not reintroduce a Seattle ZIP or area code as an example.
 
 ---

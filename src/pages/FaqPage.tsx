@@ -7,7 +7,7 @@ import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
 import { useQuoteModal } from "../components/quote/QuoteModalContext";
 import { PageSEO } from "../components/seo/PageSEO";
-import { business, faqs, serviceSlugs, SITE_URL } from "../lib/content";
+import { business, businessFaqs, faqs, serviceSlugs, SITE_URL } from "../lib/content";
 
 const relatedServiceLinks = [
   { label: "Interior Painting", href: `/services/${serviceSlugs.interior}` },
@@ -18,6 +18,7 @@ const relatedServiceLinks = [
 export function FaqPage() {
   const { openQuoteModal } = useQuoteModal();
   const canonical = `${SITE_URL}/faq/`;
+  const allFaqs = [...businessFaqs, ...faqs];
 
   return (
     <>
@@ -29,7 +30,7 @@ export function FaqPage() {
           {
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: faqs.map((item) => ({
+            mainEntity: allFaqs.map((item) => ({
               "@type": "Question",
               name: item.question,
               acceptedAnswer: { "@type": "Answer", text: item.answer },
@@ -64,7 +65,7 @@ export function FaqPage() {
       <section className="border-t border-ink/10 bg-cream-light py-12 sm:py-16 lg:py-20">
         <Container className="max-w-3xl">
           <div className="border border-ink/10 bg-cream px-5 sm:px-6">
-            <Accordion id="faq" items={faqs} />
+            <Accordion id="faq" items={allFaqs} />
           </div>
 
           <div className="mt-10 flex flex-col gap-4 border-t border-ink/10 pt-8 sm:flex-row sm:items-center sm:justify-between">

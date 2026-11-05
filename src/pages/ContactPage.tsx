@@ -120,7 +120,7 @@ export function ContactPage() {
                 <ol className="mt-4 flex flex-col gap-3">
                   {[
                     "Submit the form with a few details about your project.",
-                    "Our team typically reaches out within one business day.",
+                    "Our team typically responds within about an hour during business hours.",
                     "You're not committing to anything. You're starting a conversation.",
                   ].map((step, index) => (
                     <li key={step} className="flex items-start gap-3">

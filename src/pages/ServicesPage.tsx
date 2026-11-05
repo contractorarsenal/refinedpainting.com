@@ -60,7 +60,7 @@ export function ServicesPage() {
     <>
       <PageSEO
         title="Painting Services | Refined Painting"
-        description="Interior painting, exterior painting, cabinet refinishing, deck & fence staining and carpentry services from Refined Painting, serving Seattle and the Eastside."
+        description="Interior painting, exterior painting, cabinet refinishing, deck and fence staining and carpentry from Refined Painting, serving Seattle and the Eastside."
         canonical={`${SITE_URL}/services/`}
         image={`${SITE_URL}${afterWhite}`}
         schema={[

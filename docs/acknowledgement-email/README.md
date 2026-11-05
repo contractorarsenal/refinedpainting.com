@@ -27,7 +27,7 @@
 
 ## Copy rules
 
-- Do **not** promise a response time. The site's existing "typically reaches out within one business day" line is an owner-decision claim and is not confirmed in this repository. Leave it unless the owner confirms it, and then align the email with that.
+- Response time: the owner confirmed (2026-11-05) that a first reply typically comes within about an hour during business hours. If the email mentions it, say "typically", tie it to business hours (Monday–Saturday, 9 AM–5 PM), and do not present it as a guarantee or as an estimate-delivery time. Estimate-delivery timing is still unconfirmed, so do not promise it.
 - The template says Gloria "helps with questions and with getting started on your free estimate." That matches her approved role and blurb in `src/lib/content.ts`.
 - Maria is not named in the acknowledgement. She is the project coordinator after a job closes.
 

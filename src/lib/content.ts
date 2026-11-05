@@ -286,6 +286,51 @@ export const teamMembers = {
   },
 };
 
+// Quick-fact questions for /faq, shown above the longer FAQs and included in
+// its FAQPage markup. Every answer is built from facts confirmed by the owner
+// (services, service areas, address, hours, first-reply time, team roles,
+// Victoria's role) or from constants above. Do not add pricing, credentials,
+// review counts, warranty terms or estimate-delivery times here until the
+// owner confirms them (see docs/BUSINESS-INFO-REGISTER.md).
+export const businessFaqs: FaqItem[] = [
+  {
+    question: "What painting services does Refined Painting offer?",
+    answer: `Refined Painting offers ${services
+      .map((s) => s.title.replace("&", "and"))
+      .join(", ")
+      .replace(/, ([^,]*)$/, ", and $1")}. Each service has its own page that describes what is included.`,
+  },
+  {
+    question: "Where does Refined Painting work?",
+    answer: `Refined Painting serves ${serviceAreas
+      .join(", ")
+      .replace(/, ([^,]*)$/, ", and $1")}. Our business address is ${business.address.street}, ${business.address.city}, ${business.address.state} ${business.address.zip}.`,
+  },
+  {
+    question: "What are your business hours?",
+    answer: `We are available Monday through Saturday, 9 AM to 5 PM. You can call ${business.phone} or request a free estimate online.`,
+  },
+  {
+    question: "How quickly will I hear back after I contact you?",
+    answer:
+      "Our team typically responds to new inquiries within about an hour during business hours (Monday through Saturday, 9 AM to 5 PM). That is our usual time for a first reply. It is not a guarantee, and it is not the time it takes to receive an estimate.",
+  },
+  {
+    question: "Who will I talk to first?",
+    answer:
+      "Gloria, our Customer Service Representative, is your first contact for questions, estimates and getting started. Once you move forward, Maria, our Project Coordinator, helps coordinate your project.",
+  },
+  {
+    question: "Can someone help me choose paint colors?",
+    answer:
+      "Yes. Victoria sits down with you to explore different color options and helps you find a palette that feels right for your home. Mention color consultation when you request your estimate.",
+  },
+  {
+    question: "How do I request a free estimate?",
+    answer: `Use any Get a Free Estimate button on the site or call ${business.phone}. The online request asks for your ZIP code, the type of project, your timeline, a few project details, and your contact information.`,
+  },
+];
+
 export const promoPopup = {
   headline: "Talk With Gloria About Your Project",
   sub: "Planning a painting project? Gloria can answer your questions and help you get started with a free estimate.",
@@ -399,6 +444,8 @@ export interface ServiceDetail {
   id: ServiceId;
   eyebrow: string;
   overview: string;
+  /** Search-result snippet (about 150 chars). Built only from what the page itself says. */
+  metaDescription: string;
   commonProblem: string;
   approach: string;
   whatsIncluded: string[];
@@ -411,6 +458,8 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     eyebrow: "Interior Painting",
     overview:
       "When a room feels tired, outdated, or simply needs a refresh, professional interior painting offers one of the most impactful transformations available for your home.",
+    metaDescription:
+      "Interior painting for walls, ceilings, trim and doors, with careful prep and a clean finish. Serving Seattle and the Eastside. Get a free estimate.",
     commonProblem:
       "Homeowners often delay interior painting, worried it will be disruptive, messy, or end up looking uneven and amateur.",
     approach:
@@ -450,6 +499,8 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     eyebrow: "Exterior Painting",
     overview:
       "When a home's exterior looks faded, weathered, or no longer reflects the care put into the property, professional exterior painting delivers one of the most dramatic transformations possible.",
+    metaDescription:
+      "Exterior house painting with power washing, siding prep and detailed trim work. Serving Seattle and the Eastside. Get a free estimate.",
     commonProblem:
       "Constant rain, UV, and temperature swings fade and crack paint fast. Crews that skip proper prep set the work up to fail within months.",
     approach:
@@ -489,6 +540,8 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     eyebrow: "Cabinet Refinishing",
     overview:
       "When cabinets feel dated, worn, or out of place in an otherwise beautiful kitchen, cabinet refinishing is one of the smartest ways to upgrade the space without a full remodel.",
+    metaDescription:
+      "Cabinet refinishing that updates a dated kitchen without a full remodel. Serving Seattle and the Eastside. Request a free estimate.",
     commonProblem:
       "Cabinets take more daily wear than almost any other surface — scratches, grease buildup, and fading can make even a well-designed kitchen feel tired.",
     approach:
@@ -525,6 +578,8 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     eyebrow: "Commercial Painting",
     overview:
       "When a business space no longer projects the professionalism a brand deserves, commercial painting delivers an immediate transformation that impacts customer perception, employee morale, and property value.",
+    metaDescription:
+      "Commercial painting for offices, retail, restaurants, medical and multi-family spaces, scheduled around your business. Seattle and the Eastside.",
     commonProblem:
       "Outdated paint and worn finishes send the wrong message to clients and don't support employee pride or productivity.",
     approach:
@@ -562,6 +617,8 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     eyebrow: "Deck & Fence Staining",
     overview:
       "When outdoor wood looks gray, weathered, or no longer enhances a property's appearance, professional deck and fence staining provides the protection and visual transformation your exterior spaces deserve.",
+    metaDescription:
+      "Deck and fence staining that protects outdoor wood and restores its look. Serving Seattle and the Eastside. Get a free estimate.",
     commonProblem:
       "Pacific Northwest moisture, UV, and mildew cause untreated or improperly maintained wood to deteriorate rapidly.",
     approach:
@@ -598,6 +655,8 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     eyebrow: "Carpentry Services",
     overview:
       "When woodwork shows signs of damage, decay, or wear that paint alone can't fix, professional carpentry provides the structural repairs and custom improvements that protect your investment.",
+    metaDescription:
+      "Carpentry repairs for rotted trim, siding and window casings so paint goes on a sound surface. Serving Seattle and the Eastside.",
     commonProblem:
       "Moisture, insect damage, and years of wear leave rotted trim, siding, and window casings compromising both looks and protection.",
     approach:
@@ -655,7 +714,7 @@ export const warranty = {
 export const contactReassurance = {
   heading: "What Happens Next",
   body:
-    "Once you submit the form, our team typically reaches out within one business day. You're not committing to anything. You're starting a conversation.",
+    "Once you submit the form, our team typically responds within about an hour during business hours. You're not committing to anything. You're starting a conversation.",
 };
 
 export interface HowWeWorkPrinciple {

@@ -9,7 +9,7 @@ Status: **Confirmed** (owner stated it), **Consistent** (the site agrees with it
 | Business name: Refined Painting | `business.name` in `src/lib/content.ts`, JSON-LD, titles | Owner project; used throughout the brief | Confirmed |
 | Phone (206) 258-7994 | `business.phone`, header, footer, Contact, JSON-LD (`+1-206-258-7994`) | None on file beyond the site | Consistent. Owner to confirm it's the right public number. |
 | Address 7212 Linden Ave N, Seattle, WA 98103 | `business.address`, Contact page ("Address"), JSON-LD `PostalAddress` | None on file | Consistent. **Decision:** is it a public office customers may visit, or a business mailing address? The label was changed from "Office" to "Address" until confirmed. |
-| Hours Mon–Sat 9 AM–5 PM | `business.hours` (footer, Contact), JSON-LD `openingHoursSpecification` 09:00–17:00 Mon–Sat, `docs/acknowledgement-email/` (inactive) | BBB reportedly lists Saturday to 4 PM (reported by Jay, no record on file) | **Needs decision (Jose):** confirm Saturday closing time (5 PM or 4 PM); hours unchanged until then. All site places agree with each other today. |
+| Hours Mon–Sat 9 AM–5 PM | `business.hours` (footer, Contact, FAQ), JSON-LD `openingHoursSpecification` 09:00–17:00 Mon–Sat, `docs/acknowledgement-email/` (inactive) | Saturday closing at 5 PM confirmed by the owner (2026-11-05). BBB's 4 PM listing is an external profile that was not changed. | **Confirmed.** Site copy and JSON-LD agree. Decision: update the BBB listing (owner action, not done here). |
 | Website areas served: 14 cities (Seattle, Bellevue, Bothell, Everett, Kenmore, Kirkland, Lake Stevens, Lynnwood, Marysville, Medina, Mercer Island, Redmond, Sammamish, Shoreline) | `serviceAreas` in `content.ts`, homepage summary, About/Contact strip, JSON-LD `areaServed` (same 14) | Live WordPress also lists these plus Palmer. Not independent proof. | Preserved unchanged. **Decision:** explicit website-coverage decision (keep all 14, trim, or add Palmer). |
 | Ad targeting: Bellevue, Kirkland, Redmond, Sammamish; Seattle excluded | Not on the website. Owner brief only | Jay's instruction | Confirmed for ads. Not a website instruction. |
 | "Serving Seattle and the Eastside"; "King & Snohomish Counties" | titles and descriptions on Home, Services, Contact, About, service pages; `index.html` | None on file | Consistent with the 14-city list. Revisit with the coverage decision. |
@@ -26,16 +26,22 @@ Status: **Confirmed** (owner stated it), **Consistent** (the site agrees with it
 | Google Verified badge | trust strip, footer, Reviews | Badge image in repo only | **Needs decision:** proof of the Google badge/program. |
 | Nextdoor Neighborhood Favorite badge | trust strip, footer, Reviews | Badge image in repo only | **Needs decision:** award year and proof. |
 | 5-year workmanship warranty | hero, FAQ, About, process, `warranty` block in `content.ts` (including a "scheduled within 12 months of notification" term) | Live WordPress has a `/warranty/` page, which is also the owner's copy, not independent | **Needs decision:** owner-signed warranty terms. Decide what happens to the `/warranty/` URL. |
-| Response promise: "typically reaches out within one business day" | Contact page, `contactReassurance`, one blog post | Owner has not confirmed (see `docs/acknowledgement-email/README.md`) | **Needs decision** (see below) |
-| Estimate promise: proposal "within 24–48 hours" | process steps, FAQ, two blog posts | None on file | **Needs decision** (see below) |
+| First reply: "typically responds within about an hour during business hours" | Contact page and `contactReassurance`, one blog post (two sentences), `businessFaqs` on /faq | Confirmed by the owner (2026-11-05) as a typical first-reply time within business hours. Not a guarantee. | **Confirmed**, framed as typical and within Mon–Sat 9–5. It is not an estimate-delivery time. |
+| Estimate promise: proposal "within 24–48 hours" | process steps, FAQ, two blog posts | None on file | **Still unconfirmed.** Left as written. Needs an owner decision: confirm a delivery time or approve neutral wording. |
 | Scheduling promises: "2 to 4 weeks" interior, "3 to 7 days" commercial | FAQs in `content.ts` | None on file | **Needs decision:** confirm or soften. |
 | "200+ homes painted", "200+ cabinets refinished" | `homesPainted`, `cabinetsRefinished` | None on file | **Needs decision:** project counts need support. |
 
+## Estimate-delivery wording (still unconfirmed)
+
+The first-reply time is now confirmed and applied (see the table). The proposal wording below is for estimate delivery only and has not been applied.
+
 ## Proposed neutral timing wording (for approval, not applied)
 
-- Contact page, "What Happens Next": "Our team will review your request and follow up with you."
 - Process step 1: "We'll visit your home, take measurements, and answer your questions, then send a detailed written proposal."
 - Blog posts: replace "within one business day" and "24 to 48 hours" with "soon after" and "after the visit", with no deadline.
 - Thank-you page already has no deadline ("contact you about the next step") and needs no change.
 
 If the owner confirms a response time and a proposal time, use one wording everywhere. Today the two are consistent with each other but both are unconfirmed.
+
+## Added 2026-11-05: quick-fact FAQs (`businessFaqs`)
+Seven questions on /faq and in its FAQPage markup: services, areas served, hours, first-reply time, first contact (Gloria, then Maria), color help (Victoria's role only, no offer terms), and how to request an estimate. Each answer uses confirmed facts or constants from `content.ts`. They deliberately contain no pricing, credentials, review counts, warranty terms or estimate-delivery times.

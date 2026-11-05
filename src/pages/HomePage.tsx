@@ -15,8 +15,8 @@ export function HomePage() {
   return (
     <>
       <PageSEO
-        title="Seattle Painting Company | Interior & Exterior Painters | Refined Painting"
-        description="Refined Painting provides professional interior, exterior and cabinet painting across Seattle and the Eastside. Licensed, insured, EPA Lead-Safe and backed by a 5-year workmanship warranty."
+        title="Seattle Interior & Exterior Painters | Refined Painting"
+        description="Refined Painting provides interior, exterior, cabinet and commercial painting for homes and businesses in Seattle and the Eastside. Request a free estimate."
         canonical={`${SITE_URL}/`}
         image={`${SITE_URL}${homeHeroPoster}`}
       />

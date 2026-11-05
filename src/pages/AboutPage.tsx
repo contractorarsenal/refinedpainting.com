@@ -25,7 +25,7 @@ export function AboutPage() {
   return (
     <>
       <PageSEO
-        title="About Refined Painting | Seattle & Eastside Painting Company"
+        title="About Refined Painting | Seattle & Eastside Painters"
         description="Refined Painting is a licensed, insured and EPA Lead-Safe painting company serving Seattle and the Eastside, built around clear communication and careful prep."
         canonical={`${SITE_URL}/about/`}
         schema={[

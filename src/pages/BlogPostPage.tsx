@@ -15,7 +15,8 @@ export function BlogPostPage() {
   return (
     <>
       <PageSEO
-        title={`${post.title} | Refined Painting`}
+        // Keep the title under about 60 characters: append the brand only when it fits.
+        title={`${post.title} | Refined Painting`.length <= 60 ? `${post.title} | Refined Painting` : post.title}
         description={post.metaDescription}
         canonical={canonical}
         image={`${SITE_URL}${post.heroImage.src}`}
