@@ -1,6 +1,5 @@
-import { Building2, Hammer, type LucideIcon } from "lucide-react";
 import { Check } from "lucide-react";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import cabinetsPhoto from "../assets/images/projects/cabinets-sage-green.webp";
 import afterWhite from "../assets/images/projects/exterior-after-white.webp";
 import interiorBright from "../assets/images/projects/interior-bright-finished.webp";
@@ -14,6 +13,7 @@ import { Button, LinkButton } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { ProjectImage } from "../components/ui/ProjectImage";
 import { PageSEO } from "../components/seo/PageSEO";
+import { NotFoundPage } from "./NotFoundPage";
 import type { ServiceId } from "../lib/content";
 import {
   business,
@@ -70,15 +70,6 @@ const heroImages: Partial<Record<ServiceId, { src: string; alt: string }>> = {
 
 // Only the services with real project photos on /projects get a proof frame —
 // no project photos exist yet for commercial, deck-fence, or carpentry.
-// Which services show their hero photo on the detail page. This is separate from
-// hasProjectProof, which only controls the "Real ... Projects" copy block below.
-// Commercial is excluded: no commercial project photography exists yet, and the
-// residential photo previously assigned to it is not a commercial example.
-const heroPhotoServices: ServiceId[] = ["interior", "exterior", "cabinets", "deck-fence"];
-
-// Icon panels for services that have no approved photo yet (never a placeholder frame).
-const serviceIcons: Partial<Record<ServiceId, LucideIcon>> = { carpentry: Hammer, commercial: Building2 };
-
 const hasProjectProof: Partial<Record<ServiceId, boolean>> = {
   interior: true,
   exterior: true,
@@ -95,7 +86,12 @@ export function ServiceDetailPage() {
 
   const canonical = `${SITE_URL}/services/${slug ?? ""}`;
 
-  if (!serviceId || !service || !detail || !hero) return <Navigate to="/services" replace />;
+  // An unknown slug shows the site's 404 page at its own URL, the same markup the
+  // prerendered 404.html serves, so server and client render the same tree. A redirect
+  // here would make the first client render differ from the server HTML (React #418).
+  // A valid service renders its own content; a missing photo falls back to the icon
+  // panel in PageHero.
+  if (!serviceId || !service || !detail) return <NotFoundPage />;
 
   return (
     <>
@@ -103,7 +99,7 @@ export function ServiceDetailPage() {
         title={`${service.title} | Refined Painting`}
         description={`${detail.overview} Serving Seattle and the Eastside.`}
         canonical={canonical}
-        image={hasProjectProof[serviceId] ? `${SITE_URL}${hero.src}` : undefined}
+        image={hero && hasProjectProof[serviceId] ? `${SITE_URL}${hero.src}` : undefined}
         schema={[
           {
             "@context": "https://schema.org",
@@ -130,12 +126,10 @@ export function ServiceDetailPage() {
         eyebrow={detail.eyebrow}
         title={service.title}
         description={detail.overview}
-        icon={serviceId ? serviceIcons[serviceId] : undefined}
-        image={serviceId && heroPhotoServices.includes(serviceId) ? hero : undefined}
         onEstimateClick={() => openQuoteModal(serviceId)}
       />
 
-      <section className="bg-cream-light py-16 sm:py-20 lg:py-24">
+      <section className="bg-cream-light py-10 sm:py-20 lg:py-24">
         <Container className="mx-auto max-w-5xl">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
@@ -153,7 +147,7 @@ export function ServiceDetailPage() {
         </Container>
       </section>
 
-      <section className="border-t border-ink/10 bg-cream py-16 sm:py-20 lg:py-24">
+      <section className="border-t border-ink/10 bg-cream py-10 sm:py-20 lg:py-24">
         <Container className="mx-auto max-w-3xl">
           <h2 className="font-display text-2xl font-extrabold uppercase tracking-wide text-ink sm:text-3xl">
             What&rsquo;s Included
@@ -173,8 +167,8 @@ export function ServiceDetailPage() {
         </Container>
       </section>
 
-      {hasProjectProof[serviceId] ? (
-        <section className="border-t border-ink/10 bg-cream-light py-16 sm:py-20 lg:py-24">
+      {hero && hasProjectProof[serviceId] ? (
+        <section className="border-t border-ink/10 bg-cream-light py-10 sm:py-20 lg:py-24">
           <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <div className="aspect-4/3 w-full overflow-hidden rounded-lg border border-ink/10 shadow-card">
               <ProjectImage src={hero.src} alt={hero.alt} />
@@ -196,7 +190,7 @@ export function ServiceDetailPage() {
         </section>
       ) : null}
 
-      <section className="border-t border-ink/10 bg-cream py-16 sm:py-20 lg:py-24">
+      <section className="border-t border-ink/10 bg-cream py-10 sm:py-20 lg:py-24">
         <Container>
           <SectionProcessHeading />
           <ol className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
@@ -212,7 +206,7 @@ export function ServiceDetailPage() {
         </Container>
       </section>
 
-      <section id="faq" className="scroll-mt-20 border-t border-ink/10 bg-cream-light py-16 sm:py-20 lg:py-24">
+      <section id="faq" className="scroll-mt-20 border-t border-ink/10 bg-cream-light py-10 sm:py-20 lg:py-24">
         <Container className="mx-auto max-w-3xl">
           <div className="flex flex-col items-center text-center">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Common Questions</span>
@@ -229,7 +223,7 @@ export function ServiceDetailPage() {
 
       {serviceId === "exterior" ? (
         <>
-          <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+          <section className="border-t border-ink/10 bg-ink py-10 text-warm-white sm:py-20 lg:py-24">
             <Container className="mx-auto flex max-w-2xl flex-col items-center gap-3 text-center">
               <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Backed By</span>
               <h2 className="font-display text-2xl font-extrabold uppercase leading-[0.98] text-warm-white sm:text-3xl">
@@ -247,7 +241,7 @@ export function ServiceDetailPage() {
         // is almost entirely stained, horizontal surfaces. Showing the blanket
         // 5-year warranty claim here would misrepresent coverage, so this section
         // states the real, surface-dependent coverage instead.
-        <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+        <section className="border-t border-ink/10 bg-ink py-10 text-warm-white sm:py-20 lg:py-24">
           <Container className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
             <div className="flex flex-col gap-3">
               <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Warranty Coverage</span>
@@ -287,7 +281,7 @@ export function ServiceDetailPage() {
           </Container>
         </section>
       ) : (
-        <section className="border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+        <section className="border-t border-ink/10 bg-ink py-10 text-warm-white sm:py-20 lg:py-24">
           <Container className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
             <div className="flex flex-col gap-3">
               <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Backed By</span>

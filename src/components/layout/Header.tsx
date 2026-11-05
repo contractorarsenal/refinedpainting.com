@@ -27,16 +27,16 @@ export function Header() {
   const { openQuoteModal } = useQuoteModal();
   const { pathname } = useLocation();
 
-  // Home's video hero needs white nav text even unscrolled; every other page
-  // has a light (cream/warm-white) header underneath and needs ink text for
-  // real contrast instead of relying on a text-shadow hack. Once scrolled,
-  // the header itself goes solid navy everywhere, so white text is correct
-  // again regardless of page.
+  // Home's video hero and the Services header photo both sit under the nav, so
+  // those pages need white nav text even unscrolled. Every other page has a light
+  // header underneath and needs ink text. Once scrolled, the header goes solid
+  // navy everywhere, so white text is correct again regardless of page.
   const isHome = pathname === "/";
-  const dark = scrolled || isHome;
+  const onDarkPhoto = /^\/services\/?$/.test(pathname);
+  const dark = scrolled || isHome || onDarkPhoto;
   // Text-shadow only earns its keep where nav text sits directly over real
-  // imagery (Home's unscrolled video hero) — a solid navy bg needs no shadow.
-  const overMedia = isHome && !scrolled;
+  // imagery (the unscrolled home video and services photo) — a solid navy bg needs no shadow.
+  const overMedia = (isHome || onDarkPhoto) && !scrolled;
 
   const navLinkClass = (href: string) => {
     const active = isLinkActive(pathname, href);

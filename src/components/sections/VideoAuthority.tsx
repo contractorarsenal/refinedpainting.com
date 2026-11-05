@@ -8,7 +8,7 @@ import { LineTexture } from "../ui/Texture";
 
 function VideoFrame() {
   return (
-    <div className="relative mx-auto w-full max-w-80">
+    <div className="relative mx-auto w-full max-w-64 sm:max-w-80">
       <div className="relative aspect-9/16 w-full overflow-hidden rounded border-2 border-teal bg-ink shadow-lift">
         <iframe
           className="h-full w-full"

@@ -1,7 +1,8 @@
 interface TeamCardProps {
   name: string;
   role: string;
-  blurb: string;
+  /** Optional one-line description. Omit where the role is already stated nearby. */
+  blurb?: string;
   photo: string;
   /** object-position for the circular crop, e.g. "42% 50%". Keeps the face in frame. */
   objectPosition: string;
@@ -23,7 +24,7 @@ export function TeamCard({ name, role, blurb, photo, objectPosition, className =
       <div className="min-w-0">
         <p className="font-display text-sm font-extrabold uppercase tracking-wide text-ink">{name}</p>
         <p className="text-[11px] font-bold uppercase tracking-widest text-ink/45">{role}</p>
-        <p className="mt-1 text-sm leading-snug text-ink/65">{blurb}</p>
+        {blurb ? <p className="mt-1 text-sm leading-snug text-ink/65">{blurb}</p> : null}
       </div>
     </div>
   );

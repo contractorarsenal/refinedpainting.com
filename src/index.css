@@ -24,6 +24,8 @@
 
   /* Birdy's crest: a restrained red accent, never the dominant color */
   --color-crest: #c23b30;
+  /* Pressed and hover state for crest surfaces: deeper red with white text still above 6:1. */
+  --color-crest-dark: #a52f26;
   --color-gold: #e3a13a;
 
   --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
@@ -150,13 +152,17 @@
     -ms-overflow-style: none;
   }
 
-  /* Scroll-triggered reveal: starts hidden, JS flips data-inview once visible. */
+  /* Scroll-triggered reveal. Content starts hidden only when the page has JavaScript
+     (index.html adds the "js" class to <html> before anything renders), so a failed
+     bundle or observer leaves every section visible. JS flips data-inview once visible. */
   [data-reveal] {
-    opacity: 0;
-    transform: translateY(16px);
     transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  [data-reveal][data-inview="true"] {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .js [data-reveal][data-inview="true"] {
     opacity: 1;
     transform: translateY(0);
   }

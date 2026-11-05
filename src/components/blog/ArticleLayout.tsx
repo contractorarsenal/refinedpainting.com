@@ -123,7 +123,7 @@ export function ArticleLayout({ post, toc, children }: ArticleLayoutProps) {
       ) : null}
 
       {related.length > 0 ? (
-        <section className="border-t border-ink/10 bg-cream py-14 sm:py-16 lg:py-20">
+        <section className="border-t border-ink/10 bg-cream py-10 sm:py-16 lg:py-20">
           <Container>
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Keep Reading</span>
             <h2 className="mt-2 font-display text-2xl font-extrabold uppercase tracking-wide text-ink sm:text-3xl">

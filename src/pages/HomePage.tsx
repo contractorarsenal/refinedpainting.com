@@ -28,10 +28,10 @@ export function HomePage() {
       <HomeownerProblem />
       {/* F4 — Can they do what I need? */}
       <ServicesPreview />
+      {/* F4b — What happens after I choose a service? Moved up, right after the service choices. */}
+      <ProcessCondensed />
       {/* F5 — Can they actually deliver? */}
       <ProjectsPreview />
-      {/* F6 — What happens if I contact them? */}
-      <ProcessCondensed />
       {/* F7 — Do other homeowners agree? */}
       <Reviews />
       {/* F9 — Do they serve me, and what do I do next? */}

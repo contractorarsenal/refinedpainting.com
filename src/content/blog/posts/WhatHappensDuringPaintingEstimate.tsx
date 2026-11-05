@@ -93,8 +93,8 @@ export function WhatHappensDuringPaintingEstimate() {
       <ArticleP>
         Once you're ready to move forward, the estimate visit becomes the first step in a larger process:
         a color consultation if you haven't already picked finishes, meticulous surface prep, the actual
-        painting, and a final walkthrough backed by a 5-year workmanship warranty. You can see the full
-        breakdown on our <ArticleLink href="/services#process">process page</ArticleLink>.
+        painting, and a final walkthrough backed by a 5-year workmanship warranty. You can see a
+        summary of the steps on our homepage, in the <ArticleLink href="/#how-it-works">How It Works</ArticleLink> section.
       </ArticleP>
       <ArticleP>
         If you'd rather talk it through first, our <ArticleLink href="/about">About page</ArticleLink>{" "}

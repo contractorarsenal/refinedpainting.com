@@ -112,7 +112,7 @@ export function ProjectLightbox({ project, photoIndex, onClose, onPhotoChange }:
                 className="h-full max-h-[38vh] w-full object-cover sm:max-h-[46vh] lg:max-h-none"
               />
               {photo.stage ? (
-                <span className="absolute left-3 top-3 bg-ink/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-warm-white">
+                <span className="absolute left-3 top-3 bg-ink/80 px-2.5 py-1 text-[11px] font-bold uppercase tracking-widest text-warm-white">
                   {photo.stage}
                 </span>
               ) : null}
@@ -166,7 +166,7 @@ export function ProjectLightbox({ project, photoIndex, onClose, onPhotoChange }:
         {/* Photo strip — every photo in this project, reached by the same single scroll gesture on mobile. */}
         {hasOthers ? (
           <div className="shrink-0 border-t border-ink/10 bg-cream-light px-5 py-4 sm:px-6">
-            <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/40">
+            <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink/40">
               Project Photos
             </span>
             <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1">

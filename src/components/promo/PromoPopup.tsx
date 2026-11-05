@@ -44,7 +44,7 @@ export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
       <div
         ref={dialogRef}
         tabIndex={-1}
-        className="animate-fade-up relative flex w-full max-w-md flex-col gap-5 rounded border-2 border-teal-dark bg-cream px-6 pb-7 pt-8 shadow-lift sm:px-8 sm:pb-8"
+        className="animate-fade-up relative flex max-h-[calc(100dvh-2rem)] w-full max-w-md flex-col gap-4 overflow-y-auto rounded border-2 border-teal-dark bg-cream px-6 pb-6 pt-7 shadow-lift sm:gap-5 sm:px-8 sm:pb-8 sm:pt-8"
       >
         <button
           type="button"
@@ -58,15 +58,14 @@ export function PromoPopup({ isOpen, onClose }: PromoPopupProps) {
         <TeamCard
           name={teamMembers.gloria.name}
           role={teamMembers.gloria.role}
-          blurb={teamMembers.gloria.blurb}
           photo={gloriaPhoto}
           objectPosition="42% 50%"
-          className="border-b border-ink/10 pb-5"
+          className="border-b border-ink/10 pb-4"
         />
 
         <div className="flex flex-col gap-4">
           <div className="h-1 w-14 bg-crest" aria-hidden />
-          <h3 className="text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+          <h3 className="text-balance font-display text-2xl font-extrabold uppercase leading-[1] text-ink sm:text-4xl">
             {promoPopup.headline}
           </h3>
           <p className="text-sm leading-relaxed text-ink/65 sm:text-base">{promoPopup.sub}</p>

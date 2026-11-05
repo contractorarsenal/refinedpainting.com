@@ -4,8 +4,8 @@ import { ServiceAreaStrip } from "../components/sections/ServiceAreaStrip";
 import { TrustStrip } from "../components/sections/TrustStrip";
 import { Container } from "../components/ui/Container";
 import gloriaPhoto from "../assets/images/team/gloria-customer-service.webp";
-import mariaPhoto from "../assets/images/team/maria-project-coordinator.webp";
-import { TeamCard } from "../components/ui/TeamCard";
+import mariaPhoto from "../assets/images/team/maria-project-coordinator-portrait.webp";
+import { TeamProfileCard } from "../components/ui/TeamProfileCard";
 import { Reveal } from "../components/ui/Reveal";
 import { GridTexture, LineTexture } from "../components/ui/Texture";
 import { PageSEO } from "../components/seo/PageSEO";
@@ -40,74 +40,84 @@ export function AboutPage() {
         ]}
       />
       {/* F1 — Strong company positioning */}
-      <section className="relative overflow-hidden bg-cream pb-16 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
+      <section className="relative overflow-hidden bg-cream pb-12 pt-36 sm:pb-20 sm:pt-60 lg:pb-24">
         <GridTexture />
-        <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
-          <Reveal>
+        <Container className="relative flex flex-col items-center gap-5 text-center">
+          <Reveal className="flex flex-col items-center gap-5">
             <span className="h-1 w-10 bg-crest" aria-hidden />
-            <span className="mt-4 block text-xs font-bold uppercase tracking-[0.16em] text-crest">
+            <span className="block text-xs font-bold uppercase tracking-[0.16em] text-crest">
               About Refined Painting
             </span>
-            <h1 className="mt-3 text-balance font-display text-3xl font-black uppercase leading-[0.96] text-ink sm:text-4xl lg:text-5xl">
+            <h1 className="max-w-3xl text-balance font-display text-3xl font-black uppercase leading-[0.96] text-ink sm:text-4xl lg:text-5xl">
               Clear Communication. Careful Preparation. High-End Results.
             </h1>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/70 sm:text-base">{aboutIntro}</p>
-            <p className="mt-6 border-t border-ink/10 pt-5 text-xs font-bold uppercase tracking-wide text-ink/45">
+            <p className="max-w-xl text-balance text-sm leading-relaxed text-ink/70 sm:text-base">{aboutIntro}</p>
+            <p className="border-t border-ink/10 pt-5 text-xs font-bold uppercase tracking-wide text-ink/45">
               {trustBullets.slice(0, 3).join(" · ")}
             </p>
-          </Reveal>
-
-          <Reveal delay={130} className="max-w-md lg:justify-self-end">
-            <div className="flex flex-col gap-6 border border-ink/10 bg-cream-light p-6 sm:p-8">
-              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-crest">Who You Will Work With</span>
-              <TeamCard
-                name={teamMembers.gloria.name}
-                role={teamMembers.gloria.role}
-                blurb={teamMembers.gloria.blurb}
-                photo={gloriaPhoto}
-                objectPosition="42% 50%"
-              />
-              <TeamCard
-                name={teamMembers.maria.name}
-                role={teamMembers.maria.role}
-                blurb={teamMembers.maria.blurb}
-                photo={mariaPhoto}
-                objectPosition="50% 20%"
-                className="border-t border-ink/10 pt-6"
-              />
-            </div>
           </Reveal>
         </Container>
       </section>
 
-      {/* F2 — Why Refined exists / approved story */}
-      <section className="bg-ink pt-12 text-warm-white sm:pt-14 lg:pt-16">
-        <Container className="grid grid-cols-1 lg:grid-cols-2">
-          <Reveal className="flex flex-col gap-6 py-10 pr-0 lg:py-16 lg:pr-12">
-            <span className="text-xs font-bold uppercase tracking-[0.16em] text-teal">The Refined Pledge</span>
-            <p className="text-balance font-display text-2xl font-extrabold leading-tight text-warm-white sm:text-3xl">
-              &ldquo;{mission}&rdquo;
-            </p>
-            <p className="max-w-sm text-sm leading-relaxed text-warm-white/55">{vision}</p>
-            <div className="mt-auto border-t border-warm-white/10 pt-5 text-xs font-bold uppercase tracking-widest text-warm-white/40">
-              Locally Owned &middot; King &amp; Snohomish Counties
-            </div>
+      {/* The Refined Pledge sits directly below the introduction, as the page's focal statement. */}
+      <section className="bg-ink py-14 text-warm-white sm:py-20 lg:py-24">
+        <Container className="flex flex-col items-center gap-6 text-center">
+          <span className="h-1 w-16 bg-crest" aria-hidden />
+          <h2 className="font-display text-2xl font-black uppercase tracking-wide text-teal sm:text-3xl">The Refined Pledge</h2>
+          <p className="max-w-4xl text-balance font-display text-3xl font-extrabold uppercase leading-[1.02] text-warm-white sm:text-4xl lg:text-5xl">
+            &ldquo;{mission}&rdquo;
+          </p>
+          <p className="max-w-xl text-balance text-base leading-relaxed text-warm-white/75">{vision}</p>
+          <p className="border-t border-warm-white/15 pt-5 text-xs font-bold uppercase tracking-widest text-warm-white/55">
+            Locally Owned &middot; King &amp; Snohomish Counties
+          </p>
+        </Container>
+      </section>
+
+      {/* Team cards: full-size portraits with name, role, and description. */}
+      <section className="border-t border-ink/10 bg-cream-light py-12 sm:py-16 lg:py-20">
+        <Container className="flex flex-col items-center gap-10">
+          <h2 className="text-center font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+            Who You Will Work With
+          </h2>
+          <div className="grid w-full max-w-3xl grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8">
+            <TeamProfileCard
+              name={teamMembers.gloria.name}
+              role={teamMembers.gloria.role}
+              blurb={teamMembers.gloria.blurb}
+              photo={gloriaPhoto}
+              objectPosition="43% 50%"
+            />
+            <TeamProfileCard
+              name={teamMembers.maria.name}
+              role={teamMembers.maria.role}
+              blurb={teamMembers.maria.blurb}
+              photo={mariaPhoto}
+              objectPosition="50% 50%"
+            />
+          </div>
+        </Container>
+      </section>
+
+      {/* Company story: the Pledge now sits near the top of the page, so this section keeps the story and trust points only. */}
+      <section className="border-t border-ink/10 bg-cream py-12 sm:py-16 lg:py-20">
+        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <Reveal className="flex flex-col gap-5">
+            <h2 className="text-balance font-display text-3xl font-extrabold uppercase leading-[0.98] text-ink sm:text-4xl">
+              {companyStory.heading}
+            </h2>
           </Reveal>
-          <Reveal
-            delay={130}
-            className="flex flex-col gap-6 border-t border-warm-white/10 py-10 lg:border-l lg:border-t-0 lg:py-16 lg:pl-12"
-          >
-            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">{companyStory.heading}</span>
+          <Reveal delay={130} className="flex flex-col gap-6">
             <div className="flex flex-col gap-4">
               {companyStory.paragraphs.map((p) => (
-                <p key={p} className="text-sm leading-relaxed text-warm-white/65">
+                <p key={p} className="text-base leading-relaxed text-ink/75">
                   {p}
                 </p>
               ))}
             </div>
-            <div className="mt-auto grid grid-cols-3 gap-4 border-t border-warm-white/10 pt-5">
+            <div className="grid grid-cols-1 gap-3 border-t border-ink/10 pt-5 sm:grid-cols-3 sm:gap-4">
               {trustBullets.slice(0, 3).map((bullet) => (
-                <span key={bullet} className="text-[11px] font-bold uppercase leading-snug tracking-wide text-teal">
+                <span key={bullet} className="text-[11px] font-bold uppercase leading-snug tracking-wide text-ink/80">
                   {bullet}
                 </span>
               ))}
@@ -117,7 +127,7 @@ export function AboutPage() {
       </section>
 
       {/* F3 — How we think about the work */}
-      <section className="border-t border-ink/10 bg-cream-light py-16 sm:py-20 lg:py-24">
+      <section className="border-t border-ink/10 bg-cream-light py-10 sm:py-20 lg:py-24">
         <Container>
           <Reveal className="flex flex-col items-start gap-3 border-b border-ink/10 pb-8 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -135,7 +145,7 @@ export function AboutPage() {
             {coreValues.map((value, index) => (
               <Reveal key={value.title} delay={180 + index * 80}>
                 <div className="border-t-2 border-crest pt-4">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/40">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink/40">
                     Standard {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-1.5 font-display text-base font-extrabold uppercase tracking-wide text-ink sm:text-lg">
@@ -150,7 +160,7 @@ export function AboutPage() {
       </section>
 
       {/* F5 — What you can expect from us (practical, homeowner-facing standards) */}
-      <section className="relative overflow-hidden border-t border-ink/10 bg-ink py-16 text-warm-white sm:py-20 lg:py-24">
+      <section className="relative overflow-hidden border-t border-ink/10 bg-ink py-10 text-warm-white sm:py-20 lg:py-24">
         <LineTexture tone="warm-white" className="opacity-50" />
         <Container className="relative mx-auto max-w-2xl text-center">
           <Reveal>

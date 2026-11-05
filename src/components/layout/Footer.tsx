@@ -79,7 +79,7 @@ export function Footer() {
               <li key={service.id}>
                 <Link
                   to={`/services/${serviceSlugs[service.id]}`}
-                  className="text-sm font-medium text-warm-white/80 hover:text-warm-white"
+                  className="-my-2 inline-block py-2 text-sm font-medium text-warm-white/80 hover:text-warm-white"
                 >
                   {service.title}
                 </Link>
@@ -96,7 +96,7 @@ export function Footer() {
           <ul className="mt-4 flex flex-col gap-3">
             {companyLinks.map((link) => (
               <li key={link.label}>
-                <Link to={link.href} className="text-sm font-medium text-warm-white/80 hover:text-warm-white">
+                <Link to={link.href} className="-my-2 inline-block py-2 text-sm font-medium text-warm-white/80 hover:text-warm-white">
                   {link.label}
                 </Link>
               </li>

@@ -259,10 +259,12 @@ export const localPartnerBullets = [
 
 // Configurable. Swap this copy any time the actual offer changes.
 export const promoBanner = {
-  eyebrow: "Included With Every Project",
-  headline: "Complimentary Color Consultation",
-  sub: "With qualifying painting projects, we bring Benjamin Moore and Sherwin-Williams samples directly to your home.",
-  cta: "Get My Free Estimate",
+  eyebrow: "NEED HELP CHOOSING COLOR?",
+  headline: "COLOR CONSULTATION WITH VICTORIA",
+  sub: "Victoria sits down with you to explore different color options and help you find a palette that feels right for your home.",
+  support: "Complimentary with qualifying painting projects.",
+  cta: "GET MY FREE ESTIMATE",
+  photoCaption: "Meet Victoria",
 };
 
 // Configurable. Swap this copy any time the actual offer changes.
@@ -286,7 +288,7 @@ export const teamMembers = {
 
 export const promoPopup = {
   headline: "Talk With Gloria About Your Project",
-  sub: "Planning a painting project? Gloria, our Customer Service Representative, can answer your questions and help you get started with a free estimate.",
+  sub: "Planning a painting project? Gloria can answer your questions and help you get started with a free estimate.",
   cta: "Get My Free Estimate",
   dismiss: "No, Thanks",
   person: teamMembers.gloria,
