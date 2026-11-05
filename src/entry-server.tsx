@@ -19,7 +19,7 @@ export function render(url: string): string {
  * /thank-you (never indexable, only ever reached via a real form
  * submission) and unpublished location pages (see content/locations). */
 export function getRoutes(): string[] {
-  const staticRoutes = ["/", "/services", "/projects", "/about", "/contact", "/faq", "/blog"];
+  const staticRoutes = ["/", "/services", "/projects", "/about", "/service-areas", "/contact", "/faq", "/blog"];
   const serviceRoutes = Object.values(serviceSlugs).map((slug) => `/services/${slug}`);
   const blogPostRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
   const blogCategoryRoutes = getCategoriesWithPosts().map((slug) => `/blog/category/${slug}`);

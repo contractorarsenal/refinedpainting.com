@@ -98,17 +98,17 @@ Run only the checks relevant to a change. A full build takes longer, and lint is
 - `src/components/promo/`: promo popup and its coordination with the quote modal
 - `src/components/ui/`: shared primitives (Button, Container, SectionHeading, Accordion, FormField, ProjectImage, PlaceholderPhoto, etc.)
 - `src/components/seo/PageSEO.tsx`: per-page `<title>`, description, canonical, OG, and robots tags
-- `src/content/blog/` (posts, categories, `backlog.ts` internal planning only), `src/content/locations/` (unpublished location registry)
+- `src/content/blog/` (posts, categories, `backlog.ts` internal planning only), `src/content/locations/` (location registry; no city page published yet)
 - `src/assets/images/`: logo, badges, project photos, team photos, hero video and poster
 - `scripts/prerender.mjs`: writes `dist/<route>/index.html`, `dist/sitemap.xml`, `dist/404.html`
 - `public/`: `robots.txt` (points to `https://refinedpainting.co/sitemap.xml`), `favicon.svg`, `refined-painting-logo.webp`
 
 ### Routes (from `src/App.tsx`)
-`/`, `/services`, `/services/:slug`, `/projects`, `/about`, `/blog`, `/blog/category/:slug`, `/blog/:slug`, `/contact`, `/faq`, `/thank-you`, and `*` (404).
+`/`, `/services`, `/services/:slug`, `/projects`, `/about`, `/service-areas`, `/blog`, `/blog/category/:slug`, `/blog/:slug`, `/contact`, `/faq`, `/thank-you`, and `*` (404).
 
 Service detail pages come from `serviceSlugs` in `src/lib/content.ts`.
 
-Location pages (`/locations/:citySlug`) are **intentionally unpublished**. The file's header says a human must confirm content is ready before any route, sitemap entry, or link is added. Do not publish them without that confirmation.
+`/service-areas/` is a live hub listing all 14 approved cities. **City pages are intentionally unpublished**: they will live at `/service-areas/<city>-wa/` (the original WordPress URLs). The registry header in `src/content/locations/locations.ts` says what each needs (tagged real projects, a real local testimonial, verified local context) and that a human must confirm it before any route, sitemap entry or link is added. Never clone pages with city names swapped, and never infer a project's city from a photo. The hub links only to cities marked "ready".
 
 ---
 
@@ -305,7 +305,7 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 7. **Web3Forms key duplicated** in two components, plus the endpoint in a hook. Rotation must touch all of them.
 8. **Claims still needing proof:** the 5-year warranty terms and the Google Verified and Nextdoor badges. (Rating and count come from the Google listing. Licensed, insured and EPA Lead-Safe are owner-confirmed, with no numbers on file.)
 9. **Rating is visible text only.** There is no `aggregateRating` markup (removed by decision). See §9.
-10. **Location pages unpublished** by design. Content not ready.
+10. **City pages unpublished** by design (the hub is live). No city has verified local material yet; see `PROJECT-STATUS.md`.
 11. **Repository is public.** Do not commit anything sensitive.
 12. **Unconfirmed estimate-delivery timing** (proposal "within 24–48 hours") appears in process steps, the FAQ and two blog posts. The first-reply time is confirmed (see §5).
 13. **Form placeholders** are neutral since the cleanup: ZIP "5-digit ZIP code", phone "(555) 555-0100". Do not reintroduce a Seattle ZIP or area code as an example.

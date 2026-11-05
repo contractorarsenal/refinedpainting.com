@@ -11,18 +11,20 @@ import { business, services, serviceSlugs, SITE_URL } from "../../lib/content";
 
 /** Reusable city-landing template. Not wired into App.tsx yet — see the
  * header comment in content/locations/locations.ts for why, and what has to
- * be true before a given city should actually be routed and published. */
+ * be true before a given city should actually be routed and published.
+ * Its params arrive as "<city>-wa"; the registry slug is the city alone. */
 export function LocationPage() {
   const { citySlug } = useParams<{ citySlug: string }>();
-  const location = citySlug ? getLocationBySlug(citySlug) : undefined;
+  const baseSlug = citySlug?.replace(/-wa$/, "");
+  const location = baseSlug ? getLocationBySlug(baseSlug) : undefined;
   const { openQuoteModal } = useQuoteModal();
 
-  const canonical = `${SITE_URL}/locations/${citySlug ?? ""}/`;
+  const canonical = `${SITE_URL}/service-areas/${baseSlug ?? ""}-wa/`;
 
   // Not just a missing-slug guard — status gates whether this is actually
   // fit to show a visitor, independent of whether the route happens to be
   // reachable (it isn't yet, but this keeps the component safe either way).
-  if (!location || location.status !== "ready") return <Navigate to="/about#service-areas" replace />;
+  if (!location || location.status !== "ready") return <Navigate to="/service-areas/" replace />;
 
   return (
     <>
@@ -45,7 +47,7 @@ export function LocationPage() {
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-              { "@type": "ListItem", position: 2, name: "Service Areas", item: `${SITE_URL}/about/#service-areas` },
+              { "@type": "ListItem", position: 2, name: "Service Areas", item: `${SITE_URL}/service-areas/` },
               { "@type": "ListItem", position: 3, name: location.cityName, item: canonical },
             ],
           },
@@ -56,7 +58,7 @@ export function LocationPage() {
           <Breadcrumbs
             items={[
               { label: "Home", href: "/" },
-              { label: "Service Areas", href: "/about#service-areas" },
+              { label: "Service Areas", href: "/service-areas/" },
               { label: location.cityName },
             ]}
           />

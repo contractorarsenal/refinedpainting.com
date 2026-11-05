@@ -17,6 +17,7 @@ import { FaqPage } from "./pages/FaqPage";
 import { HomePage } from "./pages/HomePage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ProjectsPage } from "./pages/ProjectsPage";
+import { ServiceAreasPage } from "./pages/ServiceAreasPage";
 import { ServiceDetailPage } from "./pages/ServiceDetailPage";
 import { ServicesPage } from "./pages/ServicesPage";
 import { ThankYouPage } from "./pages/ThankYouPage";
@@ -36,6 +37,7 @@ function App() {
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/service-areas" element={<ServiceAreasPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/category/:slug" element={<BlogCategoryPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />

@@ -20,7 +20,7 @@ const companyLinks = [
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
   { label: "Warranty", href: "/services#warranty" },
-  { label: "Service Areas", href: "/about#service-areas" },
+  { label: "Service Areas", href: "/service-areas/" },
 ];
 
 export function Footer() {

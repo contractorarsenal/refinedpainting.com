@@ -1,9 +1,10 @@
-// LOCATION PAGE CONTENT REGISTRY — architecture only, nothing here is
-// published yet.
+// LOCATION PAGE CONTENT REGISTRY — no city page is published yet.
 //
-// No route in App.tsx renders LocationPage, no entry exists in
-// public/sitemap.xml, and nothing links to /locations/* anywhere in the
-// site. That's deliberate: every city below is a verified service area
+// The /service-areas/ hub is live and lists every city in `serviceAreas`.
+// It only links to a city whose entry below is "ready". No route renders
+// LocationPage yet, so no city page is in the sitemap and nothing links to
+// one. City pages will live at /service-areas/<city>-wa/ (the original
+// WordPress URLs), see `cityPageHref`. That's deliberate: every city below is a verified service area
 // (cross-checked against `serviceAreas` in src/lib/content.ts), but none of
 // them has the city-specific substance a real location page needs —
 // unique local project photos, local testimonials, or any verified detail
@@ -18,9 +19,10 @@
 //      from the general project gallery.
 //   2. Clear every item out of `missingContentNeeded`.
 //   3. Flip `status` to "ready".
-//   4. Add a <Route path="/locations/:citySlug" element={<LocationPage />} />
-//      to App.tsx, add the URL to public/sitemap.xml, and link it from
-//      ServiceAreaStrip.tsx / the footer.
+//   4. Add a <Route path="/service-areas/:citySlug" element={<LocationPage />} />
+//      to App.tsx (the slug there is "<city>-wa"; match it against
+//      citySlug), and add the URL to getRoutes() in entry-server.tsx so it
+//      reaches the sitemap. The hub links to it automatically.
 // Steps 3 and 4 are intentionally not automated — a human should confirm
 // the content is actually ready, not just present.
 
@@ -93,6 +95,12 @@ export const priorityLocations: LocationContent[] = [
 
 export function getLocationBySlug(slug: string): LocationContent | undefined {
   return priorityLocations.find((l) => l.citySlug === slug);
+}
+
+/** Where a city page lives once it is built. This reuses the original
+ * WordPress URL pattern (e.g. /service-areas/bellevue-wa/). */
+export function cityPageHref(location: LocationContent): string {
+  return `/service-areas/${location.citySlug}-wa/`;
 }
 
 export function getReadyLocations(): LocationContent[] {
