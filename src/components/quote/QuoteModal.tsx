@@ -1,5 +1,5 @@
 import { ChevronLeft, X } from "lucide-react";
-import { useEffect, useRef, useState, type FormEvent, type RefObject } from "react";
+import { useCallback, useEffect, useRef, useState, type FormEvent, type RefObject } from "react";
 import { useWeb3FormsSubmit } from "../../hooks/useWeb3FormsSubmit";
 import { business, services, timelineOptions } from "../../lib/content";
 import { Mascot } from "../ui/Mascot";
@@ -43,10 +43,30 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
   const { status, errorMessage, submit, reset, isSubmitting } = useWeb3FormsSubmit({
     formType: "quote",
     service: serviceLabel,
+    // The modal shows its own success screen instead of navigating, so the
+    // page, URL and scroll position underneath stay exactly as they were.
+    onSuccess: "stay",
   });
+  const isSuccess = status === "success";
+  const successHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  const resetWizard = useCallback(() => {
+    setStep(1);
+    setData(initialQuoteData);
+    setErrors({});
+    reset();
+  }, [reset]);
 
   useLockBodyScroll(isOpen);
   useFocusTrap(dialogRef, isOpen, triggerRef);
+
+  // Reopening straight after a successful submission must start a fresh
+  // estimate, even if the delayed reset below was cancelled by the reopen.
+  // Declared before the preset effect so a preset still lands on the fresh form.
+  useEffect(() => {
+    if (isOpen && isSuccess) resetWizard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   // A service card's "Learn More" can preselect its service so the visitor
   // doesn't have to pick it again on step 2.
@@ -59,12 +79,18 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
   // Re-focus into the new step's content as the wizard advances — the trap
   // above only handles focus on open/close, not step transitions.
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || isSuccess) return;
     const timer = window.setTimeout(() => {
       dialogRef.current?.querySelector<HTMLElement>("input, button, textarea")?.focus();
     }, 50);
     return () => window.clearTimeout(timer);
-  }, [isOpen, step]);
+  }, [isOpen, step, isSuccess]);
+
+  // The form unmounts on success, so move focus to the confirmation heading
+  // (otherwise it would fall back to the page behind the dialog).
+  useEffect(() => {
+    if (isOpen && isSuccess) successHeadingRef.current?.focus();
+  }, [isOpen, isSuccess]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -78,12 +104,7 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
   // Reset the form a beat after the close animation finishes.
   useEffect(() => {
     if (isOpen) return;
-    const timer = window.setTimeout(() => {
-      setStep(1);
-      setData(initialQuoteData);
-      setErrors({});
-      reset();
-    }, 300);
+    const timer = window.setTimeout(resetWizard, 300);
     return () => window.clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
@@ -171,92 +192,121 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
           </button>
         </div>
 
-        <div className="shrink-0 border-b border-ink/10 px-5 py-4 sm:px-7">
-          <StepProgress current={step} />
-        </div>
+        {/* Always mounted so screen readers announce the text change. */}
+        <p role="status" aria-live="polite" className="sr-only">
+          {isSuccess ? "Your estimate request was sent. We'll be in touch about the next step." : ""}
+        </p>
 
-        <form
-          action={WEB3FORMS_ENDPOINT}
-          method="POST"
-          noValidate
-          className="flex flex-1 flex-col overflow-y-auto px-5 py-6 sm:px-7"
-          onSubmit={handleSubmit}
-        >
-          {/* Web3Forms delivery configuration — not shown to the visitor. */}
-          <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
-          <input type="hidden" name="subject" value="Refined Painting — New Estimate Request" />
-          <input type="hidden" name="from_name" value="Refined Painting Website" />
-          <input type="hidden" name="redirect" value={redirectUrl} />
-          {/* Web3Forms' own honeypot convention: left unfilled by real visitors, often auto-filled by bots. Web3Forms checks this server-side. */}
-          <input type="checkbox" name="botcheck" style={{ display: "none" }} tabIndex={-1} aria-hidden="true" />
-
-          {/* The accumulated wizard state, submitted as the real payload once the final step validates. */}
-          <input type="hidden" name="first_name" value={data.firstName} />
-          <input type="hidden" name="last_name" value={data.lastName} />
-          <input type="hidden" name="name" value={fullName} />
-          <input type="hidden" name="email" value={data.email} />
-          <input type="hidden" name="phone" value={data.phone} />
-          <input type="hidden" name="zip" value={data.zip} />
-          <input type="hidden" name="service" value={serviceLabel} />
-          <input type="hidden" name="timeline" value={timelineLabel} />
-          <input type="hidden" name="details" value={data.details || "(none provided)"} />
-
-          <div className="flex-1">
-            {step === 1 && <StepZip data={data} errors={errors} onUpdate={update} />}
-            {step === 2 && <StepService data={data} errors={errors} onUpdate={update} />}
-            {step === 3 && <StepTimeline data={data} errors={errors} onUpdate={update} />}
-            {step === 4 && <StepDetails data={data} onUpdate={update} />}
-            {step === 5 && <StepContact data={data} errors={errors} onUpdate={update} />}
-          </div>
-
-          {step === TOTAL_STEPS && status === "error" && errorMessage ? (
-            <div className="mt-6">
-              <FormSubmitError message={errorMessage} />
-            </div>
-          ) : null}
-
-          <div className="mt-8 flex items-center gap-3 border-t border-ink/10 pt-5">
-            {step > 1 ? (
-              <Button
-                type="button"
-                variant="outline-dark"
-                icon="none"
-                onClick={goBack}
-                disabled={isSubmitting}
-                className="shrink-0"
+        {isSuccess ? (
+          <div className="flex flex-1 flex-col items-center justify-center gap-5 overflow-y-auto px-5 py-10 text-center sm:px-7">
+            <Mascot variant="full" className="h-28 w-28" />
+            <div>
+              <h2
+                ref={successHeadingRef}
+                tabIndex={-1}
+                className="font-display text-4xl font-black uppercase leading-[0.95] text-ink outline-none sm:text-5xl"
               >
-                <ChevronLeft className="size-4" aria-hidden />
-                Back
-              </Button>
-            ) : null}
-            <Button
-              type="submit"
-              variant="primary"
-              size="lg"
-              icon={step === TOTAL_STEPS ? "none" : "arrow"}
-              disabled={isSubmitting}
-              aria-busy={isSubmitting}
-              className="ml-auto justify-center disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {step === TOTAL_STEPS
-                ? isSubmitting
-                  ? "Sending…"
-                  : status === "error"
-                    ? "Try Again"
-                    : "Request My Free Estimate"
-                : "Continue"}
+                You're All Set.
+              </h2>
+              <p className="mx-auto mt-3 max-w-sm text-base leading-relaxed text-ink/70">
+                Thanks for reaching out to Refined Painting. Our team will review your project and contact you about
+                the next step.
+              </p>
+            </div>
+            <Button type="button" variant="primary" size="lg" icon="none" onClick={onClose} className="mt-2 justify-center">
+              Done
             </Button>
           </div>
-          {step === TOTAL_STEPS ? (
-            <p className="mt-4 text-center text-xs text-ink/50">
-              No pressure. No spam. Just a clear next step for your project. Can't submit?{" "}
-              <a href={business.phoneHref} className="font-bold text-ink underline">
-                Call Now
-              </a>
-              .
-            </p>
-          ) : null}
-        </form>
+        ) : (
+          <>
+            <div className="shrink-0 border-b border-ink/10 px-5 py-4 sm:px-7">
+              <StepProgress current={step} />
+            </div>
+
+            <form
+              action={WEB3FORMS_ENDPOINT}
+              method="POST"
+              noValidate
+              className="flex flex-1 flex-col overflow-y-auto px-5 py-6 sm:px-7"
+              onSubmit={handleSubmit}
+            >
+              {/* Web3Forms delivery configuration — not shown to the visitor. */}
+              <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+              <input type="hidden" name="subject" value="Refined Painting — New Estimate Request" />
+              <input type="hidden" name="from_name" value="Refined Painting Website" />
+              <input type="hidden" name="redirect" value={redirectUrl} />
+              {/* Web3Forms' own honeypot convention: left unfilled by real visitors, often auto-filled by bots. Web3Forms checks this server-side. */}
+              <input type="checkbox" name="botcheck" style={{ display: "none" }} tabIndex={-1} aria-hidden="true" />
+
+              {/* The accumulated wizard state, submitted as the real payload once the final step validates. */}
+              <input type="hidden" name="first_name" value={data.firstName} />
+              <input type="hidden" name="last_name" value={data.lastName} />
+              <input type="hidden" name="name" value={fullName} />
+              <input type="hidden" name="email" value={data.email} />
+              <input type="hidden" name="phone" value={data.phone} />
+              <input type="hidden" name="zip" value={data.zip} />
+              <input type="hidden" name="service" value={serviceLabel} />
+              <input type="hidden" name="timeline" value={timelineLabel} />
+              <input type="hidden" name="details" value={data.details || "(none provided)"} />
+
+              <div className="flex-1">
+                {step === 1 && <StepZip data={data} errors={errors} onUpdate={update} />}
+                {step === 2 && <StepService data={data} errors={errors} onUpdate={update} />}
+                {step === 3 && <StepTimeline data={data} errors={errors} onUpdate={update} />}
+                {step === 4 && <StepDetails data={data} onUpdate={update} />}
+                {step === 5 && <StepContact data={data} errors={errors} onUpdate={update} />}
+              </div>
+
+              {step === TOTAL_STEPS && status === "error" && errorMessage ? (
+                <div className="mt-6">
+                  <FormSubmitError message={errorMessage} />
+                </div>
+              ) : null}
+
+              <div className="mt-8 flex items-center gap-3 border-t border-ink/10 pt-5">
+                {step > 1 ? (
+                  <Button
+                    type="button"
+                    variant="outline-dark"
+                    icon="none"
+                    onClick={goBack}
+                    disabled={isSubmitting}
+                    className="shrink-0"
+                  >
+                    <ChevronLeft className="size-4" aria-hidden />
+                    Back
+                  </Button>
+                ) : null}
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="lg"
+                  icon={step === TOTAL_STEPS ? "none" : "arrow"}
+                  disabled={isSubmitting}
+                  aria-busy={isSubmitting}
+                  className="ml-auto justify-center disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {step === TOTAL_STEPS
+                    ? isSubmitting
+                      ? "Sending…"
+                      : status === "error"
+                        ? "Try Again"
+                        : "Request My Free Estimate"
+                    : "Continue"}
+                </Button>
+              </div>
+              {step === TOTAL_STEPS ? (
+                <p className="mt-4 text-center text-xs text-ink/50">
+                  No pressure. No spam. Just a clear next step for your project. Can't submit?{" "}
+                  <a href={business.phoneHref} className="font-bold text-ink underline">
+                    Call Now
+                  </a>
+                  .
+                </p>
+              ) : null}
+            </form>
+          </>
+        )}
       </div>
     </div>
   );
