@@ -68,7 +68,7 @@ export function CityPageLayout({ cityName, intro, neighborhoods, projects, testi
           <h2 className="mt-2 font-display text-2xl font-extrabold uppercase tracking-wide text-ink sm:text-3xl">
             Painting Services for {cityName} Homeowners
           </h2>
-          <ul className="mt-8 flex flex-wrap gap-4 sm:gap-5">
+          <ul className="mt-8 flex flex-wrap justify-center gap-4 sm:gap-5">
             {photoCardServices.map((service, index) => (
               <Reveal
                 key={service.id}
