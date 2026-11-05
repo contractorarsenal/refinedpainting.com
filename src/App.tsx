@@ -12,7 +12,6 @@ import { AboutPage } from "./pages/AboutPage";
 import { BlogCategoryPage } from "./pages/BlogCategoryPage";
 import { BlogPage } from "./pages/BlogPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
-import { CityLayoutPreviewPage } from "./pages/CityLayoutPreviewPage";
 import { ContactPage } from "./pages/ContactPage";
 import { FaqPage } from "./pages/FaqPage";
 import { HomePage } from "./pages/HomePage";
@@ -40,7 +39,6 @@ function App() {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/service-areas" element={<ServiceAreasPage />} />
-            <Route path="/service-areas/layout-preview" element={<CityLayoutPreviewPage />} />
             <Route path="/service-areas/:citySlug" element={<LocationPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/category/:slug" element={<BlogCategoryPage />} />

@@ -29,8 +29,3 @@ export function getRoutes(): string[] {
   return [...staticRoutes, ...cityRoutes, ...serviceRoutes, ...blogPostRoutes, ...blogCategoryRoutes];
 }
 
-/** TEMPORARY owner-approval preview. Prerendered like /thank-you (so the static
- * host serves it) but never in the sitemap. Return [] before merging. */
-export function getLayoutPreviewRoutes(): string[] {
-  return ["/service-areas/layout-preview"];
-}

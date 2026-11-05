@@ -49,13 +49,12 @@ approve or replace.
    `src/content/locations/locations.ts` is set to "ready". A page with no approved
    material beyond the standard sections should not be published.
 
-## Layout preview
-The shared layout is previewed with fake sample content at
-`/service-areas/layout-preview/` on the PR's Cloudflare preview (noindex, not in the
-sitemap, not linked). Sections, in order: heading and estimate buttons, Our Services
-(photo cards), Neighborhoods (one section each, only when approved), Recent Projects (only
-when approved), a testimonial (only when approved), a link back to the hub, and the closing
-CTA. The preview page is temporary and is removed before the PR is merged.
+## Layout
+The shared layout was reviewed from a temporary sample page, which has since been removed
+(its URL returns 404). Sections, in order: heading and estimate buttons, Our Services (the
+homepage's outlined photo cards, last row centered), Neighborhoods (one section each, only
+when approved), Recent Projects (only when approved), a testimonial (only when approved), a
+link back to the hub, and the closing CTA. Screenshots are in the PR comments.
 
 ## Decisions for Jay
 1. Is the layout approved (or what should change)?
