@@ -52,7 +52,7 @@ export function FinalCTA({ tone = "red" }: FinalCTAProps) {
         <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:gap-6">
           <div className="flex items-center gap-2">
             <Stars fillClassName="fill-warm-white text-warm-white" />
-            <span className="text-sm font-semibold text-warm-white/90">
+            <span className="text-balance text-sm font-semibold text-warm-white/90">
               {reviewSummary}
             </span>
           </div>

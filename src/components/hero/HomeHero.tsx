@@ -143,7 +143,7 @@ export function HomeHero() {
 
         <div className="relative flex items-center gap-2.5 pt-1">
           <Stars />
-          <span className="text-sm font-bold text-warm-white">{reviewSummary}</span>
+          <span className="text-balance text-sm font-bold text-warm-white">{reviewSummary}</span>
         </div>
       </Container>
     </section>
