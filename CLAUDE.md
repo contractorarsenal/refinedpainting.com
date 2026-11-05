@@ -202,8 +202,8 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 - Same submit path as the contact form (`hooks/useWeb3FormsSubmit.ts`), but the wizard uses `onSuccess: "stay"`: after a confirmed Web3Forms success it shows an in-modal "You're All Set" screen (Chippy, Done button) and does **not** navigate. The contact form still redirects to `/thank-you`.
 
 ### Web3Forms
-- Access key is hardcoded in **two places**: `src/components/sections/ContactForm.tsx` and `src/components/quote/QuoteModal.tsx`. A third copy, the endpoint, is in `src/hooks/useWeb3FormsSubmit.ts`.
-- Web3Forms access keys are public by design. Still, do not swap the key or create a second form. If the key is rotated, update both files together.
+- The Contact page (`src/components/sections/ContactForm.tsx`) and the estimate wizard (`src/components/quote/QuoteModal.tsx`) each hardcode their own access key — two separate Web3Forms forms, distinguished in Make by `form_source` as well. The shared endpoint is in `src/hooks/useWeb3FormsSubmit.ts`.
+- Web3Forms access keys are public by design. Still, do not merge the two forms back into one key. If a key is rotated, update only that form's key (its `access_key` payload field and its hidden `access_key` input).
 - The lead destination inbox is configured in the Web3Forms dashboard, not in code. **[unverified]**
 - Do not print the key value in chat or new files.
 
@@ -302,7 +302,7 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 4. **Public preview URLs.** `refinedpainting-com.pages.dev` and per-PR `*.refinedpainting-com.pages.dev` are public. Duplicate-content risk if indexed. Robots or noindex on these is **[unverified]**.
 5. **No branch protection on `main`.** Direct pushes deploy.
 6. **Merged branch not deleted:** `feat/analytics-clarity-seo-fixes` (fully merged into `main`).
-7. **Web3Forms key duplicated** in two components, plus the endpoint in a hook. Rotation must touch all of them.
+7. **Two Web3Forms keys, one shared endpoint.** Contact and the estimate wizard each hardcode their own key (§7); the endpoint in the shared hook (`src/hooks/useWeb3FormsSubmit.ts`) is the only thing both forms have in common.
 8. **Claims still needing proof:** the 5-year warranty terms and the Google Verified and Nextdoor badges. (Rating and count come from the Google listing. Licensed, insured and EPA Lead-Safe are owner-confirmed, with no numbers on file.)
 9. **Rating is visible text only.** There is no `aggregateRating` markup (removed by decision). See §9.
 10. **13 city pages unpublished** by design (the hub and the Seattle page are live). The Seattle page has no local-project or testimonial section because no Seattle project location is verified; see `PROJECT-STATUS.md`.

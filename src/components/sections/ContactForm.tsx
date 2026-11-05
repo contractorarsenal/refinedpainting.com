@@ -6,9 +6,9 @@ import { Button } from "../ui/Button";
 import { FormField as Field, formInputClasses as inputClasses } from "../ui/FormField";
 import { FormSubmitError } from "../ui/FormSubmitError";
 
-// Same existing Refined Painting Web3Forms form used by the estimate
-// wizard — do not swap this key or create a second form.
-const WEB3FORMS_ACCESS_KEY = "5325d12a-69cf-4914-9eed-810c0410edf5";
+// Contact-page-specific Web3Forms form, separate from the estimate
+// wizard's key, so the two lead sources can be told apart in Make.
+const WEB3FORMS_ACCESS_KEY = "805062ae-0e76-4770-87cd-891b61b5760f";
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 interface ContactFormData {
