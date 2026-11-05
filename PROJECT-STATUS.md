@@ -111,3 +111,9 @@ No Search Console access, and the archive's index was not reachable for traffic 
 
 **Build order:** Bellevue, Kirkland, Redmond, Sammamish (the ad-targeted cities, and their original URLs existed), then whichever city the owner has the most tagged work in. Seattle follows the same rule. City pages use the original URL pattern `/service-areas/<city>-wa/`. Wiring steps are in the header of `src/content/locations/locations.ts`.
 
+## City-page layout (branch `feat/city-page-layout`)
+- **Done:** the visible "Home › Service Areas" breadcrumb is removed from the hub (the BreadcrumbList markup stays). A shared city-page layout (`CityPageLayout`) is built, with the homepage's outlined photo cards for "Our Services" (extracted into `ServicePhotoCard`; the homepage look is unchanged). The registry now has an entry for all 14 cities, all "needs-content". The route `/service-areas/:citySlug` and the sitemap list read the registry, so a city goes live only when marked "ready".
+- **Not published:** no city page exists. Every city URL is still a 404, and the hub links to none.
+- **Waiting on Jay:** layout approval, neighborhood names per city, project-to-city assignments, local review and context. The full proposal is `docs/CITY-PAGE-PROPOSAL.md`.
+- **Layout preview:** the temporary sample page was used for review and has been removed. Its URL (`/service-areas/layout-preview/`) returns 404, and it is not in the sitemap. The last row of service cards is centered, matching the homepage. The hub has no visible breadcrumb.
+
