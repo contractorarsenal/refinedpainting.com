@@ -48,7 +48,8 @@ Redirects live in `public/_redirects` (Cloudflare Pages). Each is a single-hop 3
 
 **Left as 404, owner decision (no destination covers the old page's topic):**
 - `/warranty/`: no warranty page exists. Warranty terms are also unconfirmed.
-- `/service-areas/` and 15 city pages (`/service-areas/{seattle, bellevue, kirkland, redmond, sammamish, bothell, everett, kenmore, lake-stevens, lynnwood, marysville, medina, mercer-island, shoreline, palmer}-wa/`): location pages are intentionally unpublished. Palmer is not in the site's city list.
+- **`/service-areas/` hub:** restored as a new page listing all 14 approved cities (not a redirect). It links to a city only once that city page exists.
+- **15 city pages** (`/service-areas/{seattle, bellevue, kirkland, redmond, sammamish, bothell, everett, kenmore, lake-stevens, lynnwood, marysville, medina, mercer-island, shoreline, palmer}-wa/`): still 404. No city has verified local material yet (see "Service-area hub and city pages"). Palmer is not in the site's city list.
 - Sub-service pages the destination does not cover: `popcorn-ceiling-removal`, `garage-door-painting`, `trim-fascia-painting` (fascia not covered), `baseboard`, `finish-carpentry`.
 - 13 blog posts: none match the three posts on the site. Options per post: republish, redirect to a genuinely matching page, or leave as 404. Search Console data would show which carry traffic.
 
@@ -94,5 +95,19 @@ Do not delete or merge: `ace/change/*`, `feat/analytics-clarity-seo-fixes`, `pre
 No Search Console access, and the archive's index was not reachable for traffic data, so the order below is by page type, not by traffic. Export Search Console's Pages report (last 12 months) to confirm.
 1. **Restore after owner-approved content:** `/warranty/` (high-intent, but warranty terms are unconfirmed; the archived page is titled "Painting Warranty | 5-Year Coverage"). Restore only with owner-signed terms.
 2. **Restore as real articles after a fact check (no redirect):** `/blog/best-time-to-paint-your-home-exterior-in-seattle/`, `/blog/kitchen-cabinet-refinishing-process/`, `/blog/how-to-choose-interior-paint-colors-for-your-home/`. These archived copies exist. A redirect to a service page would not match what the article answered.
-3. **One real Seattle service-area page, if wanted:** the archive shows `/service-areas/seattle-wa/` ("Painters in Seattle WA") existed. Build one only from verified local content, not a template. Do not build the other 13 city pages as thin copies.
+3. **Real city pages, only from verified local content:** the first one is covered in "Service-area hub and city pages" below. Seattle's archived page (`/service-areas/seattle-wa/`) existed; it was one of several near-identical ~2,500-word city pages, so it should not be restored as it was. Original note: the archive shows `/service-areas/seattle-wa/` ("Painters in Seattle WA") existed. Build one only from verified local content, not a template. Do not build the other 13 city pages as thin copies.
 4. **Leave as 404:** `/service-areas/palmer-wa/` (Palmer is not in the site's city list), the other city pages, and sub-service pages with no matching content or archived copy (popcorn ceiling removal, garage door painting, trim and fascia, baseboard, finish carpentry), plus the remaining blog posts until a deliberate decision.
+
+## Service-area hub and city pages (2026-11-05, branch `feat/service-areas-hub`)
+**Shipped:** `/service-areas/` lists the 14 approved website cities (Seattle included) from `serviceAreas` in `content.ts`. "View All Service Areas" and the footer link point to it. `/about#service-areas` still works (the About and Contact strip keeps its id). The page is in the sitemap with a trailing-slash canonical. No city is a link yet. Ad targeting is not mentioned or changed.
+
+**No pilot city page was built.** I checked the project photo source map (`docs/SOURCE_TO_ASSET_MAP.md`), the project registry, and the archived old WordPress city pages. No project is tagged to a city (the Drive folders are "House 1" to "House 31" with no location), no testimonial is tied to a city, and photos must not be placed in a city by inference. The archived Bellevue, Kirkland, Redmond, Sammamish, Seattle and Bothell pages were each about 2,500 words of the same shape (titles "Painters in X WA | ..."), so restoring them would recreate the thin, swapped-name pages we are avoiding.
+
+**What the first city page needs (from the owner):**
+1. Which Drive "House" folders are in that city. Three or more projects is a good minimum. City name only, never street numbers (photos with readable numbers were excluded on purpose).
+2. A real review or testimonial from a customer in that city, with permission to show it.
+3. Verified local context the business can speak to: common home styles or eras, HOA or historic-district rules it has dealt with, and anything distinct about scheduling there.
+4. Confirmation the page should go live.
+
+**Build order:** Bellevue, Kirkland, Redmond, Sammamish (the ad-targeted cities, and their original URLs existed), then whichever city the owner has the most tagged work in. Seattle follows the same rule. City pages use the original URL pattern `/service-areas/<city>-wa/`. Wiring steps are in the header of `src/content/locations/locations.ts`.
+

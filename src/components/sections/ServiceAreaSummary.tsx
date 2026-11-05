@@ -29,7 +29,7 @@ export function ServiceAreaSummary() {
         </div>
 
         <Link
-          to="/about#service-areas"
+          to="/service-areas/"
           className="mt-8 inline-flex items-center gap-1.5 border-b-2 border-crest pb-1 text-sm font-bold uppercase tracking-wide text-ink transition-colors hover:text-crest"
         >
           View All Service Areas
