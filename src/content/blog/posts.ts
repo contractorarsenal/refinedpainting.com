@@ -2,10 +2,15 @@ import type { ComponentType } from "react";
 import interiorPrepRoom from "../../assets/images/projects/interior-prep-room.webp";
 import interiorBrightFinished from "../../assets/images/projects/interior-bright-finished.webp";
 import cabinetsSageGreen from "../../assets/images/projects/cabinets-sage-green.webp";
+import { coverPhoto } from "../projects/projects";
 import { CostToPaintKitchenCabinetsSeattle } from "./posts/CostToPaintKitchenCabinetsSeattle";
+import { HowOftenToRepaintExteriorSeattle } from "./posts/HowOftenToRepaintExteriorSeattle";
 import { InteriorPaintingCostSeattle } from "./posts/InteriorPaintingCostSeattle";
 import { WhatHappensDuringPaintingEstimate } from "./posts/WhatHappensDuringPaintingEstimate";
 import type { BlogCategorySlug } from "./categories";
+
+// An existing project photo used as an illustration for the article.
+const exteriorHeroPhoto = coverPhoto("blue-craftsman-screened-porch");
 
 export interface BlogPost {
   slug: string;
@@ -101,6 +106,32 @@ export const blogPosts: BlogPost[] = [
       { id: "next-step", label: "Getting a Price for Your Kitchen" },
     ],
     Body: CostToPaintKitchenCabinetsSeattle,
+  },
+  {
+    slug: "how-often-should-you-repaint-your-homes-exterior-in-seattle",
+    title: "How Often Should You Repaint Your Home's Exterior in Seattle?",
+    category: "painting-guides",
+    excerpt:
+      "Siding type, weather exposure and visible wear all affect when a Seattle home is ready for exterior paint. Here is how to read your own house.",
+    dek: "The calendar is only a starting point. Here is how siding, weather and visible wear tell you when it is time to repaint.",
+    publishDate: "2026-11-05",
+    readTimeMinutes: 4,
+    heroImage: {
+      src: exteriorHeroPhoto.lg,
+      alt: exteriorHeroPhoto.alt,
+    },
+    relatedService: { label: "Exterior Painting", href: "/services/exterior-painting" },
+    metaDescription:
+      "How often to repaint a Seattle home's exterior depends on siding, weather exposure and visible wear. Learn what to look for before you plan a repaint.",
+    toc: [
+      { id: "siding", label: "Start With What Your Siding Is" },
+      { id: "weather", label: "Weather Exposure Is Not the Same on Every Wall" },
+      { id: "wear", label: "Visible Wear: What to Look For" },
+      { id: "prep", label: "Why Prep Decides How Long a Repaint Lasts" },
+      { id: "timing", label: "When in the Year to Repaint" },
+      { id: "next-step", label: "Getting Help Deciding" },
+    ],
+    Body: HowOftenToRepaintExteriorSeattle,
   },
 ];
 

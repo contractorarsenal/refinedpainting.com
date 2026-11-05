@@ -80,6 +80,18 @@ function slugFor(cityName: string): string {
 
 // Per-city content, keyed by citySlug. A city absent here stays "needs-content".
 const cityContent: Record<string, Partial<LocationContent>> = {
+  // Kirkland: built from the standard sections only. No Kirkland neighborhood
+  // coverage, project location or review is confirmed yet, so those sections
+  // are omitted and the page carries no local claims. Add them when Jay confirms.
+  kirkland: {
+    status: "ready",
+    missingContentNeeded: [],
+    uniqueLocalContext:
+      "Refined Painting works with Kirkland homeowners on interior and exterior painting, cabinet refinishing, deck and fence staining, and carpentry repairs.",
+    servicesIntro:
+      "Whether you are refreshing a single room or repainting the outside of your house, here is what we can do for your Kirkland home. We also paint commercial spaces. Choose a service to see what is included.",
+  },
+
   // Seattle: approved by the owner, who confirmed Refined Painting serves these
   // six neighborhoods. No local projects or testimonial are verified yet, so
   // those sections are skipped. Website coverage only; ad targeting is separate.
