@@ -124,3 +124,17 @@ No Search Console access, and the archive's index was not reachable for traffic 
 - **Still unpublished:** the other 13 city pages. Ad targeting is unchanged and is not mentioned on the page; Seattle's website coverage is separate from it.
 - **To add later:** tagged Seattle projects (Drive "House" folders confirmed to be in Seattle, city name only), a permitted Seattle review, and any local context Jay can speak to.
 
+## Kirkland page and Seattle exterior article (branch `feat/kirkland-page-and-seattle-article`)
+- **Kirkland page** `/service-areas/kirkland-wa/` (the original URL) is built on the Seattle layout: heading, services intro with photo cards, How to Request an Estimate, closing CTA. The hub links to it and it is in the sitemap. **It has no neighborhoods, no projects and no testimonial,** so it is the same as Seattle minus the neighborhood section and carries no local claims. That makes it thin. Setting Kirkland back to `needs-content` in the registry unpublishes it.
+- **Why no Kirkland project:** nothing in the project registry, `docs/SOURCE_TO_ASSET_MAP.md`, the Drive-folder names, or the client materials checked (Google post drafts, review folders, handoff notes) says a project was in Kirkland. The Google post drafts only mention Kirkland as a service city. Photos and filenames were not used to guess a location.
+- **To add Kirkland projects, Jay needs to confirm for each:** which Drive "House" folder, that it was in Kirkland (city only, never a street number), and the scope (what was painted or refinished). A Kirkland review with permission to show it is optional. **Neighborhoods:** only the ones Jay confirms (the suggestions in `docs/CITY-PAGE-PROPOSAL.md` are not confirmed).
+- **Seattle exterior article** restored at its original URL `/blog/how-often-should-you-repaint-your-homes-exterior-in-seattle/`, and listed on the Blog index. **It is a rewrite.** The original text could not be recovered: no WordPress export exists in the workspace, and the web archive has no snapshot of that URL. The rewrite covers siding, weather exposure, visible wear, prep and timing, with no pricing, credentials or project claims. It links to `/service-areas/seattle-wa/`, the exterior painting page and the estimate article. Owner review is needed. Its published date is the restore date, not the original date (unknown).
+- **No redirect rule** touches either URL (`public/_redirects` has none for `/blog/` or `/service-areas/`).
+
+## Search Console findings (export dated 2026-11-05, in `Downloads/`; not committed)
+Use these to order future work. Clicks / impressions / average position, last period in the export.
+- **Article restored this round:** the exterior repainting article, 3 clicks, 140 impressions, position 6.5 (the strongest blog page).
+- **City pages by impressions** (candidates after Seattle and Kirkland): Kenmore 5,766 (position 8.8), Kirkland 3,149 (38.4), Lynnwood 3,046 (19.1), Shoreline 2,703 (23.8), Mercer Island 2,623 (25.9), Bellevue 2,240 (43.1), Everett 1,874 (22.6), Marysville 1,570 impressions with 3 clicks (18.9), Sammamish 1,719 (18.6). Palmer had 2 clicks on 56 impressions (not an approved city).
+- **Other legacy URLs with clicks:** `/portfolio/` 5 clicks (already redirected), `/warranty/` 1 click on 142 impressions (position 8.1), `/blog/kitchen-cabinet-refinishing-process/` 1 click.
+- Search Console also reports older URL variants (for example `/service-areas/painters-redmond-wa`, `/about-us`) as pages with redirects. They were not reviewed.
+
