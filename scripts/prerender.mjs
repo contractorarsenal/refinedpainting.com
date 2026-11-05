@@ -16,7 +16,7 @@ const distDir = join(projectRoot, "dist");
 const templatePath = join(distDir, "index.html");
 const SITE_URL = "https://refinedpainting.co";
 
-const { render, getRoutes } = await import(join(projectRoot, "dist-ssr", "entry-server.js"));
+const { render, getRoutes, getLayoutPreviewRoutes } = await import(join(projectRoot, "dist-ssr", "entry-server.js"));
 
 const rawTemplate = await readFile(templatePath, "utf-8");
 
@@ -103,6 +103,17 @@ const thankYouPath = join(distDir, "thank-you", "index.html");
 await mkdir(dirname(thankYouPath), { recursive: true });
 await writeFile(thankYouPath, thankYouPage, "utf-8");
 console.log(`Wrote dist/thank-you/index.html (${thankYouPage.length.toLocaleString()} bytes)`);
+
+// TEMPORARY owner-approval preview of the shared city-page layout (see
+// CityLayoutPreviewPage). Written like /thank-you: a real file, never in the
+// sitemap. getLayoutPreviewRoutes() returns [] once the preview is removed.
+for (const route of getLayoutPreviewRoutes()) {
+  const page = renderPage(route);
+  const outPath = outputPathFor(route);
+  await mkdir(dirname(outPath), { recursive: true });
+  await writeFile(outPath, page, "utf-8");
+  console.log(`Wrote ${outPath.replace(projectRoot + "/", "")} (layout preview, not in sitemap)`);
+}
 
 console.log(`Prerendered ${results.length} routes:`);
 for (const r of results) {

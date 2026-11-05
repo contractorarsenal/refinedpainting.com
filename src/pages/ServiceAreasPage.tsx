@@ -1,6 +1,5 @@
 import { ArrowRight, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Breadcrumbs } from "../components/blog/Breadcrumbs";
 import { useQuoteModal } from "../components/quote/QuoteModalContext";
 import { PageSEO } from "../components/seo/PageSEO";
 import { FinalCTA } from "../components/sections/FinalCTA";
@@ -13,6 +12,8 @@ import { business, serviceAreas, services, serviceSlugs, SITE_URL } from "../lib
 const chipClasses =
   "flex items-center gap-2 border border-ink/15 bg-cream-light px-4 py-3 text-sm font-bold text-ink/80";
 
+// No visible breadcrumb trail on this page, by design. The BreadcrumbList
+// markup below still describes the page's place in the site.
 /** Hub for the full website service-area list (`serviceAreas` in content.ts).
  * Every approved city is listed; a city is only a link once its page exists
  * and is marked "ready" in content/locations/locations.ts. */
@@ -40,8 +41,7 @@ export function ServiceAreasPage() {
       />
       <section className="bg-cream pb-10 pt-28 sm:pt-32 lg:pb-12 lg:pt-36">
         <Container className="max-w-2xl">
-          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Service Areas" }]} />
-          <Reveal className="mt-6">
+          <Reveal>
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Where We Work</span>
             <h1 className="mt-3 text-balance font-display text-4xl font-black uppercase leading-[0.96] text-ink sm:text-5xl">
               Painting Service Areas

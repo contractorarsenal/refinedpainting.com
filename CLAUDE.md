@@ -104,11 +104,11 @@ Run only the checks relevant to a change. A full build takes longer, and lint is
 - `public/`: `robots.txt` (points to `https://refinedpainting.co/sitemap.xml`), `favicon.svg`, `refined-painting-logo.webp`
 
 ### Routes (from `src/App.tsx`)
-`/`, `/services`, `/services/:slug`, `/projects`, `/about`, `/service-areas`, `/blog`, `/blog/category/:slug`, `/blog/:slug`, `/contact`, `/faq`, `/thank-you`, and `*` (404).
+`/`, `/services`, `/services/:slug`, `/projects`, `/about`, `/service-areas`, `/service-areas/:citySlug` (ready cities only), `/blog`, `/blog/category/:slug`, `/blog/:slug`, `/contact`, `/faq`, `/thank-you`, and `*` (404).
 
 Service detail pages come from `serviceSlugs` in `src/lib/content.ts`.
 
-`/service-areas/` is a live hub listing all 14 approved cities. **City pages are intentionally unpublished**: they will live at `/service-areas/<city>-wa/` (the original WordPress URLs). The registry header in `src/content/locations/locations.ts` says what each needs (tagged real projects, a real local testimonial, verified local context) and that a human must confirm it before any route, sitemap entry or link is added. Never clone pages with city names swapped, and never infer a project's city from a photo. The hub links only to cities marked "ready".
+`/service-areas/` is a live hub listing all 14 approved cities. **City pages are intentionally unpublished**: they will live at `/service-areas/<city>-wa/` (the original WordPress URLs). The registry header in `src/content/locations/locations.ts` says what each needs (tagged real projects, a real local testimonial, verified local context) and that a human must confirm it before any route, sitemap entry or link is added. Never clone pages with city names swapped, and never infer a project's city from a photo. The hub links only to cities marked "ready". City pages share `CityPageLayout`; "Our Services" there reuses the homepage `ServicePhotoCard` (service illustrations, never labeled as local projects). Neighborhoods are sections inside a city page and need Jay's approval for each name. The temporary `/service-areas/layout-preview/` page is for owner approval only and must be removed before merge.
 
 ---
 

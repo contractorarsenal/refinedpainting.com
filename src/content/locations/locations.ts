@@ -1,30 +1,33 @@
 // LOCATION PAGE CONTENT REGISTRY — no city page is published yet.
 //
 // The /service-areas/ hub is live and lists every city in `serviceAreas`.
-// It only links to a city whose entry below is "ready". No route renders
-// LocationPage yet, so no city page is in the sitemap and nothing links to
-// one. City pages will live at /service-areas/<city>-wa/ (the original
-// WordPress URLs), see `cityPageHref`. That's deliberate: every city below is a verified service area
-// (cross-checked against `serviceAreas` in src/lib/content.ts), but none of
-// them has the city-specific substance a real location page needs —
-// unique local project photos, local testimonials, or any verified detail
-// that isn't identical from one city to the next. Publishing now would mean
-// swapping a city name into otherwise-identical text across 4+ pages,
-// exactly the doorway-page pattern Google penalizes and the implementation
-// brief explicitly said not to build.
+// It links to a city only when that city's entry below is "ready". The route
+// /service-areas/:citySlug and the sitemap list are already wired to this
+// registry, so flipping a city to "ready" is what publishes it. Until then
+// its URL stays a 404 (never a placeholder page), and nothing links to it.
+// City pages live at /service-areas/<city>-wa/ (the original WordPress URLs),
+// see `cityPageHref`.
 //
-// To actually launch a city's page:
-//   1. Fill in at least `localProjectImages` or `localTestimonial` (ideally
-//      both) with real, verifiable material — tagged by city, not reused
-//      from the general project gallery.
-//   2. Clear every item out of `missingContentNeeded`.
-//   3. Flip `status` to "ready".
-//   4. Add a <Route path="/service-areas/:citySlug" element={<LocationPage />} />
-//      to App.tsx (the slug there is "<city>-wa"; match it against
-//      citySlug), and add the URL to getRoutes() in entry-server.tsx so it
-//      reaches the sitemap. The hub links to it automatically.
-// Steps 3 and 4 are intentionally not automated — a human should confirm
-// the content is actually ready, not just present.
+// Every city below is a verified website service area (cross-checked against
+// `serviceAreas` in src/lib/content.ts), but none has the city-specific
+// substance a real page needs: unique local project photos, local
+// testimonials, or verified detail that isn't identical from one city to the
+// next. Swapping a city name into otherwise-identical text across 14 pages is
+// the doorway-page pattern Google penalizes, so it is not done here.
+//
+// To launch a city's page:
+//   1. Get owner approval for the content (see docs/CITY-PAGE-PROPOSAL.md):
+//      real projects tagged to the city, a permitted local testimonial,
+//      verified local context, and any neighborhood names.
+//   2. Fill in `localProjectImages` and/or `localTestimonial`,
+//      `uniqueLocalContext`, and `neighborhoods`.
+//   3. Clear every item out of `missingContentNeeded`.
+//   4. Flip `status` to "ready".
+// Step 4 is deliberately manual: a human confirms the content is actually
+// ready, not just present. Do not assign a project to a city by guessing
+// from a photo, and keep website coverage separate from ad targeting.
+
+import { serviceAreas } from "../../lib/content";
 
 export interface LocationProjectImage {
   src: string;
@@ -34,6 +37,15 @@ export interface LocationProjectImage {
 export interface LocationTestimonial {
   quote: string;
   source: string;
+}
+
+/** A neighborhood section on a city page. Only add one after the owner has
+ * approved both the name and the text. A neighborhood is a section inside its
+ * city's page, never a page of its own, and listing one is a coverage claim. */
+export interface LocationNeighborhood {
+  name: string;
+  /** Verified, owner-approved local note. No generic filler. */
+  description: string;
 }
 
 export interface LocationContent {
@@ -48,6 +60,8 @@ export interface LocationContent {
   localTestimonial?: LocationTestimonial;
   /** Verified local context (housing stock, neighborhoods actually served, etc.) distinct from boilerplate. Omitted until supplied. */
   uniqueLocalContext?: string;
+  /** Owner-approved neighborhoods served in this city. Empty until approved. */
+  neighborhoods?: LocationNeighborhood[];
   /** What's required before this page can go live — cleared out as items are verified. */
   missingContentNeeded: string[];
 }
@@ -58,43 +72,23 @@ const commonMissingContent = [
   "Verified local context the business can actually speak to (common home styles/eras, HOA or historic-district considerations, typical scheduling lead time for this area) — not generic Seattle-area copy with the city name swapped in",
 ];
 
-export const priorityLocations: LocationContent[] = [
-  {
-    citySlug: "kirkland",
-    cityName: "Kirkland",
-    verifiedServiceArea: true,
-    status: "needs-content",
-    localProjectImages: [],
-    missingContentNeeded: [...commonMissingContent],
-  },
-  {
-    citySlug: "bellevue",
-    cityName: "Bellevue",
-    verifiedServiceArea: true,
-    status: "needs-content",
-    localProjectImages: [],
-    missingContentNeeded: [...commonMissingContent],
-  },
-  {
-    citySlug: "redmond",
-    cityName: "Redmond",
-    verifiedServiceArea: true,
-    status: "needs-content",
-    localProjectImages: [],
-    missingContentNeeded: [...commonMissingContent],
-  },
-  {
-    citySlug: "bothell",
-    cityName: "Bothell",
-    verifiedServiceArea: true,
-    status: "needs-content",
-    localProjectImages: [],
-    missingContentNeeded: [...commonMissingContent],
-  },
-];
+function slugFor(cityName: string): string {
+  return cityName.toLowerCase().replace(/\s+/g, "-");
+}
+
+// One entry per approved website city (`serviceAreas`), all "needs-content".
+// Seattle's website coverage is its own decision and is unrelated to ad targeting.
+export const cityLocations: LocationContent[] = serviceAreas.map((cityName) => ({
+  citySlug: slugFor(cityName),
+  cityName,
+  verifiedServiceArea: true,
+  status: "needs-content",
+  localProjectImages: [],
+  missingContentNeeded: [...commonMissingContent],
+}));
 
 export function getLocationBySlug(slug: string): LocationContent | undefined {
-  return priorityLocations.find((l) => l.citySlug === slug);
+  return cityLocations.find((l) => l.citySlug === slug);
 }
 
 /** Where a city page lives once it is built. This reuses the original
@@ -104,5 +98,5 @@ export function cityPageHref(location: LocationContent): string {
 }
 
 export function getReadyLocations(): LocationContent[] {
-  return priorityLocations.filter((l) => l.status === "ready");
+  return cityLocations.filter((l) => l.status === "ready");
 }

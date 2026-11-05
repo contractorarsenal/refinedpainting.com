@@ -1,6 +1,7 @@
 import { renderToString } from "react-dom/server";
 import { Document } from "./entry-server/Document";
 import { getCategoriesWithPosts, blogPosts } from "./content/blog/posts";
+import { getReadyLocations, cityPageHref } from "./content/locations/locations";
 import { serviceSlugs } from "./lib/content";
 
 /** Renders the app for a single fixed URL. No browser APIs are touched —
@@ -23,5 +24,13 @@ export function getRoutes(): string[] {
   const serviceRoutes = Object.values(serviceSlugs).map((slug) => `/services/${slug}`);
   const blogPostRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
   const blogCategoryRoutes = getCategoriesWithPosts().map((slug) => `/blog/category/${slug}`);
-  return [...staticRoutes, ...serviceRoutes, ...blogPostRoutes, ...blogCategoryRoutes];
+  // City pages exist only once marked "ready" in the location registry.
+  const cityRoutes = getReadyLocations().map((l) => cityPageHref(l).replace(/\/$/, ""));
+  return [...staticRoutes, ...cityRoutes, ...serviceRoutes, ...blogPostRoutes, ...blogCategoryRoutes];
+}
+
+/** TEMPORARY owner-approval preview. Prerendered like /thank-you (so the static
+ * host serves it) but never in the sitemap. Return [] before merging. */
+export function getLayoutPreviewRoutes(): string[] {
+  return ["/service-areas/layout-preview"];
 }
