@@ -236,7 +236,7 @@ export function QuoteModal({ isOpen, presetService, onClose, triggerRef }: Quote
               <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
               <input type="hidden" name="subject" value="Refined Painting — New Estimate Request" />
               <input type="hidden" name="from_name" value="Refined Painting Website" />
-          <input type="hidden" name="form_source" value="quote_popup" />
+              <input type="hidden" name="form_source" value="quote_popup" />
               <input type="hidden" name="redirect" value={redirectUrl} />
               {/* Web3Forms' own honeypot convention: left unfilled by real visitors, often auto-filled by bots. Web3Forms checks this server-side. */}
               <input type="checkbox" name="botcheck" style={{ display: "none" }} tabIndex={-1} aria-hidden="true" />
