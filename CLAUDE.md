@@ -2,7 +2,9 @@
 
 Operating instructions for this project. Read this first in every session. Keep responses concise and avoid full-repository scans.
 
-Verified on 2026-10-15 from source files, `gh` queries, and live HTTP checks. Items marked **[unverified]** need confirmation in a dashboard or with the client.
+Verified on 2026-10-15 from source files, `gh` queries, and live HTTP checks. Updated 2026-11-04 (PR #7 merged, business-info cleanup). Items marked **[unverified]** need confirmation in a dashboard or with the client.
+
+Current release status and open owner decisions: `PROJECT-STATUS.md`. Per-fact evidence for every business claim: `docs/BUSINESS-INFO-REGISTER.md`. Read both before editing public copy.
 
 ---
 
@@ -57,8 +59,9 @@ There are two separate environments. Never treat them as one.
 - Branch protection is **off** on `main`. Be extra careful with direct pushes.
 
 ### Current Git state
-- `main` tracks `origin/main`. The Refined Painting project photo integration and the stable-id hydration fix are on `main` (see `git log -1`).
-- Open PRs: check with `gh pr list`. PRs #4 and #5 are merged.
+- `main` tracks `origin/main`. The approved preview (`5e9afcd`: new hero video, Victoria card, About team cards, 39-project gallery, mobile fixes) was merged by PR #7 as `12038c6` and deployed to `refinedpainting-com.pages.dev`. `refinedpainting.co` is still WordPress.
+- Open PRs: check with `gh pr list`. PRs #4, #5 and #7 are merged.
+- Remote branch `preview/mobile-fixes-2026-10-26` is merged. **Do not delete without permission.**
 - Remote branch `feat/analytics-clarity-seo-fixes` is merged into `main`. **Do not delete without permission.**
 - Remote branches `ace/change/*` are automated one-line test commits from the ACE Website Engine. They are not on `main`. **Do not merge or delete them without permission.**
 
@@ -74,7 +77,7 @@ There are two separate environments. Never treat them as one.
 - Static prerendering: each route is rendered to its own HTML file (see §8)
 
 ### Scripts
-- `npm install`: install dependencies (not yet run in this folder; `node_modules` absent)
+- `npm install`: install dependencies (already installed in this folder)
 - `npm run dev`: Vite dev server
 - `npm run build`: `build:client` (`tsc -b` + `vite build`) → `build:ssr` (`vite build --ssr src/entry-server.tsx --outDir dist-ssr`) → `prerender` (`scripts/prerender.mjs`) → removes `dist-ssr`
 - `npm run lint`: oxlint
@@ -115,9 +118,12 @@ Location pages (`/locations/:citySlug`) are **intentionally unpublished**. The f
 - **Address:** 7212 Linden Ave N, Seattle, WA 98103
 - **Phone:** (206) 258-7994 (`tel:+12062587994`)
 - **Email:** No business email address is published on the site. The only addresses in code are input placeholders.
-- **Hours:** Monday–Saturday, 9 AM–5 PM
+- **Hours:** Monday–Saturday, 9 AM–5 PM on the site and in JSON-LD (consistent). **Owner decision pending:** BBB reportedly lists Saturday to 4 PM. Neither source is authoritative; do not change until the owner confirms.
 - **Services:** Interior, exterior, cabinet refinishing, commercial, deck & fence staining, carpentry/repairs
 - **Service areas (14):** Seattle, Bellevue, Bothell, Everett, Kenmore, Kirkland, Lake Stevens, Lynnwood, Marysville, Medina, Mercer Island, Redmond, Sammamish, Shoreline. Schema `areaServed` matches this list.
+- **Three separate concepts, never conflate:** (1) *Physical business address*: 7212 Linden Ave N, Seattle. There is no evidence it is a customer-visit office, so label it "Address", not "Office". (2) *Website areas served*: the 14-city list above, kept unchanged until the owner makes an explicit website decision. (3) *Ad targeting*: Bellevue, Kirkland, Redmond, Sammamish, and Seattle is **excluded from ads**. Ad targeting is not a website instruction. Do not remove Seattle from site copy or schema because of the ad exclusion, and never describe a service city as an office.
+- **Team roles:** Gloria is the first contact (questions, estimates, getting started). Maria, Project Coordinator, coordinates once the customer moves forward. **Victoria:** her name and her role helping customers compare color options are confirmed by Jay. The offer terms ("complimentary with qualifying painting projects") are not documented.
+- **Do not trust existing site copy as proof of a claim.** Each fact's evidence is tracked in `docs/BUSINESS-INFO-REGISTER.md`.
 - **Claims on site:** licensed and insured; EPA Lead-Safe certified; 5-year workmanship warranty (see `warranty` in `content.ts`); "Google Verified" and "Nextdoor Neighborhood Favorite" badges; 5.0 rating with 227 reviews; repaint-cycle guidance (exterior 7–12 years, decks 2–4 years).
 - **Verify before relying on these in any new copy:** every claim above, especially the 227 review count, the 5.0 rating (hardcoded in `content.ts` and the homepage JSON-LD), the warranty terms, and the badges. Obtain proof from the client first.
 - **Do not add new certifications, pricing, timelines, or awards** without verified source material. Blog backlog items must be fact-checked before publishing (see `src/content/blog/backlog.ts`).
@@ -296,7 +302,8 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 9. **Hardcoded aggregateRating in JSON-LD** on the homepage. See §9.
 10. **Location pages unpublished** by design. Content not ready.
 11. **Repository is public.** Do not commit anything sensitive.
-12. **Dependencies not installed** in this folder. `node_modules` is absent, so the build and lint have not been run from this checkout.
+12. **Unconfirmed response and estimate timelines** ("reaches out within one business day", proposal "within 24–48 hours") appear on the Contact page, FAQ, process steps and two blog posts. The owner has not confirmed them.
+13. **Form placeholders** are neutral since the cleanup: ZIP "5-digit ZIP code", phone "(555) 555-0100". Do not reintroduce a Seattle ZIP or area code as an example.
 
 ---
 

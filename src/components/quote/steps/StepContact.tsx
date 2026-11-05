@@ -48,7 +48,7 @@ export function StepContact({ data, errors, onUpdate }: StepContactProps) {
             autoComplete="tel"
             value={data.phone}
             onChange={(e) => onUpdate({ phone: e.target.value })}
-            placeholder="(206) 555-0100"
+            placeholder="(555) 555-0100"
             className={inputClasses}
           />
         </Field>

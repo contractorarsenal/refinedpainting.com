@@ -140,7 +140,7 @@ export function ContactForm() {
                 type="tel"
                 name="phone"
                 autoComplete="tel"
-                placeholder="(206) 555-0100"
+                placeholder="(555) 555-0100"
                 value={data.phone}
                 onChange={(e) => update({ phone: e.target.value })}
                 className={inputClasses}
