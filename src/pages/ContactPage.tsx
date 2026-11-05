@@ -94,7 +94,7 @@ export function ContactPage() {
               <div className="flex items-start gap-3 border-t border-ink/10 pt-5">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-crest" aria-hidden />
                 <div>
-                  <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">Office</span>
+                  <span className="block text-xs font-bold uppercase tracking-widest text-ink/45">Address</span>
                   <span className="text-[15px] font-bold text-ink">
                     {business.address.street}, {business.address.city}, {business.address.state}{" "}
                     {business.address.zip}
