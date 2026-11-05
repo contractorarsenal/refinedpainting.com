@@ -58,7 +58,7 @@ None of these redirect to the homepage. WordPress admin, feed and login URLs als
 ## Optional improvements (not blockers)
 - Neutral timing wording (proposal in the register) once the owner confirms or declines a deadline.
 - Victoria offer conditions, "200+" counts, scheduling-time FAQs, JSON-LD `priceRange`.
-- Twitter card tags; consolidating the duplicated Web3Forms key and the NAP in `index.html`.
+- Twitter card tags; the NAP duplicated in `index.html`.
 - iPhone Safari hero playback test.
 
 ## Git housekeeping
