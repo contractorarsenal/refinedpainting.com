@@ -72,6 +72,8 @@ export function ContactForm() {
       phone: data.phone,
       service: data.service,
       message: data.message,
+      // Identifies which form sent this lead (the quote pop-up sends "quote_popup").
+      form_source: "contact_page",
       botcheck: false,
     });
   };
@@ -98,6 +100,7 @@ export function ContactForm() {
           <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
           <input type="hidden" name="subject" value="Refined Painting — Contact Form" />
           <input type="hidden" name="from_name" value="Refined Painting Website" />
+          <input type="hidden" name="form_source" value="contact_page" />
           <input type="hidden" name="redirect" value={redirectUrl} />
           <input type="hidden" name="name" value={fullName} />
           {/* Web3Forms' own honeypot convention, checked server-side by Web3Forms itself. */}
