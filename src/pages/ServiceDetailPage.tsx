@@ -84,7 +84,7 @@ export function ServiceDetailPage() {
   const detail = serviceId ? serviceDetails[serviceId] : undefined;
   const hero = serviceId ? heroImages[serviceId] : undefined;
 
-  const canonical = `${SITE_URL}/services/${slug ?? ""}`;
+  const canonical = `${SITE_URL}/services/${slug ?? ""}/`;
 
   // An unknown slug shows the site's 404 page at its own URL, the same markup the
   // prerendered 404.html serves, so server and client render the same tree. A redirect
@@ -115,8 +115,8 @@ export function ServiceDetailPage() {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-              { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
+              { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+              { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services/` },
               { "@type": "ListItem", position: 3, name: service.title, item: canonical },
             ],
           },

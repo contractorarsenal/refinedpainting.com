@@ -17,7 +17,7 @@ export function LocationPage() {
   const location = citySlug ? getLocationBySlug(citySlug) : undefined;
   const { openQuoteModal } = useQuoteModal();
 
-  const canonical = `${SITE_URL}/locations/${citySlug ?? ""}`;
+  const canonical = `${SITE_URL}/locations/${citySlug ?? ""}/`;
 
   // Not just a missing-slug guard — status gates whether this is actually
   // fit to show a visitor, independent of whether the route happens to be
@@ -44,8 +44,8 @@ export function LocationPage() {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-              { "@type": "ListItem", position: 2, name: "Service Areas", item: `${SITE_URL}/about#service-areas` },
+              { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+              { "@type": "ListItem", position: 2, name: "Service Areas", item: `${SITE_URL}/about/#service-areas` },
               { "@type": "ListItem", position: 3, name: location.cityName, item: canonical },
             ],
           },

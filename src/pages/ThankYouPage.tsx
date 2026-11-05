@@ -22,7 +22,7 @@ export function ThankYouPage() {
       <PageSEO
         title="Thank You | Refined Painting"
         description="Thanks for requesting a free estimate from Refined Painting. We'll be in touch soon."
-        canonical={`${SITE_URL}/thank-you`}
+        canonical={`${SITE_URL}/thank-you/`}
         noindex
       />
       <Container className="mx-auto flex max-w-lg flex-col items-center gap-5 py-16 text-center">

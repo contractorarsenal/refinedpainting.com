@@ -246,6 +246,8 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 - Sitemap: generated at build into `dist/sitemap.xml`. There is no committed `public/sitemap.xml`. `robots.txt` points to it.
 - 404: prerendered `dist/404.html`. Its comments say Cloudflare Pages serves it with a 404 status. **[unverified]** against the live Pages project.
 - `/thank-you` is prerendered and excluded from the sitemap.
+- **Trailing slashes:** Pages serves `/<route>/` with 200 and 308-redirects the slashless form. Canonicals, `og:url`, sitemap URLs and schema URLs must use the trailing-slash form (`https://refinedpainting.co/services/`). The sitemap generator in `scripts/prerender.mjs` adds the slash. Keep new `canonical` values in the same form.
+- **Redirects:** `public/_redirects` holds the legacy WordPress redirects (see `PROJECT-STATUS.md`). List both the slash and slashless source so each takes one hop. Never redirect unmatched legacy URLs to the homepage.
 - Structured data:
   - `index.html`: `PaintingContractor` JSON-LD (address, phone, hours, areaServed, aggregateRating).
   - `ServiceDetailPage`, `BlogPostPage`, `LocationPage`, `FaqPage`: BreadcrumbList and related schema.

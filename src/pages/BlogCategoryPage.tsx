@@ -26,7 +26,7 @@ export function BlogCategoryPage() {
       <PageSEO
         title={`${label} Guides | Refined Painting`}
         description={`${label} guides and resources from Refined Painting, serving Seattle and the Eastside.`}
-        canonical={`${SITE_URL}/blog/category/${slug ?? ""}`}
+        canonical={`${SITE_URL}/blog/category/${slug ?? ""}/`}
       />
       <section className="bg-cream pb-10 pt-28 sm:pt-32 lg:pb-12 lg:pt-36">
         <Container className="max-w-2xl">
