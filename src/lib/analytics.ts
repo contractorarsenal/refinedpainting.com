@@ -81,6 +81,15 @@ export function consumePendingLead() {
   trackEvent("generate_lead", pending);
 }
 
+/** Fires generate_lead directly, for a submission that never leaves the page
+ * (the quote modal's in-modal success screen). Callers invoke this once,
+ * only after Web3Forms has confirmed success. It does not write the pending
+ * lead key, so a later visit to /thank-you cannot fire the same lead twice.
+ * Carries only form_type and a service label, never name/email/phone. */
+export function trackLead(lead: PendingLead) {
+  trackEvent("generate_lead", lead);
+}
+
 /** Fired from the single openQuoteModal() chokepoint in QuoteModalContext,
  * so every "Free Estimate" CTA and every quote-modal open are the same
  * underlying action here — in this codebase there is no path that opens the

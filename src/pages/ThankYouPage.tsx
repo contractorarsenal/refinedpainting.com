@@ -11,8 +11,9 @@ export function ThankYouPage() {
   // params are visitor-controlled; anyone could type
   // /thank-you?form_type=contact and fake a lead). consumePendingLead only
   // fires if this exact browser tab's sessionStorage has an entry that
-  // ContactForm/QuoteModal wrote themselves after a confirmed-successful
-  // Web3Forms response — see lib/analytics.ts and useWeb3FormsSubmit.ts.
+  // ContactForm wrote itself after a confirmed-successful
+  // Web3Forms response (the quote modal shows its own success screen and
+  // fires generate_lead directly) — see lib/analytics.ts and useWeb3FormsSubmit.ts.
   useEffect(() => {
     consumePendingLead();
   }, []);

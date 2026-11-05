@@ -198,7 +198,7 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 - 5 steps (`TOTAL_STEPS = 5` in `quoteState.ts`): ZIP → service → details → timeline → contact.
 - Can be pre-filled with a service via `openQuoteModal("cabinets")`.
 - Final payload: `subject: "Refined Painting — New Estimate Request"`, plus name, email, phone, zip, service, timeline, details, `botcheck`.
-- Same submit path and success logic as the contact form (`hooks/useWeb3FormsSubmit.ts`).
+- Same submit path as the contact form (`hooks/useWeb3FormsSubmit.ts`), but the wizard uses `onSuccess: "stay"`: after a confirmed Web3Forms success it shows an in-modal "You're All Set" screen (Chippy, Done button) and does **not** navigate. The contact form still redirects to `/thank-you`.
 
 ### Web3Forms
 - Access key is hardcoded in **two places**: `src/components/sections/ContactForm.tsx` and `src/components/quote/QuoteModal.tsx`. A third copy, the endpoint, is in `src/hooks/useWeb3FormsSubmit.ts`.
@@ -227,7 +227,7 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 - **Not present** in the codebase (searched `src` and `index.html`).
 
 ### Conversion events (`src/lib/analytics.ts`)
-- `generate_lead`: fires only after a confirmed Web3Forms success and the `/thank-you` mount. It is consumed via `sessionStorage` (`rp_pending_lead`), so a refresh or a typed URL does not fire it. Do not change this to a URL query-param trigger.
+- `generate_lead`: fires only after a confirmed Web3Forms success. Contact form: on the `/thank-you` mount. Quote wizard: once, directly from the hook (`trackLead`), with no pending-lead entry so /thank-you cannot double-fire it. It is consumed via `sessionStorage` (`rp_pending_lead`), so a refresh or a typed URL does not fire it. Do not change this to a URL query-param trigger.
 - `quote_modal_open`: fires on every quote modal open, from `openQuoteModal` (includes `preset_service` and `page_path`).
 - `click_to_call`: delegated listener on any `tel:` link (`ConversionTracking.tsx`).
 - `page_view`: SPA navigations via `RouteAnalytics`.
