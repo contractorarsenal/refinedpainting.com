@@ -8,7 +8,7 @@ export function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getPostBySlug(slug) : undefined;
 
-  const canonical = `${SITE_URL}/blog/${slug ?? ""}`;
+  const canonical = `${SITE_URL}/blog/${slug ?? ""}/`;
 
   if (!slug || !post) return <Navigate to="/blog" replace />;
 
@@ -40,8 +40,8 @@ export function BlogPostPage() {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-              { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+              { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+              { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog/` },
               { "@type": "ListItem", position: 3, name: post.title, item: canonical },
             ],
           },

@@ -19,7 +19,7 @@ export function BlogPage() {
       <PageSEO
         title="Painting Advice for Seattle Homeowners | Refined Painting"
         description="Practical guides covering project planning, interior and exterior painting, cabinets, Seattle weather, and what to expect when hiring a painter."
-        canonical={`${SITE_URL}/blog`}
+        canonical={`${SITE_URL}/blog/`}
       />
       <section className="bg-cream pb-10 pt-28 sm:pt-32 lg:pb-14 lg:pt-36">
         <Container className="max-w-2xl">

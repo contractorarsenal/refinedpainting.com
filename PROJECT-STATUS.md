@@ -4,7 +4,8 @@ Updated 2026-11-04. No credentials or keys in this file.
 
 ## Release status
 - **Approved site:** `5e9afcd` merged to `main` by PR #7 as `12038c6`. Deployed by Cloudflare Pages to https://refinedpainting-com.pages.dev (success).
-- **Live domain:** https://refinedpainting.co still serves **WordPress**. The domain is not attached to the Pages project (unverified in the dashboard). No DNS, email or WordPress changes have been made.
+- **Live domain:** https://refinedpainting.co now serves this React build from Cloudflare Pages (verified over HTTP). `http`, `www` and `https://www` all 301 to `https://refinedpainting.co/`. MX and SPF records were unchanged at last check. Dashboard-side settings remain unverified.
+- **URL form:** Cloudflare Pages serves every page at its trailing-slash URL (`/about/` is 200, `/about` is 308). Canonicals, `og:url`, sitemap URLs and schema URLs use the trailing-slash form (branch `launch-cleanup/trailing-slash-redirects`).
 - **Prelaunch cleanup:** local branch `prelaunch/business-info-cleanup` from `origin/main`. Changes are uncommitted and unpushed, awaiting review.
 
 ## Separate concepts
@@ -31,7 +32,27 @@ Do not redesign. Keep the approved hero video, Victoria card on `/services`, Abo
 5. Lead inbox: confirm in Web3Forms that submissions reach the business. Not verified. No test lead was sent.
 6. Analytics ownership: `G-X3HQQ4CQDB` (React) vs `G-TCE6S4DT0K` (WordPress).
 7. Cloudflare dashboard checks: Pages custom domain state, apex and `www` records, WordPress origin for rollback. Not verified.
-8. WordPress redirect decisions: `/warranty/`, `/service-areas/` and its 15 city pages, 13 blog posts.
+8. WordPress redirect decisions for the legacy URLs listed under "Legacy WordPress URLs" below.
+
+## Legacy WordPress URLs
+Redirects live in `public/_redirects` (Cloudflare Pages). Each is a single-hop 301 to a trailing-slash destination that returns 200.
+
+**Redirected:**
+- `/portfolio/` → `/projects/`
+- `/services/interior-painting/ceiling-painting/` → `/services/interior-painting/` (page covers ceilings)
+- `/services/exterior-painting/siding-painting/` → `/services/exterior-painting/` (page covers siding)
+- `/services/cabinet-refinishing/cabinet-painting/` → `/services/cabinet-refinishing/`
+- `/services/commercial-painting/office-painting/` → `/services/commercial-painting/` (page covers offices)
+- `/services/carpentry-services/trim/` → `/services/carpentry-services/` (page covers trim repair and matching)
+- `/sitemap_index.xml`, `/post-sitemap.xml`, `/page-sitemap.xml`, `/wp-sitemap.xml` → `/sitemap.xml`
+
+**Left as 404, owner decision (no destination covers the old page's topic):**
+- `/warranty/`: no warranty page exists. Warranty terms are also unconfirmed.
+- `/service-areas/` and 15 city pages (`/service-areas/{seattle, bellevue, kirkland, redmond, sammamish, bothell, everett, kenmore, lake-stevens, lynnwood, marysville, medina, mercer-island, shoreline, palmer}-wa/`): location pages are intentionally unpublished. Palmer is not in the site's city list.
+- Sub-service pages the destination does not cover: `popcorn-ceiling-removal`, `garage-door-painting`, `trim-fascia-painting` (fascia not covered), `baseboard`, `finish-carpentry`.
+- 13 blog posts: none match the three posts on the site. Options per post: republish, redirect to a genuinely matching page, or leave as 404. Search Console data would show which carry traffic.
+
+None of these redirect to the homepage. WordPress admin, feed and login URLs also return 404, which is intended.
 
 ## Optional improvements (not blockers)
 - Neutral timing wording (proposal in the register) once the owner confirms or declines a deadline.

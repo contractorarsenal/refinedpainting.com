@@ -1,0 +1,26 @@
+# Cloudflare Pages redirects for URLs inherited from the old WordPress site.
+# Both the slash and slashless forms are listed so each old URL resolves in
+# one hop (a slashless request would otherwise take a 308 first, then this
+# rule). Destinations use the trailing-slash form Pages serves with a 200.
+# Only pages whose destination covers the old page's topic are redirected;
+# see PROJECT-STATUS.md for legacy URLs deliberately left as 404.
+
+/portfolio /projects/ 301
+/portfolio/ /projects/ 301
+
+/services/interior-painting/ceiling-painting /services/interior-painting/ 301
+/services/interior-painting/ceiling-painting/ /services/interior-painting/ 301
+/services/exterior-painting/siding-painting /services/exterior-painting/ 301
+/services/exterior-painting/siding-painting/ /services/exterior-painting/ 301
+/services/cabinet-refinishing/cabinet-painting /services/cabinet-refinishing/ 301
+/services/cabinet-refinishing/cabinet-painting/ /services/cabinet-refinishing/ 301
+/services/commercial-painting/office-painting /services/commercial-painting/ 301
+/services/commercial-painting/office-painting/ /services/commercial-painting/ 301
+/services/carpentry-services/trim /services/carpentry-services/ 301
+/services/carpentry-services/trim/ /services/carpentry-services/ 301
+
+# Old WordPress (Yoast / core) sitemap endpoints
+/sitemap_index.xml /sitemap.xml 301
+/post-sitemap.xml /sitemap.xml 301
+/page-sitemap.xml /sitemap.xml 301
+/wp-sitemap.xml /sitemap.xml 301

@@ -17,7 +17,7 @@ const relatedServiceLinks = [
 
 export function FaqPage() {
   const { openQuoteModal } = useQuoteModal();
-  const canonical = `${SITE_URL}/faq`;
+  const canonical = `${SITE_URL}/faq/`;
 
   return (
     <>
@@ -39,7 +39,7 @@ export function FaqPage() {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+              { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
               { "@type": "ListItem", position: 2, name: "FAQ", item: canonical },
             ],
           },

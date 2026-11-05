@@ -27,14 +27,14 @@ export function AboutPage() {
       <PageSEO
         title="About Refined Painting | Seattle & Eastside Painting Company"
         description="Refined Painting is a licensed, insured and EPA Lead-Safe painting company serving Seattle and the Eastside, built around clear communication and careful prep."
-        canonical={`${SITE_URL}/about`}
+        canonical={`${SITE_URL}/about/`}
         schema={[
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-              { "@type": "ListItem", position: 2, name: "About", item: `${SITE_URL}/about` },
+              { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+              { "@type": "ListItem", position: 2, name: "About", item: `${SITE_URL}/about/` },
             ],
           },
         ]}

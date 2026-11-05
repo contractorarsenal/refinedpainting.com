@@ -109,13 +109,16 @@ for (const r of results) {
   console.log(`  ${r.route.padEnd(45)} -> ${r.outPath} (${r.bytes.toLocaleString()} bytes)`);
 }
 
+// URLs end in a trailing slash because that is the form Cloudflare Pages
+// serves (each route is written to <route>/index.html and the slashless URL
+// answers 308), and it matches each page's canonical.
 // Generated from the exact same route list every page above was rendered
 // from, so a new blog post or service can't drift out of sync with the
 // sitemap the way a hand-maintained public/sitemap.xml could (and had).
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  ...routes.map((route) => `  <url><loc>${SITE_URL}${route === "/" ? "" : route}</loc></url>`),
+  ...routes.map((route) => `  <url><loc>${SITE_URL}${route.endsWith("/") ? route : `${route}/`}</loc></url>`),
   "</urlset>",
   "",
 ].join("\n");

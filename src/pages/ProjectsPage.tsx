@@ -34,15 +34,15 @@ export function ProjectsPage() {
       <PageSEO
         title="Our Work | Refined Painting Projects"
         description="Browse recent interior, exterior and cabinet painting projects from Refined Painting, plus real before-and-after comparisons."
-        canonical={`${SITE_URL}/projects`}
+        canonical={`${SITE_URL}/projects/`}
         image={`${SITE_URL}${featurePhoto}`}
         schema={[
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-              { "@type": "ListItem", position: 2, name: "Projects", item: `${SITE_URL}/projects` },
+              { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+              { "@type": "ListItem", position: 2, name: "Projects", item: `${SITE_URL}/projects/` },
             ],
           },
         ]}

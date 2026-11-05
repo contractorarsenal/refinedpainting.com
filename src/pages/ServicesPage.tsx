@@ -61,15 +61,15 @@ export function ServicesPage() {
       <PageSEO
         title="Painting Services | Refined Painting"
         description="Interior painting, exterior painting, cabinet refinishing, deck & fence staining and carpentry services from Refined Painting, serving Seattle and the Eastside."
-        canonical={`${SITE_URL}/services`}
+        canonical={`${SITE_URL}/services/`}
         image={`${SITE_URL}${afterWhite}`}
         schema={[
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-              { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
+              { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+              { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services/` },
             ],
           },
         ]}
