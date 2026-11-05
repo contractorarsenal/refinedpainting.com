@@ -1,4 +1,4 @@
-import { business, CTA } from "../../lib/content";
+import { business, CTA, reviewSummary } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
@@ -53,7 +53,7 @@ export function FinalCTA({ tone = "red" }: FinalCTAProps) {
           <div className="flex items-center gap-2">
             <Stars fillClassName="fill-warm-white text-warm-white" />
             <span className="text-sm font-semibold text-warm-white/90">
-              {business.rating} Google Rating • {business.reviewCount} Reviews
+              {reviewSummary}
             </span>
           </div>
           <span className="hidden text-warm-white/35 sm:inline">•</span>

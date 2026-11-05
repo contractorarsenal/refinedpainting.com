@@ -5,7 +5,7 @@ import heroPoster from "../../assets/images/home-hero-main-poster.webp";
 // outside the repository. The full sequence is used untrimmed (7.5s, 1920x1080, 30fps,
 // H.264 High, yuv420p, faststart, no audio). The poster is a frame from the truck shot at 1.0s.
 import heroVideo from "../../assets/videos/home-hero-main.mp4";
-import { business } from "../../lib/content";
+import { business, reviewSummary } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { Button, LinkButton } from "../ui/Button";
 import { Container } from "../ui/Container";
@@ -143,8 +143,7 @@ export function HomeHero() {
 
         <div className="relative flex items-center gap-2.5 pt-1">
           <Stars />
-          <span className="text-sm font-bold text-warm-white">5.0 Google Rating</span>
-          <span className="text-sm font-medium text-warm-white/60">• 227 Reviews</span>
+          <span className="text-sm font-bold text-warm-white">{reviewSummary}</span>
         </div>
       </Container>
     </section>

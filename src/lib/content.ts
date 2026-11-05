@@ -14,8 +14,12 @@ export const business = {
   },
   hours: "Monday–Saturday: 9 AM–5 PM",
   rating: "5.0",
-  reviewCount: 227,
+  reviewCount: 242,
 } as const;
+
+// The one wording for the Google rating and review count. The hero and the
+// closing CTA both render this, so the figures can only change in `business`.
+export const reviewSummary = `${business.rating} stars from ${business.reviewCount} Google reviews`;
 
 // Google's public Maps Search URL API. A real, functional deep link built from
 // the business's own name/address (no fabricated place ID or review page).
