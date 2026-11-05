@@ -1,8 +1,8 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import type { LocationNeighborhood, LocationProjectImage, LocationTestimonial } from "../../content/locations/locations";
-import { business } from "../../lib/content";
+import { business, teamMembers } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { FinalCTA } from "../sections/FinalCTA";
 import { photoCardServices, ServicePhotoCard } from "../sections/ServicePhotoCard";
@@ -14,6 +14,8 @@ interface CityPageLayoutProps {
   cityName: string;
   /** Verified, owner-approved local context. Omit until supplied. */
   intro?: string;
+  /** A sentence or two above the service cards, written for this city. */
+  servicesIntro?: string;
   /** Owner-approved neighborhoods. Each renders as a section inside this page. */
   neighborhoods?: LocationNeighborhood[];
   /** Real photos taken in this city. Omit until supplied and approved. */
@@ -30,7 +32,15 @@ interface CityPageLayoutProps {
  * less material shows less rather than filler. "Our Services" uses the
  * homepage's photo cards; those photos illustrate the service and are never
  * presented as work done in this city. */
-export function CityPageLayout({ cityName, intro, neighborhoods, projects, testimonial, banner }: CityPageLayoutProps) {
+export function CityPageLayout({
+  cityName,
+  intro,
+  servicesIntro,
+  neighborhoods,
+  projects,
+  testimonial,
+  banner,
+}: CityPageLayoutProps) {
   const { openQuoteModal } = useQuoteModal();
 
   return (
@@ -68,6 +78,9 @@ export function CityPageLayout({ cityName, intro, neighborhoods, projects, testi
           <h2 className="mt-2 font-display text-2xl font-extrabold uppercase tracking-wide text-ink sm:text-3xl">
             Painting Services for {cityName} Homeowners
           </h2>
+          {servicesIntro ? (
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink/70">{servicesIntro}</p>
+          ) : null}
           <ul className="mt-8 flex flex-wrap justify-center gap-4 sm:gap-5">
             {photoCardServices.map((service, index) => (
               <Reveal
@@ -88,24 +101,68 @@ export function CityPageLayout({ cityName, intro, neighborhoods, projects, testi
           <Container className="max-w-3xl">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Neighborhoods</span>
             <h2 className="mt-2 font-display text-2xl font-extrabold uppercase tracking-wide text-ink sm:text-3xl">
-              Neighborhoods We Paint In {cityName}
+              {cityName} Neighborhoods We Serve
             </h2>
-            <div className="mt-6 flex flex-col gap-6">
+            <p className="mt-3 text-base leading-relaxed text-ink/70">
+              We work with homeowners across {cityName}, including in these neighborhoods.
+            </p>
+            <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {neighborhoods.map((n) => (
-                <section key={n.name} aria-labelledby={`n-${n.name}`} className="border-t-2 border-crest pt-4">
-                  <h3
-                    id={`n-${n.name}`}
-                    className="font-display text-xl font-extrabold uppercase tracking-wide text-ink"
-                  >
+                <li
+                  key={n.name}
+                  className="border border-ink/15 bg-cream-light px-4 py-3 text-sm font-bold text-ink/80"
+                >
+                  <span className="flex items-center gap-2">
+                    <MapPin className="size-4 shrink-0 text-crest" aria-hidden />
                     {n.name}
-                  </h3>
-                  <p className="mt-2 text-base leading-relaxed text-ink/70">{n.description}</p>
-                </section>
+                  </span>
+                  {n.description ? (
+                    <span className="mt-1 block text-sm font-normal text-ink/65">{n.description}</span>
+                  ) : null}
+                </li>
               ))}
-            </div>
+            </ul>
           </Container>
         </section>
       ) : null}
+
+      <section className="border-t border-ink/10 bg-cream-light py-12 sm:py-16 lg:py-20">
+        <Container className="max-w-3xl">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Free Estimate</span>
+          <h2 className="mt-2 font-display text-2xl font-extrabold uppercase tracking-wide text-ink sm:text-3xl">
+            How to Request an Estimate
+          </h2>
+          <ol className="mt-6 flex flex-col gap-5">
+            <li className="border-t-2 border-crest pt-4">
+              <h3 className="font-display text-lg font-extrabold uppercase tracking-wide text-ink">
+                1. Tell us about your project
+              </h3>
+              <p className="mt-1.5 text-base leading-relaxed text-ink/70">
+                Use any Get a Free Estimate button, or call {business.phone}. The online request asks for your ZIP code,
+                the type of project, your timeline, a few details, and how to reach you.
+              </p>
+            </li>
+            <li className="border-t-2 border-crest pt-4">
+              <h3 className="font-display text-lg font-extrabold uppercase tracking-wide text-ink">
+                2. We get back to you
+              </h3>
+              <p className="mt-1.5 text-base leading-relaxed text-ink/70">
+                {teamMembers.gloria.name}, our {teamMembers.gloria.role}, is your first contact. Our team typically
+                responds to new inquiries within about an hour during business hours ({business.hours}).
+              </p>
+            </li>
+            <li className="border-t-2 border-crest pt-4">
+              <h3 className="font-display text-lg font-extrabold uppercase tracking-wide text-ink">
+                3. We look at your home
+              </h3>
+              <p className="mt-1.5 text-base leading-relaxed text-ink/70">
+                We visit your home, take measurements, and answer your questions, so you know what to expect before
+                you decide.
+              </p>
+            </li>
+          </ol>
+        </Container>
+      </section>
 
       {projects && projects.length > 0 ? (
         <section className="border-t border-ink/10 bg-cream-light py-12 sm:py-16 lg:py-20">

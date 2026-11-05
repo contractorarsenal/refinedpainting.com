@@ -1,7 +1,7 @@
 # City pages: proposal for Jay's approval
 
-Prepared 2026-11-05. Nothing here is published. No city page exists yet, and the
-/service-areas/ hub links to none.
+Prepared 2026-11-05. Seattle is published; the other 13 city pages are not, and the hub
+links only to Seattle.
 
 ## Rules this proposal follows
 - **Neighborhoods are suggestions, not coverage.** The names below come from general
@@ -24,7 +24,7 @@ approve or replace.
 
 | City | Page URL | Suggested neighborhoods (not confirmed coverage) |
 |---|---|---|
-| Seattle | /service-areas/seattle-wa/ | Greenwood (Jay's suggestion), Ballard, Fremont, Wallingford, Queen Anne, Capitol Hill |
+| Seattle | /service-areas/seattle-wa/ | **Published.** Jay confirmed Greenwood, Ballard, Fremont, Wallingford, Queen Anne and Capitol Hill. |
 | Bellevue | /service-areas/bellevue-wa/ | Bridle Trails, Somerset, Newport Hills, Crossroads, Enatai, Downtown Bellevue |
 | Kirkland | /service-areas/kirkland-wa/ | Juanita, Houghton, Market, Totem Lake, Finn Hill, Kingsgate |
 | Redmond | /service-areas/redmond-wa/ | Education Hill, Overlake, Downtown Redmond, Willows, Grass Lawn |

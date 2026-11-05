@@ -44,8 +44,8 @@ export interface LocationTestimonial {
  * city's page, never a page of its own, and listing one is a coverage claim. */
 export interface LocationNeighborhood {
   name: string;
-  /** Verified, owner-approved local note. No generic filler. */
-  description: string;
+  /** Verified, owner-approved local note. Optional: a bare name is fine. */
+  description?: string;
 }
 
 export interface LocationContent {
@@ -62,6 +62,8 @@ export interface LocationContent {
   uniqueLocalContext?: string;
   /** Owner-approved neighborhoods served in this city. Empty until approved. */
   neighborhoods?: LocationNeighborhood[];
+  /** A sentence or two above the service cards, written for this city's homeowners. */
+  servicesIntro?: string;
   /** What's required before this page can go live — cleared out as items are verified. */
   missingContentNeeded: string[];
 }
@@ -76,16 +78,43 @@ function slugFor(cityName: string): string {
   return cityName.toLowerCase().replace(/\s+/g, "-");
 }
 
-// One entry per approved website city (`serviceAreas`), all "needs-content".
-// Seattle's website coverage is its own decision and is unrelated to ad targeting.
-export const cityLocations: LocationContent[] = serviceAreas.map((cityName) => ({
-  citySlug: slugFor(cityName),
-  cityName,
-  verifiedServiceArea: true,
-  status: "needs-content",
-  localProjectImages: [],
-  missingContentNeeded: [...commonMissingContent],
-}));
+// Per-city content, keyed by citySlug. A city absent here stays "needs-content".
+const cityContent: Record<string, Partial<LocationContent>> = {
+  // Seattle: approved by the owner, who confirmed Refined Painting serves these
+  // six neighborhoods. No local projects or testimonial are verified yet, so
+  // those sections are skipped. Website coverage only; ad targeting is separate.
+  seattle: {
+    status: "ready",
+    missingContentNeeded: [],
+    uniqueLocalContext:
+      "Refined Painting works with Seattle homeowners on interior and exterior painting, cabinet refinishing, deck and fence staining, and carpentry repairs, in neighborhoods including Greenwood, Ballard, Fremont, Wallingford, Queen Anne, and Capitol Hill.",
+    servicesIntro:
+      "Whether you are refreshing a single room or repainting the whole outside of your house, here is what we can do for your Seattle home. We also paint commercial spaces. Choose a service to see what is included.",
+    neighborhoods: [
+      { name: "Greenwood" },
+      { name: "Ballard" },
+      { name: "Fremont" },
+      { name: "Wallingford" },
+      { name: "Queen Anne" },
+      { name: "Capitol Hill" },
+    ],
+  },
+};
+
+// One entry per approved website city (`serviceAreas`). Cities without an entry
+// in `cityContent` are "needs-content" and are not published.
+export const cityLocations: LocationContent[] = serviceAreas.map((cityName) => {
+  const citySlug = slugFor(cityName);
+  return {
+    citySlug,
+    cityName,
+    verifiedServiceArea: true,
+    status: "needs-content",
+    localProjectImages: [],
+    missingContentNeeded: [...commonMissingContent],
+    ...cityContent[citySlug],
+  };
+});
 
 export function getLocationBySlug(slug: string): LocationContent | undefined {
   return cityLocations.find((l) => l.citySlug === slug);
