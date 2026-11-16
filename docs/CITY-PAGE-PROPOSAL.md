@@ -26,7 +26,7 @@ approve or replace.
 |---|---|---|
 | Seattle | /service-areas/seattle-wa/ | **Published.** Jay confirmed Greenwood, Ballard, Fremont, Wallingford, Queen Anne and Capitol Hill. |
 | Bellevue | /service-areas/bellevue-wa/ | Bridle Trails, Somerset, Newport Hills, Crossroads, Enatai, Downtown Bellevue |
-| Kirkland | /service-areas/kirkland-wa/ | Juanita, Houghton, Market, Totem Lake, Finn Hill, Kingsgate |
+| Kirkland | /service-areas/kirkland-wa/ | **Published without neighborhoods or projects** (nothing confirmed yet). Suggested, not confirmed coverage: Juanita, Houghton, Market, Totem Lake, Finn Hill, Kingsgate. |
 | Redmond | /service-areas/redmond-wa/ | Education Hill, Overlake, Downtown Redmond, Willows, Grass Lawn |
 | Sammamish | /service-areas/sammamish-wa/ | Pine Lake, Beaver Lake, Klahanie, Inglewood, the Plateau |
 | Bothell | /service-areas/bothell-wa/ | Canyon Park, North Creek, Downtown Bothell |
