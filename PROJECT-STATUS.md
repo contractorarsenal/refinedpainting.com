@@ -1,6 +1,6 @@
 # Refined Painting: Project Status
 
-Updated 2026-11-05. No credentials or keys in this file.
+Updated 2026-11-16. No credentials or keys in this file.
 
 ## Release status
 - **Approved site:** `5e9afcd` merged to `main` by PR #7 as `12038c6`. Deployed by Cloudflare Pages to https://refinedpainting-com.pages.dev (success).
@@ -47,11 +47,11 @@ Redirects live in `public/_redirects` (Cloudflare Pages). Each is a single-hop 3
 - `/sitemap_index.xml`, `/post-sitemap.xml`, `/page-sitemap.xml`, `/wp-sitemap.xml` → `/sitemap.xml`
 
 **Left as 404, owner decision (no destination covers the old page's topic):**
-- `/warranty/`: no warranty page exists. Warranty terms are also unconfirmed.
+- `/warranty/`: no warranty page exists. Warranty terms are also unconfirmed — restoring this one needs owner-signed terms, not just a rewrite. See "Missing-page investigation and repair" below.
 - **`/service-areas/` hub:** restored as a new page listing all 14 approved cities (not a redirect). It links to a city only once that city page exists.
-- **15 city pages** (`/service-areas/{seattle, bellevue, kirkland, redmond, sammamish, bothell, everett, kenmore, lake-stevens, lynnwood, marysville, medina, mercer-island, shoreline, palmer}-wa/`): still 404. No city has verified local material yet (see "Service-area hub and city pages"). Palmer is not in the site's city list.
+- **13 remaining city pages** (`/service-areas/{bellevue, redmond, sammamish, bothell, everett, kenmore, lake-stevens, lynnwood, marysville, medina, mercer-island, shoreline, palmer}-wa/`): still 404. Seattle and Kirkland are published; no other city has verified local material yet (see "Service-area hub and city pages"). Palmer is not in the site's city list.
 - Sub-service pages the destination does not cover: `popcorn-ceiling-removal`, `garage-door-painting`, `trim-fascia-painting` (fascia not covered), `baseboard`, `finish-carpentry`.
-- 13 blog posts: none match the three posts on the site. Options per post: republish, redirect to a genuinely matching page, or leave as 404. Search Console data would show which carry traffic.
+- Remaining blog posts with no archived copy and no fact-checkable content: options per post are republish, redirect to a genuinely matching page, or leave as 404. Search Console data would show which carry traffic. (Four posts with archived copies were restored as rewrites — see below.)
 
 None of these redirect to the homepage. WordPress admin, feed and login URLs also return 404, which is intended.
 
@@ -93,8 +93,8 @@ Do not delete or merge: `ace/change/*`, `feat/analytics-clarity-seo-fixes`, `pre
 
 ## Legacy WordPress URL recommendations
 No Search Console access, and the archive's index was not reachable for traffic data, so the order below is by page type, not by traffic. Export Search Console's Pages report (last 12 months) to confirm.
-1. **Restore after owner-approved content:** `/warranty/` (high-intent, but warranty terms are unconfirmed; the archived page is titled "Painting Warranty | 5-Year Coverage"). Restore only with owner-signed terms.
-2. **Restore as real articles after a fact check (no redirect):** `/blog/best-time-to-paint-your-home-exterior-in-seattle/`, `/blog/kitchen-cabinet-refinishing-process/`, `/blog/how-to-choose-interior-paint-colors-for-your-home/`. These archived copies exist. A redirect to a service page would not match what the article answered.
+1. **Restore after owner-approved content:** `/warranty/` (high-intent, but warranty terms are unconfirmed; the archived page is titled "Painting Warranty | 5-Year Coverage"). Restore only with owner-signed terms. Still open — see "Missing-page investigation and repair" below.
+2. **Restore as real articles after a fact check (no redirect):** ~~`/blog/best-time-to-paint-your-home-exterior-in-seattle/`, `/blog/how-to-choose-interior-paint-colors-for-your-home/`~~ — done, see below, plus `/blog/interior-paint-finishes-for-each-room/` (same treatment). `/blog/kitchen-cabinet-refinishing-process/` still has an archived copy and was not requested this round; same approach would apply.
 3. **Real city pages, only from verified local content:** the first one is covered in "Service-area hub and city pages" below. Seattle's archived page (`/service-areas/seattle-wa/`) existed; it was one of several near-identical ~2,500-word city pages, so it should not be restored as it was. Original note: the archive shows `/service-areas/seattle-wa/` ("Painters in Seattle WA") existed. Build one only from verified local content, not a template. Do not build the other 13 city pages as thin copies.
 4. **Leave as 404:** `/service-areas/palmer-wa/` (Palmer is not in the site's city list), the other city pages, and sub-service pages with no matching content or archived copy (popcorn ceiling removal, garage door painting, trim and fascia, baseboard, finish carpentry), plus the remaining blog posts until a deliberate decision.
 
@@ -130,6 +130,29 @@ No Search Console access, and the archive's index was not reachable for traffic 
 - **To add Kirkland projects, Jay needs to confirm for each:** which Drive "House" folder, that it was in Kirkland (city only, never a street number), and the scope (what was painted or refinished). A Kirkland review with permission to show it is optional. **Neighborhoods:** only the ones Jay confirms (the suggestions in `docs/CITY-PAGE-PROPOSAL.md` are not confirmed).
 - **Seattle exterior article** restored at its original URL `/blog/how-often-should-you-repaint-your-homes-exterior-in-seattle/`, and listed on the Blog index. **It is a rewrite.** The original text could not be recovered: no WordPress export exists in the workspace, and the web archive has no snapshot of that URL. The rewrite covers siding, weather exposure, visible wear, prep and timing, with no pricing, credentials or project claims. It links to `/service-areas/seattle-wa/`, the exterior painting page and the estimate article. Owner review is needed. Its published date is the restore date, not the original date (unknown).
 - **No redirect rule** touches either URL (`public/_redirects` has none for `/blog/` or `/service-areas/`).
+
+## Missing-page investigation and repair (2026-11-16, branch `feat/kirkland-page-and-seattle-article`)
+A client-reported audit (dated 2026-11-15) listed 9 city URLs, `/warranty/`, and 4 blog URLs as missing. Verified each against production before changing anything; none were soft-404s (every 404 below returns a real HTTP 404, not a 200 app shell).
+
+| URL | Found | Disposition |
+|---|---|---|
+| `/service-areas/kirkland-wa/` | Built on PR #16 (open, unmerged) | **Already fixed, unmerged.** Reused as-is. |
+| `/blog/how-often-should-you-repaint-your-homes-exterior-in-seattle/` | Built on PR #16 (open, unmerged) | **Already fixed, unmerged.** Reused as-is. |
+| `/blog/how-to-choose-interior-paint-colors-for-your-home/` | 404 live; web archive snapshot exists (byline not a confirmed current team member) | **Restored as a rewrite** in the site's own voice, same step-by-step guidance as the archive. No pricing, credentials, named staff or project claims. |
+| `/blog/interior-paint-finishes-for-each-room/` | 404 live; web archive snapshot exists (same byline) | **Restored as a rewrite**, same treatment. |
+| `/blog/best-time-to-paint-your-home-exterior-in-seattle/` | 404 live; web archive snapshot exists (same byline) | **Restored as a rewrite**. Matches the already-approved May–September FAQ guidance. |
+| `/warranty/` | 404 live; web archive snapshot exists, titled "Painting Warranty \| 5-Year Coverage" | **Left as 404.** Warranty terms are unconfirmed (see Launch blocker #4); restoring this one is a content/legal decision for Jay, not a rewrite like the blog posts. |
+| `/service-areas/everett-wa/`, `/mercer-island-wa/`, `/lake-stevens-wa/`, `/kenmore-wa/`, `/marysville-wa/`, `/bellevue-wa/`, `/sammamish-wa/`, `/redmond-wa/` | 404 live; no recoverable local content (no project, testimonial or neighborhood confirmed for any of them — same gap documented for Kirkland before PR #16) | **Left as 404**, same as the other 11 unpublished cities. Not a bug; needs owner-approved local content per city (see "Service-area hub and city pages"). Search Console impressions for these (recorded above, 2026-11-05 export) are useful for ordering future work, not for writing copy. |
+
+**Not duplicated:** checked PR #16, `locations.ts`, `posts.ts` and `backlog.ts` before writing anything. Kirkland and the exterior-repaint article were already built on PR #16 and are reused unchanged. The backlog's "Best Time of Year to Paint a House Exterior in Seattle" entry is a different, not-yet-written idea (different proposed slug) and was left alone.
+
+**No redirects added.** All three restored blog posts went back at their original URL with the same, correct content — a redirect was not needed. No city URL redirects to Seattle or the hub (several of the audited cities are not even ad-targeted, and conflating them with Seattle would misrepresent coverage).
+
+**Verification:** lint clean, build produced 27 prerendered routes (was 22), sitemap has 27 URLs. All three new posts and Kirkland have self-referencing trailing-slash canonicals, `robots: index, follow`, correct unique titles/descriptions, and resolve from the hub, blog index, and each other's cross-links with no broken hrefs or redirect chains. Preview checks are in the PR.
+
+**Open for Jay (business decisions, not implemented):**
+1. `/warranty/`: owner-signed 5-year warranty terms (duration, exclusions) before any warranty page is restored.
+2. The 8 city pages above: per-city local projects (which Drive "House" folder, confirmed city, scope), a permitted local testimonial, and verified local context — same checklist already open for Kirkland.
 
 ## Search Console findings (export dated 2026-11-05, in `Downloads/`; not committed)
 Use these to order future work. Clicks / impressions / average position, last period in the export.
