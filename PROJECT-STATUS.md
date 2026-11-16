@@ -154,6 +154,13 @@ A client-reported audit (dated 2026-11-15) listed 9 city URLs, `/warranty/`, and
 1. `/warranty/`: owner-signed 5-year warranty terms (duration, exclusions) before any warranty page is restored.
 2. The 8 city pages above: per-city local projects (which Drive "House" folder, confirmed city, scope), a permitted local testimonial, and verified local context — same checklist already open for Kirkland.
 
+**Merged and deployed (2026-11-16):** PR #16 merged to `main` as `32f1254` (merge commit), Cloudflare Pages check succeeded. Verified against production (`https://refinedpainting.co`), not just the preview:
+- Kirkland and all 4 restored articles return 200, `index, follow`, self-referencing trailing-slash canonicals, correct unique titles, no `X-Robots-Tag` (no accidental preview-noindex carried into production).
+- Sitemap has 27 URLs (was 22) and includes all four; the hub links Kirkland and Seattle only; the blog index links all 4 restored posts.
+- `/warranty/` and `/service-areas/bellevue-wa/` (representative of the still-unpublished pages) still return a genuine 404 with the site's own 404 page, not an empty 200 shell.
+- Spot-checked `/`, `/services/`, `/services/interior-painting/`, `/contact/`, `/faq/`, `/thank-you/` for regressions — all 200. This PR touched no form, nav, or layout component, so no test lead was submitted.
+- Kirkland's content gap (no neighborhoods/projects/testimonial section) was re-confirmed as intentional, not a bug: `CityPageLayout.tsx` only renders those sections when data is supplied, and Kirkland's registry entry supplies none, so the page ships without them rather than with placeholder or invented content.
+
 ## Search Console findings (export dated 2026-11-05, in `Downloads/`; not committed)
 Use these to order future work. Clicks / impressions / average position, last period in the export.
 - **Article restored this round:** the exterior repainting article, 3 clicks, 140 impressions, position 6.5 (the strongest blog page).
