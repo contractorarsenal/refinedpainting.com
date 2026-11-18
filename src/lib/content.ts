@@ -543,9 +543,9 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
     id: "cabinets",
     eyebrow: "Cabinet Refinishing",
     overview:
-      "When cabinets feel dated, worn, or out of place in an otherwise beautiful kitchen, cabinet refinishing is one of the smartest ways to upgrade the space without a full remodel.",
+      "When cabinets feel dated, worn, or out of place in an otherwise beautiful kitchen, cabinet refinishing — sometimes called cabinet painting — is one of the smartest ways to upgrade the space without a full remodel.",
     metaDescription:
-      "Cabinet refinishing that updates a dated kitchen without a full remodel. Serving Seattle and the Eastside. Request a free estimate.",
+      "Cabinet refinishing, also called cabinet painting, updates a dated kitchen without a full remodel. Serving Seattle and the Eastside. Free estimate.",
     commonProblem:
       "Cabinets take more daily wear than almost any other surface — scratches, grease buildup, and fading can make even a well-designed kitchen feel tired.",
     approach:
@@ -574,6 +574,11 @@ export const serviceDetails: Record<ServiceId, ServiceDetail> = {
       {
         question: "Can you change the cabinet color completely?",
         answer: "Yes. Cabinet refinishing allows for full color changes.",
+      },
+      {
+        question: "Is cabinet painting the same as cabinet refinishing?",
+        answer:
+          "Yes. Many homeowners search for cabinet painting, but it's the same service we call cabinet refinishing — deep cleaning, sanding, priming, and premium cabinet-grade coatings for a durable, factory-quality finish.",
       },
     ],
   },

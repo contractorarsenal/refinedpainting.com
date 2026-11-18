@@ -296,3 +296,80 @@ Prepared from `green-bungalow-trim`, the most-photographed job in the registry (
 **Draft copy** (visible facts only — no scope, timeline or location claims): "This job covered the main house, a detached garage, and the porch railings and steps, all finished in green with white trim. The in-progress photos show the porch railings being sanded and newly installed before the final coat. Before-and-after photos of the house, garage, and porch are below." No pricing, no duration, no named crew member, no city.
 
 **Still needed to finish this for real:** the city (so it can also become that city's page's "Recent Projects" proof), and a sentence or two from the crew on what the job actually involved beyond what's visible (same as Jesus/Jose question #2). Not implemented as a page or route — this is a content draft for review only.
+
+## Growth audit and page improvements (2026-11-17, branch `feat/seattle-case-study-and-page-improvements`, stacked on PR #20)
+
+This branch is stacked on `feat/content-expansion-batch-1` (PR #20, unmerged) so it can reuse that PR's `CityPageLayout` `relatedArticles` plumbing instead of duplicating it. Its own PR is opened with PR #20 as the base branch — see the PR link in chat. **No change in this round touched PR #20's own files**, and the gallery/mobile-CTA/Seattle-article-link work PR #20 already has was preserved, not redone.
+
+### Confirmed facts applied this round
+- **Refined Painting serves Bellevue, WA** — already true in `serviceAreas` (`src/lib/content.ts`); no code change needed, just confirms Bellevue stays in scope for the brief below.
+- **`green-bungalow-trim` was a Seattle project, completed in summer (exact month/year not confirmed)**, by Refined Painting's in-house painting crew. This is the **first project in the whole registry with a confirmed city**. Used to: populate Seattle's "Recent Projects" section for the first time (`localProjectImages` in `locations.ts`), write a real case-study blog post, and give the Exterior Painting page its first multi-photo gallery. No neighborhood, prep step, product, or scope beyond what the photos themselves show was added — the case study omits all of that, and uses "completed in summer" with no month, day, or year.
+
+### 1. Search Console / GA4 audit
+**No Google Search Console or GA4 connector is available in this environment** — there is no authenticated access to pull live Performance reports or GA4 Explorations from here, and the one-time CSV export referenced in earlier sessions (dated 2026-11-05) is no longer present in `Downloads/`. Nothing below is invented to fill that gap. Per your instruction, here's exactly what to export, plus everything that genuinely can be verified from source instead of guessed.
+
+**Exports needed (Search Console, property `refinedpainting.co`):**
+1. Performance → Search results → **Pages + Queries**, date range **last 28 complete days**, and the **same metric for the prior 28 days** (for the week-over-week comparison), plus a **90-day** view for context. State the exact start/end dates used when you export, so results stay comparable.
+2. Filter queries containing: `interior paint*`, `exterior paint*`, `cabinet paint*`, `kitchen cabinet paint*`, `cabinet refinish*`, and `near me`. Export **Query + Page + Clicks + Impressions + CTR + Position** so each query can be matched to the URL it's actually landing on (not assumed).
+3. Split branded vs. nonbranded: filter out any query containing `refined painting` (or close misspellings) into its own tab — the rest is nonbranded demand.
+4. A dedicated **Queries** pull filtered to `Page` = `/service-areas/kenmore-wa` (and, while in there, Bellevue, Redmond, Sammamish) — this is the one specific gap flagged in the last round and still open.
+
+**Exports needed (GA4, property tied to `G-X3HQQ4CQDB`):**
+1. An Exploration: **Session default channel group = Organic Search**, dimension **Landing page + query string**, for the same last-28/prior-28/90-day ranges.
+2. The **Events** report, **not** filtered to only "key events" — pull `generate_lead`, `quote_modal_open`, and `click_to_call` as separate rows (see verified definitions below for why they are not interchangeable).
+
+**What each GA4 event actually measures — verified from `src/lib/analytics.ts` source, not assumed:**
+- **`generate_lead`** — fires only after Web3Forms confirms a successful submission (never on a validation failure, never from a bookmarked or typed `/thank-you` URL — it's gated by a `sessionStorage` flag written at the moment of a real submit). Carries a `form_type` parameter (`"contact"` or `"quote"`) and an optional `service` label, **never** name/email/phone. **This is the one event that should be counted as an actual lead.** To break out contact vs. quote leads, segment this event by its own `form_type` parameter — the data already supports that split without any new tracking.
+- **`quote_modal_open`** — fires every time the estimate modal opens, from any "Get a Free Estimate" button. **This is interest, not a lead** — most opens don't finish all 5 steps. Don't count this as a conversion in the scorecard below.
+- **`click_to_call`** — fires on any `tel:` link click. This is call *intent* (the phone app opened), not a confirmed call or a booked job.
+- **`page_view`** — standard SPA navigation tracking, not a conversion signal.
+
+**GBP / Maps:** no Google Business Profile Insights connector is available either, so GBP post performance and Maps-pack scan results can't be reported this round, separately or otherwise. Both GBP post drafts prepared earlier remain unpublished, so there is no performance data to report for them yet regardless.
+
+**What's already known without live access** (reused, not re-guessed): the historical Search Console page-level export from 2026-11-05, already labeled historical throughout this document (see "Search Console findings" section above).
+
+### 2. Priority-search → landing-page map
+No query-level click data is available this round (see above), so this map is built from the terms you named plus which page already exists for each — not from measured volume. Each maps to exactly one existing page; none gets a new page just for a "near me" variant.
+
+| Priority search | Maps to | Why one page, not a new one |
+|---|---|---|
+| "interior painters [near me]" | `/services/interior-painting/` | Already the canonical interior page; "near me" is intent, not a location, and doesn't get its own URL. |
+| "exterior painters [near me]" | `/services/exterior-painting/` | Same reasoning. Now has real project proof (see below). |
+| "cabinet painting," "cabinet refinishing," "kitchen cabinet painters" | `/services/cabinet-refinishing/` | See decision below — same service, same page. |
+| "painting contractor Seattle" / Seattle-specific exterior queries | `/service-areas/seattle-wa/` (+ the new case study) | Already live; now has its first real local proof. |
+| "painting contractor Bellevue" | `/service-areas/bellevue-wa/` (not yet built) | Named priority + ad-targeted, but still content-blocked — see Bellevue decision below. |
+
+### 3. "Cabinet painting" vs. "cabinet refinishing": covered together, on the same page
+Checked against what the crew actually offers and what's already approved: `content.ts`'s own `videoAuthority` block (already live, already approved, used elsewhere on the site) uses the CTA label **"Get a Cabinet Painting Estimate"** right next to **"Learn About Cabinet Refinishing"** — the business already treats these as the same service under two names, not two different offerings. So: no second page. Added to `/services/cabinet-refinishing/`:
+- The page's `overview` and `metaDescription` now name "cabinet painting" as the common term for the same service.
+- A new FAQ: "Is cabinet painting the same as cabinet refinishing? — Yes. Many homeowners search for cabinet painting, but it's the same service we call cabinet refinishing..." (reuses only already-approved facts from `whatsIncluded`/`approach`, no new claims), which also feeds the page's FAQPage schema.
+
+### 4. Scorecard
+| Search term | Current landing page | Evidence | Next change |
+|---|---|---|---|
+| exterior painters / exterior repaint | `/services/exterior-painting/` | First confirmed local project (Seattle, summer, in-house crew) became available this round | **Done:** added a 2-photo gallery (was single hero photo) with a link to the new case study |
+| cabinet painting / cabinet refinishing / kitchen cabinet painters | `/services/cabinet-refinishing/` | Business's own approved copy already uses both terms for one service | **Done:** synonym added to overview/meta description + new FAQ |
+| painting contractor Seattle | `/service-areas/seattle-wa/` | Owner confirmed Seattle project this round — page's "Recent Projects" section had never had real photos before | **Done:** 2 real project photos added, case study cross-linked from the page |
+| painting contractor Bellevue | `/service-areas/bellevue-wa/` (404) | Historical impressions at a very weak position (SC export, 2026-11-05) + named priority + ad-targeted, but zero verified local material even after this round's confirmed facts ("serves Bellevue" ≠ a Bellevue project/testimonial/context) | **Not done.** Brief kept ready; exact ask for Jose below. Not built as a preview — there isn't enough verified material to make it useful on its own yet. |
+| interior painters [near me] | `/services/interior-painting/` | Gallery/CTA already added in PR #20 | No further change this round |
+
+### 5. Top 3 actions, ranked by likely lead impact
+1. **Seattle case study + Recent Projects unlock.** Seattle is already the highest-traffic page on the whole service-area side, and it had zero real project proof until today. Zero blockers — implemented and verified this round.
+2. **Cabinet painting/refinishing synonym coverage.** Low effort, directly captures a second phrasing of real search intent on a page that's already indexed and already getting impressions (per the cabinet-cost article's existence). Zero blockers — implemented this round.
+3. **Bellevue local proof.** Highest-potential item on the list (real historical impressions, named priority, ad-targeted) but ranked third because it isn't done — it depends entirely on Jose supplying one of the three inputs below. Nothing to implement yet without inventing content.
+
+### 6. Bellevue: brief kept, not built — exact ask for Jose
+Confirming "Refined Painting serves Bellevue, WA" is a service-area fact, not local proof, and the Seattle bungalow project is explicitly not substituted as Bellevue evidence. Ask Jose for **any one** of these (one is enough to stop the page being empty; per `docs/CITY-PAGE-PROPOSAL.md`, three or more projects is the good minimum):
+1. Which Drive "House" folder(s) are a confirmed Bellevue job.
+2. A permitted customer review from a Bellevue homeowner.
+3. One or two sentences of local context Jay can personally speak to for Bellevue.
+Also needs sign-off on which (if any) of the six suggested neighborhoods (Bridle Trails, Somerset, Newport Hills, Crossroads, Enatai, Downtown Bellevue) are real coverage. The page itself is mechanical to build once any one of these lands — same `CityPageLayout`, same registry pattern Seattle and Kirkland already use.
+
+### 7. What's new vs. preserved
+- **Preserved, unchanged:** PR #20's gallery layout, mobile CTA placement, and Seattle↔article cross-links. This round's branch is stacked on top of PR #20, not merged into it, and touches none of its files.
+- **New this round:** the Seattle case study post, Seattle's first real local project photos, the Exterior Painting gallery + case study link, and the cabinet painting/refinishing synonym + FAQ.
+- **Not done, left open:** Bellevue page (brief only), Kenmore/Redmond/Sammamish query-level data (no connector), GBP/Maps performance (no connector), everything else already logged as open in this file.
+- Nothing merged, no GBP post published, no live form submitted, no change to JobNimbus, Make, tracking, animations, or paid targeting.
+
+### Correction (2026-11-18): case study narrowed to confirmed trim work
+On review, the case study's claim that the job "covered the main house siding, a detached garage, and the porch railings and steps" wasn't supported by the project's own records: the only in-progress (process) photos show work on the porch railings and steps, and the siding/garage are described as the same green in both the before and finished photos — i.e. unchanged. Retitled to **"Seattle Bungalow Trim Project: Porch Railings and Steps"** and narrowed the body copy to the railings/steps work that's actually documented. The house and garage before/after photos are still shown for context, not as a claim the crew worked on them. URL unchanged (`/blog/green-bungalow-exterior-repaint-seattle/`); updated everywhere the old title was referenced (post metadata, Seattle page's related-article link).

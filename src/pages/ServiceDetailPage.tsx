@@ -84,7 +84,15 @@ const hasProjectProof: Partial<Record<ServiceId, boolean>> = {
 // never claims more than what the photo shows.
 const projectGalleryIds: Partial<Record<ServiceId, string[]>> = {
   interior: ["green-living-room-orange-entry", "blue-walls-orange-ceiling-kitchen", "staircase-and-hallway"],
+  exterior: ["exterior-white", "green-bungalow-trim"],
   cabinets: ["cabinets-sage"],
+};
+
+// The green bungalow job is the first project with a confirmed city
+// (Seattle, confirmed 2026-11-17), so it also gets a link to its own case
+// study. No other project has a confirmed city yet.
+const caseStudyLinks: Partial<Record<ServiceId, { href: string; label: string }>> = {
+  exterior: { href: "/blog/green-bungalow-exterior-repaint-seattle", label: "Read the Full Case Study" },
 };
 
 export function ServiceDetailPage() {
@@ -207,9 +215,16 @@ export function ServiceDetailPage() {
             {/* Estimate CTA sits right under the gallery so a mobile visitor scrolling
                 through photos doesn't have to scroll back up to the hero to act. */}
             <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <LinkButton href="/projects" variant="ghost">
-                View All Projects
-              </LinkButton>
+              <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
+                <LinkButton href="/projects" variant="ghost">
+                  View All Projects
+                </LinkButton>
+                {caseStudyLinks[serviceId] ? (
+                  <LinkButton href={caseStudyLinks[serviceId]!.href} variant="ghost">
+                    {caseStudyLinks[serviceId]!.label}
+                  </LinkButton>
+                ) : null}
+              </div>
               <Button onClick={() => openQuoteModal(serviceId)} size="lg">
                 Get a Free Estimate
               </Button>
