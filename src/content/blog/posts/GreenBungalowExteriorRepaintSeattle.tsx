@@ -1,23 +1,29 @@
 import { useQuoteModal } from "../../../components/quote/QuoteModalContext";
 import { ArticleH2, ArticleImageGrid, ArticleInlineCTA, ArticleLink, ArticleP } from "../../../components/blog/ArticleContent";
-import { projects } from "../../projects/projects";
+import { projectPhoto } from "../../projects/projects";
 
 // CASE STUDY. City (Seattle) and season (completed in summer, exact month and
 // year not confirmed) are confirmed by the owner. The crew is Refined
-// Painting's in-house painting crew (confirmed). Scope is deliberately
-// narrow: the project's own title ("Green Bungalow Trim and Railings") and
-// its "In progress" photos only document work on the porch railings and
-// steps (sanding, reinstalling). The siding and the garage are described
-// as green in both the "Before" and "Finished" photos — i.e. unchanged —
-// so this is written as a trim project, not a full exterior repaint. Do
-// not restore the "covered the siding and garage" framing without an
-// in-progress photo (or the owner's word) actually showing that work.
-// No neighborhood, prep steps, or products beyond what's stated here are
-// confirmed for this job.
-const project = projects.find((p) => p.id === "green-bungalow-trim")!;
-const beforePhotos = project.photos.filter((p) => p.stage === "Before").map((p) => ({ src: p.lg, alt: p.alt }));
-const inProgressPhotos = project.photos.filter((p) => p.stage === "In progress").map((p) => ({ src: p.lg, alt: p.alt }));
-const finishedPhotos = project.photos.filter((p) => p.stage === "Finished").map((p) => ({ src: p.lg, alt: p.alt }));
+// Painting's in-house painting crew (confirmed). No neighborhood, year,
+// products, or installation scope beyond what's below is confirmed.
+//
+// Scope is deliberately narrow and photo-led: only the porch railings and
+// steps have documentation of actual work (a photo of sanding, a photo of
+// masking/drop cloths). The siding and garage are shown as the same green
+// in both "Before" and "Finished" photos — i.e. unchanged — so this article
+// shows only porch photos, not the house or garage.
+//
+// A photo captioned "Newly installed porch railing" shows the railing's
+// state, not who installed it — the copy below never claims Refined
+// Painting installed or reinstalled it, only what's directly documented:
+// sanding, and masking/protecting the area before painting. Do not add an
+// installation claim, a "final coat" claim, or restore the house/garage
+// photos without new evidence.
+const beforePorch = projectPhoto("green-bungalow-trim", 6); // "Porch railing and steps before the project"
+const finishedPorch = projectPhoto("green-bungalow-trim", 3); // "Green bungalow front with white porch railings and steps"
+const sandingPhoto = projectPhoto("green-bungalow-trim", 9); // "Worker sanding porch railings during trim work"
+const maskingPhoto = projectPhoto("green-bungalow-trim", 10); // "Drop cloth and tape on a porch deck during trim work"
+const railingShownPhoto = projectPhoto("green-bungalow-trim", 11); // "Newly installed porch railing with wood steps during trim work"
 
 export function GreenBungalowExteriorRepaintSeattle() {
   const { openQuoteModal } = useQuoteModal();
@@ -26,22 +32,33 @@ export function GreenBungalowExteriorRepaintSeattle() {
     <>
       <ArticleP>
         This Seattle bungalow trim project, completed in summer by Refined Painting's in-house painting crew,
-        refreshed the porch railings and steps. Before-and-after photos of the house and the detached garage are
-        included below for context.
+        is documented here from before to finished. The focus is the porch railings and steps.
       </ArticleP>
 
-      <ArticleH2 id="before">Before</ArticleH2>
-      <ArticleImageGrid images={beforePhotos} />
+      <ArticleH2 id="before-and-after">Before and After</ArticleH2>
+      <ArticleImageGrid
+        images={[
+          { src: beforePorch.lg, alt: beforePorch.alt, label: "Before", caption: "The porch railings and steps before the project." },
+          {
+            src: finishedPorch.lg,
+            alt: finishedPorch.alt,
+            label: "Finished",
+            caption: "The same porch railings and steps, finished. This photo isn't from the exact same angle as the before photo.",
+          },
+        ]}
+      />
 
-      <ArticleH2 id="in-progress">In Progress</ArticleH2>
+      <ArticleH2 id="documented-work">Documented Work</ArticleH2>
       <ArticleP>
-        The porch railings were sanded and reinstalled as part of the job, shown here before the final coat went
-        on.
+        These photos show the porch railings being sanded, and the area being masked off, ahead of painting.
       </ArticleP>
-      <ArticleImageGrid images={inProgressPhotos} />
-
-      <ArticleH2 id="finished">Finished</ArticleH2>
-      <ArticleImageGrid images={finishedPhotos} />
+      <ArticleImageGrid
+        images={[
+          { src: sandingPhoto.lg, alt: sandingPhoto.alt, caption: "Sanding the porch railings." },
+          { src: maskingPhoto.lg, alt: maskingPhoto.alt, caption: "The porch deck masked off before painting." },
+          { src: railingShownPhoto.lg, alt: railingShownPhoto.alt, caption: "The railing and steps, shown ahead of painting." },
+        ]}
+      />
 
       <ArticleInlineCTA onClick={() => openQuoteModal("exterior")}>
         Want trim or exterior work like this for your home?
