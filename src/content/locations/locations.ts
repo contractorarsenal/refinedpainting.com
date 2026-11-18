@@ -28,6 +28,13 @@
 // from a photo, and keep website coverage separate from ad targeting.
 
 import { serviceAreas } from "../../lib/content";
+import { projectPhoto } from "../projects/projects";
+
+// Confirmed by the owner (2026-11-17): the "green-bungalow-trim" project was
+// completed in Seattle. This is the first project with a confirmed city —
+// every other project remains unassigned until confirmed the same way.
+const seattleProjectSiding = projectPhoto("green-bungalow-trim", 0);
+const seattleProjectGarage = projectPhoto("green-bungalow-trim", 2);
 
 export interface LocationProjectImage {
   src: string;
@@ -120,6 +127,10 @@ const cityContent: Record<string, Partial<LocationContent>> = {
       { name: "Queen Anne" },
       { name: "Capitol Hill" },
     ],
+    localProjectImages: [
+      { src: seattleProjectSiding.lg, alt: seattleProjectSiding.alt },
+      { src: seattleProjectGarage.lg, alt: seattleProjectGarage.alt },
+    ],
     relatedArticles: [
       {
         title: "How Often Should You Repaint Your Home's Exterior in Seattle?",
@@ -128,6 +139,10 @@ const cityContent: Record<string, Partial<LocationContent>> = {
       {
         title: "Best Time to Paint Your Home Exterior in Seattle",
         href: "/blog/best-time-to-paint-your-home-exterior-in-seattle/",
+      },
+      {
+        title: "Seattle Exterior Repaint Case Study: Green Bungalow, Garage and Porch Trim",
+        href: "/blog/green-bungalow-exterior-repaint-seattle/",
       },
     ],
   },

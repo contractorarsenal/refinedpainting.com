@@ -2,9 +2,10 @@ import type { ComponentType } from "react";
 import interiorPrepRoom from "../../assets/images/projects/interior-prep-room.webp";
 import interiorBrightFinished from "../../assets/images/projects/interior-bright-finished.webp";
 import cabinetsSageGreen from "../../assets/images/projects/cabinets-sage-green.webp";
-import { coverPhoto } from "../projects/projects";
+import { coverPhoto, projectPhoto } from "../projects/projects";
 import { BestTimeToPaintExteriorSeattle } from "./posts/BestTimeToPaintExteriorSeattle";
 import { CostToPaintKitchenCabinetsSeattle } from "./posts/CostToPaintKitchenCabinetsSeattle";
+import { GreenBungalowExteriorRepaintSeattle } from "./posts/GreenBungalowExteriorRepaintSeattle";
 import { HowOftenToRepaintExteriorSeattle } from "./posts/HowOftenToRepaintExteriorSeattle";
 import { HowToChooseInteriorPaintColors } from "./posts/HowToChooseInteriorPaintColors";
 import { InteriorPaintFinishesForEachRoom } from "./posts/InteriorPaintFinishesForEachRoom";
@@ -17,6 +18,7 @@ const exteriorHeroPhoto = coverPhoto("blue-craftsman-screened-porch");
 const colorsHeroPhoto = coverPhoto("green-living-room-orange-entry");
 const finishesHeroPhoto = coverPhoto("open-living-area");
 const bestTimeHeroPhoto = coverPhoto("teal-craftsman");
+const greenBungalowHeroPhoto = projectPhoto("green-bungalow-trim", 3);
 
 export interface BlogPost {
   slug: string;
@@ -216,6 +218,30 @@ export const blogPosts: BlogPost[] = [
       { id: "next-step", label: "Getting Help With Timing" },
     ],
     Body: BestTimeToPaintExteriorSeattle,
+  },
+  {
+    slug: "green-bungalow-exterior-repaint-seattle",
+    title: "Seattle Exterior Repaint Case Study: Green Bungalow, Garage and Porch Trim",
+    category: "exterior-painting",
+    excerpt:
+      "A real Seattle exterior repaint: siding, a detached garage, and porch railings and steps, finished green with white trim by our in-house crew.",
+    dek: "Before, during and after photos from a real Refined Painting exterior repaint in Seattle, completed in summer.",
+    publishDate: "2026-11-17",
+    readTimeMinutes: 1,
+    heroImage: {
+      src: greenBungalowHeroPhoto.lg,
+      alt: greenBungalowHeroPhoto.alt,
+    },
+    relatedService: { label: "Exterior Painting", href: "/services/exterior-painting" },
+    metaDescription:
+      "A Seattle exterior repaint case study: a green bungalow, garage and porch railings, completed in summer by Refined Painting's in-house crew.",
+    toc: [
+      { id: "before", label: "Before" },
+      { id: "in-progress", label: "In Progress" },
+      { id: "finished", label: "Finished" },
+      { id: "next-step", label: "See More" },
+    ],
+    Body: GreenBungalowExteriorRepaintSeattle,
   },
 ];
 

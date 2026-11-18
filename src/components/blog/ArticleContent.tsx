@@ -85,6 +85,22 @@ export function ArticleCallout({ type, children }: ArticleCalloutProps) {
   );
 }
 
+/** A small photo grid for a case study's before/in-progress/finished shots.
+ * Captions are each photo's own verified alt text, not written copy — same
+ * convention as the service-page project galleries. */
+export function ArticleImageGrid({ images }: { images: { src: string; alt: string }[] }) {
+  return (
+    <div className={`grid grid-cols-1 gap-4 ${images.length > 1 ? "sm:grid-cols-2" : ""}`}>
+      {images.map((image) => (
+        <figure key={image.src} className="overflow-hidden rounded-lg border border-ink/10 bg-ink shadow-card">
+          <img src={image.src} alt={image.alt} loading="lazy" decoding="async" className="aspect-4/3 w-full object-cover" />
+          <figcaption className="bg-cream-light px-4 py-3 text-sm leading-snug text-ink/70">{image.alt}</figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 export function ArticleLink({ href, children }: { href: string; children: ReactNode }) {
   return (
     <Link to={href} className="font-semibold text-teal-dark underline decoration-teal-dark/30 underline-offset-2 hover:text-ink">

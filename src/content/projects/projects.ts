@@ -1019,3 +1019,11 @@ export function coverPhoto(projectId: string): ProjectPhoto {
   if (!cover) throw new Error(`Missing project cover for "${projectId}"`);
   return cover;
 }
+
+/** A specific photo from a project by index, for when a cover alone isn't enough. */
+export function projectPhoto(projectId: string, index: number): ProjectPhoto {
+  const project = projects.find((p) => p.id === projectId);
+  const photo = project?.photos[index];
+  if (!photo) throw new Error(`Missing photo ${index} for "${projectId}"`);
+  return photo;
+}
