@@ -86,7 +86,9 @@ export function BestTimeToPaintExteriorSeattle() {
         <ArticleLink href="/blog/how-often-should-you-repaint-your-homes-exterior-in-seattle">
           how often should you repaint your home's exterior in Seattle
         </ArticleLink>
-        .
+        . If you are in Seattle, visit our{" "}
+        <ArticleLink href="/service-areas/seattle-wa/">Seattle page</ArticleLink> to see the neighborhoods we
+        serve and how to request an estimate.
       </ArticleP>
     </>
   );

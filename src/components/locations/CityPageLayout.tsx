@@ -1,7 +1,12 @@
 import { ArrowRight, MapPin } from "lucide-react";
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import type { LocationNeighborhood, LocationProjectImage, LocationTestimonial } from "../../content/locations/locations";
+import type {
+  LocationArticleLink,
+  LocationNeighborhood,
+  LocationProjectImage,
+  LocationTestimonial,
+} from "../../content/locations/locations";
 import { business, teamMembers } from "../../lib/content";
 import { useQuoteModal } from "../quote/QuoteModalContext";
 import { FinalCTA } from "../sections/FinalCTA";
@@ -22,6 +27,8 @@ interface CityPageLayoutProps {
   projects?: LocationProjectImage[];
   /** A real, permitted review from a customer in this city. */
   testimonial?: LocationTestimonial;
+  /** Published articles genuinely about this city. */
+  relatedArticles?: LocationArticleLink[];
   /** Optional notice above the heading (used only by the layout preview). */
   banner?: ReactNode;
 }
@@ -39,6 +46,7 @@ export function CityPageLayout({
   neighborhoods,
   projects,
   testimonial,
+  relatedArticles,
   banner,
 }: CityPageLayoutProps) {
   const { openQuoteModal } = useQuoteModal();
@@ -189,6 +197,30 @@ export function CityPageLayout({
               &ldquo;{testimonial.quote}&rdquo;
               <footer className="mt-2 text-sm font-normal not-italic text-ink/50">{testimonial.source}</footer>
             </blockquote>
+          </Container>
+        </section>
+      ) : null}
+
+      {relatedArticles && relatedArticles.length > 0 ? (
+        <section className="border-t border-ink/10 bg-cream-light py-12 sm:py-16 lg:py-20">
+          <Container className="max-w-3xl">
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">Learn More</span>
+            <h2 className="mt-2 font-display text-2xl font-extrabold uppercase tracking-wide text-ink sm:text-3xl">
+              {cityName} Painting Guides
+            </h2>
+            <ul className="mt-6 flex flex-col gap-3">
+              {relatedArticles.map((article) => (
+                <li key={article.href} className="border-t-2 border-crest pt-3">
+                  <Link
+                    to={article.href}
+                    className="inline-flex items-center gap-1.5 text-base font-bold text-ink transition-colors hover:text-crest"
+                  >
+                    {article.title}
+                    <ArrowRight className="size-4 shrink-0" aria-hidden />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </Container>
         </section>
       ) : null}

@@ -53,6 +53,7 @@ export function LocationPage() {
         neighborhoods={location.neighborhoods}
         projects={location.localProjectImages}
         testimonial={location.localTestimonial}
+        relatedArticles={location.relatedArticles}
       />
     </>
   );

@@ -39,6 +39,14 @@ export interface LocationTestimonial {
   source: string;
 }
 
+/** A link to an already-published, genuinely city-specific article. Only for
+ * articles that are actually about this city, not a generic post with the
+ * city name added for internal-linking's sake. */
+export interface LocationArticleLink {
+  title: string;
+  href: string;
+}
+
 /** A neighborhood section on a city page. Only add one after the owner has
  * approved both the name and the text. A neighborhood is a section inside its
  * city's page, never a page of its own, and listing one is a coverage claim. */
@@ -64,6 +72,8 @@ export interface LocationContent {
   neighborhoods?: LocationNeighborhood[];
   /** A sentence or two above the service cards, written for this city's homeowners. */
   servicesIntro?: string;
+  /** Published articles that are genuinely about this city. Empty until one exists. */
+  relatedArticles?: LocationArticleLink[];
   /** What's required before this page can go live — cleared out as items are verified. */
   missingContentNeeded: string[];
 }
@@ -109,6 +119,16 @@ const cityContent: Record<string, Partial<LocationContent>> = {
       { name: "Wallingford" },
       { name: "Queen Anne" },
       { name: "Capitol Hill" },
+    ],
+    relatedArticles: [
+      {
+        title: "How Often Should You Repaint Your Home's Exterior in Seattle?",
+        href: "/blog/how-often-should-you-repaint-your-homes-exterior-in-seattle/",
+      },
+      {
+        title: "Best Time to Paint Your Home Exterior in Seattle",
+        href: "/blog/best-time-to-paint-your-home-exterior-in-seattle/",
+      },
     ],
   },
 };
