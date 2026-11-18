@@ -31,8 +31,8 @@ export function GreenBungalowExteriorRepaintSeattle() {
   return (
     <>
       <ArticleP>
-        This Seattle bungalow trim project, completed in summer by Refined Painting's in-house painting crew,
-        is documented here from before to finished. The focus is the porch railings and steps.
+        Before, during, and after photos of a Seattle bungalow porch project completed in summer by Refined
+        Painting's in-house crew. The work shown focuses on the railings and steps.
       </ArticleP>
 
       <ArticleH2 id="before-and-after">Before and After</ArticleH2>
@@ -43,7 +43,7 @@ export function GreenBungalowExteriorRepaintSeattle() {
             src: finishedPorch.lg,
             alt: finishedPorch.alt,
             label: "Finished",
-            caption: "The same porch railings and steps, finished. This photo isn't from the exact same angle as the before photo.",
+            caption: "Finished porch, viewed from another angle.",
           },
         ]}
       />
