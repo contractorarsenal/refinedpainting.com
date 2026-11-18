@@ -2,7 +2,7 @@
 
 Operating instructions for this project. Read this first in every session. Keep responses concise and avoid full-repository scans.
 
-Verified on 2026-10-15 from source files, `gh` queries, and live HTTP checks. Updated 2026-11-04 (PR #7 merged, business-info cleanup). Items marked **[unverified]** need confirmation in a dashboard or with the client.
+Verified on 2026-10-15 from source files, `gh` queries, and live HTTP checks. Updated 2026-11-04 (PR #7 merged, business-info cleanup). Updated 2026-11-18 (refinedpainting.co confirmed serving this React build, not WordPress — see §1). Items marked **[unverified]** need confirmation in a dashboard or with the client.
 
 Current release status and open owner decisions: `PROJECT-STATUS.md`. Per-fact evidence for every business claim: `docs/BUSINESS-INFO-REGISTER.md`. Read both before editing public copy.
 
@@ -10,19 +10,21 @@ Current release status and open owner decisions: `PROJECT-STATUS.md`. Per-fact e
 
 ## 1. Environments: read this before any deploy or "live" request
 
-There are two separate environments. Never treat them as one.
+**Updated 2026-11-18: refinedpainting.co now serves this repository's React build, not WordPress.** Confirmed live via HTTP: `refinedpainting.co/robots.txt` matches this repo's `public/robots.txt` exactly (not WordPress's WP Defender version), the homepage HTML contains this repo's own GA4 ID (`G-X3HQQ4CQDB`) and React build asset filenames, and no `wp-content`/`wp-json`/WordPress markers are present anywhere on the domain. This was discovered mid-session, not caused by anything in this session — the custom domain was evidently already attached to the Cloudflare Pages project by the time this check ran. **Exactly when the cutover happened and whether DNS/Cloudflare custom-domain settings changed are still [unverified]** — only the current HTTP response is confirmed.
 
-| Environment | URL | What serves it | Status |
+This reverses the prior assumption below (kept for history — do not delete; it explains why older `PROJECT-STATUS.md` entries, commit messages, and this file's own wording up to today treat the two as separate):
+
+| Environment (historical, pre-2026-11-18) | URL | What served it | Status |
 |---|---|---|---|
-| **Live client site** | https://refinedpainting.co | **WordPress** (wp-content, wp-json, WP Defender in robots.txt) | Client's real public site. Verified via HTTP. |
-| **React application** | https://refinedpainting-com.pages.dev (Pages project `refinedpainting-com`) | This repository, built and deployed by Cloudflare Pages | Verified. Serves the React build with the correct title and GA4 ID. |
+| **Live client site** | https://refinedpainting.co | WordPress (wp-content, wp-json, WP Defender in robots.txt) | Was the client's real public site; verified via HTTP as of 2026-10-15/11-04. **No longer current — see above.** |
+| **React application** | https://refinedpainting-com.pages.dev (Pages project `refinedpainting-com`) | This repository, built and deployed by Cloudflare Pages | Was the only place the React build was reachable. **refinedpainting.co now serves the same build — see above.** |
 
-- A push to `main` triggers a Cloudflare Pages deploy of the React app. It does **not** change refinedpainting.co, which still serves WordPress.
-- **Do not describe a successful Pages deployment as a production-domain launch.**
-- **[unverified]** Whether refinedpainting.co is attached to the Pages project in any way. Confirm in the Cloudflare dashboard. I have no dashboard access.
+- A push to `main` triggers a Cloudflare Pages deploy of the React app, and — as of the finding above — **this now appears to reach refinedpainting.co directly**, not just the Pages URL. Treat `main` as the live production branch for the real domain until told otherwise.
+- **Do not describe a Pages-only deploy as separate from the production domain anymore** — confirm with the client if this matters for a specific request, since the distinction this section used to rely on may no longer hold.
+- WordPress may still exist (as a retired, non-live installation, a staging copy, or something else) — nothing here confirms it's gone, only that it's not what currently answers at refinedpainting.co.
 
 ### Never do these without explicit, specific authorization for a migration
-- Modify WordPress (themes, plugins, content, settings, or its database).
+- Modify WordPress (themes, plugins, content, settings, or its database) — if it still exists anywhere.
 - Change DNS records.
 - Add, remove, or change Cloudflare custom domains or redirects.
 - Redirect or replace the production domain.
@@ -34,9 +36,9 @@ There are two separate environments. Never treat them as one.
 
 | Command | Meaning |
 |---|---|
-| **Check website** | Read-only inspection. Ask which environment (React Pages site or live WordPress) only if the answer changes the task. |
+| **Check website** | Read-only inspection. As of 2026-11-18, refinedpainting.co and the Pages URL appear to serve the same build (see §1) — still confirm which URL matters if the answer could change the task. |
 | **Update website** | Implement and verify changes locally in this React project. **Do not push.** |
-| **Push live** | Ambiguous while WordPress is the live domain. Explain the destination (Pages deploy from `main`, not the live domain) and **request explicit confirmation before pushing.** |
+| **Push live** | As of 2026-11-18, a push to `main` appears to reach refinedpainting.co directly (see §1) — treat this as a real production push, not a Pages-only deploy. **Always request explicit confirmation before pushing to `main`, and say plainly that it affects the live domain.** |
 | **Deploy preview** | Deploy only to an authorized preview environment. Never change the production branch or live domain. |
 | **Status** | Report branch, working tree, latest commit, open PRs, and outstanding work. |
 | **Refresh context** | Inspect recent changes and this file. Do not rescan the repository. |
@@ -272,7 +274,7 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 - **Build command `npm run build` and output directory `dist`:** inferred from `package.json` and `scripts/prerender.mjs`. Check the Pages project settings before relying on them.
 - **Node version 22:** from `.node-version`. Confirm the Pages build image uses it.
 - **Production branch `main`:** inferred from the check on `main`. The production-branch setting is **[unverified]** in the dashboard.
-- **Custom domain binding:** **[unverified]**. The live `refinedpainting.co` serves WordPress, and the Pages project's domain list has not been checked.
+- **Custom domain binding:** the Pages project's domain list itself has not been checked in the dashboard, but as of 2026-11-18, `refinedpainting.co` responds with this repo's own build (see §1) — so some binding exists in practice even though it hasn't been confirmed in the Cloudflare UI.
 
 ### Rules
 - Do not change Pages settings, build configuration, environment variables, or domains without approval.
@@ -296,8 +298,8 @@ Common usage: `text-ink`, `text-ink/70` for secondary text, `bg-cream` and `bg-c
 
 ## 12. Known issues and risks (supported by the repository)
 
-1. **Live domain vs. React app.** `refinedpainting.co` serves WordPress. The React app is only visible at the Pages URL. See §1.
-2. **Two GA4 properties.** Repo uses `G-X3HQQ4CQDB`. Live WordPress uses `G-TCE6S4DT0K`. Ownership is unresolved.
+1. **Live domain vs. React app — reversed 2026-11-18.** `refinedpainting.co` now serves this repo's React build directly, confirmed via HTTP (see §1). The historical distinction ("WordPress is live, React is Pages-only") no longer holds; exactly when this changed is unverified.
+2. **Two GA4 properties — status unclear after the domain finding above.** Repo uses `G-X3HQQ4CQDB`. A prior check (2026-11-04) found the then-live WordPress site using `G-TCE6S4DT0K` — but that check predates the domain reversal in #1, so it's unknown whether `G-TCE6S4DT0K` is still in use anywhere live. Ownership of both IDs is still unresolved.
 3. **Cloudflare custom-domain mapping unverified.** Needs dashboard confirmation.
 4. **Public preview URLs.** `refinedpainting-com.pages.dev` and per-PR `*.refinedpainting-com.pages.dev` are public. Duplicate-content risk if indexed. Robots or noindex on these is **[unverified]**.
 5. **No branch protection on `main`.** Direct pushes deploy.
