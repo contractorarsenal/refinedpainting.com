@@ -221,12 +221,13 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "green-bungalow-exterior-repaint-seattle",
-    title: "Seattle Exterior Repaint Case Study: Green Bungalow, Garage and Porch Trim",
+    title: "Seattle Bungalow Trim Project: Porch Railings and Steps",
     category: "exterior-painting",
     excerpt:
-      "A real Seattle exterior repaint: siding, a detached garage, and porch railings and steps, finished green with white trim by our in-house crew.",
-    dek: "Before, during and after photos from a real Refined Painting exterior repaint in Seattle, completed in summer.",
+      "A real Seattle bungalow trim project: porch railings and steps refreshed by our in-house crew, completed in summer.",
+    dek: "Before, during and after photos from a real Refined Painting trim project on a Seattle bungalow, completed in summer.",
     publishDate: "2026-11-17",
+    updatedDate: "2026-11-18",
     readTimeMinutes: 1,
     heroImage: {
       src: greenBungalowHeroPhoto.lg,
@@ -234,7 +235,7 @@ export const blogPosts: BlogPost[] = [
     },
     relatedService: { label: "Exterior Painting", href: "/services/exterior-painting" },
     metaDescription:
-      "A Seattle exterior repaint case study: a green bungalow, garage and porch railings, completed in summer by Refined Painting's in-house crew.",
+      "A Seattle bungalow trim project case study: porch railings and steps refreshed in summer by Refined Painting's in-house crew.",
     toc: [
       { id: "before", label: "Before" },
       { id: "in-progress", label: "In Progress" },

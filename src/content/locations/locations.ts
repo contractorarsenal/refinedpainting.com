@@ -141,7 +141,7 @@ const cityContent: Record<string, Partial<LocationContent>> = {
         href: "/blog/best-time-to-paint-your-home-exterior-in-seattle/",
       },
       {
-        title: "Seattle Exterior Repaint Case Study: Green Bungalow, Garage and Porch Trim",
+        title: "Seattle Bungalow Trim Project: Porch Railings and Steps",
         href: "/blog/green-bungalow-exterior-repaint-seattle/",
       },
     ],
