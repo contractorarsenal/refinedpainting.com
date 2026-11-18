@@ -237,9 +237,8 @@ export const blogPosts: BlogPost[] = [
     metaDescription:
       "A Seattle bungalow trim project case study: porch railings and steps refreshed in summer by Refined Painting's in-house crew.",
     toc: [
-      { id: "before", label: "Before" },
-      { id: "in-progress", label: "In Progress" },
-      { id: "finished", label: "Finished" },
+      { id: "before-and-after", label: "Before and After" },
+      { id: "documented-work", label: "Documented Work" },
       { id: "next-step", label: "See More" },
     ],
     Body: GreenBungalowExteriorRepaintSeattle,
