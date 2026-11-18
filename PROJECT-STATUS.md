@@ -1,6 +1,6 @@
 # Refined Painting: Project Status
 
-Updated 2026-11-16. No credentials or keys in this file.
+Updated 2026-11-17. No credentials or keys in this file.
 
 ## Release status
 - **Approved site:** `5e9afcd` merged to `main` by PR #7 as `12038c6`. Deployed by Cloudflare Pages to https://refinedpainting-com.pages.dev (success).
@@ -161,10 +161,138 @@ A client-reported audit (dated 2026-11-15) listed 9 city URLs, `/warranty/`, and
 - Spot-checked `/`, `/services/`, `/services/interior-painting/`, `/contact/`, `/faq/`, `/thank-you/` for regressions — all 200. This PR touched no form, nav, or layout component, so no test lead was submitted.
 - Kirkland's content gap (no neighborhoods/projects/testimonial section) was re-confirmed as intentional, not a bug: `CityPageLayout.tsx` only renders those sections when data is supplied, and Kirkland's registry entry supplies none, so the page ships without them rather than with placeholder or invented content.
 
-## Search Console findings (export dated 2026-11-05, in `Downloads/`; not committed)
-Use these to order future work. Clicks / impressions / average position, last period in the export.
+## Search Console findings — HISTORICAL (export dated 2026-11-05, in `Downloads/`; not committed)
+**These numbers are historical, not live.** They come from a one-time CSV export pulled 2026-11-05; no Search Console connector is available from this environment, so the figures below have not been, and cannot currently be, refreshed. Treat them as directional (which unpublished pages had *some* pre-existing visibility) rather than as current traffic, and re-pull the export before using these numbers to justify a go/no-go decision. Clicks / impressions / average position, period ending 2026-11-05.
 - **Article restored this round:** the exterior repainting article, 3 clicks, 140 impressions, position 6.5 (the strongest blog page).
 - **City pages by impressions** (candidates after Seattle and Kirkland): Kenmore 5,766 (position 8.8), Kirkland 3,149 (38.4), Lynnwood 3,046 (19.1), Shoreline 2,703 (23.8), Mercer Island 2,623 (25.9), Bellevue 2,240 (43.1), Everett 1,874 (22.6), Marysville 1,570 impressions with 3 clicks (18.9), Sammamish 1,719 (18.6). Palmer had 2 clicks on 56 impressions (not an approved city).
 - **Other legacy URLs with clicks:** `/portfolio/` 5 clicks (already redirected), `/warranty/` 1 click on 142 impressions (position 8.1), `/blog/kitchen-cabinet-refinishing-process/` 1 click.
 - Search Console also reports older URL variants (for example `/service-areas/painters-redmond-wa`, `/about-us`) as pages with redirects. They were not reviewed.
+- **Kenmore query-level data: not available.** The 2026-11-05 export captured page-level totals (clicks/impressions/position per URL) only, not the Queries report, and that export is no longer present in `Downloads/` to re-check. No Search Console connector is authenticated in this environment, so the actual search terms driving Kenmore's 5,766 impressions cannot be pulled from here. To find out which queries they were, open the Search Console property directly (Performance → Pages → filter to `/service-areas/kenmore-wa` → Queries tab) and export that, or share it here.
 
+
+## Content expansion: roadmap and batch 1 (2026-11-17, branch `feat/content-expansion-batch-1`)
+
+### 0. PR #16 status check
+Checked before any new work: PR #16 was already merged (`32f1254`, 2026-11-16) and verified live on `https://refinedpainting.co` in the prior session. Re-confirmed again now with live HTTP checks: `/service-areas/kirkland-wa/`, `/service-areas/seattle-wa/`, both restored articles, `/services/interior-painting/` and `/services/cabinet-refinishing/` all return 200. Nothing to finish on PR #16 — this batch builds on top of it from a new branch off `main`.
+
+### 1. Research inputs actually available (and what's missing)
+- **Search Console export** (2026-11-05, logged above under "Search Console findings") has real impressions/position data for 8 of the 9 originally-audited cities. Reused here rather than re-guessed.
+- **"Seattle Maps grid" baseline**: not found. It is not in this repository, in `~/Downloads`, or anywhere else checked, and was not attached to this conversation. The ranking below does **not** use Maps-grid data for Seattle or anywhere else — flagging this so it isn't mistaken for a researched number. Send the actual file or export and it can be folded in.
+- **Redmond-specific demand data**: not in the Search Console export either. Only a legacy URL variant (`/service-areas/painters-redmond-wa`) appears, logged as "not reviewed." Redmond is ranked below on its named priority and ad-targeting status alone, not on measured demand — call this out to Jay before treating it as equally evidenced as Bellevue or Sammamish.
+- **Approved project library**: re-checked `src/content/projects/projects.ts`. No project is tagged with a city (confirmed — PR #19's "address fields" added a street-address field to the *lead-capture forms*, not to the published gallery, so this remains unverified for every city including Seattle and Kirkland). Cabinet Refinishing has exactly **one** tagged project (`cabinets-sage`) in the entire library; Interior Painting has eleven.
+
+### 2. The five named cities, researched directly
+| City | URL | Typical homeowner question | Demand evidence | Verified project proof | Related links |
+|---|---|---|---|---|---|
+| Seattle | `/service-areas/seattle-wa/` | "house painters Seattle," "exterior painting Capitol Hill" | Live; already ranked and getting the article cross-links added this round. | None tagged to Seattle specifically (six neighborhoods are owner-confirmed, but no photo is). | Now links to both Seattle exterior-repaint articles; hub links it. |
+| Kirkland | `/service-areas/kirkland-wa/` | "painting contractor Kirkland WA" | 3,149 impressions, position 38.4 (SC export, historical, 2026-11-05). Live since PR #16. | None tagged to Kirkland. | Hub links it; no article is Kirkland-specific yet (backlog item exists, see #7 below). |
+| Bellevue | `/service-areas/bellevue-wa/` | "house painters Bellevue," "cabinet refinishing Bellevue" | 2,240 impressions, position 43.1 (SC export, historical, 2026-11-05). A real impression count at a very weak position is the classic signature of a missing page competing on domain authority alone — restoring it is likely to move position, not just add a URL. Named priority + ad-targeted. | None yet. | Would link from hub; no Bellevue-specific article exists or is proposed (none needed — avoid writing one just to pad the grid). |
+| Redmond | `/service-areas/redmond-wa/` | "painting contractor Redmond WA" | **Not found in the current Search Console export.** Named priority + ad-targeted only. | None yet. | Same as above. |
+| Sammamish | `/service-areas/sammamish-wa/` | "exterior painters Sammamish" | 1,719 impressions, position 18.6 (SC export, historical, 2026-11-05) — already ranking respectably without a page, on the strength of the old WordPress URL. Named priority + ad-targeted. | None yet. | Same as above. |
+
+All five city pages are blocked on the same input regardless of rank: a real local project tagged to that city, a permitted local testimonial, and verified local context (the same three-item checklist already documented in `src/content/locations/locations.ts` and `docs/CITY-PAGE-PROPOSAL.md`). Ranking them does not unblock them — see the Jesus/Jose list below.
+
+### 3. Found opportunities outside the five named cities
+The Search Console export (historical, 2026-11-05) also shows two unaudited, unpublished service-area cities with stronger demand signals than three of the five named ones: **Lynnwood** (3,046 impressions, position 19.1) and **Shoreline** (2,703, position 23.8). **Kenmore** (5,766 impressions, position 8.8) is the single strongest demand signal of any unpublished city on the whole site — well ahead of Kirkland, which is already live. These are flagged, not silently added to the plan, since the client's instructions named a different five; the ranked list below treats Kenmore as the top city-page opportunity on evidence, with Bellevue/Sammamish next by combined evidence + named priority, and notes where Lynnwood/Shoreline sit.
+
+### 4. Ranked roadmap — next 10
+1. **Kenmore city page** (`/service-areas/kenmore-wa/`) — strongest demand signal of any unpublished city (5,766 impressions, position 8.8, historical SC export, 2026-11-05 — see note above on re-pulling before relying on this). Blocked on local project/testimonial/context, same as every city page.
+2. **Bellevue city page** — named priority, ad-targeted, real impressions at a very weak position (see table above).
+3. **Sammamish city page** — named priority, ad-targeted, already ranking respectably without a page.
+4. **Cabinet Refinishing photo gap** — the service page (improved this round) is capped at one approved project. This is the single biggest content gap blocking any further Cabinet Refinishing work (the page, a gallery, a case study, or a GBP series), and it is pure input, not design or code.
+5. **"Cabinet Refinishing vs. Replacement" article** (already scoped in `src/content/blog/backlog.ts`) — directly answers a real comparison question, can draw on already-approved `content.ts` facts, and gives the thin Cabinet Refinishing page a second internal link once written.
+6. **Redmond city page** — named priority, ad-targeted, but flagged above as the one city in this batch with no demand evidence on file. Recommend pulling a Redmond-specific Search Console query before writing it, so it isn't scoped on assumption alone.
+7. **`/warranty/` restoration** — blocked purely on Jay's sign-off, not on research or code. It previously ranked at position 8.1 (142 impressions, 1 click), the best position of anything in the whole export, so restoring it is likely high-leverage once the terms are confirmed. Note: the 5-year warranty content already renders live at `/services/#warranty` from the same `warranty` object in `content.ts` — a possible low-effort option is redirecting the legacy URL there instead of writing a new page, but that is a call for Jay to approve explicitly, not something implemented unprompted here.
+8. **Lynnwood city page** — found opportunity (§3), stronger evidence than 3 of the 5 named cities, not on anyone's named list.
+9. **Shoreline city page** — same basis as Lynnwood.
+10. **"Why Kirkland Homes Need Specialized Exterior Painting & Siding Care"** (already scoped in `backlog.ts`) — gives the live Kirkland page its first dedicated article, reusing only general PNW siding/moisture facts already approved; the backlog entry itself warns not to invent a Kirkland-specific project claim, which still holds.
+
+Not recommended: filling Everett, Mercer Island, Marysville, Medina or the remaining cities right now — each has a real impression count but none stronger than what's already ranked above, and adding them now would be grid-filling rather than evidence-led.
+
+### 5. Batch 1 — built today
+- **Kirkland ⇄ Seattle cross-linking**: `/blog/best-time-to-paint-your-home-exterior-in-seattle/` now links to `/service-areas/seattle-wa/` (the other restored Seattle article already did). Added a `relatedArticles` field to the city-page registry (`locations.ts` → `CityPageLayout.tsx` → `LocationPage.tsx`) so Seattle's page now links back to both Seattle-specific articles under a new "Learn More" section — rendered conditionally like every other optional section on this layout, so Kirkland (which has no city-specific article yet) shows nothing extra. The Service Areas hub already linked Kirkland and Seattle only; unchanged.
+- **Interior Painting page** (`/services/interior-painting/`): the single-photo "Real Projects" block is now a 3-photo gallery (green living room, blue-and-orange kitchen, staircase — all verified `Finished`-stage cover photos from existing approved projects), each with its own caption pulled directly from that photo's own verified alt text, not written copy. A "Get a Free Estimate" button sits directly under the gallery, in addition to the existing buttons higher on the page, so a mobile visitor scrolling through photos doesn't have to scroll back up.
+- **Cabinet Refinishing page** (`/services/cabinet-refinishing/`): same treatment, but with its one approved photo (`cabinets-sage`) — the gallery renders as a single card rather than a 3-up grid, honestly reflecting that only one job is currently documented for this service. Same CTA placement.
+- **Exterior Painting / Deck & Fence Staining**: unchanged — they still use the original single-hero-photo layout (not in scope this round).
+- Verification: `npx tsc -b` clean, `npm run lint` clean (same five pre-existing warnings as before this branch, none new), `npm run build` produced the same 27 prerendered routes with no errors. Confirmed in the built HTML that both service pages render the new gallery/CTA and that Seattle's prerendered page contains both new article links.
+- **Case study: not drafted.** The most photo-documented jobs in the library (`green-bungalow-trim`, 12 photos; `blue-craftsman-screened-porch`, 11; `blue-craftsman-deck`, 10; `gray-gambrel-home`, 9) show a real before → in-progress → finished arc, but `ProjectEntry` carries only an id, title, category and photos — no city, scope, timeline, materials, or challenge/outcome narrative. A trustworthy case study needs that narrative from the crew, not inference from what's visible in a photo. This is the first item on the Jesus/Jose list below; once one job has a confirmed city and crew narrative, `green-bungalow-trim` or `blue-craftsman-screened-porch` are the strongest candidates to write up first.
+
+### 6. GBP post drafts (not published — for approval)
+Both use already-live service URLs and existing approved photo assets; no new claims.
+
+**Post 1 — Interior Painting** (caption revised 2026-11-17: the registry's own alt text for this photo — "Living room with green walls, a wood-plank ceiling and track lighting" — documents that the ceiling is wood-plank, not that the crew did any work on it. The original draft said "a cleaner look on the wood-plank ceiling," which implied finished ceiling work that isn't recorded anywhere. Rewritten to describe only what's visible and verified: the wall color.)
+- Photo: `src/assets/images/projects/green-living-room-orange-entry/vaulted-living-room-green-walls-lg.webp` (same cover photo now used on the Interior Painting page gallery)
+- Caption: "A fresh coat changes how a room feels. This living room now has green walls under a wood-plank ceiling — see more interior painting work and get a free estimate for your own space."
+- CTA: Learn more → `https://refinedpainting.co/services/interior-painting/`
+
+**Post 2 — Cabinet Refinishing** (checked against the registry: "refinished in sage green" matches this project's own verified title and alt text exactly — no change needed.)
+- Photo: `src/assets/images/projects/cabinets-sage-green.webp`
+- Caption: "Cabinet refinishing can give a kitchen a whole new look without a full remodel. These cabinets were refinished in sage green — see what's included and get a free estimate."
+- CTA: Learn more → `https://refinedpainting.co/services/cabinet-refinishing/`
+
+**Gallery captions checked too:** the three Interior Painting gallery captions and the one Cabinet Refinishing caption on the live pages are rendered directly from each photo's own registry alt text (see `ServiceDetailPage.tsx`), not written separately — so they carry the same verified wording already governed by `projects.ts`'s own rule ("alt text... describe[s] only what is visible"). Nothing to rewrite there.
+
+### 7. One list for Jesus and Jose
+Each question is tied to the specific page it unlocks. Using already-approved material in the meantime — not waiting on replies to keep moving.
+1. **Cities**: which 2–3 cities do you want more leads from first — of Kenmore, Bellevue, Sammamish, Redmond (ranked above), or a different one? Unlocks: the next city page to build.
+2. **Case study**: pick one completed job (any of `green-bungalow-trim`, `blue-craftsman-screened-porch`, `blue-craftsman-deck`, `gray-gambrel-home` — the four most photographed) and tell us its city, roughly when it was done, and one or two things the crew actually did (prep, repairs, number of coats, anything the homeowner asked for). Unlocks: the first project case study, and that project's city page gaining real proof.
+3. **Cabinet Refinishing photos**: do you have before/after photos from any other cabinet refinishing job, even unpublished ones? Right now the whole site has exactly one documented cabinet job. Unlocks: a real Cabinet Refinishing gallery (today's page only has room for what's approved) and the "Refinishing vs. Replacement" article's own photo.
+4. **Warranty terms**: are you ready to confirm the exact 5-year warranty language for a standalone `/warranty/` page, or should it just redirect to the existing `/services/#warranty` section instead? Unlocks: restoring the single best-performing legacy URL in the whole Search Console export.
+5. **Kirkland specifics**: any Kirkland neighborhood names, a Kirkland customer review we can quote, or a Kirkland job to photograph? Unlocks: upgrading Kirkland's page past its current thin state, and gives the new Kirkland backlog article something real to point to.
+
+### 8. Left alone, as instructed
+JobNimbus, Make, Web3Forms, tracking, forms, animations and paid ad targeting were not touched. No city was redirected to Seattle or to the hub. No GBP post was published. Nothing was merged or deployed to production — this is a branch and PR for review.
+
+## Content expansion: PR #20 finishing pass (2026-11-17, same branch)
+
+### Mobile QA — Interior Painting and Cabinet Refinishing galleries
+Tested both preview pages in a real mobile viewport (resized browser window down to ~320px CSS width, confirmed by the gallery actually switching to a single stacked column — at a wider ~640px+ window the `sm:grid-cols-3` class correctly kept it at 3-across, which is the intended behavior, not a bug).
+- **Interior Painting** (`/services/interior-painting/`): 3-photo gallery stacks one per row at mobile width, each photo's caption readable underneath, "View All Projects" and "Get a Free Estimate" buttons stack cleanly above the sticky mobile CTA bar with no overlap.
+- **Cabinet Refinishing** (`/services/cabinet-refinishing/`): single-photo card renders the same way, same button layout.
+- **Both "Get a Free Estimate" buttons under the gallery were clicked and confirmed to open the 5-step Quote Modal** (lands on step 1, "Where is the project?"). Closed immediately afterward with the modal's own close button — no field was filled in and nothing was submitted.
+
+### Caption accuracy check (requested follow-up)
+Audited the gallery captions and both GBP drafts against the project registry (`src/content/projects/projects.ts`) for claims the photos don't actually support.
+- **On-page gallery captions**: no change needed. Each caption is rendered directly from that photo's own `alt` field (`{photo.alt}` in `ServiceDetailPage.tsx`), and that alt text is already governed by the registry's own rule to describe only what's visible — it was never written as separate marketing copy.
+- **GBP Post 1 (Interior Painting): rewritten.** The original caption said the project gave "a cleaner look on the wood-plank ceiling." The photo's alt text only documents that the ceiling *is* wood-plank — it doesn't say the crew refinished, painted, or otherwise worked on it. That's exactly the gap flagged: a photo showing a feature isn't proof work was done on that feature. Caption now only claims what's documented (new wall color) and describes the ceiling as a visible feature, not a completed scope item. New caption is in §6 above.
+- **GBP Post 2 (Cabinet Refinishing): no change.** "Refinished in sage green" is the project's own verified title and alt text, not a new claim.
+
+### Bellevue city page — brief (not implemented, not published)
+Per `docs/CITY-PAGE-PROPOSAL.md`'s own template and the same three-item checklist every city page needs (`src/content/locations/locations.ts`).
+- **URL:** `/service-areas/bellevue-wa/` (currently a genuine 404; stays that way until "ready")
+- **Demand case:** 2,240 impressions, position 43.1 — historical SC export, 2026-11-05 (see note above; re-pull before relying on this). Named priority + ad-targeted city.
+- **Suggested neighborhoods** (from the proposal doc, **not confirmed coverage** — Jay must approve, replace, or drop any of these before they appear on a page): Bridle Trails, Somerset, Newport Hills, Crossroads, Enatai, Downtown Bellevue.
+- **Still needed before this can be built, let alone published:**
+  1. Which Drive "House" folder(s) are a confirmed Bellevue job (three or more is a good minimum per the proposal; one is enough to stop the page being empty).
+  2. A permitted customer review from a Bellevue homeowner, if one exists.
+  3. Any local context Jay can personally speak to for Bellevue (one or two sentences — optional, same as Seattle's).
+  4. Sign-off on which of the six suggested neighborhoods (if any) are real coverage.
+- **What's already reusable once approved:** the exact same `CityPageLayout` component, the same conditional-rendering pattern (sections appear only when content exists), and the same registry wiring Kirkland and Seattle already use — so once the four items above are answered, building the page itself is a short, mechanical change, not new design or engineering work.
+- This is a brief for review, not a draft page. No file in `locations.ts` was added or flipped to "ready" for Bellevue.
+
+### Case study draft: "Green Bungalow Trim and Railings" (city withheld — not confirmed)
+Prepared from `green-bungalow-trim`, the most-photographed job in the registry (12 photos — the clearest before → in-progress → finished arc of anything on file: siding, a detached garage, and a porch with railings and steps). **No city, date, square footage, materials, or timeline are included below — none of those are in the registry, and inventing any of them would violate the no-fabrication rule for this content.** If Jesus or Jose confirm the city and what the crew did (Jesus/Jose question #2), this becomes a real, fully-specified case study; until then, it's a photo-led draft using only each photo's own verified alt text.
+
+**Working title:** Exterior Repaint: Bungalow, Garage, and Porch Trim *(no city in the title until one is confirmed)*
+
+**Before**
+- "Green bungalow side before the project with a window well"
+- "Green detached garage before the project with a white door"
+- "Porch railing and steps before the project"
+- "Green bungalow front before the project with a planter box on the porch"
+- "Porch railing and steps before the project beside a gate"
+
+**In progress**
+- "Worker sanding porch railings during trim work"
+- "Drop cloth and tape on a porch deck during trim work"
+- "Newly installed porch railing with wood steps during trim work"
+
+**Finished**
+- "Green bungalow siding with white window trim beside brick"
+- "Green bungalow corner with white window trim and shrubs"
+- "Green detached garage with a white door and gable trim"
+- "Green bungalow front with white porch railings and steps"
+
+**Draft copy** (visible facts only — no scope, timeline or location claims): "This job covered the main house, a detached garage, and the porch railings and steps, all finished in green with white trim. The in-progress photos show the porch railings being sanded and newly installed before the final coat. Before-and-after photos of the house, garage, and porch are below." No pricing, no duration, no named crew member, no city.
+
+**Still needed to finish this for real:** the city (so it can also become that city's page's "Recent Projects" proof), and a sentence or two from the crew on what the job actually involved beyond what's visible (same as Jesus/Jose question #2). Not implemented as a page or route — this is a content draft for review only.

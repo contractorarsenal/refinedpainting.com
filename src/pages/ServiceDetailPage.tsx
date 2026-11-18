@@ -76,6 +76,17 @@ const hasProjectProof: Partial<Record<ServiceId, boolean>> = {
   cabinets: true,
 };
 
+// A small multi-photo gallery for services with more than one documented
+// project. Cabinet Refinishing has only one project in the registry
+// ("cabinets-sage"), so its gallery is a single photo until more
+// before/after cabinet jobs are approved (see PROJECT-STATUS.md). Each
+// caption is the photo's own verified alt text, not written copy, so it
+// never claims more than what the photo shows.
+const projectGalleryIds: Partial<Record<ServiceId, string[]>> = {
+  interior: ["green-living-room-orange-entry", "blue-walls-orange-ceiling-kitchen", "staircase-and-hallway"],
+  cabinets: ["cabinets-sage"],
+};
+
 export function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const serviceId = slug ? getServiceIdFromSlug(slug) : undefined;
@@ -83,6 +94,8 @@ export function ServiceDetailPage() {
   const service = serviceId ? services.find((s) => s.id === serviceId) : undefined;
   const detail = serviceId ? serviceDetails[serviceId] : undefined;
   const hero = serviceId ? heroImages[serviceId] : undefined;
+  const galleryIds = serviceId ? projectGalleryIds[serviceId] : undefined;
+  const gallery = galleryIds?.map((id) => ({ id, photo: coverPhoto(id) }));
 
   const canonical = `${SITE_URL}/services/${slug ?? ""}/`;
 
@@ -167,7 +180,43 @@ export function ServiceDetailPage() {
         </Container>
       </section>
 
-      {hero && hasProjectProof[serviceId] ? (
+      {gallery && gallery.length > 0 ? (
+        <section className="border-t border-ink/10 bg-cream-light py-10 sm:py-20 lg:py-24">
+          <Container>
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-crest">See the Work</span>
+            <h2 className="mt-2 font-display text-2xl font-extrabold uppercase leading-[0.98] text-ink sm:text-3xl">
+              Real {service.title} Projects
+            </h2>
+            <div
+              className={`mt-8 grid grid-cols-1 gap-6 ${
+                gallery.length > 1 ? "sm:grid-cols-3" : "sm:max-w-md"
+              }`}
+            >
+              {gallery.map(({ id, photo }) => (
+                <div
+                  key={id}
+                  className="flex flex-col overflow-hidden rounded-lg border border-ink/10 bg-ink shadow-card"
+                >
+                  <div className="aspect-4/3 w-full">
+                    <ProjectImage src={photo.lg} alt={photo.alt} />
+                  </div>
+                  <p className="bg-cream px-4 py-3 text-sm leading-snug text-ink/70">{photo.alt}</p>
+                </div>
+              ))}
+            </div>
+            {/* Estimate CTA sits right under the gallery so a mobile visitor scrolling
+                through photos doesn't have to scroll back up to the hero to act. */}
+            <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <LinkButton href="/projects" variant="ghost">
+                View All Projects
+              </LinkButton>
+              <Button onClick={() => openQuoteModal(serviceId)} size="lg">
+                Get a Free Estimate
+              </Button>
+            </div>
+          </Container>
+        </section>
+      ) : hero && hasProjectProof[serviceId] ? (
         <section className="border-t border-ink/10 bg-cream-light py-10 sm:py-20 lg:py-24">
           <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <div className="aspect-4/3 w-full overflow-hidden rounded-lg border border-ink/10 shadow-card">
